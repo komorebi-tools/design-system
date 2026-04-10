@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Komorebi Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #6E87B6;
+    --primary-dark: #5A74A3;
+    --primary-light: #9BB0D0;
+    --accent: #C4A55A;
+    --accent-dark: #B0923E;
+    --accent-light: #E0D5A8;
+    --danger: #D9534F;
+    --warning: #F0AD4E;
+    --success: #5CB85C;
+    --text: #333333;
+    --text-secondary: #666666;
+    --text-disabled: #AAAAAA;
+    --border: #E0E0E0;
+    --bg: #F7F7F7;
+    --surface: #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #6E87B6 0%, #5A74A3 50%, #9BB0D0 100%);
+    color: white;
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 48px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; }
+  .hero p { font-size: 18px; opacity: 0.9; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  /* Section */
+  .section { padding: 64px 0; }
+  .section + .section { border-top: 1px solid var(--border); }
+  .section-title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--primary-dark); margin-bottom: 8px;
+  }
+  .section-heading { font-size: 32px; font-weight: 700; line-height: 1.4; margin-bottom: 40px; }
+
+  /* Color Grid */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+  .color-card {
+    background: white; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid var(--border);
+  }
+  .color-swatch { height: 100px; }
+  .color-info { padding: 12px 16px; }
+  .color-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .color-hex { font-size: 13px; color: var(--text-secondary); font-family: 'SF Mono', monospace; }
+  .color-role { font-size: 11px; color: var(--text-disabled); margin-top: 4px; }
+
+  /* Typography */
+  .type-row {
+    display: flex; align-items: baseline; gap: 40px;
+    padding: 24px 0; border-bottom: 1px solid var(--border);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-meta { width: 200px; flex-shrink: 0; }
+  .type-label { font-size: 12px; font-weight: 700; color: var(--primary-dark); }
+  .type-spec { font-size: 11px; color: var(--text-disabled); margin-top: 4px; line-height: 1.6; }
+  .type-sample { flex: 1; }
+
+  /* Components */
+  .component-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .component-box {
+    background: white; border: 1px solid var(--border); border-radius: 8px; padding: 32px;
+  }
+  .component-label { font-size: 12px; font-weight: 700; color: var(--primary-dark); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 24px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block; padding: 12px 24px; border-radius: 6px;
+    font-size: 16px; font-weight: 700; font-family: inherit;
+    cursor: pointer; border: none; transition: 0.3s cubic-bezier(0.4, 0.4, 0, 1);
+    margin-right: 12px; margin-bottom: 12px;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-accent { background: var(--accent); color: white; }
+  .btn-accent:hover { background: var(--accent-dark); }
+  .btn-secondary { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+  .btn-secondary:hover { background: rgba(110, 135, 182, 0.08); }
+  .btn-danger { background: var(--danger); color: white; }
+  .btn-sm { padding: 8px 16px; font-size: 14px; }
+
+  /* Inputs */
+  .input-demo {
+    width: 100%; height: 44px; padding: 10px 14px; font-size: 16px;
+    border: 1px solid var(--border); border-radius: 6px; font-family: inherit;
+    background: white; color: var(--text); margin-bottom: 12px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .input-demo:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(110,183,214,0.15); }
+
+  /* Cards */
+  .card-demo {
+    background: white; border: 1px solid var(--border); border-radius: 8px;
+    padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .card-demo h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .card-demo p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* Spacing */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 24px; background: var(--primary-light); border-radius: 4px; }
+  .spacing-label { font-size: 13px; color: var(--text-secondary); width: 80px; flex-shrink: 0; }
+  .spacing-value { font-size: 12px; color: var(--text-disabled); font-family: 'SF Mono', monospace; width: 40px; }
+
+  /* Elevation */
+  .elevation-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .elevation-card {
+    background: white; border-radius: 8px; height: 120px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .elevation-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+  .elevation-value { font-size: 11px; color: var(--text-disabled); font-family: 'SF Mono', monospace; text-align: center; }
+
+  /* Font stack */
+  .font-stack {
+    background: #f0f0f0; padding: 16px 20px; border-radius: 6px;
+    font-family: 'SF Mono', Consolas, monospace; font-size: 14px;
+    color: var(--text-secondary); margin-top: 24px; line-height: 1.8;
+  }
+
+  /* Do / Don't */
+  .rule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .rule-box { padding: 24px; border-radius: 8px; }
+  .rule-do { background: rgba(92, 184, 92, 0.08); border: 1px solid rgba(92, 184, 92, 0.3); }
+  .rule-dont { background: rgba(217, 83, 79, 0.08); border: 1px solid rgba(217, 83, 79, 0.3); }
+  .rule-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+  .rule-do .rule-title { color: var(--success); }
+  .rule-dont .rule-title { color: var(--danger); }
+  .rule-box li { font-size: 14px; line-height: 1.8; color: var(--text-secondary); margin-left: 16px; }
+
+  /* Breakpoints */
+  .bp-row { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .bp-bar {
+    height: 36px; border-radius: 6px; display: flex; align-items: center;
+    padding: 0 16px; font-size: 13px; font-weight: 600; color: white;
+  }
+
+  /* Chart colors */
+  .chart-strip { display: flex; height: 48px; border-radius: 8px; overflow: hidden; }
+  .chart-strip div { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 48px 24px; }
+    .hero h1 { font-size: 28px; }
+    .component-grid, .rule-grid { grid-template-columns: 1fr; }
+    .type-row { flex-direction: column; gap: 8px; }
+    .type-meta { width: auto; }
+    .elevation-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>Komorebi Design System</h1>
+  <p>gpt-mcp-server 全ツール共通のデザインガイドライン</p>
+</div>
+
+<div class="container">
+
+  <!-- 1. Color Palette -->
+  <div class="section">
+    <div class="section-title">01 / Color Palette</div>
+    <div class="section-heading">カラーパレット</div>
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background:#6E87B6"></div>
+        <div class="color-info">
+          <div class="color-name">Primary</div>
+          <div class="color-hex">#6E87B6</div>
+          <div class="color-role">CTA, リンク, アクセント</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#5A74A3"></div>
+        <div class="color-info">
+          <div class="color-name">Primary Dark</div>
+          <div class="color-hex">#5A74A3</div>
+          <div class="color-role">ホバー, プレス</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#9BB0D0"></div>
+        <div class="color-info">
+          <div class="color-name">Primary Light</div>
+          <div class="color-hex">#9BB0D0</div>
+          <div class="color-role">背景アクセント, ハイライト</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#C4A55A"></div>
+        <div class="color-info">
+          <div class="color-name">Accent</div>
+          <div class="color-hex">#C4A55A</div>
+          <div class="color-role">CTA, バッジ, ハイライト</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#B0923E"></div>
+        <div class="color-info">
+          <div class="color-name">Accent Dark</div>
+          <div class="color-hex">#B0923E</div>
+          <div class="color-role">ホバー, プレス</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#E0D5A8"></div>
+        <div class="color-info">
+          <div class="color-name">Accent Light</div>
+          <div class="color-hex">#E0D5A8</div>
+          <div class="color-role">背景アクセント, バッジ背景</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#5CB85C"></div>
+        <div class="color-info">
+          <div class="color-name">Success</div>
+          <div class="color-hex">#5CB85C</div>
+          <div class="color-role">成功, 完了</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#F0AD4E"></div>
+        <div class="color-info">
+          <div class="color-name">Warning</div>
+          <div class="color-hex">#F0AD4E</div>
+          <div class="color-role">警告, 注意</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#D9534F"></div>
+        <div class="color-info">
+          <div class="color-name">Danger</div>
+          <div class="color-hex">#D9534F</div>
+          <div class="color-role">エラー, 削除</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#333333"></div>
+        <div class="color-info">
+          <div class="color-name">Text Primary</div>
+          <div class="color-hex">#333333</div>
+          <div class="color-role">本文テキスト</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#666666"></div>
+        <div class="color-info">
+          <div class="color-name">Text Secondary</div>
+          <div class="color-hex">#666666</div>
+          <div class="color-role">補足, ラベル</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#AAAAAA"></div>
+        <div class="color-info">
+          <div class="color-name">Text Disabled</div>
+          <div class="color-hex">#AAAAAA</div>
+          <div class="color-role">無効状態</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#E0E0E0"></div>
+        <div class="color-info">
+          <div class="color-name">Border</div>
+          <div class="color-hex">#E0E0E0</div>
+          <div class="color-role">区切り線, 枠線</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#F7F7F7; border-bottom: 1px solid #E0E0E0"></div>
+        <div class="color-info">
+          <div class="color-name">Background</div>
+          <div class="color-hex">#F7F7F7</div>
+          <div class="color-role">ページ背景</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#FFFFFF; border-bottom: 1px solid #E0E0E0"></div>
+        <div class="color-info">
+          <div class="color-name">Surface</div>
+          <div class="color-hex">#FFFFFF</div>
+          <div class="color-role">カード, モーダル</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart Colors -->
+    <div style="margin-top: 40px;">
+      <div class="component-label">Chart Colors (PPTX / データ可視化用)</div>
+      <div class="chart-strip">
+        <div style="background:#6E87B6;color:#fff">#6E87B6</div>
+        <div style="background:#5A74A3;color:#fff">#5A74A3</div>
+        <div style="background:#9BB0D0;color:#333">#9BB0D0</div>
+        <div style="background:#333333;color:#fff">#333</div>
+        <div style="background:#999999;color:#fff">#999</div>
+        <div style="background:#D9534F;color:#fff">#D9534F</div>
+        <div style="background:#5CB85C;color:#fff">#5CB85C</div>
+        <div style="background:#E8EDF5;color:#333">#E8EDF5</div>
+        <div style="background:#666666;color:#fff">#666</div>
+        <div style="background:#D0DAE8;color:#333">#D0DAE8</div>
+        <div style="background:#AAAAAA;color:#fff">#AAA</div>
+        <div style="background:#F7F7F7;color:#999">#F7F7F7</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Typography -->
+  <div class="section">
+    <div class="section-title">02 / Typography</div>
+    <div class="section-heading">タイポグラフィ</div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Title-XL</div>
+        <div class="type-spec">48px / 700 / 1.3</div>
+      </div>
+      <div class="type-sample" style="font-size:48px;font-weight:700;line-height:1.3">
+        コモレビの光
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Title-L</div>
+        <div class="type-spec">32px / 700 / 1.4</div>
+      </div>
+      <div class="type-sample" style="font-size:32px;font-weight:700;line-height:1.4">
+        デザインシステム Design System
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Title-M</div>
+        <div class="type-spec">24px / 700 / 1.4</div>
+      </div>
+      <div class="type-sample" style="font-size:24px;font-weight:700;line-height:1.4">
+        セクション見出し Section Heading
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Paragraph-L</div>
+        <div class="type-spec">16px / 400 / 1.5</div>
+      </div>
+      <div class="type-sample" style="font-size:16px;font-weight:400;line-height:1.5">
+        本文テキストです。Inter と Noto Sans JP の組み合わせで、日本語と英語のバランスを取ります。Body text with Inter font for Latin characters.
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Paragraph-M</div>
+        <div class="type-spec">12px / 400 / 1.4</div>
+      </div>
+      <div class="type-sample" style="font-size:12px;font-weight:400;line-height:1.4;color:var(--text-secondary)">
+        補足テキスト・注釈。Caption and small text for secondary information.
+      </div>
+    </div>
+
+    <div class="font-stack">
+      <strong>font-family:</strong><br>
+      "Inter", "Noto Sans JP", sans-serif<br><br>
+      <strong>monospace:</strong><br>
+      "SFMono-Regular", "Consolas", "Menlo", monospace
+    </div>
+  </div>
+
+  <!-- 3. Components -->
+  <div class="section">
+    <div class="section-title">03 / Components</div>
+    <div class="section-heading">コンポーネント</div>
+
+    <div class="component-grid">
+      <!-- Buttons -->
+      <div class="component-box">
+        <div class="component-label">Buttons</div>
+        <div>
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-accent">Accent</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-danger">Danger</button>
+        </div>
+        <div style="margin-top: 12px">
+          <button class="btn btn-primary btn-sm">Small Primary</button>
+          <button class="btn btn-accent btn-sm">Small Accent</button>
+          <button class="btn btn-secondary btn-sm">Small Secondary</button>
+        </div>
+        <div style="margin-top: 16px; font-size: 12px; color: var(--text-disabled)">
+          border-radius: 6px &middot; padding: 12px 24px &middot; font-weight: 700
+        </div>
+      </div>
+
+      <!-- Inputs -->
+      <div class="component-box">
+        <div class="component-label">Inputs</div>
+        <input class="input-demo" type="text" placeholder="テキストを入力...">
+        <input class="input-demo" type="text" value="入力済みテキスト">
+        <input class="input-demo" type="text" placeholder="無効状態" disabled style="background:#F7F7F7;color:var(--text-disabled)">
+        <div style="margin-top: 4px; font-size: 12px; color: var(--text-disabled)">
+          height: 44px &middot; border-radius: 6px &middot; focus: #6E87B6
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div class="component-box">
+        <div class="component-label">Cards</div>
+        <div class="card-demo">
+          <h4>カードタイトル</h4>
+          <p>カードコンポーネントの例です。白背景に軽い影とボーダーで浮き上がります。</p>
+        </div>
+        <div style="margin-top: 16px; font-size: 12px; color: var(--text-disabled)">
+          border-radius: 8px &middot; shadow: 0 1px 3px rgba(0,0,0,0.08)
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="component-box">
+        <div class="component-label">Table</div>
+        <table style="width:100%;border-collapse:collapse;font-size:14px">
+          <thead>
+            <tr>
+              <th style="background:var(--primary-dark);color:#fff;padding:10px 12px;text-align:left;font-weight:600">項目</th>
+              <th style="background:var(--primary-dark);color:#fff;padding:10px 12px;text-align:left;font-weight:600">値</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border)">Primary</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border)">#6E87B6</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border)">Font</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border)">Inter</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px">Radius</td>
+              <td style="padding:10px 12px">6px</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Spacing -->
+  <div class="section">
+    <div class="section-title">04 / Spacing</div>
+    <div class="section-heading">スペーシング</div>
+    <div style="max-width: 600px;">
+      <div class="spacing-row">
+        <div class="spacing-label">XS</div>
+        <div class="spacing-value">4px</div>
+        <div class="spacing-bar" style="width:4px"></div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">S</div>
+        <div class="spacing-value">8px</div>
+        <div class="spacing-bar" style="width:8px"></div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">M</div>
+        <div class="spacing-value">16px</div>
+        <div class="spacing-bar" style="width:16px"></div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">L</div>
+        <div class="spacing-value">24px</div>
+        <div class="spacing-bar" style="width:24px"></div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">XL</div>
+        <div class="spacing-value">40px</div>
+        <div class="spacing-bar" style="width:40px"></div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">XXL</div>
+        <div class="spacing-value">64px</div>
+        <div class="spacing-bar" style="width:64px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Elevation -->
+  <div class="section">
+    <div class="section-title">05 / Depth & Elevation</div>
+    <div class="section-heading">シャドウ</div>
+    <div class="elevation-grid">
+      <div class="elevation-card" style="border:1px solid var(--border)">
+        <div class="elevation-label">Level 0</div>
+        <div class="elevation-value">none</div>
+      </div>
+      <div class="elevation-card" style="box-shadow:0 1px 3px rgba(0,0,0,0.08)">
+        <div class="elevation-label">Level 1</div>
+        <div class="elevation-value">0 1px 3px<br>rgba(0,0,0,0.08)</div>
+      </div>
+      <div class="elevation-card" style="box-shadow:0 4px 12px rgba(0,0,0,0.1)">
+        <div class="elevation-label">Level 2</div>
+        <div class="elevation-value">0 4px 12px<br>rgba(0,0,0,0.1)</div>
+      </div>
+      <div class="elevation-card" style="box-shadow:0 8px 24px rgba(0,0,0,0.12)">
+        <div class="elevation-label">Level 3</div>
+        <div class="elevation-value">0 8px 24px<br>rgba(0,0,0,0.12)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Responsive -->
+  <div class="section">
+    <div class="section-title">06 / Responsive</div>
+    <div class="section-heading">ブレークポイント</div>
+    <div class="bp-row">
+      <div class="bp-bar" style="width:120px;background:var(--primary)">Mobile</div>
+      <span style="font-size:14px;color:var(--text-secondary)">&le; 480px</span>
+    </div>
+    <div class="bp-row">
+      <div class="bp-bar" style="width:200px;background:var(--primary-dark)">Tablet</div>
+      <span style="font-size:14px;color:var(--text-secondary)">&le; 768px</span>
+    </div>
+    <div class="bp-row">
+      <div class="bp-bar" style="width:360px;background:#4A6490">Desktop</div>
+      <span style="font-size:14px;color:var(--text-secondary)">&gt; 768px &middot; max-width: 1280px</span>
+    </div>
+    <div style="margin-top:24px; font-size:14px; color:var(--text-secondary)">
+      タッチターゲット最小サイズ: 44px &times; 44px (WCAG基準)
+    </div>
+  </div>
+
+  <!-- 7. Do's and Don'ts -->
+  <div class="section">
+    <div class="section-title">07 / Guidelines</div>
+    <div class="section-heading">Do's & Don'ts</div>
+    <div class="rule-grid">
+      <div class="rule-box rule-do">
+        <div class="rule-title">Do</div>
+        <ul>
+          <li>フォントは "Inter", "Noto Sans JP", sans-serif のフォールバックチェーンを指定</li>
+          <li>日本語本文の line-height は 1.5 以上</li>
+          <li>色のコントラスト比は WCAG AA 以上</li>
+          <li>角丸は 6〜8px で統一</li>
+          <li>ブランドカラーは水彩ブルー #6E87B6 を基調に</li>
+        </ul>
+      </div>
+      <div class="rule-box rule-dont">
+        <div class="rule-title">Don't</div>
+        <ul>
+          <li>font-family に和文フォント1つだけ指定しない</li>
+          <li>日本語本文に line-height: 1.2 以下を使わない</li>
+          <li>テキストに純粋な #000000 を使わない (#333333 を使う)</li>
+          <li>Primary カラーをエラーの意味で使わない</li>
+          <li>border-radius: 50% のような極端な値にしない</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Applicable Tools -->
+  <div class="section">
+    <div class="section-title">08 / Applicable Tools</div>
+    <div class="section-heading">適用ツール一覧</div>
+    <div class="component-grid">
+      <div class="card-demo">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:40px;height:40px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px">S</div>
+          <div>
+            <h4 style="margin:0">Slide Flow Generator</h4>
+            <div style="font-size:12px;color:var(--text-disabled)">React + Tailwind CSS</div>
+          </div>
+        </div>
+        <p>マークダウン → PPTX スライド自動生成</p>
+        <div style="font-size:12px;color:var(--primary-dark);margin-top:8px">tokens.css &middot; 5 components</div>
+      </div>
+      <div class="card-demo">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:40px;height:40px;background:var(--primary-dark);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px">R</div>
+          <div>
+            <h4 style="margin:0">Analysis Report Studio</h4>
+            <div style="font-size:12px;color:var(--text-disabled)">Vanilla HTML/JS</div>
+          </div>
+        </div>
+        <p>分析レポート生成 Web UI</p>
+        <div style="font-size:12px;color:var(--primary-dark);margin-top:8px">server.js (inline CSS)</div>
+      </div>
+      <div class="card-demo">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:40px;height:40px;background:#4A6490;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px">P</div>
+          <div>
+            <h4 style="margin:0">PPTX Skill</h4>
+            <div style="font-size:12px;color:var(--text-disabled)">Node.js + PptxGenJS</div>
+          </div>
+        </div>
+        <p>PowerPoint スライド生成エンジン</p>
+        <div style="font-size:12px;color:var(--primary-dark);margin-top:8px">shared.js (COLORS / FONTS)</div>
+      </div>
+      <div class="card-demo">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:40px;height:40px;background:var(--primary-light);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--text);font-weight:700;font-size:18px">F</div>
+          <div>
+            <h4 style="margin:0">FA Analysis Skill</h4>
+            <div style="font-size:12px;color:var(--text-disabled)">Static HTML</div>
+          </div>
+        </div>
+        <p>自由回答(FA) 分析スキルガイド</p>
+        <div style="font-size:12px;color:var(--primary-dark);margin-top:8px">index.html (inline CSS)</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:40px;color:var(--text-disabled);font-size:13px;border-top:1px solid var(--border)">
+  Komorebi Design System &mdash; DESIGN.md visualized &middot; 2026
+</footer>
+
+</body>
+</html>
