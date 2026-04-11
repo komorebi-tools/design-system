@@ -1,6 +1,7 @@
 # Komorebi Design System
 
-コモレビの全ツール共通デザインガイドラインです。カラーパレット、フォント、コンポーネントの定義を管理しています。
+コモレビの全ツール共通デザインガイドラインです。
+カラーパレット、フォント、コンポーネントの定義を管理しています。
 
 ## プレビュー
 
@@ -8,18 +9,104 @@ https://komorebi-tools.github.io/design-system/
 
 ## 内容
 
-- [DESIGN.md](DESIGN.md) — デザイン仕様書 (カラー、フォント、スペーシング、コンポーネント定義)
-- [index.html](index.html) — ビジュアルプレビュー (GitHub Pages で公開中)
+| ファイル | 説明 |
+|---|---|
+| [DESIGN.md](DESIGN.md) | デザイン仕様書 (カラー、フォント、スペーシング、コンポーネント定義) |
+| [index.html](index.html) | ビジュアルプレビュー (GitHub Pages で公開中) |
+| [.claude/skills/komorebi-design-system/SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | Claude Code 用スキル |
 
-## 各ツールでの使い方
+---
 
-DESIGN.md を参照して、ツールの UI を実装してください。主なカラー:
+## Claude Code スキル : komorebi-design-system
+
+コモレビの UI / Web 制作時に、デザインシステムのルールを Claude Code が自動適用するスキルです。
+チームメンバーは以下の手順でセットアップしてください。
+
+### できること
+
+- デザイントークン (カラー、タイポグラフィ、スペーシング、シャドウ) の自動適用
+- アイコンルール (Material Icons 必須、絵文字禁止) の遵守
+- ロゴ使用規定 (実画像 URL の参照、CSS 模造の禁止)
+- コーポレートサイト、会社説明スライドからの実データ参照
+- 制作完了チェックリストによる品質確認
+
+### セットアップ手順
+
+#### 方法 1 : このリポジトリを clone して使う (推奨)
+
+```bash
+# 1. リポジトリを clone
+git clone git@github.com:komorebi-tools/design-system.git
+
+# 2. clone したディレクトリ内で Claude Code を起動
+cd design-system
+claude
+```
+
+clone したリポジトリ内で Claude Code を起動すると、`.claude/skills/` 配下のスキルが自動的に認識されます。
+
+#### 方法 2 : 既存プロジェクトにスキルだけコピーする
+
+```bash
+# 1. 既存プロジェクトのルートに .claude/skills ディレクトリを作成
+mkdir -p .claude/skills/komorebi-design-system
+
+# 2. SKILL.md をコピー
+curl -o .claude/skills/komorebi-design-system/SKILL.md \
+  https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
+```
+
+#### 方法 3 : グローバルに設定する (全プロジェクトで有効)
+
+```bash
+# 1. グローバルスキルディレクトリを作成
+mkdir -p ~/.claude/skills/komorebi-design-system
+
+# 2. SKILL.md をコピー
+curl -o ~/.claude/skills/komorebi-design-system/SKILL.md \
+  https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
+```
+
+### 使い方
+
+セットアップ後、Claude Code にコモレビ関連の UI 制作を依頼するだけで自動適用されます。
+
+```
+# 例
+コモレビのランディングページを作って
+コモレビのダッシュボード UI を設計して
+コモレビのサービス紹介ページの HTML を作って
+```
+
+スキルが適用されると、以下が自動的に行われます :
+- コーポレートサイト、会社説明スライド、デザインシステムの3ソースを参照
+- デザイントークンに基づいた CSS の生成
+- Material Icons の使用 (絵文字は使わない)
+- 実画像ロゴの参照
+- 制作完了チェックリストの実施
+
+### スキルの更新
+
+スキルの内容が更新された場合、最新版を取得してください。
+
+```bash
+# 方法 1 の場合
+cd design-system && git pull
+
+# 方法 2, 3 の場合
+curl -o <SKILL.md のパス> \
+  https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
+```
+
+---
+
+## 主なカラー
 
 | 色 | コード | 用途 |
 |---|---|---|
-| Primary | `#6E87B6` | CTAボタン、リンク、アクセント |
-| Primary Dark | `#5A74A3` | ホバー・プレス時 |
+| Primary | `#6E87B6` | CTA ボタン、リンク、アクセント |
+| Primary Dark | `#5A74A3` | ホバー、プレス時 |
 | Accent | `#C4A55A` | 注目させたい CTA、バッジ |
 | Text | `#333333` | 本文 |
-| Text Light | `#999999` | メタ情報、プレースホルダー |
-| Background | `#F7F8FA` | ページ背景 |
+| Text Secondary | `#666666` | 補足、ラベル |
+| Background | `#F7F7F7` | ページ背景 |
