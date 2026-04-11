@@ -28,8 +28,6 @@ https://komorebi-tools.github.io/design-system/
 
 コモレビの UI / Web 制作時に、デザインシステムのルールを Claude Code が自動適用するスキルです。
 
-チームメンバーは以下の手順でセットアップしてください。
-
 ### できること
 
 - デザイントークン (カラー、タイポグラフィ、スペーシング、シャドウ) の自動適用
@@ -38,70 +36,33 @@ https://komorebi-tools.github.io/design-system/
 - コーポレートサイト、会社説明スライドからの実データ参照
 - 制作完了チェックリストによる品質確認
 
-### セットアップ手順
+### セットアップ
+
+Claude Code を開いて、以下をそのまま貼り付けてください。
 
 #### 方法 1 : このリポジトリを clone して使う (推奨)
 
-リポジトリを clone :
+> komorebi-tools/design-system リポジトリを ~/design-system に clone して。
 
-```bash
-git clone git@github.com:komorebi-tools/design-system.git
-```
+clone したフォルダで Claude Code を開けば、スキルが自動的に有効になります。
 
-clone したディレクトリ内で Claude Code を起動 :
+#### 方法 2 : 今のプロジェクトにスキルを追加する
 
-```bash
-cd design-system
-claude
-```
+> komorebi-tools/design-system リポジトリから .claude/skills/komorebi-design-system/SKILL.md を取得して、このプロジェクトの同じパスに配置して。
 
-`.claude/skills/` 配下のスキルが自動的に認識されます。
+#### 方法 3 : 全プロジェクトで有効にする (グローバル設定)
 
-#### 方法 2 : 既存プロジェクトにスキルだけコピーする
-
-ディレクトリを作成 :
-
-```bash
-mkdir -p .claude/skills/komorebi-design-system
-```
-
-SKILL.md をダウンロード :
-
-```bash
-curl -o .claude/skills/komorebi-design-system/SKILL.md \
-  https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
-```
-
-#### 方法 3 : グローバルに設定する (全プロジェクトで有効)
-
-ディレクトリを作成 :
-
-```bash
-mkdir -p ~/.claude/skills/komorebi-design-system
-```
-
-SKILL.md をダウンロード :
-
-```bash
-curl -o ~/.claude/skills/komorebi-design-system/SKILL.md \
-  https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
-```
+> komorebi-tools/design-system リポジトリから .claude/skills/komorebi-design-system/SKILL.md を取得して、~/.claude/skills/komorebi-design-system/SKILL.md に配置して。
 
 ### 使い方
 
-セットアップ後、Claude Code にコモレビ関連の UI 制作を依頼するだけで自動適用されます。
+セットアップ後、コモレビ関連の UI 制作を依頼するだけで自動適用されます。
 
-```
-コモレビのランディングページを作って
-```
+> コモレビのランディングページを作って
 
-```
-コモレビのダッシュボード UI を設計して
-```
+> コモレビのサービス紹介ページの HTML を作って
 
-```
-コモレビのサービス紹介ページの HTML を作って
-```
+> コモレビのダッシュボード UI を設計して
 
 スキルが適用されると、以下が自動的に行われます :
 
@@ -113,17 +74,6 @@ curl -o ~/.claude/skills/komorebi-design-system/SKILL.md \
 
 ### スキルの更新
 
-スキルの内容が更新された場合、最新版を取得してください。
+スキルが更新された場合、Claude Code に以下を伝えてください。
 
-方法 1 の場合 :
-
-```bash
-cd design-system && git pull
-```
-
-方法 2, 3 の場合 :
-
-```bash
-curl -o <SKILL.md のパス> \
-  https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
-```
+> design-system リポジトリから最新の SKILL.md を取得して上書きして。
