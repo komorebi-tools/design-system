@@ -42,35 +42,47 @@ https://komorebi-tools.github.io/design-system/
 
 #### 方法 1 : このリポジトリを clone して使う (推奨)
 
-```bash
-# 1. リポジトリを clone
-git clone git@github.com:komorebi-tools/design-system.git
+リポジトリを clone :
 
-# 2. clone したディレクトリ内で Claude Code を起動
+```bash
+git clone git@github.com:komorebi-tools/design-system.git
+```
+
+clone したディレクトリ内で Claude Code を起動 :
+
+```bash
 cd design-system
 claude
 ```
 
-clone したリポジトリ内で Claude Code を起動すると、`.claude/skills/` 配下のスキルが自動的に認識されます。
+`.claude/skills/` 配下のスキルが自動的に認識されます。
 
 #### 方法 2 : 既存プロジェクトにスキルだけコピーする
 
-```bash
-# 1. 既存プロジェクトのルートに .claude/skills ディレクトリを作成
-mkdir -p .claude/skills/komorebi-design-system
+ディレクトリを作成 :
 
-# 2. SKILL.md をコピー
+```bash
+mkdir -p .claude/skills/komorebi-design-system
+```
+
+SKILL.md をダウンロード :
+
+```bash
 curl -o .claude/skills/komorebi-design-system/SKILL.md \
   https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
 ```
 
 #### 方法 3 : グローバルに設定する (全プロジェクトで有効)
 
-```bash
-# 1. グローバルスキルディレクトリを作成
-mkdir -p ~/.claude/skills/komorebi-design-system
+ディレクトリを作成 :
 
-# 2. SKILL.md をコピー
+```bash
+mkdir -p ~/.claude/skills/komorebi-design-system
+```
+
+SKILL.md をダウンロード :
+
+```bash
 curl -o ~/.claude/skills/komorebi-design-system/SKILL.md \
   https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
 ```
@@ -80,9 +92,14 @@ curl -o ~/.claude/skills/komorebi-design-system/SKILL.md \
 セットアップ後、Claude Code にコモレビ関連の UI 制作を依頼するだけで自動適用されます。
 
 ```
-# 例
 コモレビのランディングページを作って
+```
+
+```
 コモレビのダッシュボード UI を設計して
+```
+
+```
 コモレビのサービス紹介ページの HTML を作って
 ```
 
@@ -98,11 +115,15 @@ curl -o ~/.claude/skills/komorebi-design-system/SKILL.md \
 
 スキルの内容が更新された場合、最新版を取得してください。
 
-```bash
-# 方法 1 の場合
-cd design-system && git pull
+方法 1 の場合 :
 
-# 方法 2, 3 の場合
+```bash
+cd design-system && git pull
+```
+
+方法 2, 3 の場合 :
+
+```bash
 curl -o <SKILL.md のパス> \
   https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
 ```
