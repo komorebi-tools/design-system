@@ -302,6 +302,7 @@
     <a class="nav-link" href="#responsive">Responsive</a>
     <a class="nav-link" href="#dark">Dark Mode</a>
     <a class="nav-link" href="#guidelines">Guidelines</a>
+    <a class="nav-link" href="#formatting">JP Formatting</a>
     <a class="nav-link" href="#tools">Tools</a>
   </div>
 </nav>
@@ -858,21 +859,48 @@
   <!-- 6. Responsive -->
   <div class="section" id="responsive">
     <div class="section-title">06 / Responsive</div>
-    <div class="section-heading">ブレークポイント</div>
-    <div class="bp-row">
-      <div class="bp-bar" style="width:120px;background:var(--primary)">Mobile</div>
-      <span style="font-size:14px;color:var(--text-secondary)">&le; 480px</span>
-    </div>
-    <div class="bp-row">
-      <div class="bp-bar" style="width:200px;background:var(--primary-dark)">Tablet</div>
-      <span style="font-size:14px;color:var(--text-secondary)">&le; 768px</span>
-    </div>
-    <div class="bp-row">
-      <div class="bp-bar" style="width:360px;background:#4A6490">Desktop</div>
-      <span style="font-size:14px;color:var(--text-secondary)">&gt; 768px &middot; max-width: 1280px</span>
-    </div>
-    <div style="margin-top:24px; font-size:14px; color:var(--text-secondary)">
-      タッチターゲット最小サイズ: 44px &times; 44px (WCAG基準)
+    <div class="section-heading">レスポンシブ</div>
+
+    <table style="width:100%;max-width:720px;border-collapse:collapse;font-size:14px;margin-bottom:24px">
+      <thead>
+        <tr>
+          <th style="background:var(--primary-dark);color:#fff;padding:10px 16px;text-align:left;font-weight:600">区分</th>
+          <th style="background:var(--primary-dark);color:#fff;padding:10px 16px;text-align:left;font-weight:600">幅</th>
+          <th style="background:var(--primary-dark);color:#fff;padding:10px 16px;text-align:left;font-weight:600">カラム</th>
+          <th style="background:var(--primary-dark);color:#fff;padding:10px 16px;text-align:left;font-weight:600">余白</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border)">
+            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--primary);margin-right:8px;vertical-align:middle"></span>Mobile
+          </td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace">&le; 480px</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border)">1カラム</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace">16px</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border)">
+            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--primary-dark);margin-right:8px;vertical-align:middle"></span>Tablet
+          </td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace">481 - 768px</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border)">1 - 2カラム</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace">24px</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px">
+            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#4A6490;margin-right:8px;vertical-align:middle"></span>Desktop
+          </td>
+          <td style="padding:10px 16px;font-family:'SF Mono',monospace">&gt; 768px</td>
+          <td style="padding:10px 16px">2カラム</td>
+          <td style="padding:10px 16px;font-family:'SF Mono',monospace">24px</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="font-stack">
+      <strong>max-width:</strong> 1280px<br>
+      <strong>タッチターゲット最小サイズ:</strong> 44px &times; 44px (WCAG基準)
     </div>
   </div>
 
@@ -992,9 +1020,62 @@
     </div>
   </div>
 
-  <!-- 9. Applicable Tools -->
+  <!-- 9. JP Formatting -->
+  <div class="section" id="formatting">
+    <div class="section-title">09 / JP Formatting</div>
+    <div class="section-heading">日本語テキスト整形ルール</div>
+
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px">
+      全てのテキスト出力 (会話、ドキュメント、メール、レポート、スライド等) に適用する約物ルール。
+    </p>
+
+    <table style="width:100%;max-width:720px;border-collapse:collapse;font-size:14px;margin-bottom:24px">
+      <thead>
+        <tr>
+          <th style="background:var(--primary-dark);color:#fff;padding:10px 16px;text-align:left;font-weight:600">対象</th>
+          <th style="background:var(--primary-dark);color:#fff;padding:10px 16px;text-align:left;font-weight:600">Before</th>
+          <th style="background:var(--primary-dark);color:#fff;padding:10px 16px;text-align:left;font-weight:600">After</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border)">中黒</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace;color:var(--danger)">新機能<strong>・</strong>改善点</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace;color:var(--success)">新機能<strong>&#xB7;</strong>改善点</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border)">スラッシュ</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace;color:var(--danger)">A<strong>／</strong>B</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace;color:var(--success)">A <strong>/</strong> B</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border)">括弧</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace;color:var(--danger)">報告<strong>（</strong>2026年<strong>）</strong></td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace;color:var(--success)">報告 <strong>(</strong>2026年<strong>)</strong></td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border)">コロン</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace;color:var(--danger)">ステータス<strong>：</strong>完了</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);font-family:'SF Mono',monospace;color:var(--success)">ステータス <strong>:</strong> 完了</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px">ダブルクォート</td>
+          <td style="padding:10px 16px;font-family:'SF Mono',monospace;color:var(--danger)"><strong>"</strong>値<strong>"</strong>のまま</td>
+          <td style="padding:10px 16px;font-family:'SF Mono',monospace;color:var(--success)"><strong>"</strong> 値 <strong>"</strong> の前後にスペース</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="font-stack">
+      <strong>変換例:</strong><br>
+      <span style="color:var(--danger)">新機能・改善点／バグ修正についての報告（2026年4月）ステータス：完了</span><br>
+      <span style="color:var(--success)">新機能&#xB7;改善点 / バグ修正についての報告 (2026年4月) ステータス : 完了</span>
+    </div>
+  </div>
+
+  <!-- 10. Applicable Tools -->
   <div class="section" id="tools">
-    <div class="section-title">09 / Applicable Tools</div>
+    <div class="section-title">10 / Applicable Tools</div>
     <div class="section-heading">適用ツール一覧</div>
     <div class="component-grid">
       <div class="card-demo">
@@ -1028,14 +1109,6 @@
         <p>自由回答(FA) 分析スキルガイド</p>
         <div style="font-size:12px;color:var(--text-disabled);margin-top:8px">Static HTML</div>
         <div style="font-size:12px;color:var(--primary-dark);margin-top:4px">index.html (inline CSS)</div>
-      </div>
-      <div class="card-demo">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-          <img src="assets/tools/logo-jp-formatting.svg" alt="JP Formatting" style="height:44px">
-        </div>
-        <p>日本語テキストの約物を半角化 + スペース補正</p>
-        <div style="font-size:12px;color:var(--text-disabled);margin-top:8px">Claude Code Skill</div>
-        <div style="font-size:12px;color:var(--primary-dark);margin-top:4px">SKILL.md</div>
       </div>
     </div>
   </div>
