@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="28" viewBox="0 0 220 28" fill="none">
+  <!-- Icon: text with formatting marks -->
+  <g transform="translate(2, 2)">
+    <!-- Text block background -->
+    <rect x="0" y="0" width="30" height="22" rx="3" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
+    <!-- Japanese text lines -->
+    <rect x="4" y="4" width="10" height="2.5" rx="0.8" fill="#6E87B6" opacity="0.7"/>
+    <rect x="16" y="4" width="3" height="2.5" rx="0.8" fill="#5A74A3"/>
+    <rect x="4" y="9" width="7" height="2.5" rx="0.8" fill="#CCC"/>
+    <rect x="13" y="9" width="3" height="2.5" rx="0.8" fill="#5A74A3"/>
+    <rect x="18" y="9" width="8" height="2.5" rx="0.8" fill="#CCC"/>
+    <rect x="4" y="14" width="14" height="2.5" rx="0.8" fill="#CCC"/>
+    <!-- Format badge -->
+    <text x="8" y="22" font-family="'Inter', sans-serif" font-size="5.5" font-weight="700" fill="#6E87B6" opacity="0.6">A→a</text>
+  </g>
+  <!-- Text -->
+  <text x="42" y="19" font-family="'Inter', 'Noto Sans JP', sans-serif" font-size="20" font-weight="700" fill="#333" letter-spacing="0.01em">JP Formatting</text>
+</svg>
