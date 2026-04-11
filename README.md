@@ -12,15 +12,47 @@ DESIGN.md の内容をビジュアルで確認できるページです。
 
 https://komorebi-tools.github.io/design-system/
 
-## リポジトリの構成
+## 仕組み
 
-| ファイル | 説明 |
+Claude Code にコモレビの UI 制作を依頼すると、デザインが意図通りに出てきます。
+
+プロンプトに「色は #6E87B6 で、フォントは Noto Sans JP で...」と毎回書く必要はありません。
+
+理由は、プロジェクトに設計書を置いているからです。
+
+Claude Code はセッション開始時にこれらを自動で読み込み、ルールに従って作業します。
+
+```
+design-system/
+├── DESIGN.md                    ... デザイン仕様書 (色、フォント、余白、コンポーネント)
+├── index.html                   ... ビジュアルプレビュー (GitHub Pages)
+├── contracts/
+│   └── rules.json               ... 禁止ルール9件 (hook で自動チェック)
+├── assets/
+│   ├── logo/                    ... ロゴ素材 (PNG 透過、JPG 白背景)
+│   └── tools/                   ... 各ツールのロゴ SVG
+└── .claude/
+    └── skills/
+        └── komorebi-design-system/
+            └── SKILL.md         ... Claude Code 用スキル
+```
+
+### 各ファイルの役割
+
+| ファイル | 何をしているか |
 |---|---|
-| [DESIGN.md](DESIGN.md) | デザイン仕様書 (カラー、フォント、スペーシング、コンポーネント定義) |
-| [index.html](index.html) | ビジュアルプレビュー (GitHub Pages で公開中) |
-| [assets/logo/](assets/logo/) | ロゴ素材 (PNG 透過、JPG 白背景) |
-| [assets/tools/](assets/tools/) | 各ツールのロゴ SVG |
-| [.claude/skills/komorebi-design-system/SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | Claude Code 用スキル |
+| [DESIGN.md](DESIGN.md) | 色、フォント、角丸、余白、シャドウを数値で定義。Claude Code はここを見てトークン準拠の CSS を書く |
+| [SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | デザイントークン、情報ソース (コーポレートサイト、会社説明スライド)、品質 3 層定義 (L1/L2/L3)、アンチパターン、チェックリストを定義。Claude Code が UI を作る際の判断基準になる |
+| [rules.json](contracts/rules.json) | 絵文字禁止、#000000 禁止、全角括弧禁止など 9 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する |
+| [index.html](index.html) | DESIGN.md をビジュアルで確認できるページ。チーム全員が同じトークンを見られる |
+
+### 品質を維持する仕組み
+
+1. **DESIGN.md** がルールを定義する
+2. **SKILL.md** が Claude Code に判断基準を与える
+3. **rules.json + hook** が編集のたびに違反を自動検出する
+
+この 3 層で、誰が作業しても品質がブレない構造になっています。
 
 ---
 
