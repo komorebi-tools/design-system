@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="180" height="24" viewBox="0 0 180 24" fill="none">
-  <!-- Speech bubble -->
-  <rect x="1" y="1" width="26" height="16" rx="3.5" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
-  <path d="M5 17 L3.5 22 L10 17" fill="white" stroke="#6E87B6" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- Speech bubble body -->
+  <path d="M4.5 1 L23.5 1 Q27 1 27 4.5 L27 13.5 Q27 17 23.5 17 L10 17 L5 22 L7 17 L4.5 17 Q1 17 1 13.5 L1 4.5 Q1 1 4.5 1 Z" fill="white" stroke="#6E87B6" stroke-width="1.5" stroke-linejoin="round"/>
   <!-- Tag chips -->
   <rect x="4" y="4" width="10" height="4" rx="2" fill="#6E87B6" opacity="0.2" stroke="#6E87B6" stroke-width="0.7"/>
   <rect x="15.5" y="4" width="7" height="4" rx="2" fill="#9BB0D0" opacity="0.25" stroke="#9BB0D0" stroke-width="0.7"/>
