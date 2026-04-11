@@ -848,63 +848,61 @@
 
     <!-- Diagram (right) -->
     <div style="flex:1;min-width:300px">
-      <svg width="100%" viewBox="0 0 560 248" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:560px">
+      <svg width="100%" viewBox="0 0 560 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:560px">
         <!-- Card -->
-        <rect x="4" y="4" width="552" height="204" rx="8" fill="white" stroke="#E0E0E0" stroke-width="1.5"/>
+        <rect x="4" y="4" width="552" height="200" rx="8" fill="white" stroke="#E0E0E0" stroke-width="1.5"/>
 
         <!-- Padding area -->
-        <rect x="4" y="4" width="552" height="204" rx="8" fill="#6E87B6" opacity="0.12"/>
+        <rect x="4" y="4" width="552" height="200" rx="8" fill="#6E87B6" opacity="0.12"/>
         <!-- Content area (white cutout) -->
-        <rect x="36" y="36" width="488" height="140" rx="4" fill="white"/>
+        <rect x="36" y="36" width="488" height="136" rx="4" fill="white"/>
 
         <!-- Padding labels -->
         <text x="280" y="24" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-top : L 24px</text>
         <text x="20" y="140" font-family="'SF Mono',monospace" font-size="10" fill="#6E87B6" text-anchor="middle" transform="rotate(-90 20 140)">L 24px</text>
 
-        <!-- Title block -->
-        <rect x="36" y="36" width="220" height="18" rx="3" fill="#6E87B6" opacity="0.25"/>
-        <text x="46" y="49" font-family="'Inter','Noto Sans JP',sans-serif" font-size="12" fill="#5A74A3" font-weight="600">Title</text>
+        <!-- Title -->
+        <text x="36" y="52" font-family="'Inter','Noto Sans JP',sans-serif" font-size="16" fill="#333" font-weight="700">カードタイトル</text>
 
         <!-- Gap: title → content -->
-        <rect x="36" y="54" width="484" height="16" fill="#C4A55A" opacity="0.15"/>
-        <line x1="480" y1="54" x2="480" y2="70" stroke="#C4A55A" stroke-width="1" stroke-dasharray="3 2"/>
-        <text x="490" y="66" font-family="'SF Mono',monospace" font-size="10" fill="#C4A55A">M 16px</text>
+        <rect x="36" y="56" width="484" height="16" fill="#C4A55A" opacity="0.15"/>
+        <line x1="480" y1="56" x2="480" y2="72" stroke="#C4A55A" stroke-width="1" stroke-dasharray="3 2"/>
+        <text x="490" y="68" font-family="'SF Mono',monospace" font-size="10" fill="#C4A55A">M 16px</text>
 
-        <!-- Content lines -->
-        <rect x="36" y="70" width="484" height="10" rx="2" fill="#CCC" opacity="0.5"/>
-        <rect x="36" y="88" width="400" height="10" rx="2" fill="#CCC" opacity="0.4"/>
-        <rect x="36" y="106" width="440" height="10" rx="2" fill="#CCC" opacity="0.3"/>
+        <!-- Body text -->
+        <text x="36" y="88" font-family="'Inter','Noto Sans JP',sans-serif" font-size="12" fill="#666">本文テキストが入ります。</text>
+        <text x="36" y="106" font-family="'Inter','Noto Sans JP',sans-serif" font-size="12" fill="#666">コンテンツの説明文が続きます。</text>
 
         <!-- Gap: content → buttons -->
-        <rect x="36" y="116" width="484" height="24" fill="#C4A55A" opacity="0.15"/>
-        <line x1="480" y1="116" x2="480" y2="140" stroke="#C4A55A" stroke-width="1" stroke-dasharray="3 2"/>
-        <text x="490" y="132" font-family="'SF Mono',monospace" font-size="10" fill="#C4A55A">L 24px</text>
+        <rect x="36" y="112" width="484" height="24" fill="#C4A55A" opacity="0.15"/>
+        <line x1="480" y1="112" x2="480" y2="136" stroke="#C4A55A" stroke-width="1" stroke-dasharray="3 2"/>
+        <text x="490" y="128" font-family="'SF Mono',monospace" font-size="10" fill="#C4A55A">L 24px</text>
 
         <!-- Button: Primary -->
-        <rect x="36" y="140" width="140" height="36" rx="6" fill="#6E87B6"/>
-        <text x="76" y="163" font-family="'Inter',sans-serif" font-size="13" fill="white" font-weight="700">Primary</text>
+        <rect x="36" y="136" width="140" height="36" rx="6" fill="#6E87B6"/>
+        <text x="76" y="159" font-family="'Inter',sans-serif" font-size="13" fill="white" font-weight="700">Primary</text>
 
         <!-- Button inline gap -->
-        <rect x="176" y="140" width="12" height="36" fill="#5CB85C" opacity="0.2"/>
-        <line x1="182" y1="140" x2="182" y2="176" stroke="#5CB85C" stroke-width="1" stroke-dasharray="3 2"/>
-        <text x="182" y="186" font-family="'SF Mono',monospace" font-size="10" fill="#5CB85C" text-anchor="middle">S 8px</text>
+        <rect x="176" y="136" width="12" height="36" fill="#5CB85C" opacity="0.2"/>
+        <line x1="182" y1="136" x2="182" y2="172" stroke="#5CB85C" stroke-width="1" stroke-dasharray="3 2"/>
+        <text x="182" y="184" font-family="'SF Mono',monospace" font-size="10" fill="#5CB85C" text-anchor="middle">S 8px</text>
 
         <!-- Button: Secondary -->
-        <rect x="188" y="140" width="140" height="36" rx="6" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
-        <text x="218" y="163" font-family="'Inter',sans-serif" font-size="13" fill="#6E87B6" font-weight="700">Secondary</text>
+        <rect x="188" y="136" width="140" height="36" rx="6" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
+        <text x="218" y="159" font-family="'Inter',sans-serif" font-size="13" fill="#6E87B6" font-weight="700">Secondary</text>
 
         <!-- Padding bottom label -->
-        <text x="280" y="196" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-bottom : L 24px</text>
+        <text x="280" y="192" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-bottom : L 24px</text>
 
         <!-- Padding bottom label -->
 
         <!-- Legend (below card) -->
-        <rect x="12" y="220" width="14" height="10" rx="2" fill="#6E87B6" opacity="0.25"/>
-        <text x="32" y="230" font-family="'Inter','Noto Sans JP',sans-serif" font-size="12" fill="#666">padding</text>
-        <rect x="120" y="220" width="14" height="10" rx="2" fill="#C4A55A" opacity="0.3"/>
-        <text x="140" y="230" font-family="'Inter','Noto Sans JP',sans-serif" font-size="12" fill="#666">gap (要素間)</text>
-        <rect x="290" y="220" width="14" height="10" rx="2" fill="#5CB85C" opacity="0.35"/>
-        <text x="310" y="230" font-family="'Inter','Noto Sans JP',sans-serif" font-size="12" fill="#666">inline gap (横並び)</text>
+        <rect x="12" y="216" width="14" height="10" rx="2" fill="#6E87B6" opacity="0.25"/>
+        <text x="32" y="226" font-family="'Inter','Noto Sans JP',sans-serif" font-size="12" fill="#666">padding</text>
+        <rect x="120" y="216" width="14" height="10" rx="2" fill="#C4A55A" opacity="0.3"/>
+        <text x="140" y="226" font-family="'Inter','Noto Sans JP',sans-serif" font-size="12" fill="#666">gap (要素間)</text>
+        <rect x="290" y="216" width="14" height="10" rx="2" fill="#5CB85C" opacity="0.35"/>
+        <text x="310" y="226" font-family="'Inter','Noto Sans JP',sans-serif" font-size="12" fill="#666">inline gap (横並び)</text>
       </svg>
     </div>
 
