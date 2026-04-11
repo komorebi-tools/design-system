@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="230" height="40" viewBox="0 0 230 40" fill="none">
+  <!-- Icon: speech bubbles → analysis chart, scaled 60% -->
+  <g transform="translate(0, 2) scale(0.6)">
+    <!-- Speech bubble (back) -->
+    <rect x="18" y="2" width="30" height="20" rx="4" fill="#9BB0D0" opacity="0.3"/>
+    <path d="M40 22 L44 28 L36 22" fill="#9BB0D0" opacity="0.3"/>
+    <rect x="23" y="8" width="14" height="2" rx="1" fill="#fff" opacity="0.7"/>
+    <rect x="23" y="13" width="18" height="2" rx="1" fill="#fff" opacity="0.5"/>
+
+    <!-- Speech bubble (front) -->
+    <rect x="2" y="10" width="32" height="22" rx="4" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
+    <path d="M10 32 L6 38 L16 32" fill="white" stroke="#6E87B6" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- Text lines in bubble -->
+    <rect x="8" y="16" width="12" height="2.5" rx="1" fill="#6E87B6" opacity="0.7"/>
+    <rect x="8" y="21" width="20" height="2" rx="1" fill="#CCC"/>
+    <rect x="8" y="25" width="16" height="2" rx="1" fill="#CCC"/>
+
+    <!-- Arrow -->
+    <path d="M52 24 L62 24" stroke="#6E87B6" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M59 20 L64 24 L59 28" stroke="#6E87B6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Sparkle -->
+    <g transform="translate(54, 10)" fill="#6E87B6" opacity="0.5">
+      <path d="M4 0 L4.8 2.8 L8 4 L4.8 5.2 L4 8 L3.2 5.2 L0 4 L3.2 2.8 Z"/>
+    </g>
+
+    <!-- Analysis result: categorized tags -->
+    <rect x="68" y="4" width="34" height="42" rx="3" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
+    <!-- Title -->
+    <rect x="73" y="10" width="18" height="2.5" rx="1" fill="#6E87B6" opacity="0.8"/>
+    <!-- Tag chips -->
+    <rect x="73" y="17" width="14" height="6" rx="3" fill="#6E87B6" opacity="0.15" stroke="#6E87B6" stroke-width="0.8"/>
+    <rect x="89" y="17" width="10" height="6" rx="3" fill="#6E87B6" opacity="0.15" stroke="#6E87B6" stroke-width="0.8"/>
+    <rect x="73" y="26" width="12" height="6" rx="3" fill="#9BB0D0" opacity="0.2" stroke="#9BB0D0" stroke-width="0.8"/>
+    <rect x="87" y="26" width="13" height="6" rx="3" fill="#9BB0D0" opacity="0.2" stroke="#9BB0D0" stroke-width="0.8"/>
+    <!-- Percentage bars -->
+    <rect x="73" y="36" width="22" height="3" rx="1.5" fill="#6E87B6" opacity="0.6"/>
+    <rect x="73" y="41" width="16" height="3" rx="1.5" fill="#6E87B6" opacity="0.4"/>
+  </g>
+
+  <!-- Text -->
+  <text x="66" y="24" font-family="'Inter', 'Noto Sans JP', sans-serif" font-size="22" font-weight="700" fill="#333" letter-spacing="0.01em">FA Analysis</text>
+</svg>
