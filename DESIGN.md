@@ -111,9 +111,9 @@ font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
 
 | Role | Font | Size | Weight | Line Height | Letter Spacing | 備考 |
 |------|------|------|--------|-------------|----------------|------|
-| Title-XL | Inter, Noto Sans JP | 48px | 700 | 1.3 | 0 | ページタイトル |
-| Title-L | Inter, Noto Sans JP | 32px | 700 | 1.4 | 0 | セクション見出し |
-| Title-M | Inter, Noto Sans JP | 24px | 700 | 1.4 | 0 | サブ見出し |
+| Title-XL | Inter, Noto Sans JP | 48px | 700 | 1.3 | 0.05em | ページタイトル |
+| Title-L | Inter, Noto Sans JP | 32px | 700 | 1.4 | 0.05em | セクション見出し |
+| Title-M | Inter, Noto Sans JP | 24px | 700 | 1.4 | 0.05em | サブ見出し |
 | Paragraph-L | Inter, Noto Sans JP | 16px | 400 | 1.6 | 0.05em | 本文 |
 | Paragraph-M | Inter, Noto Sans JP | 12px | 400 | 1.6 | 0.05em | 補足、注釈 |
 
@@ -121,8 +121,7 @@ font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
 
 - **本文の行間 (line-height)**: 1.6（日本語の読みやすさを考慮）
 - **見出しの行間**: 1.3〜1.4
-- **本文の字間 (letter-spacing)**: 0.05em（日本語テキストの可読性向上）
-- **見出しの字間**: 0
+- **字間 (letter-spacing)**: 0.05em（見出し&#xB7;本文共通）
 
 **ガイドライン**:
 - 長文テキストでは `line-height: 1.7` まで広げてもよい
