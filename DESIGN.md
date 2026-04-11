@@ -114,19 +114,19 @@ font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
 | Title-XL | Inter, Noto Sans JP | 48px | 700 | 1.3 | 0 | ページタイトル |
 | Title-L | Inter, Noto Sans JP | 32px | 700 | 1.4 | 0 | セクション見出し |
 | Title-M | Inter, Noto Sans JP | 24px | 700 | 1.4 | 0 | サブ見出し |
-| Paragraph-L | Inter, Noto Sans JP | 16px | 400 | 1.5 | 0 | 本文 |
-| Paragraph-M | Inter, Noto Sans JP | 12px | 400 | 1.4 | 0 | 補足、注釈 |
+| Paragraph-L | Inter, Noto Sans JP | 16px | 400 | 1.6 | 0.05em | 本文 |
+| Paragraph-M | Inter, Noto Sans JP | 12px | 400 | 1.6 | 0.05em | 補足、注釈 |
 
 ### 3.5 行間・字間
 
-- **本文の行間 (line-height)**: 1.5（日本語の読みやすさを考慮）
+- **本文の行間 (line-height)**: 1.6（日本語の読みやすさを考慮）
 - **見出しの行間**: 1.3〜1.4
-- **本文の字間 (letter-spacing)**: 0（Inter + Noto Sans JP の組み合わせではデフォルトで十分）
+- **本文の字間 (letter-spacing)**: 0.05em（日本語テキストの可読性向上）
 - **見出しの字間**: 0
 
 **ガイドライン**:
 - 長文テキストでは `line-height: 1.7` まで広げてもよい
-- `letter-spacing` は全角文字が多い箇所で `0.04em` 程度にすると可読性向上
+- `letter-spacing: 0.05em` を本文のベースとして適用する
 
 ### 3.6 約物・記号の表記ルール
 
@@ -258,7 +258,7 @@ font-feature-settings: "kern" 1; /* 欧文カーニング */
 ### Do（推奨）
 
 - フォントは必ず `"Inter", "Noto Sans JP", sans-serif` のフォールバックチェーンを指定する
-- 日本語本文の line-height は 1.5 以上にする
+- 日本語本文の line-height は 1.6、letter-spacing は 0.05em を基本とする
 - 色のコントラスト比は WCAG AA 以上を確保する
 - コンポーネントの余白は Spacing Scale に従う
 - ブランドカラーは水彩ブルー `#6E87B6` を基調とする
