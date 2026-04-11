@@ -6,6 +6,41 @@
 
 ---
 
+## 0. Logo Assets
+
+ロゴ原本の格納先: `~/Documents/仕事系/コモレビ/_ロゴ/komorebi-logo/`
+
+### バリエーション
+
+| 名称 | 用途 | ファイル |
+|---|---|---|
+| Wide (横長) | ヘッダー、メール署名など横幅が取れる場所 | `png_bg-clear/logo-clear-wide.png` / `jpg_bg-white/logo-white-wide.jpg` |
+| Short (縦型) | 正方形に近いスペース、OGP、名刺など | `png_bg-clear/logo-short.png` / `jpg_bg-white/logo-white-short.jpg` |
+| Symbol (シンボルマーク) | favicon、アイコン、小スペース | `png_bg-clear/logo-clear-symbol.png` / `jpg_bg-white/logo-white-symbol.jpg` |
+
+### フォーマット
+
+| フォーマット | ディレクトリ | 備考 |
+|---|---|---|
+| PNG (透過) | `png_bg-clear/` | Web、アプリUI向け。背景透過 |
+| JPG (白背景) | `jpg_bg-white/` | 印刷物、白背景前提の用途 |
+| AI (ベクター) | `ai_vector/` | 編集・高解像度出力用。`komorebi_logo.ai` |
+
+### ロゴの特徴
+
+- 水彩テクスチャの円が重なり合うシンボルマーク
+- ロゴタイプは小文字の `komorebi` + カタカナ `コモレビ` のルビ表記
+- ロゴカラーは Primary (`#6E87B6`) 系のブルーグレー
+
+### 使用ルール
+
+- シンボルマークとロゴタイプの比率・配置はオリジナルを維持すること
+- 最小表示サイズ: Symbol 24px、Short 48px、Wide 120px (幅基準)
+- 背景色が暗い場合は PNG 透過版を使用し、白背景の場合は JPG 版でも可
+- ロゴの色やテクスチャを改変しないこと
+
+---
+
 ## 1. Visual Theme & Atmosphere
 
 - **デザイン方針**: クリーンで信頼感がありつつ、柔らかさと透明感を持つ
