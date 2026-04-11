@@ -71,7 +71,7 @@ Neutral :
 
 ### タイポグラフィ
 
-**フォントファミリー** : `"Inter", "Noto Sans JP", sans-serif`
+**フォントファミリー** : `"Plus Jakarta Sans", "Noto Sans JP", sans-serif`
 
 | トークン | サイズ | 用途 |
 |----------|--------|------|
@@ -393,7 +393,7 @@ IntersectionObserver を使った reveal パターン。
 - [ ] 見出しの letter-spacing が 0.05em、font-feature-settings が "palt" 1, "kern" 1 である
 - [ ] カラーが CSS custom properties 経由で使われている
 - [ ] レスポンシブ対応 (480px, 768px) が入っている
-- [ ] フォントが Inter + Noto Sans JP である
+- [ ] フォントが Plus Jakarta Sans + Noto Sans JP である
 - [ ] シャドウがトークン (--shadow-1 等) 経由である
 - [ ] 紫グラデーション、blob、SaaS テンプレート風の配色になっていない
 - [ ] カード3枚均等横並びのような安易なレイアウトに逃げていない

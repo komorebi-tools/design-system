@@ -89,7 +89,7 @@
 
 ### 3.2 欧文フォント
 
-- **サンセリフ**: Inter
+- **サンセリフ**: Plus Jakarta Sans
 - **等幅**: SFMono-Regular, Consolas, Menlo
 
 ### 3.3 font-family 指定
@@ -97,7 +97,7 @@
 本文、見出し :
 
 ```css
-font-family: "Inter", "Noto Sans JP", sans-serif;
+font-family: "Plus Jakarta Sans", "Noto Sans JP", sans-serif;
 ```
 
 等幅 (コード表示) :
@@ -107,7 +107,7 @@ font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
 ```
 
 **フォールバックの考え方**:
-- Inter を先に指定し、欧文は Inter のグリフを優先
+- Plus Jakarta Sans を先に指定し、欧文は Plus Jakarta Sans のグリフを優先
 - 和文は Noto Sans JP にフォールバック
 - 最後に generic family（sans-serif）を指定
 
@@ -115,11 +115,11 @@ font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
 
 | Role | Font | Size | Weight | Line Height | Letter Spacing | 備考 |
 |------|------|------|--------|-------------|----------------|------|
-| Title-XL | Inter, Noto Sans JP | 48px | 700 | 1.3 | 0.05em | ページタイトル |
-| Title-L | Inter, Noto Sans JP | 32px | 700 | 1.4 | 0.05em | セクション見出し |
-| Title-M | Inter, Noto Sans JP | 24px | 700 | 1.4 | 0.05em | サブ見出し |
-| Paragraph-L | Inter, Noto Sans JP | 16px | 400 | 1.6 | 0.05em | 本文 |
-| Paragraph-M | Inter, Noto Sans JP | 12px | 400 | 1.6 | 0.05em | 補足、注釈 |
+| Title-XL | Plus Jakarta Sans, Noto Sans JP | 48px | 700 | 1.3 | 0.05em | ページタイトル |
+| Title-L | Plus Jakarta Sans, Noto Sans JP | 32px | 700 | 1.4 | 0.05em | セクション見出し |
+| Title-M | Plus Jakarta Sans, Noto Sans JP | 24px | 700 | 1.4 | 0.05em | サブ見出し |
+| Paragraph-L | Plus Jakarta Sans, Noto Sans JP | 16px | 400 | 1.6 | 0.05em | 本文 |
+| Paragraph-M | Plus Jakarta Sans, Noto Sans JP | 12px | 400 | 1.6 | 0.05em | 補足、注釈 |
 
 ### 3.5 行間・字間
 
@@ -267,7 +267,7 @@ font-feature-settings: "kern" 1;
 
 ### Do（推奨）
 
-- フォントは必ず `"Inter", "Noto Sans JP", sans-serif` のフォールバックチェーンを指定する
+- フォントは必ず `"Plus Jakarta Sans", "Noto Sans JP", sans-serif` のフォールバックチェーンを指定する
 - 日本語本文の line-height は 1.6、letter-spacing は 0.05em を基本とする
 - 色のコントラスト比は WCAG AA 以上を確保する
 - コンポーネントの余白は Spacing Scale に従う
@@ -323,7 +323,7 @@ Text Color:    #333333
 Background:    #F7F7F7
 Surface:       #FFFFFF
 Border:        #E0E0E0
-Font:          "Inter", "Noto Sans JP", sans-serif
+Font:          "Plus Jakarta Sans", "Noto Sans JP", sans-serif
 Body Size:     16px
 Line Height:   1.5
 Border Radius: 6px
@@ -334,7 +334,7 @@ Border Radius: 6px
 ```
 このサービスのデザインシステムに従って、UIを作成してください。
 - プライマリカラー: #6E87B6（水彩ブルー）
-- フォント: "Inter", "Noto Sans JP", sans-serif
+- フォント: "Plus Jakarta Sans", "Noto Sans JP", sans-serif
 - 行間: 本文は line-height: 1.5
 - 背景色: #F7F7F7
 - カード背景: #FFFFFF、角丸 8px、影 0 1px 3px rgba(0,0,0,0.08)
@@ -360,7 +360,7 @@ Border Radius: 6px
 
 ### Aesthetics Guidelines（美的基準）
 
-- **タイポグラフィ**: フォントは Inter + Noto Sans JP を基本としつつ、見出しやヒーロー部分では display 用のウェイトや letter-spacing で変化をつける。Arial / Roboto / system-ui のような汎用フォントは使わない
+- **タイポグラフィ**: フォントは Plus Jakarta Sans + Noto Sans JP を基本としつつ、見出しやヒーロー部分では display 用のウェイトや letter-spacing で変化をつける。Arial / Roboto / system-ui のような汎用フォントは使わない
 - **カラー**: CSS変数で一貫性を保つ。プライマリブルー `#6E87B6` を軸に、アクセントカラーは控えめに。均等配色より、メインカラー + シャープなアクセントの方が効果的
 - **モーション**: アニメーションは意図を持って使う。ページ読み込み時のstaggered reveal（animation-delay）は効果的。散発的なmicro-interactionより、ひとつの美しいトランジションの方がインパクトがある。CSS-onlyを優先し、ReactではMotionライブラリを検討する
 - **空間構成**: 余白を恐れない。カード・セクション間の spacing は Spacing Scale に従いつつ、視覚的なリズムを意識する
