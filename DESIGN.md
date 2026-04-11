@@ -94,11 +94,15 @@
 
 ### 3.3 font-family 指定
 
-```css
-/* 本文・見出し */
-font-family: "Inter", "Noto Sans JP", sans-serif;
+本文、見出し :
 
-/* 等幅（コード表示） */
+```css
+font-family: "Inter", "Noto Sans JP", sans-serif;
+```
+
+等幅 (コード表示) :
+
+```css
 font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
 ```
 
@@ -155,9 +159,16 @@ line-break: strict;
 
 ### 3.8 OpenType 機能
 
+見出し、ナビゲーションのみ :
+
 ```css
-font-feature-settings: "palt" 1; /* 見出し・ナビゲーションのみ */
-font-feature-settings: "kern" 1; /* 欧文カーニング */
+font-feature-settings: "palt" 1;
+```
+
+欧文カーニング :
+
+```css
+font-feature-settings: "kern" 1;
 ```
 
 - 本文には `palt` を適用しない（可読性優先）
