@@ -1,18 +1,23 @@
 # Komorebi Design System
 
 コモレビの全ツール共通デザインガイドラインです。
-カラーパレット、フォント、コンポーネントの定義を管理しています。
+カラーパレット、フォント、コンポーネント、日本語テキスト整形ルールなどを一元管理しています。
 
-## プレビュー
+## デザインシステム プレビュー
+
+DESIGN.md の内容をビジュアルで確認できるページです。
+カラー、タイポグラフィ、コンポーネント、アイコン、アニメーション、ダークモード、レスポンシブ、JP Formatting ルールなど、全セクションをインタラクティブに閲覧できます。
 
 https://komorebi-tools.github.io/design-system/
 
-## 内容
+## リポジトリの構成
 
 | ファイル | 説明 |
 |---|---|
 | [DESIGN.md](DESIGN.md) | デザイン仕様書 (カラー、フォント、スペーシング、コンポーネント定義) |
 | [index.html](index.html) | ビジュアルプレビュー (GitHub Pages で公開中) |
+| [assets/logo/](assets/logo/) | ロゴ素材 (PNG 透過、JPG 白背景) |
+| [assets/tools/](assets/tools/) | 各ツールのロゴ SVG |
 | [.claude/skills/komorebi-design-system/SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | Claude Code 用スキル |
 
 ---
@@ -79,7 +84,8 @@ curl -o ~/.claude/skills/komorebi-design-system/SKILL.md \
 ```
 
 スキルが適用されると、以下が自動的に行われます :
-- コーポレートサイト、会社説明スライド、デザインシステムの3ソースを参照
+
+- コーポレートサイト、会社説明スライド、デザインシステムの 3 ソースを参照
 - デザイントークンに基づいた CSS の生成
 - Material Icons の使用 (絵文字は使わない)
 - 実画像ロゴの参照
@@ -97,16 +103,3 @@ cd design-system && git pull
 curl -o <SKILL.md のパス> \
   https://raw.githubusercontent.com/komorebi-tools/design-system/main/.claude/skills/komorebi-design-system/SKILL.md
 ```
-
----
-
-## 主なカラー
-
-| 色 | コード | 用途 |
-|---|---|---|
-| Primary | `#6E87B6` | CTA ボタン、リンク、アクセント |
-| Primary Dark | `#5A74A3` | ホバー、プレス時 |
-| Accent | `#C4A55A` | 注目させたい CTA、バッジ |
-| Text | `#333333` | 本文 |
-| Text Secondary | `#666666` | 補足、ラベル |
-| Background | `#F7F7F7` | ページ背景 |
