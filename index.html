@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Komorebi Design System</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
   :root {
     --primary: #6E87B6;
@@ -43,6 +44,27 @@
 
   .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 
+  /* Nav */
+  .nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    overflow-x: auto; white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 24px;
+    display: flex; gap: 0;
+  }
+  .nav-link {
+    display: inline-block; padding: 12px 16px;
+    font-size: 13px; font-weight: 600; color: var(--text-secondary);
+    text-decoration: none; border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .nav-link:hover { color: var(--primary); border-bottom-color: var(--primary); }
+
   /* Section */
   .section { padding: 64px 0; }
   .section + .section { border-top: 1px solid var(--border); }
@@ -61,8 +83,22 @@
   .color-swatch { height: 100px; }
   .color-info { padding: 12px 16px; }
   .color-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-  .color-hex { font-size: 13px; color: var(--text-secondary); font-family: 'SF Mono', monospace; }
+  .color-hex {
+    font-size: 13px; color: var(--text-secondary); font-family: 'SF Mono', monospace;
+    cursor: pointer; transition: color 0.2s;
+  }
+  .color-hex:hover { color: var(--primary); }
   .color-role { font-size: 11px; color: var(--text-disabled); margin-top: 4px; }
+
+  /* Copy toast */
+  .copy-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--text); color: white; padding: 10px 20px; border-radius: 6px;
+    font-size: 14px; font-weight: 600; opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+    pointer-events: none; z-index: 200;
+  }
+  .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   /* Typography */
   .type-row {
@@ -97,6 +133,15 @@
   .btn-secondary:hover { background: rgba(110, 135, 182, 0.08); }
   .btn-danger { background: var(--danger); color: white; }
   .btn-sm { padding: 8px 16px; font-size: 14px; }
+  .btn-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+  .btn-loading { position: relative; color: transparent !important; pointer-events: none; }
+  .btn-loading::after {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    width: 18px; height: 18px; margin: -9px 0 0 -9px;
+    border: 2px solid rgba(255,255,255,0.3); border-top-color: white;
+    border-radius: 50%; animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   /* Inputs */
   .input-demo {
@@ -158,13 +203,80 @@
   .chart-strip { display: flex; height: 48px; border-radius: 8px; overflow: hidden; }
   .chart-strip div { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
 
+  /* Icons grid */
+  .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+  .icon-item {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 16px 8px; background: white; border: 1px solid var(--border);
+    border-radius: 8px; text-align: center;
+  }
+  .icon-item .material-icons { font-size: 28px; color: var(--text); }
+  .icon-item span:last-child { font-size: 11px; color: var(--text-disabled); font-family: 'SF Mono', monospace; }
+  .icon-size-row { display: flex; align-items: center; gap: 24px; margin-top: 24px; }
+  .icon-size-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .icon-size-item span:last-child { font-size: 11px; color: var(--text-disabled); }
+
+  /* Motion tokens */
+  .motion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .motion-card {
+    background: white; border: 1px solid var(--border); border-radius: 8px;
+    padding: 24px; text-align: center;
+  }
+  .motion-demo {
+    width: 48px; height: 48px; background: var(--primary); border-radius: 8px;
+    margin: 16px auto; cursor: pointer;
+  }
+  .motion-card:nth-child(1) .motion-demo { transition: transform 0.15s ease-out; }
+  .motion-card:nth-child(1) .motion-demo:hover { transform: scale(1.15); }
+  .motion-card:nth-child(2) .motion-demo { transition: transform 0.3s cubic-bezier(0.4,0.4,0,1); }
+  .motion-card:nth-child(2) .motion-demo:hover { transform: translateY(-8px); }
+  .motion-card:nth-child(3) .motion-demo { transition: opacity 0.2s ease-in-out; }
+  .motion-card:nth-child(3) .motion-demo:hover { opacity: 0.5; }
+  .motion-card:nth-child(4) .motion-demo { transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+  .motion-card:nth-child(4) .motion-demo:hover { transform: rotate(90deg); }
+  .motion-label { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .motion-spec { font-size: 12px; color: var(--text-disabled); font-family: 'SF Mono', monospace; }
+
+  /* Dark mode preview */
+  .dark-preview {
+    background: #1A1A2E; border-radius: 12px; padding: 32px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .dark-preview .dp-card {
+    background: #25253E; border: 1px solid #3A3A5C; border-radius: 8px; padding: 20px;
+  }
+  .dark-preview .dp-card h4 { color: #E8E8F0; font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+  .dark-preview .dp-swatch {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .dark-preview .dp-chip {
+    padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 600;
+    font-family: 'SF Mono', monospace;
+  }
+  .dark-tokens {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px; margin-top: 24px;
+  }
+  .dark-token-row {
+    display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+    background: #25253E; border-radius: 6px;
+  }
+  .dark-token-swatch { width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0; }
+  .dark-token-label { font-size: 12px; color: #A0A0C0; flex: 1; }
+  .dark-token-hex { font-size: 11px; color: #707090; font-family: 'SF Mono', monospace; }
+
+  /* Button states */
+  .state-row { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .state-label { width: 80px; font-size: 12px; font-weight: 600; color: var(--text-secondary); flex-shrink: 0; }
+
   @media (max-width: 768px) {
     .hero { padding: 48px 24px; }
     .hero h1 { font-size: 28px; }
-    .component-grid, .rule-grid { grid-template-columns: 1fr; }
+    .component-grid, .rule-grid, .motion-grid { grid-template-columns: 1fr; }
     .type-row { flex-direction: column; gap: 8px; }
     .type-meta { width: auto; }
     .elevation-grid { grid-template-columns: repeat(2, 1fr); }
+    .dark-preview { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -177,10 +289,31 @@
   <p>gpt-mcp-server 全ツール共通のデザインガイドライン</p>
 </div>
 
+<!-- Nav -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-link" href="#logo">Logo</a>
+    <a class="nav-link" href="#color">Color</a>
+    <a class="nav-link" href="#typography">Typography</a>
+    <a class="nav-link" href="#components">Components</a>
+    <a class="nav-link" href="#icons">Icons</a>
+    <a class="nav-link" href="#motion">Motion</a>
+    <a class="nav-link" href="#spacing">Spacing</a>
+    <a class="nav-link" href="#elevation">Elevation</a>
+    <a class="nav-link" href="#responsive">Responsive</a>
+    <a class="nav-link" href="#dark">Dark Mode</a>
+    <a class="nav-link" href="#guidelines">Guidelines</a>
+    <a class="nav-link" href="#tools">Tools</a>
+  </div>
+</nav>
+
+<!-- Copy toast -->
+<div class="copy-toast" id="copyToast">Copied!</div>
+
 <div class="container">
 
   <!-- 0. Logo Assets -->
-  <div class="section">
+  <div class="section" id="logo">
     <div class="section-title">00 / Logo Assets</div>
     <div class="section-heading">ロゴアセット</div>
 
@@ -223,7 +356,7 @@
   </div>
 
   <!-- 1. Color Palette -->
-  <div class="section">
+  <div class="section" id="color">
     <div class="section-title">01 / Color Palette</div>
     <div class="section-heading">カラーパレット</div>
     <div class="color-grid">
@@ -231,7 +364,7 @@
         <div class="color-swatch" style="background:#6E87B6"></div>
         <div class="color-info">
           <div class="color-name">Primary</div>
-          <div class="color-hex">#6E87B6</div>
+          <div class="color-hex" onclick="copyColor(this)">#6E87B6</div>
           <div class="color-role">CTA, リンク, アクセント</div>
         </div>
       </div>
@@ -239,7 +372,7 @@
         <div class="color-swatch" style="background:#5A74A3"></div>
         <div class="color-info">
           <div class="color-name">Primary Dark</div>
-          <div class="color-hex">#5A74A3</div>
+          <div class="color-hex" onclick="copyColor(this)">#5A74A3</div>
           <div class="color-role">ホバー, プレス</div>
         </div>
       </div>
@@ -247,7 +380,7 @@
         <div class="color-swatch" style="background:#9BB0D0"></div>
         <div class="color-info">
           <div class="color-name">Primary Light</div>
-          <div class="color-hex">#9BB0D0</div>
+          <div class="color-hex" onclick="copyColor(this)">#9BB0D0</div>
           <div class="color-role">背景アクセント, ハイライト</div>
         </div>
       </div>
@@ -255,7 +388,7 @@
         <div class="color-swatch" style="background:#C4A55A"></div>
         <div class="color-info">
           <div class="color-name">Accent</div>
-          <div class="color-hex">#C4A55A</div>
+          <div class="color-hex" onclick="copyColor(this)">#C4A55A</div>
           <div class="color-role">CTA, バッジ, ハイライト</div>
         </div>
       </div>
@@ -263,7 +396,7 @@
         <div class="color-swatch" style="background:#B0923E"></div>
         <div class="color-info">
           <div class="color-name">Accent Dark</div>
-          <div class="color-hex">#B0923E</div>
+          <div class="color-hex" onclick="copyColor(this)">#B0923E</div>
           <div class="color-role">ホバー, プレス</div>
         </div>
       </div>
@@ -271,7 +404,7 @@
         <div class="color-swatch" style="background:#E0D5A8"></div>
         <div class="color-info">
           <div class="color-name">Accent Light</div>
-          <div class="color-hex">#E0D5A8</div>
+          <div class="color-hex" onclick="copyColor(this)">#E0D5A8</div>
           <div class="color-role">背景アクセント, バッジ背景</div>
         </div>
       </div>
@@ -279,7 +412,7 @@
         <div class="color-swatch" style="background:#5CB85C"></div>
         <div class="color-info">
           <div class="color-name">Success</div>
-          <div class="color-hex">#5CB85C</div>
+          <div class="color-hex" onclick="copyColor(this)">#5CB85C</div>
           <div class="color-role">成功, 完了</div>
         </div>
       </div>
@@ -287,7 +420,7 @@
         <div class="color-swatch" style="background:#F0AD4E"></div>
         <div class="color-info">
           <div class="color-name">Warning</div>
-          <div class="color-hex">#F0AD4E</div>
+          <div class="color-hex" onclick="copyColor(this)">#F0AD4E</div>
           <div class="color-role">警告, 注意</div>
         </div>
       </div>
@@ -295,7 +428,7 @@
         <div class="color-swatch" style="background:#D9534F"></div>
         <div class="color-info">
           <div class="color-name">Danger</div>
-          <div class="color-hex">#D9534F</div>
+          <div class="color-hex" onclick="copyColor(this)">#D9534F</div>
           <div class="color-role">エラー, 削除</div>
         </div>
       </div>
@@ -303,7 +436,7 @@
         <div class="color-swatch" style="background:#333333"></div>
         <div class="color-info">
           <div class="color-name">Text Primary</div>
-          <div class="color-hex">#333333</div>
+          <div class="color-hex" onclick="copyColor(this)">#333333</div>
           <div class="color-role">本文テキスト</div>
         </div>
       </div>
@@ -311,7 +444,7 @@
         <div class="color-swatch" style="background:#666666"></div>
         <div class="color-info">
           <div class="color-name">Text Secondary</div>
-          <div class="color-hex">#666666</div>
+          <div class="color-hex" onclick="copyColor(this)">#666666</div>
           <div class="color-role">補足, ラベル</div>
         </div>
       </div>
@@ -319,7 +452,7 @@
         <div class="color-swatch" style="background:#AAAAAA"></div>
         <div class="color-info">
           <div class="color-name">Text Disabled</div>
-          <div class="color-hex">#AAAAAA</div>
+          <div class="color-hex" onclick="copyColor(this)">#AAAAAA</div>
           <div class="color-role">無効状態</div>
         </div>
       </div>
@@ -327,7 +460,7 @@
         <div class="color-swatch" style="background:#E0E0E0"></div>
         <div class="color-info">
           <div class="color-name">Border</div>
-          <div class="color-hex">#E0E0E0</div>
+          <div class="color-hex" onclick="copyColor(this)">#E0E0E0</div>
           <div class="color-role">区切り線, 枠線</div>
         </div>
       </div>
@@ -335,7 +468,7 @@
         <div class="color-swatch" style="background:#F7F7F7; border-bottom: 1px solid #E0E0E0"></div>
         <div class="color-info">
           <div class="color-name">Background</div>
-          <div class="color-hex">#F7F7F7</div>
+          <div class="color-hex" onclick="copyColor(this)">#F7F7F7</div>
           <div class="color-role">ページ背景</div>
         </div>
       </div>
@@ -343,7 +476,7 @@
         <div class="color-swatch" style="background:#FFFFFF; border-bottom: 1px solid #E0E0E0"></div>
         <div class="color-info">
           <div class="color-name">Surface</div>
-          <div class="color-hex">#FFFFFF</div>
+          <div class="color-hex" onclick="copyColor(this)">#FFFFFF</div>
           <div class="color-role">カード, モーダル</div>
         </div>
       </div>
@@ -370,7 +503,7 @@
   </div>
 
   <!-- 2. Typography -->
-  <div class="section">
+  <div class="section" id="typography">
     <div class="section-title">02 / Typography</div>
     <div class="section-heading">タイポグラフィ</div>
 
@@ -433,7 +566,7 @@
   </div>
 
   <!-- 3. Components -->
-  <div class="section">
+  <div class="section" id="components">
     <div class="section-title">03 / Components</div>
     <div class="section-heading">コンポーネント</div>
 
@@ -454,6 +587,31 @@
         </div>
         <div style="margin-top: 16px; font-size: 12px; color: var(--text-disabled)">
           border-radius: 6px &middot; padding: 12px 24px &middot; font-weight: 700
+        </div>
+      </div>
+
+      <!-- Button States -->
+      <div class="component-box">
+        <div class="component-label">Button States</div>
+        <div class="state-row">
+          <div class="state-label">Default</div>
+          <button class="btn btn-primary" style="margin:0">Primary</button>
+          <button class="btn btn-secondary" style="margin:0">Secondary</button>
+        </div>
+        <div class="state-row">
+          <div class="state-label">Hover</div>
+          <button class="btn" style="margin:0;background:var(--primary-dark);color:white">Primary</button>
+          <button class="btn" style="margin:0;background:rgba(110,135,182,0.08);color:var(--primary);border:1px solid var(--primary)">Secondary</button>
+        </div>
+        <div class="state-row">
+          <div class="state-label">Disabled</div>
+          <button class="btn btn-primary btn-disabled" style="margin:0">Primary</button>
+          <button class="btn btn-secondary btn-disabled" style="margin:0">Secondary</button>
+        </div>
+        <div class="state-row">
+          <div class="state-label">Loading</div>
+          <button class="btn btn-primary btn-loading" style="margin:0">Primary</button>
+          <button class="btn btn-accent btn-loading" style="margin:0">Accent</button>
         </div>
       </div>
 
@@ -509,8 +667,135 @@
     </div>
   </div>
 
+  <!-- 3.5 Icons -->
+  <div class="section" id="icons">
+    <div class="section-title">03.5 / Iconography</div>
+    <div class="section-heading">Material Icons</div>
+
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px">
+      アイコンは Google Material Icons を使用。絵文字は使用禁止。
+    </p>
+
+    <div class="component-label">よく使うアイコン</div>
+    <div class="icon-grid">
+      <div class="icon-item"><span class="material-icons">home</span><span>home</span></div>
+      <div class="icon-item"><span class="material-icons">search</span><span>search</span></div>
+      <div class="icon-item"><span class="material-icons">settings</span><span>settings</span></div>
+      <div class="icon-item"><span class="material-icons">delete</span><span>delete</span></div>
+      <div class="icon-item"><span class="material-icons">edit</span><span>edit</span></div>
+      <div class="icon-item"><span class="material-icons">add</span><span>add</span></div>
+      <div class="icon-item"><span class="material-icons">close</span><span>close</span></div>
+      <div class="icon-item"><span class="material-icons">check</span><span>check</span></div>
+      <div class="icon-item"><span class="material-icons">info</span><span>info</span></div>
+      <div class="icon-item"><span class="material-icons">warning</span><span>warning</span></div>
+      <div class="icon-item"><span class="material-icons">error</span><span>error</span></div>
+      <div class="icon-item"><span class="material-icons">help</span><span>help</span></div>
+      <div class="icon-item"><span class="material-icons">visibility</span><span>visibility</span></div>
+      <div class="icon-item"><span class="material-icons">visibility_off</span><span>visibility_off</span></div>
+      <div class="icon-item"><span class="material-icons">file_download</span><span>file_download</span></div>
+      <div class="icon-item"><span class="material-icons">file_upload</span><span>file_upload</span></div>
+      <div class="icon-item"><span class="material-icons">content_copy</span><span>content_copy</span></div>
+      <div class="icon-item"><span class="material-icons">open_in_new</span><span>open_in_new</span></div>
+      <div class="icon-item"><span class="material-icons">chevron_right</span><span>chevron_right</span></div>
+      <div class="icon-item"><span class="material-icons">expand_more</span><span>expand_more</span></div>
+      <div class="icon-item"><span class="material-icons">menu</span><span>menu</span></div>
+      <div class="icon-item"><span class="material-icons">person</span><span>person</span></div>
+      <div class="icon-item"><span class="material-icons">mail</span><span>mail</span></div>
+      <div class="icon-item"><span class="material-icons">notifications</span><span>notifications</span></div>
+    </div>
+
+    <div style="margin-top:32px">
+      <div class="component-label">サイズ規定</div>
+      <div class="icon-size-row">
+        <div class="icon-size-item">
+          <span class="material-icons" style="font-size:16px;color:var(--text)">settings</span>
+          <span>16px</span>
+        </div>
+        <div class="icon-size-item">
+          <span class="material-icons" style="font-size:20px;color:var(--text)">settings</span>
+          <span>20px</span>
+        </div>
+        <div class="icon-size-item">
+          <span class="material-icons" style="font-size:24px;color:var(--text)">settings</span>
+          <span>24px (標準)</span>
+        </div>
+        <div class="icon-size-item">
+          <span class="material-icons" style="font-size:32px;color:var(--text)">settings</span>
+          <span>32px</span>
+        </div>
+        <div class="icon-size-item">
+          <span class="material-icons" style="font-size:48px;color:var(--text)">settings</span>
+          <span>48px</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="font-stack" style="margin-top:24px">
+      <strong>使い方:</strong><br>
+      &lt;span class="material-icons"&gt;icon_name&lt;/span&gt;<br><br>
+      <strong>CDN:</strong><br>
+      fonts.googleapis.com/icon?family=Material+Icons
+    </div>
+  </div>
+
+  <!-- 3.6 Motion -->
+  <div class="section" id="motion">
+    <div class="section-title">03.6 / Motion & Transition</div>
+    <div class="section-heading">アニメーション</div>
+
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px">
+      ホバーで各トランジションを確認できます。
+    </p>
+
+    <div class="motion-grid">
+      <div class="motion-card">
+        <div class="motion-label">Fast</div>
+        <div class="motion-spec">150ms ease-out</div>
+        <div class="motion-demo"></div>
+        <div style="font-size:12px;color:var(--text-disabled)">ツールチップ、トグル、マイクロ操作</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-label">Normal</div>
+        <div class="motion-spec">300ms cubic-bezier(0.4,0.4,0,1)</div>
+        <div class="motion-demo"></div>
+        <div style="font-size:12px;color:var(--text-disabled)">ボタン、カード、ホバー、フォーカス</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-label">Fade</div>
+        <div class="motion-spec">200ms ease-in-out</div>
+        <div class="motion-demo"></div>
+        <div style="font-size:12px;color:var(--text-disabled)">表示/非表示、トースト、オーバーレイ</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-label">Expressive</div>
+        <div class="motion-spec">500ms cubic-bezier(0.34,1.56,0.64,1)</div>
+        <div class="motion-demo"></div>
+        <div style="font-size:12px;color:var(--text-disabled)">成功フィードバック、強調演出</div>
+      </div>
+    </div>
+
+    <div class="rule-grid" style="margin-top:32px">
+      <div class="rule-box rule-do">
+        <div class="rule-title">Do</div>
+        <ul>
+          <li>UI フィードバックは 300ms 以下で完了させる</li>
+          <li>ease-out を基本に、操作の「結果」を素早く見せる</li>
+          <li>prefers-reduced-motion に対応する</li>
+        </ul>
+      </div>
+      <div class="rule-box rule-dont">
+        <div class="rule-title">Don't</div>
+        <ul>
+          <li>500ms を超えるトランジションを日常操作に使わない</li>
+          <li>linear イージングをUIに使わない (機械的に見える)</li>
+          <li>同時に複数のアニメーションを重ねない</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <!-- 4. Spacing -->
-  <div class="section">
+  <div class="section" id="spacing">
     <div class="section-title">04 / Spacing</div>
     <div class="section-heading">スペーシング</div>
     <div style="max-width: 600px;">
@@ -548,7 +833,7 @@
   </div>
 
   <!-- 5. Elevation -->
-  <div class="section">
+  <div class="section" id="elevation">
     <div class="section-title">05 / Depth & Elevation</div>
     <div class="section-heading">シャドウ</div>
     <div class="elevation-grid">
@@ -572,7 +857,7 @@
   </div>
 
   <!-- 6. Responsive -->
-  <div class="section">
+  <div class="section" id="responsive">
     <div class="section-title">06 / Responsive</div>
     <div class="section-heading">ブレークポイント</div>
     <div class="bp-row">
@@ -592,9 +877,95 @@
     </div>
   </div>
 
-  <!-- 7. Do's and Don'ts -->
-  <div class="section">
-    <div class="section-title">07 / Guidelines</div>
+  <!-- 7. Dark Mode -->
+  <div class="section" id="dark">
+    <div class="section-title">07 / Dark Mode</div>
+    <div class="section-heading">ダークモード</div>
+
+    <div class="dark-preview">
+      <div class="dp-card">
+        <h4>カラートークン</h4>
+        <div class="dp-swatch">
+          <div class="dp-chip" style="background:#7B94C0;color:#fff">#7B94C0</div>
+          <div class="dp-chip" style="background:#D4BA6E;color:#1A1A2E">#D4BA6E</div>
+          <div class="dp-chip" style="background:#E05550;color:#fff">#E05550</div>
+          <div class="dp-chip" style="background:#65C465;color:#1A1A2E">#65C465</div>
+        </div>
+      </div>
+      <div class="dp-card">
+        <h4>コンポーネント例</h4>
+        <button style="background:#7B94C0;color:#fff;border:none;padding:10px 20px;border-radius:6px;font-weight:700;font-family:inherit;font-size:14px;margin-right:8px">Primary</button>
+        <button style="background:transparent;color:#7B94C0;border:1px solid #7B94C0;padding:10px 20px;border-radius:6px;font-weight:700;font-family:inherit;font-size:14px">Secondary</button>
+      </div>
+    </div>
+
+    <div class="dark-tokens">
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#7B94C0"></div>
+        <div class="dark-token-label">Primary</div>
+        <div class="dark-token-hex">#7B94C0</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#9AAFD5"></div>
+        <div class="dark-token-label">Primary Light</div>
+        <div class="dark-token-hex">#9AAFD5</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#D4BA6E"></div>
+        <div class="dark-token-label">Accent</div>
+        <div class="dark-token-hex">#D4BA6E</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#E8E8F0"></div>
+        <div class="dark-token-label">Text</div>
+        <div class="dark-token-hex">#E8E8F0</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#A0A0C0"></div>
+        <div class="dark-token-label">Text Secondary</div>
+        <div class="dark-token-hex">#A0A0C0</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#606080"></div>
+        <div class="dark-token-label">Text Disabled</div>
+        <div class="dark-token-hex">#606080</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#1A1A2E"></div>
+        <div class="dark-token-label">Background</div>
+        <div class="dark-token-hex">#1A1A2E</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#25253E"></div>
+        <div class="dark-token-label">Surface</div>
+        <div class="dark-token-hex">#25253E</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#3A3A5C"></div>
+        <div class="dark-token-label">Border</div>
+        <div class="dark-token-hex">#3A3A5C</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#E05550"></div>
+        <div class="dark-token-label">Danger</div>
+        <div class="dark-token-hex">#E05550</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#F5BD5A"></div>
+        <div class="dark-token-label">Warning</div>
+        <div class="dark-token-hex">#F5BD5A</div>
+      </div>
+      <div class="dark-token-row">
+        <div class="dark-token-swatch" style="background:#65C465"></div>
+        <div class="dark-token-label">Success</div>
+        <div class="dark-token-hex">#65C465</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Do's and Don'ts -->
+  <div class="section" id="guidelines">
+    <div class="section-title">08 / Guidelines</div>
     <div class="section-heading">Do's & Don'ts</div>
     <div class="rule-grid">
       <div class="rule-box rule-do">
@@ -603,8 +974,9 @@
           <li>フォントは "Inter", "Noto Sans JP", sans-serif のフォールバックチェーンを指定</li>
           <li>日本語本文の line-height は 1.5 以上</li>
           <li>色のコントラスト比は WCAG AA 以上</li>
-          <li>角丸は 6〜8px で統一</li>
+          <li>角丸は 6~8px で統一</li>
           <li>ブランドカラーは水彩ブルー #6E87B6 を基調に</li>
+          <li>アイコンは Material Icons を使用する</li>
         </ul>
       </div>
       <div class="rule-box rule-dont">
@@ -615,14 +987,15 @@
           <li>テキストに純粋な #000000 を使わない (#333333 を使う)</li>
           <li>Primary カラーをエラーの意味で使わない</li>
           <li>border-radius: 50% のような極端な値にしない</li>
+          <li>絵文字をUIに使わない (Material Icons を使う)</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <!-- 8. Applicable Tools -->
-  <div class="section">
-    <div class="section-title">08 / Applicable Tools</div>
+  <!-- 9. Applicable Tools -->
+  <div class="section" id="tools">
+    <div class="section-title">09 / Applicable Tools</div>
     <div class="section-heading">適用ツール一覧</div>
     <div class="component-grid">
       <div class="card-demo">
@@ -665,6 +1038,18 @@
 <footer style="text-align:center;padding:40px;color:var(--text-disabled);font-size:13px;border-top:1px solid var(--border)">
   Komorebi Design System &mdash; DESIGN.md visualized &middot; 2026
 </footer>
+
+<script>
+function copyColor(el) {
+  const hex = el.textContent.trim();
+  navigator.clipboard.writeText(hex).then(() => {
+    const toast = document.getElementById('copyToast');
+    toast.textContent = hex + ' をコピーしました';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 1500);
+  });
+}
+</script>
 
 </body>
 </html>
