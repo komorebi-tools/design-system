@@ -1099,7 +1099,11 @@
       全てのテキスト出力 (会話&#xB7;ドキュメント&#xB7;メール&#xB7;レポート&#xB7;スライド等) に適用する約物ルール。
     </p>
 
-    <table style="width:100%;max-width:720px;border-collapse:collapse;font-size:14px;margin-bottom:24px">
+    <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap">
+
+    <!-- Table (left) -->
+    <div style="flex:1;min-width:400px">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
       <thead>
         <tr>
           <th style="background:var(--primary-dark);color:#fff;padding:10px 16px;text-align:left;font-weight:600">対象</th>
@@ -1140,11 +1144,17 @@
         </tr>
       </tbody>
     </table>
+    </div>
 
-    <div class="font-stack">
-      <strong>変換例:</strong><br>
+    <!-- Conversion example (right) -->
+    <div style="flex:1;min-width:300px">
+    <div class="font-stack" style="margin-top:0">
+      <strong>変換例:</strong><br><br>
       <span style="color:var(--text-secondary)">新機能・改善点／バグ修正についての報告（2026年4月）ステータス：完了。結果は"良好"です。</span><br><br>
       <span style="color:var(--primary)">新機能&#xB7;改善点 / バグ修正についての報告 (2026年4月) ステータス : 完了。<br>結果は "良好" です。</span>
+    </div>
+    </div>
+
     </div>
   </div>
 
