@@ -852,13 +852,14 @@
         <!-- Card -->
         <rect x="4" y="4" width="552" height="272" rx="8" fill="white" stroke="#E0E0E0" stroke-width="1.5"/>
 
-        <!-- Padding top area (tinted) -->
-        <rect x="4" y="4" width="552" height="32" rx="8" fill="#6E87B6" opacity="0.06"/>
-        <text x="280" y="24" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-top : L 24px</text>
+        <!-- Padding area (single tinted rect covering all padding) -->
+        <rect x="4" y="4" width="552" height="272" rx="8" fill="#6E87B6" opacity="0.04"/>
+        <!-- Content area (white cutout to show padding visually) -->
+        <rect x="36" y="36" width="488" height="194" rx="4" fill="white"/>
 
-        <!-- Padding left area (tinted) -->
-        <rect x="4" y="36" width="32" height="200" fill="#6E87B6" opacity="0.06"/>
-        <text x="20" y="140" font-family="'SF Mono',monospace" font-size="10" fill="#6E87B6" text-anchor="middle" transform="rotate(-90 20 140)">padding : L 24px</text>
+        <!-- Padding labels -->
+        <text x="280" y="24" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-top : L 24px</text>
+        <text x="20" y="140" font-family="'SF Mono',monospace" font-size="10" fill="#6E87B6" text-anchor="middle" transform="rotate(-90 20 140)">L 24px</text>
 
         <!-- Title block -->
         <rect x="36" y="36" width="220" height="18" rx="3" fill="#6E87B6" opacity="0.25"/>
@@ -892,8 +893,7 @@
         <rect x="188" y="140" width="140" height="36" rx="6" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
         <text x="218" y="163" font-family="'Inter',sans-serif" font-size="13" fill="#6E87B6" font-weight="700">Secondary</text>
 
-        <!-- Padding bottom area (tinted) -->
-        <rect x="4" y="236" width="552" height="32" rx="8" fill="#6E87B6" opacity="0.06"/>
+        <!-- Padding bottom label -->
         <text x="280" y="256" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-bottom : L 24px</text>
 
         <!-- Legend -->
