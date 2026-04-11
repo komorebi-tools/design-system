@@ -3,7 +3,7 @@
   <g transform="translate(2, 0)">
     <!-- Speech bubble -->
     <rect x="0" y="0" width="30" height="20" rx="4" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
-    <path d="M6 20 L4 26 L12 20" fill="white" stroke="#6E87B6" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M6 20 L4 25 L12 20" fill="white" stroke="#6E87B6" stroke-width="1.5" stroke-linejoin="round"/>
     <!-- Tag chips inside bubble -->
     <rect x="4" y="4.5" width="12" height="5" rx="2.5" fill="#6E87B6" opacity="0.2" stroke="#6E87B6" stroke-width="0.8"/>
     <rect x="18" y="4.5" width="8" height="5" rx="2.5" fill="#9BB0D0" opacity="0.25" stroke="#9BB0D0" stroke-width="0.8"/>
