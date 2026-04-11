@@ -1,12 +1,14 @@
 # Komorebi Design System
 
 コモレビの全ツール共通デザインガイドラインです。
+
 カラーパレット、フォント、コンポーネント、日本語テキスト整形ルールなどを一元管理しています。
 
 ## デザインシステム プレビュー
 
 DESIGN.md の内容をビジュアルで確認できるページです。
-カラー、タイポグラフィ、コンポーネント、アイコン、アニメーション、ダークモード、レスポンシブ、JP Formatting ルールなど、全セクションをインタラクティブに閲覧できます。
+
+カラー、タイポグラフィ、コンポーネント、アイコン、アニメーション、ダークモード、レスポンシブ、JP Formatting ルールなど全セクションをインタラクティブに閲覧できます。
 
 https://komorebi-tools.github.io/design-system/
 
@@ -25,6 +27,7 @@ https://komorebi-tools.github.io/design-system/
 ## Claude Code スキル : komorebi-design-system
 
 コモレビの UI / Web 制作時に、デザインシステムのルールを Claude Code が自動適用するスキルです。
+
 チームメンバーは以下の手順でセットアップしてください。
 
 ### できること
