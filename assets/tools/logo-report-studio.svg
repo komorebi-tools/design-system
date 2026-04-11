@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="40" viewBox="0 0 250 40" fill="none">
+  <!-- Icon: stacked text docs → visualized report, scaled 60% -->
+  <g transform="translate(0, 2) scale(0.6)">
+    <!-- Left: stacked plain text documents (Before) -->
+    <!-- Back doc -->
+    <rect x="10" y="2" width="26" height="36" rx="3" fill="#F5F5F5" stroke="#CCC" stroke-width="1.2"/>
+    <!-- Middle doc -->
+    <rect x="5" y="6" width="26" height="36" rx="3" fill="#FAFAFA" stroke="#CCC" stroke-width="1.2"/>
+    <!-- Front doc -->
+    <rect x="0" y="10" width="26" height="36" rx="3" fill="white" stroke="#CCC" stroke-width="1.5"/>
+    <rect x="5" y="16" width="12" height="2.5" rx="1" fill="#BBB"/>
+    <rect x="5" y="21" width="18" height="2" rx="1" fill="#DDD"/>
+    <rect x="5" y="25" width="14" height="2" rx="1" fill="#DDD"/>
+    <rect x="5" y="29" width="17" height="2" rx="1" fill="#DDD"/>
+    <rect x="5" y="33" width="12" height="2" rx="1" fill="#DDD"/>
+    <rect x="5" y="37" width="16" height="2" rx="1" fill="#DDD"/>
+
+    <!-- Arrow -->
+    <path d="M42 28 L52 28" stroke="#6E87B6" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M49 24 L54 28 L49 32" stroke="#6E87B6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Sparkle -->
+    <g transform="translate(44 12)" fill="#6E87B6" opacity="0.5">
+      <path d="M4 0 L4.8 2.8 L8 4 L4.8 5.2 L4 8 L3.2 5.2 L0 4 L3.2 2.8 Z"/>
+    </g>
+
+    <!-- Right: visualized report (After) -->
+    <rect x="62" y="4" width="34" height="42" rx="3" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
+    <!-- Hero band -->
+    <rect x="62" y="4" width="34" height="9" rx="3" fill="#6E87B6" opacity="0.12"/>
+    <!-- Title -->
+    <rect x="67" y="17" width="22" height="2.5" rx="1" fill="#6E87B6" opacity="0.8"/>
+    <!-- Text -->
+    <rect x="67" y="22" width="24" height="2" rx="1" fill="#AAA"/>
+    <rect x="67" y="26" width="18" height="2" rx="1" fill="#AAA"/>
+    <!-- Bar chart -->
+    <rect x="68" y="36" width="5" height="6" rx="1" fill="#6E87B6" opacity="0.45"/>
+    <rect x="75" y="32" width="5" height="10" rx="1" fill="#6E87B6" opacity="0.65"/>
+    <rect x="82" y="34" width="5" height="8" rx="1" fill="#6E87B6" opacity="0.55"/>
+    <rect x="89" y="30" width="5" height="12" rx="1" fill="#6E87B6" opacity="0.85"/>
+  </g>
+
+  <!-- Text -->
+  <text x="66" y="24" font-family="'Inter', 'Noto Sans JP', sans-serif" font-size="22" font-weight="700" fill="#333" letter-spacing="0.01em">Report Studio</text>
+</svg>
