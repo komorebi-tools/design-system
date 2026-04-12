@@ -16,7 +16,7 @@ https://komorebi-tools.github.io/design-system/
 
 Claude Code にコモレビの UI 制作を依頼すると、デザインが意図通りに出てきます。
 
-プロンプトに「色は #6E87B6 で、フォントは Noto Sans JP で...」と毎回書く必要はありません。
+プロンプトに「色は #6E87B6 で、フォントは Plus Jakarta Sans で...」と毎回書く必要はありません。
 
 理由は、プロジェクトに設計書を置いているからです。
 
