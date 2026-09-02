@@ -325,7 +325,7 @@ font-feature-settings: "kern" 1;
 
 ### クイックリファレンス
 
-```text <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+```text <!-- design-check: allow-block NO_HARDCODED_PRIMARY -->
 Primary Color: #6E87B6
 Primary Dark:  #5A74A3
 Primary Light: #9BB0D0
@@ -344,9 +344,8 @@ Border Radius: 6px
 
 ### プロンプト例
 
-「このサービスのデザインシステムに従って、UIを作成してください。」に続けて、次を渡す :
-
-```text <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+```text <!-- design-check: allow-block NO_HARDCODED_PRIMARY -->
+このサービスのデザインシステムに従って、UIを作成してください。
 - プライマリカラー: #6E87B6 (水彩ブルー)
 - フォント: "Plus Jakarta Sans", "Noto Sans JP", sans-serif
 - 行間: 本文は line-height: 1.6
@@ -422,7 +421,6 @@ Border Radius: 6px
   カンマ区切りで複数書ける。
   `allow all` と引数なしの `allow` は受け付けない。
   「この行は全部見ない」を作ると、ファイル単位の除外と同じ問題に戻る
-- 置き場所は**同じ行の末尾か、直前の行**
 - コメント記法は問わない (`<!-- -->` ･ `/* */` ･ `//` ･ `#`) 。
   検査器は文字列を探すだけなので `.md` ･ `.html` ･ `.css` ･ `.ts` で同じように効く
 - 知らない規則 ID を書くと「未知の規則 ID」として報告される。
@@ -432,14 +430,38 @@ Border Radius: 6px
 - 「。」改行チェックだけは `rules.json` に無いので、ID は `NO_PERIOD_LINEBREAK` を使う。
   表のセルのように改行できない行のためにある
 
+### どこまで覆うか
+
+覆う範囲は3通り。
+内容のある行に付けた注釈は、**その行しか覆わない**。
+
+| 置き場所 | 覆う範囲 |
+| --- | --- |
+| 内容のある行の末尾 | **その行だけ** |
+| 注釈しか書かれていない行 | その行と**次の1行** |
+| コードフェンスの行 (`allow-block`) | **そのブロック全体** |
+
+内容のある行の末尾に付けた注釈が次の行まで届くと、**あとから足した行が黙って飲まれる**。
+次の行を覆うのは「次の行のために書かれた行」= 注釈しか書かれていない行だけにしてある。
+
 Markdown での書き方 (この行自体が全角中黒を含む実例) :
 
 ```
 Notion・Slack <!-- design-check: allow NO_FULLWIDTH_NAKAGURO -->
 ```
 
-コードブロックの中は HTML コメントが表示されてしまうので、開始フェンスの後ろに書く。
+コードブロックの中に HTML コメントを書くと**そのまま表示されてしまう**ので、注釈を置けない。
+開始フェンスの後ろに `allow-block` を書いてブロック全体を覆う。
 本ファイルの §9 がその例。
+
+````
+```text <!-- design-check: allow-block NO_HARDCODED_PRIMARY -->
+Primary: #6E87B6
+```
+````
+
+この例も実際に Primary の直書きを含んでいるので、注釈は「使われている」判定になる。
+`allow-block` はコードフェンスの行以外に書くと、そう報告されて効かない。
 
 ### 注釈は「意図的な違反」だけに付ける
 

@@ -135,46 +135,100 @@ const badPatterns = [];
 let count = 0;
 
 // ─── 行単位の許可注釈 ───
-// 書式 : design-check: allow <RULE_ID>[,<RULE_ID>...]
-// 同じ行、または直前の行にこの文字列があれば、その行のその規則を報告しない。
-// 言語は問わない。どのコメント記法で囲むかは書く人の自由で、検査器は文字列を探すだけ。
-// 規則 ID は必須。「この行は全部見ない」を作ると、ファイル単位除外と同じ問題に戻る。
-// 「。」改行チェックは rules.json に無いが、表のセルのように改行できない行がある。
-// 注釈で黙らせる手段が無いと、そこだけ黙らせようがなくなるので ID を1つ用意する。
+// 書式 :
+//   design-check: allow <RULE_ID>[,<RULE_ID>...]
+//       その行だけを黙らせる。注釈しか書かれていない行なら、次の1行も覆う。
+//   design-check: allow-block <RULE_ID>[,<RULE_ID>...]
+//       コードフェンスの行に置き、そのブロック全体を覆う。
+//
+// 覆う範囲を「その行だけ」に寄せているのは、内容のある行の末尾に付けた注釈が
+// 次の行まで届くと、あとから足した行が黙って飲まれるため。
+// 次の行を覆うのは「注釈しか書かれていない行」= 次の行のために書かれた行だけにする。
+// コードブロックの中は HTML コメントがそのまま表示されて注釈を置けないので、
+// フェンス行に置く allow-block でブロック全体を覆う。
 const PERIOD_RULE_ID = "NO_PERIOD_LINEBREAK";
 const RULE_IDS = new Set([...rules.map((r) => r.id), PERIOD_RULE_ID]);
-const ALLOW_MARK = /design-check:[ \t]*allow\b/g;
+const ALLOW_MARK = /design-check:[ \t]*(allow-block|allow)\b/g;
 // ID の並びだけを取る。`-->` や `*/` は文字クラスに入らないので自然にそこで止まる。
 const ALLOW_IDS = /^[ \t]*([A-Za-z_][A-Za-z0-9_]*(?:[ \t]*,[ \t]*[A-Za-z_][A-Za-z0-9_]*)*)/;
+// 注釈を取り除いた残りがコメント記号と空白だけなら「注釈だけの行」
+const COMMENT_ONLY = /^[\s<>!\-\/*#;%]*$/;
+const FENCE = /^[ \t]{0,3}(`{3,}|~{3,})/;
 
-const allowsByLine = new Map(); // 0-based 行番号 -> Set(規則 ID)
-const allowProblems = [];       // ID 無し ･ allow all ･ 未知の ID
-const usedAllows = new Set();   // "行番号|規則 ID" : 実際に違反を黙らせた注釈
+const allowEntries = []; // { at, id, from, to, kind, used }
+const allowProblems = [];
 
 for (let i = 0; i < lines.length; i++) {
+  const found = [];
   ALLOW_MARK.lastIndex = 0;
   let m;
   while ((m = ALLOW_MARK.exec(lines[i])) !== null) {
+    const kind = m[1];
     const idMatch = ALLOW_IDS.exec(lines[i].slice(ALLOW_MARK.lastIndex));
     if (!idMatch) {
-      // 引数なしの allow は受け付けない。黙って無視もしない。
-      allowProblems.push(`${i + 1} 行目 : allow に規則 ID がありません。黙らせる規則 ID を必ず書いてください`);
+      // 引数なしは受け付けない。黙って無視もしない。
+      allowProblems.push(`${i + 1} 行目 : ${kind} に規則 ID がありません。黙らせる規則 ID を必ず書いてください`);
+      found.push({ kind, ids: [], span: m[0] });
       continue;
     }
-    for (const id of idMatch[1].split(",").map((x) => x.trim())) {
+    found.push({ kind, ids: idMatch[1].split(",").map((x) => x.trim()), span: m[0] + idMatch[0] });
+    ALLOW_MARK.lastIndex += idMatch[0].length;
+  }
+  if (found.length === 0) continue;
+
+  // その行が「注釈だけの行」か ･ フェンス行かで、覆う範囲が変わる
+  let rest = lines[i];
+  for (const f of found) rest = rest.replace(f.span, "");
+  const commentOnly = COMMENT_ONLY.test(rest);
+  const fence = FENCE.exec(lines[i]);
+
+  for (const f of found) {
+    let from = i;
+    let to = i;
+    if (f.kind === "allow-block") {
+      if (!fence) {
+        allowProblems.push(`${i + 1} 行目 : allow-block はコードフェンスの行にだけ置けます。1行だけ黙らせるなら allow を使ってください`);
+        continue;
+      }
+      const close = new RegExp("^[ \\t]{0,3}[" + fence[1][0] + "]{" + fence[1].length + ",}[ \\t]*$");
+      to = lines.length - 1;
+      for (let j = i + 1; j < lines.length; j++) {
+        if (close.test(lines[j])) { to = j; break; }
+      }
+    } else if (commentOnly) {
+      to = i + 1; // 注釈だけの行は、次の行のために書かれている
+    }
+    for (const id of f.ids) {
       if (/^(all|any)$/i.test(id)) {
-        allowProblems.push(`${i + 1} 行目 : allow ${id} は受け付けません。黙らせる規則 ID を1つずつ書いてください`);
+        allowProblems.push(`${i + 1} 行目 : ${f.kind} ${id} は受け付けません。黙らせる規則 ID を1つずつ書いてください`);
         continue;
       }
       if (!RULE_IDS.has(id)) {
-        allowProblems.push(`${i + 1} 行目 : allow に未知の規則 ID \`${id}\` があります`);
+        allowProblems.push(`${i + 1} 行目 : ${f.kind} に未知の規則 ID \`${id}\` があります`);
         continue;
       }
-      if (!allowsByLine.has(i)) allowsByLine.set(i, new Set());
-      allowsByLine.get(i).add(id);
+      allowEntries.push({ at: i, id, from, to, kind: f.kind, used: false });
     }
   }
 }
+
+// 行 -> その行を覆っている注釈
+const coverage = new Map();
+for (const e of allowEntries) {
+  for (let k = e.from; k <= e.to && k < lines.length; k++) {
+    if (!coverage.has(k)) coverage.set(k, []);
+    coverage.get(k).push(e);
+  }
+}
+
+// その行のその規則が黙らされているか。使われた注釈には印を付ける。
+const silence = (lineIdx, ruleId) => {
+  const es = coverage.get(lineIdx);
+  if (!es) return false;
+  let hit = false;
+  for (const e of es) if (e.id === ruleId) { e.used = true; hit = true; }
+  return hit;
+};
 
 // pattern が壊れている規則は「使われていない注釈」を判定できない
 const uncheckable = new Set();
@@ -194,16 +248,7 @@ for (const rule of rules) {
   for (let i = 0; i < lines.length; i++) {
     re.lastIndex = 0; // g フラグは test() で状態を持つので毎回戻す
     if (!re.test(lines[i])) continue;
-    // 同じ行 (i) と直前の行 (i - 1) の注釈を見る
-    let silenced = false;
-    for (const at of [i, i - 1]) {
-      const ids = allowsByLine.get(at);
-      if (ids && ids.has(rule.id)) {
-        usedAllows.add(at + "|" + rule.id);
-        silenced = true;
-      }
-    }
-    if (silenced) continue;
+    if (silence(i, rule.id)) continue;
     if (hits.length < 3) hits.push(`  ${i + 1}:${lines[i]}`);
   }
   if (hits.length > 0) {
@@ -229,16 +274,8 @@ const SKIP_LINE = /<script|<style|\/\/|\/\*|\*\//;
 const periodHits = [];
 for (let i = 0; i < lines.length; i++) {
   if (!PERIOD.test(lines[i]) || SKIP_LINE.test(lines[i])) continue;
-  // この検査も allow NO_PERIOD_LINEBREAK で1行だけ黙らせられる
-  let silenced = false;
-  for (const at of [i, i - 1]) {
-    const ids = allowsByLine.get(at);
-    if (ids && ids.has(PERIOD_RULE_ID)) {
-      usedAllows.add(at + "|" + PERIOD_RULE_ID);
-      silenced = true;
-    }
-  }
-  if (silenced) continue;
+  // この検査も allow NO_PERIOD_LINEBREAK で黙らせられる
+  if (silence(i, PERIOD_RULE_ID)) continue;
   if (periodHits.length < 5) periodHits.push(`${i + 1}:${lines[i]}`);
 }
 if (periodHits.length > 0) {
@@ -258,12 +295,11 @@ if (allowProblems.length > 0) {
 // 印は書き忘れれば鳴り、要らなくなれば言ってくる。
 // 放置すると印が古びて、いつの間にか本物を黙らせる。
 const staleAllows = [];
-for (const [i, ids] of allowsByLine) {
-  for (const id of ids) {
-    if (uncheckable.has(id)) continue; // pattern が壊れていて判定できない
-    if (!usedAllows.has(i + "|" + id)) {
-      staleAllows.push(`${i + 1} 行目 : ${id} の allow が付いていますが、その行に ${id} の違反はありません`);
-    }
+for (const e of allowEntries) {
+  if (uncheckable.has(e.id)) continue; // pattern が壊れていて判定できない
+  if (!e.used) {
+    const range = e.from === e.to ? "その行" : `${e.from + 1}-${e.to + 1} 行目`;
+    staleAllows.push(`${e.at + 1} 行目 : ${e.id} の ${e.kind} が付いていますが、${range}に ${e.id} の違反はありません`);
   }
 }
 if (staleAllows.length > 0) {
