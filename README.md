@@ -16,7 +16,7 @@ https://komorebi-tools.github.io/design-system/
 
 Claude Code にコモレビの UI 制作を依頼すると、デザインが意図通りに出てきます。
 
-プロンプトに「色は #6E87B6 で、フォントは Plus Jakarta Sans で...」と毎回書く必要はありません。
+プロンプトに「色は `#6E87B6` で、フォントは Plus Jakarta Sans で...」と毎回書く必要はありません。
 
 理由は、プロジェクトに設計書を置いているからです。
 
@@ -50,10 +50,10 @@ design-system/
 |---|---|
 | [DESIGN.md](DESIGN.md) | 色、フォント、角丸、余白、シャドウを数値で定義。Claude Code はここを見てトークン準拠の CSS を書く |
 | [SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | デザイントークン、情報ソース (コーポレートサイト、会社説明スライド)、品質 3 層定義 (L1/L2/L3)、アンチパターン、チェックリストを定義。Claude Code が UI を作る際の判断基準になる |
-| [rules.json](contracts/rules.json) | 絵文字禁止、#000000 禁止、全角括弧禁止など 9 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する |
+| [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 9 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する |
 | [index.html](index.html) | DESIGN.md をビジュアルで確認できるページ。チーム全員が同じトークンを見られる |
 
-> 約物 ・ 記号の表記ルール ( 中黒 ・ スラッシュ ・ 引用符 ・ 括弧 ・ コロン ・ カンマ等の 11 項目 + 句点後改行ルール ) は [DESIGN.md §3.6](DESIGN.md) を一次情報源として参照してください。
+> 約物 ･ 記号の表記ルール ( 中黒 ･ スラッシュ ･ 引用符 ･ 括弧 ･ コロン ･ カンマ等の 11 項目 + 句点後改行ルール ) は [DESIGN.md §3.6](DESIGN.md) を一次情報源として参照してください。
 
 #### 2026/9/1 の `NO_EMOJI` の変更について
 

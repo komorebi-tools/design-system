@@ -42,9 +42,9 @@
   {
     "id": "NO_FULLWIDTH_NAKAGURO",
     "severity": "warning",
-    "description": "全角中黒禁止。半角中黒を使う",
+    "description": "中黒は半角 U+FF65 を使う。全角 ・ (U+30FB) と中点 · (U+00B7) は禁止",
     "detector": "regex",
-    "pattern": "・",
+    "pattern": "[\\u30FB\\u00B7]",
     "alternative": "･ (半角中黒 U+FF65)"
   },
   {
