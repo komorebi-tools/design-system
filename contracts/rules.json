@@ -56,14 +56,6 @@
     "alternative": "border-radius: 6px or 8px"
   },
   {
-    "id": "NO_LINE_HEIGHT_LOW",
-    "severity": "warning",
-    "description": "日本語本文に line-height 1.5 以下は禁止",
-    "detector": "regex",
-    "pattern": "line-height:\\s*(1\\.[0-4]|1\\.5)\\b",
-    "alternative": "line-height: 1.6"
-  },
-  {
     "id": "NO_HARDCODED_PRIMARY",
     "severity": "warning",
     "description": "Primary カラー直書き禁止。CSS variable を使う",
