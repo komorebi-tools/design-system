@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
   :root {
-    --primary: #6E87B6;
+    --primary: #6E87B6; /* design-check: allow NO_HARDCODED_PRIMARY */
     --primary-dark: #5A74A3;
     --primary-light: #9BB0D0;
     --accent: #C4A55A;
@@ -37,7 +37,7 @@
 
   /* Hero */
   .hero {
-    background: linear-gradient(135deg, #6E87B6 0%, #5A74A3 50%, #9BB0D0 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--primary-light) 100%);
     color: white;
     padding: 80px 40px;
     text-align: center;
@@ -142,7 +142,7 @@
     content: ''; position: absolute; top: 50%; left: 50%;
     width: 18px; height: 18px; margin: -9px 0 0 -9px;
     border: 2px solid rgba(255,255,255,0.3); border-top-color: white;
-    border-radius: 50%; animation: spin 0.6s linear infinite;
+    border-radius: 50%; animation: spin 0.6s linear infinite; /* design-check: allow NO_BORDER_RADIUS_50 */
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -363,10 +363,10 @@
     <div class="section-heading">カラーパレット</div>
     <div class="color-grid">
       <div class="color-card">
-        <div class="color-swatch" style="background:#6E87B6"></div>
+        <div class="color-swatch" style="background:#6E87B6"></div> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
         <div class="color-info">
           <div class="color-name">Primary</div>
-          <div class="color-hex" onclick="copyColor(this)">#6E87B6</div>
+          <div class="color-hex" onclick="copyColor(this)">#6E87B6</div> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
           <div class="color-role">CTA ･ リンク ･ アクセント</div>
         </div>
       </div>
@@ -488,7 +488,7 @@
     <div style="margin-top: 40px;">
       <div class="component-label">Chart Colors (PPTX / データ可視化用)</div>
       <div class="chart-strip">
-        <div style="background:#6E87B6;color:#fff">#6E87B6</div>
+        <div style="background:#6E87B6;color:#fff">#6E87B6</div> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
         <div style="background:#5A74A3;color:#fff">#5A74A3</div>
         <div style="background:#9BB0D0;color:#333">#9BB0D0</div>
         <div style="background:#333333;color:#fff">#333</div>
@@ -549,7 +549,9 @@
         <div class="type-spec">16px / 400 / 1.6 / 0.05em.05em</div>
       </div>
       <div class="type-sample" style="font-size:16px;font-weight:400;line-height:1.6;letter-spacing:0.05em">
-        本文テキストです。Plus Jakarta Sans と Noto Sans JP の組み合わせで、日本語と英語のバランスを取ります。Body text with Plus Jakarta Sans font for Latin characters.
+        本文テキストです。
+        Plus Jakarta Sans と Noto Sans JP の組み合わせで、日本語と英語のバランスを取ります。
+        Body text with Plus Jakarta Sans font for Latin characters.
       </div>
     </div>
 
@@ -559,7 +561,8 @@
         <div class="type-spec">12px / 400 / 1.6 / 0.05em.05em</div>
       </div>
       <div class="type-sample" style="font-size:12px;font-weight:400;line-height:1.6;letter-spacing:0.05em;color:var(--text-secondary)">
-        補足テキスト ･ 注釈。Caption and small text for secondary information.
+        補足テキスト ･ 注釈。
+        Caption and small text for secondary information.
       </div>
     </div>
 
@@ -632,7 +635,7 @@
         <input class="input-demo" type="text" value="入力済みテキスト">
         <input class="input-demo" type="text" placeholder="無効状態" disabled style="background:#F7F7F7;color:var(--text-disabled)">
         <div style="margin-top: 4px; font-size: 12px; color: var(--text-disabled)">
-          height: 44px &middot; border-radius: 6px &middot; focus: #6E87B6
+          height: 44px &middot; border-radius: 6px &middot; focus: #6E87B6 <!-- design-check: allow NO_HARDCODED_PRIMARY -->
         </div>
       </div>
 
@@ -641,7 +644,8 @@
         <div class="component-label">Cards</div>
         <div class="card-demo">
           <h4>カードタイトル</h4>
-          <p>カードコンポーネントの例です。白背景に軽い影とボーダーで浮き上がります。</p>
+          <p>カードコンポーネントの例です。<br>
+          白背景に軽い影とボーダーで浮き上がります。</p>
         </div>
         <div style="margin-top: 16px; font-size: 12px; color: var(--text-disabled)">
           border-radius: 8px &middot; shadow: 0 1px 3px rgba(0,0,0,0.08)
@@ -661,7 +665,7 @@
           <tbody>
             <tr>
               <td style="padding:10px 12px;border-bottom:1px solid var(--border)">Primary</td>
-              <td style="padding:10px 12px;border-bottom:1px solid var(--border)">#6E87B6</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border)">#6E87B6</td> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
             </tr>
             <tr>
               <td style="padding:10px 12px;border-bottom:1px solid var(--border)">Font</td>
@@ -683,7 +687,8 @@
     <div class="section-heading">Material Icons</div>
 
     <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px">
-      アイコンは Google Material Icons を使用。絵文字は使用禁止。
+      アイコンは Google Material Icons を使用。<br>
+      絵文字は使用禁止。
     </p>
 
     <div class="component-label">よく使うアイコン</div>
@@ -852,13 +857,13 @@
         <rect x="4" y="4" width="552" height="200" rx="8" fill="white" stroke="#E0E0E0" stroke-width="1.5"/>
 
         <!-- Padding area -->
-        <rect x="4" y="4" width="552" height="200" rx="8" fill="#6E87B6" opacity="0.12"/>
+        <rect x="4" y="4" width="552" height="200" rx="8" fill="#6E87B6" opacity="0.12"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
         <!-- Content area (white cutout) -->
         <rect x="36" y="36" width="488" height="136" rx="4" fill="white"/>
 
         <!-- Padding labels -->
-        <text x="280" y="24" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-top : L 24px</text>
-        <text x="20" y="140" font-family="'SF Mono',monospace" font-size="10" fill="#6E87B6" text-anchor="middle" transform="rotate(-90 20 140)">L 24px</text>
+        <text x="280" y="24" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-top : L 24px</text> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+        <text x="20" y="140" font-family="'SF Mono',monospace" font-size="10" fill="#6E87B6" text-anchor="middle" transform="rotate(-90 20 140)">L 24px</text> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
 
         <!-- Title -->
         <text x="36" y="52" font-family="'Plus Jakarta Sans','Noto Sans JP',sans-serif" font-size="16" fill="#333" font-weight="700">カードタイトル</text>
@@ -878,7 +883,7 @@
         <text x="490" y="128" font-family="'SF Mono',monospace" font-size="10" fill="#C4A55A">L 24px</text>
 
         <!-- Button: Primary -->
-        <rect x="36" y="136" width="140" height="36" rx="6" fill="#6E87B6"/>
+        <rect x="36" y="136" width="140" height="36" rx="6" fill="#6E87B6"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
         <text x="76" y="159" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" fill="white" font-weight="700">Primary</text>
 
         <!-- Button inline gap -->
@@ -887,16 +892,16 @@
         <text x="182" y="184" font-family="'SF Mono',monospace" font-size="10" fill="#5CB85C" text-anchor="middle">S 8px</text>
 
         <!-- Button: Secondary -->
-        <rect x="188" y="136" width="140" height="36" rx="6" fill="white" stroke="#6E87B6" stroke-width="1.5"/>
-        <text x="218" y="159" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" fill="#6E87B6" font-weight="700">Secondary</text>
+        <rect x="188" y="136" width="140" height="36" rx="6" fill="white" stroke="#6E87B6" stroke-width="1.5"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+        <text x="218" y="159" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" fill="#6E87B6" font-weight="700">Secondary</text> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
 
         <!-- Padding bottom label -->
-        <text x="280" y="192" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-bottom : L 24px</text>
+        <text x="280" y="192" font-family="'SF Mono',monospace" font-size="11" fill="#6E87B6" text-anchor="middle">padding-bottom : L 24px</text> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
 
         <!-- Padding bottom label -->
 
         <!-- Legend (below card) -->
-        <rect x="12" y="216" width="14" height="10" rx="2" fill="#6E87B6" opacity="0.25"/>
+        <rect x="12" y="216" width="14" height="10" rx="2" fill="#6E87B6" opacity="0.25"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
         <text x="32" y="226" font-family="'Plus Jakarta Sans','Noto Sans JP',sans-serif" font-size="12" fill="#666">padding</text>
         <rect x="120" y="216" width="14" height="10" rx="2" fill="#C4A55A" opacity="0.3"/>
         <text x="140" y="226" font-family="'Plus Jakarta Sans','Noto Sans JP',sans-serif" font-size="12" fill="#666">gap (要素間)</text>
@@ -944,13 +949,13 @@
       <!-- Mobile -->
       <div style="text-align:center">
         <svg width="60" height="100" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="56" height="96" rx="8" fill="white" stroke="#6E87B6" stroke-width="2"/>
+          <rect x="2" y="2" width="56" height="96" rx="8" fill="white" stroke="#6E87B6" stroke-width="2"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
           <rect x="22" y="6" width="16" height="3" rx="1.5" fill="#E0E0E0"/>
           <rect x="8" y="14" width="44" height="72" fill="#F7F7F7"/>
-          <rect x="12" y="20" width="36" height="6" rx="1.5" fill="#6E87B6" opacity="0.3"/>
-          <rect x="12" y="30" width="36" height="6" rx="1.5" fill="#6E87B6" opacity="0.2"/>
-          <rect x="12" y="40" width="36" height="6" rx="1.5" fill="#6E87B6" opacity="0.15"/>
-          <rect x="12" y="50" width="36" height="6" rx="1.5" fill="#6E87B6" opacity="0.1"/>
+          <rect x="12" y="20" width="36" height="6" rx="1.5" fill="#6E87B6" opacity="0.3"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="12" y="30" width="36" height="6" rx="1.5" fill="#6E87B6" opacity="0.2"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="12" y="40" width="36" height="6" rx="1.5" fill="#6E87B6" opacity="0.15"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="12" y="50" width="36" height="6" rx="1.5" fill="#6E87B6" opacity="0.1"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
           <circle cx="30" cy="92" r="3" fill="#E0E0E0"/>
         </svg>
         <div style="margin-top:8px;font-size:12px;font-weight:600;color:var(--primary)">Mobile</div>
@@ -962,12 +967,12 @@
           <rect x="2" y="2" width="116" height="96" rx="8" fill="white" stroke="#C4A55A" stroke-width="2"/>
           <rect x="50" y="5" width="20" height="3" rx="1.5" fill="#E0E0E0"/>
           <rect x="8" y="12" width="104" height="76" fill="#F7F7F7"/>
-          <rect x="12" y="18" width="46" height="8" rx="2" fill="#6E87B6" opacity="0.3"/>
-          <rect x="62" y="18" width="46" height="8" rx="2" fill="#6E87B6" opacity="0.2"/>
-          <rect x="12" y="30" width="46" height="8" rx="2" fill="#6E87B6" opacity="0.15"/>
-          <rect x="62" y="30" width="46" height="8" rx="2" fill="#6E87B6" opacity="0.1"/>
-          <rect x="12" y="42" width="96" height="6" rx="1.5" fill="#6E87B6" opacity="0.1"/>
-          <rect x="12" y="52" width="96" height="6" rx="1.5" fill="#6E87B6" opacity="0.08"/>
+          <rect x="12" y="18" width="46" height="8" rx="2" fill="#6E87B6" opacity="0.3"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="62" y="18" width="46" height="8" rx="2" fill="#6E87B6" opacity="0.2"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="12" y="30" width="46" height="8" rx="2" fill="#6E87B6" opacity="0.15"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="62" y="30" width="46" height="8" rx="2" fill="#6E87B6" opacity="0.1"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="12" y="42" width="96" height="6" rx="1.5" fill="#6E87B6" opacity="0.1"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="12" y="52" width="96" height="6" rx="1.5" fill="#6E87B6" opacity="0.08"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
           <circle cx="60" cy="93" r="3" fill="#E0E0E0"/>
         </svg>
         <div style="margin-top:8px;font-size:12px;font-weight:600;color:#C4A55A">Tablet</div>
@@ -978,13 +983,13 @@
         <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="2" y="2" width="196" height="105" rx="6" fill="white" stroke="#333333" stroke-width="2"/>
           <rect x="8" y="8" width="184" height="88" fill="#F7F7F7"/>
-          <rect x="14" y="14" width="84" height="10" rx="2" fill="#6E87B6" opacity="0.3"/>
-          <rect x="104" y="14" width="84" height="10" rx="2" fill="#6E87B6" opacity="0.2"/>
-          <rect x="14" y="28" width="84" height="10" rx="2" fill="#6E87B6" opacity="0.15"/>
-          <rect x="104" y="28" width="84" height="10" rx="2" fill="#6E87B6" opacity="0.1"/>
-          <rect x="14" y="42" width="174" height="8" rx="2" fill="#6E87B6" opacity="0.1"/>
-          <rect x="14" y="54" width="174" height="8" rx="2" fill="#6E87B6" opacity="0.08"/>
-          <rect x="14" y="66" width="174" height="8" rx="2" fill="#6E87B6" opacity="0.06"/>
+          <rect x="14" y="14" width="84" height="10" rx="2" fill="#6E87B6" opacity="0.3"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="104" y="14" width="84" height="10" rx="2" fill="#6E87B6" opacity="0.2"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="14" y="28" width="84" height="10" rx="2" fill="#6E87B6" opacity="0.15"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="104" y="28" width="84" height="10" rx="2" fill="#6E87B6" opacity="0.1"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="14" y="42" width="174" height="8" rx="2" fill="#6E87B6" opacity="0.1"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="14" y="54" width="174" height="8" rx="2" fill="#6E87B6" opacity="0.08"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+          <rect x="14" y="66" width="174" height="8" rx="2" fill="#6E87B6" opacity="0.06"/> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
           <rect x="80" y="107" width="40" height="6" rx="1" fill="#E0E0E0"/>
           <rect x="70" y="113" width="60" height="4" rx="2" fill="#E0E0E0"/>
         </svg>
@@ -1137,7 +1142,7 @@
           <li>本文の line-height / letter-spacing は Typography 規定に従う</li>
           <li>色のコントラスト比は WCAG AA 以上</li>
           <li>角丸は 6~8px で統一</li>
-          <li>ブランドカラーは水彩ブルー #6E87B6 を基調に</li>
+          <li>ブランドカラーは水彩ブルー #6E87B6 を基調に</li> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
           <li>アイコンは Material Icons を使用する</li>
         </ul>
       </div>
@@ -1146,9 +1151,9 @@
         <ul>
           <li>font-family に和文フォント1つだけ指定しない</li>
           <li>日本語本文に line-height: 1.5 以下を使わない</li>
-          <li>テキストに純粋な #000000 を使わない (#333333 を使う)</li>
+          <li>テキストに純粋な #000000 を使わない (#333333 を使う)</li> <!-- design-check: allow NO_TEXT_BLACK -->
           <li>Primary カラーをエラーの意味で使わない</li>
-          <li>border-radius: 50% のような極端な値にしない</li>
+          <li>border-radius: 50% のような極端な値にしない</li> <!-- design-check: allow NO_BORDER_RADIUS_50 -->
           <li>絵文字をUIに使わない (Material Icons を使う)</li>
         </ul>
       </div>
@@ -1179,22 +1184,22 @@
       <tbody>
         <tr>
           <td style="padding:10px 16px;border-bottom:1px solid var(--border)">中黒</td>
-          <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text-secondary)">新機能・改善点</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text-secondary)">新機能・改善点</td> <!-- design-check: allow NO_FULLWIDTH_NAKAGURO -->
           <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--primary)">新機能 ･ 改善点</td>
         </tr>
         <tr>
           <td style="padding:10px 16px;border-bottom:1px solid var(--border)">スラッシュ</td>
-          <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text-secondary)">A／B</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text-secondary)">A／B</td> <!-- design-check: allow NO_FULLWIDTH_SLASH -->
           <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--primary)">A / B</td>
         </tr>
         <tr>
           <td style="padding:10px 16px;border-bottom:1px solid var(--border)">括弧</td>
-          <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text-secondary)">報告（2026年）</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text-secondary)">報告（2026年）</td> <!-- design-check: allow NO_FULLWIDTH_PAREN -->
           <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--primary)">報告 (2026年)</td>
         </tr>
         <tr>
           <td style="padding:10px 16px;border-bottom:1px solid var(--border)">コロン</td>
-          <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text-secondary)">ステータス：完了</td>
+          <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text-secondary)">ステータス：完了</td> <!-- design-check: allow NO_FULLWIDTH_COLON -->
           <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--primary)">ステータス : 完了</td>
         </tr>
         <tr>
@@ -1204,7 +1209,7 @@
         </tr>
         <tr>
           <td style="padding:10px 16px">句点</td>
-          <td style="padding:10px 16px;color:var(--text-secondary)">完了です。次に進みます。</td>
+          <td style="padding:10px 16px;color:var(--text-secondary)">完了です。次に進みます。</td> <!-- design-check: allow NO_PERIOD_LINEBREAK -->
           <td style="padding:10px 16px;color:var(--primary)">完了です。<br>次に進みます。</td>
         </tr>
       </tbody>
@@ -1215,7 +1220,7 @@
     <div style="flex:1;min-width:300px">
     <div class="font-stack" style="margin-top:0">
       <strong>変換例:</strong><br><br>
-      <span style="color:var(--text-secondary)">新機能・改善点／バグ修正についての報告（2026年4月）ステータス：完了。結果は"良好"です。</span><br><br>
+      <span style="color:var(--text-secondary)">新機能・改善点／バグ修正についての報告（2026年4月）ステータス：完了。結果は"良好"です。</span><br><br> <!-- design-check: allow NO_FULLWIDTH_SLASH,NO_FULLWIDTH_PAREN,NO_FULLWIDTH_COLON,NO_FULLWIDTH_NAKAGURO,NO_PERIOD_LINEBREAK -->
       <span style="color:var(--primary)">新機能 ･ 改善点 / バグ修正についての報告 (2026年4月) ステータス : 完了。<br>結果は "良好" です。</span>
     </div>
     </div>
