@@ -27,7 +27,7 @@ design-system/
 ├── DESIGN.md                    ... デザイン仕様書 (色、フォント、余白、コンポーネント)
 ├── index.html                   ... ビジュアルプレビュー (GitHub Pages)
 ├── contracts/
-│   └── rules.json               ... 禁止ルール9件 (hook で自動チェック)
+│   └── rules.json               ... 禁止ルール8件 (hook で自動チェック)
 ├── hooks/
 │   └── design-check.sh          ... 違反を検出する hook の本体 (各自 ~/.claude/hooks/ へコピー)
 ├── scripts/
@@ -50,14 +50,14 @@ design-system/
 |---|---|
 | [DESIGN.md](DESIGN.md) | 色、フォント、角丸、余白、シャドウを数値で定義。Claude Code はここを見てトークン準拠の CSS を書く |
 | [SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | デザイントークン、情報ソース (コーポレートサイト、会社説明スライド)、品質 3 層定義 (L1/L2/L3)、アンチパターン、チェックリストを定義。Claude Code が UI を作る際の判断基準になる |
-| [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 9 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する |
+| [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 8 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する |
 | [index.html](index.html) | DESIGN.md をビジュアルで確認できるページ。チーム全員が同じトークンを見られる |
 
 > 約物 ･ 記号の表記ルール ( 中黒 ･ スラッシュ ･ 引用符 ･ 括弧 ･ コロン ･ カンマ等の 11 項目 + 句点後改行ルール ) は [DESIGN.md §3.6](DESIGN.md) を一次情報源として参照してください。
 
 #### 2026/9/1 の `NO_EMOJI` の変更について
 
-判定基準を Unicode の定義 (`Extended_Pictographic`) に合わせました。**規則は 9 件のままです。**増えた側と減った側の両方があります。
+判定基準を Unicode の定義 (`Extended_Pictographic`) に合わせました。**このとき規則の件数は増減していません。**増えた側と減った側の両方があります。
 
 **拾うようになったもの** — 二重感嘆符 `‼` (U+203C), 感嘆疑問符 `⁉` (U+2049), 情報記号 `ℹ` (U+2139), 左右矢印 `↔` (U+2194), 腕時計 `⌚` (U+231A) など。もともと禁止対象だったのに、旧パターンの範囲の下端が U+2600 だったため検出漏れしていた絵文字です。
 
@@ -124,7 +124,7 @@ URL を除外することを狙って書かれた条件ではなく**現状そ�
 | 読み手 | 評価の仕方 |
 | --- | --- |
 | report-studio `utils/report-verify.js` の `DESIGN_RULE_CHECKS` | `new RegExp(rule.pattern, "gu")` |
-| design-system の hook [hooks/design-check.sh](hooks/design-check.sh) | 同上 (bash から node を1回呼んで9件まとめて評価) |
+| design-system の hook [hooks/design-check.sh](hooks/design-check.sh) | 同上 (bash から node を1回呼んで8件まとめて評価) |
 
 **読み手を増やすときは、そのエンジンが同じ方言を解釈できるか必ず確認してください。**
 
@@ -133,8 +133,8 @@ URL を除外することを狙って書かれた条件ではなく**現状そ�
 パターンを変えたら、次のテストを両方回してください。
 
 ```bash
-node scripts/check-rules.mjs   # rules.json 自体 (9件 ･ 全 pattern が RegExp で生成できるか ･ NO_EMOJI の検出期待値)
-node scripts/check-hook.mjs    # hook 経由の挙動 (9件の検出 / 非検出 ･ 各種スキップ表示)
+node scripts/check-rules.mjs   # rules.json 自体 (8件 ･ 全 pattern が RegExp で生成できるか ･ NO_EMOJI の検出期待値)
+node scripts/check-hook.mjs    # hook 経由の挙動 (8件の検出 / 非検出 ･ 各種スキップ表示)
 ```
 
 ---
