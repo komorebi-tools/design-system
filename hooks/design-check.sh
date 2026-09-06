@@ -102,7 +102,7 @@ if [ -z "$RULES_FILE" ]; then
 fi
 
 # ─── 検査本体 ───
-# 9件を1回の node 起動でまとめて評価する。PostToolUse は編集のたびに走るため、
+# 8件を1回の node 起動でまとめて評価する。PostToolUse は編集のたびに走るため、
 # 規則ごとに node を起動しない。
 read -r -d '' NODE_SRC <<'NODEJS'
 const fs = require("fs");

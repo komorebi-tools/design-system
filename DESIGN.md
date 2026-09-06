@@ -290,7 +290,6 @@ font-feature-settings: "kern" 1;
 ### Don't (禁止)
 
 - `font-family` に和文フォント1つだけを指定しない (環境依存になる)
-- 日本語本文に `line-height: 1.5` 以下を使わない (可読性が著しく低下する) <!-- design-check: allow NO_LINE_HEIGHT_LOW -->
 - 全角 ･ 半角スペースを混在させない
 - テキストの色に純粋な `#000000` を使わない (`#333333` を使う) <!-- design-check: allow NO_TEXT_BLACK -->
 - Primary カラーを警告 ･ エラーの意味で使わない
@@ -406,10 +405,17 @@ Border Radius: 6px
 
 ## 11. 検査と allow 注釈
 
-このリポジトリの `hooks/design-check.sh` は、保存されたファイルを `contracts/rules.json` の9件と
+このリポジトリの `hooks/design-check.sh` は、保存されたファイルを `contracts/rules.json` の8件と
 「。」改行チェックに掛ける。
 検査を飛ばしたとき (node ･ jq ･ rules.json が無いなど) は必ず1行出す。
 無出力は「違反なし」だけを意味する。
+
+### rules.json から外した規則
+
+`NO_LINE_HEIGHT_LOW` (日本語本文に line-height 1.5 以下は禁止) は 2026/9/5 に rules.json から外した。
+静的検査では要素の役割を見られないため、見出し ･ ラベル ･ 表ヘッダに付いた 1.6 未満をすべて違反として拾ってしまう。
+判定は描画後 (実ブラウザ ･ `getComputedStyle`) で行う。
+人が読むルールとしての「本文の行間 1.6」は §3.5 に残っている。
 
 ### 意図的な違反を1行だけ黙らせる
 

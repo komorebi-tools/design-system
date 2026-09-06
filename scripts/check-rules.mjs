@@ -7,7 +7,7 @@ import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const RULES_PATH = join(root, "contracts", "rules.json");
-const EXPECTED_COUNT = 9;
+const EXPECTED_COUNT = 8;
 
 let failed = 0;
 const check = (label, ok, detail = "") => {
@@ -15,7 +15,7 @@ const check = (label, ok, detail = "") => {
   console.log(`${ok ? "PASS" : "FAIL"}  ${label}${detail ? "  " + detail : ""}`);
 };
 
-// --- 1. JSON として妥当 ･ 9件のまま -------------------------------------
+// --- 1. JSON として妥当 ･ 8件のまま -------------------------------------
 let rules;
 try {
   rules = JSON.parse(readFileSync(RULES_PATH, "utf8"));
