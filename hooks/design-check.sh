@@ -132,7 +132,8 @@ const lines = text.split("\n");
 
 const blocks = [];
 const badPatterns = [];
-let count = 0;
+let count = 0;      // 違反した規則の数
+let lineCount = 0;  // 違反した行の延べ数
 
 // ─── 行単位の許可注釈 ───
 // 書式 :
@@ -244,22 +245,35 @@ for (const rule of rules) {
     continue;
   }
   const hits = [];
-  // 使われていない注釈を数えるため、報告が3件で足りても最後まで走査する。
+  let total = 0;
+  // 最後まで走査する理由は2つ。使われていない注釈を数えるためと、
+  // 表示は先頭3行で打ち切るが「本当は何行あるか」を出すため。
+  // 打ち切ったことも総数も出さないと、読んだ人が3行を全体だと思い込む。
+  // 2026/9/6 に、ちょうどそれで実際より少ない件数を報告に書いた。
   for (let i = 0; i < lines.length; i++) {
     re.lastIndex = 0; // g フラグは test() で状態を持つので毎回戻す
     if (!re.test(lines[i])) continue;
     if (silence(i, rule.id)) continue;
+    total++;
     if (hits.length < 3) hits.push(`  ${i + 1}:${lines[i]}`);
   }
   if (hits.length > 0) {
     count++;
-    blocks.push(`[${rule.severity}] ${rule.id}: ${rule.description}\n  -> ${rule.alternative}\n${hits.join("\n")}\n\n`);
+    lineCount += total;
+    const more = total > hits.length
+      ? `\n  ... 他 ${total - hits.length} 行 (この規則は計 ${total} 行)`
+      : "";
+    blocks.push(`[${rule.severity}] ${rule.id}: ${rule.description}\n  -> ${rule.alternative}\n${hits.join("\n")}${more}\n\n`);
   }
 }
 
 let out = "";
 if (count > 0) {
-  out += `--- Design System Check: ${count} violation(s) ---\n\n`;
+  // 見出しは規則数と行数の両方を出す。以前は `N violation(s)` の N が
+// count++ の回数 = 違反した規則の数で、行数だと読まれていた。
+// `Design System Check` の文字列は org-setup の sync-design-check.sh が
+// 配布した hook の健全性判定に使っているので消さない。
+  out += `--- Design System Check: ${count} 規則 / ${lineCount} 行 ---\n\n`;
   out += blocks.join("") + "\n";
   out += `Rules: ${rulesPath}\n`;
 }
@@ -272,16 +286,22 @@ if (count > 0) {
 const PERIOD = /。[^<\n"')\]}>）」』】\s]/u;
 const SKIP_LINE = /<script|<style|\/\/|\/\*|\*\//;
 const periodHits = [];
+let periodTotal = 0;
 for (let i = 0; i < lines.length; i++) {
   if (!PERIOD.test(lines[i]) || SKIP_LINE.test(lines[i])) continue;
   // この検査も allow NO_PERIOD_LINEBREAK で黙らせられる
   if (silence(i, PERIOD_RULE_ID)) continue;
+  periodTotal++;
+  // 表示は先頭5行で打ち切るが、総数は最後まで数える ( 上の規則違反側と同じ理由 )
   if (periodHits.length < 5) periodHits.push(`${i + 1}:${lines[i]}`);
 }
 if (periodHits.length > 0) {
-  out += "\n--- 「。」改行チェック ---\n";
+  out += `\n--- 「。」改行チェック : ${periodTotal} 行 ---\n`;
   out += "日本語は「。」ごとに改行してください (1文1行):\n";
   out += periodHits.join("\n") + "\n";
+  if (periodTotal > periodHits.length) {
+    out += `... 他 ${periodTotal - periodHits.length} 行\n`;
+  }
 }
 
 // ─── 注釈そのものの問題を報告する ───

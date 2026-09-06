@@ -341,6 +341,76 @@ console.log("\n=== 7. わざと壊して、テストが捕まえることを確�
     `握り潰し版の出力 : ${outSwallow.trim() || "(無出力)"}`);
 }
 
+// (c) 総数のカウントを「表示した数」に置き換える
+// 2026/9/6 の欠陥そのもの : 打ち切った先を数えていないと、3行しか無いように見える。
+{
+  const src = readFileSync(HOOK, "utf8");
+  const nine = write("break-c.md",
+    Array.from({ length: 9 }, (_, i) => `これは（全角括弧${i + 1}）を含みます`).join("\n") + "\n");
+
+  // 現行 : 総数を最後まで数えるので「計 9 行」が出る
+  const rNow = runHook(nine, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  const nowOk = rNow.out.includes("計 9 行") && rNow.out.includes("他 6 行");
+  check("(c) 現行 : 打ち切っても総数 (計 9 行) が出る", nowOk, rNow.out.trim().split("\n").find((l) => l.includes("他 ")) || "(その行が無い)");
+
+  // 壊した版 : 総数を「表示した数」に置き換える = 打ち切った先を数えていない状態
+  const broken = src.replace(
+    "(この規則は計 ${total} 行)",
+    "(この規則は計 ${hits.length} 行)",
+  );
+  check("(c) 前提 : 総数カウントを壊した版を作れている", broken !== src);
+  const brokenPath = write("hook-count-display-only.sh", broken);
+  const rBroken = spawnSync("bash", [brokenPath], {
+    input: JSON.stringify({ tool_input: { file_path: nine } }),
+    encoding: "utf8",
+    env: { ...process.env, KOMOREBI_RULES_FILE: RULES_MAIN },
+  });
+  const outBroken = (rBroken.stdout || "") + (rBroken.stderr || "");
+  // 壊した版は「計 3 行」と出す。表示した3行が全部だと読める = 2026/9/6 の欠陥そのもの。
+  const brokenShowsThree = outBroken.includes("計 3 行") && !outBroken.includes("計 9 行");
+  check("(c) 壊した版では「計 3 行」になる (＝このテストが差を捕まえる)", nowOk && brokenShowsThree,
+    `壊した版の該当行 : ${outBroken.trim().split("\n").find((l) => l.includes("計 ")) || "(打ち切りを知らせる行が無い)"}`);
+}
+
+// ---------------------------------------------------------------------------
+console.log("\n=== 8. 打ち切りと総数 ===");
+// 表示は打ち切ったままでよい。長い出力は hook 自体が読まれなくなる。
+// 「打ち切ったこと」と「本当は何行あるか」が出ることだけを確かめる。
+{
+  // (1) 1つの規則に9行違反する
+  const nine = write("trunc-rule.md",
+    Array.from({ length: 9 }, (_, i) => `これは（全角括弧${i + 1}）を含みます`).join("\n") + "\n");
+  const r1 = runHook(nine, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  const shown1 = (r1.out.match(/^ {2}\d+:/gm) || []).length;
+  check("(1) 表示される違反行は3行", shown1 === 3, `実際 : ${shown1} 行`);
+  check("(1) 「他 6 行」が出る", r1.out.includes("他 6 行"));
+  check("(1) 「計 9 行」が出る", r1.out.includes("計 9 行"));
+  check("(1) 見出しに「9 行」が出る", /--- Design System Check: \d+ 規則 \/ 9 行 ---/.test(r1.out),
+    r1.out.trim().split("\n")[0]);
+
+  // (2) 「。」改行が18行
+  const eighteen = write("trunc-period.md",
+    Array.from({ length: 18 }, (_, i) => `これは一文目です${i + 1}。これは二文目です。`).join("\n") + "\n");
+  const r2 = runHook(eighteen, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  const shown2 = (r2.out.match(/^\d+:/gm) || []).length;
+  check("(2) 表示される「。」改行は5行", shown2 === 5, `実際 : ${shown2} 行`);
+  check("(2) 「他 13 行」が出る", r2.out.includes("他 13 行"));
+  check("(2) 見出しに「18 行」が出る", r2.out.includes("--- 「。」改行チェック : 18 行 ---"),
+    r2.out.split("\n").find((l) => l.includes("「。」改行チェック")) || "");
+
+  // (3) 打ち切りが起きない入力では「他 」を出さない
+  const few = write("trunc-none.md",
+    "これは（全角括弧1）を含みます\nこれは（全角括弧2）を含みます\n" +
+    "これは一文目ですA。これは二文目です。\nこれは一文目ですB。これは二文目です。\nこれは一文目ですC。これは二文目です。\n");
+  const r3 = runHook(few, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("(3) 打ち切りが無いときは「他 」を出さない", !r3.out.includes("他 "),
+    r3.out.split("\n").find((l) => l.includes("他 ")) || "");
+  check("(3) それでも見出しには行数が出る", /--- Design System Check: 1 規則 \/ 2 行 ---/.test(r3.out),
+    r3.out.trim().split("\n")[0]);
+  check("(3) 「。」改行の見出しにも行数が出る", r3.out.includes("--- 「。」改行チェック : 3 行 ---"),
+    r3.out.split("\n").find((l) => l.includes("「。」改行チェック")) || "");
+}
+
 rmSync(tmp, { recursive: true, force: true });
 console.log(`\n${failed === 0 ? "OK : 全チェック pass" : `NG : ${failed} 件 fail`}`);
 process.exit(failed === 0 ? 0 : 1);
