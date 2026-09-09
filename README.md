@@ -12,6 +12,10 @@ DESIGN.md の内容をビジュアルで確認できるページです。
 
 https://komorebi-tools.github.io/design-system/
 
+グラフ ･ 図解 ･ 表の配色は、実物で確認できる別ページがあります。
+
+https://komorebi-tools.github.io/design-system/figure.html
+
 ## 仕組み
 
 Claude Code にコモレビの UI 制作を依頼すると、デザインが意図通りに出てきます。
@@ -25,7 +29,9 @@ Claude Code はセッション開始時にこれらを自動で読み込み、�
 ```
 design-system/
 ├── DESIGN.md                    ... デザイン仕様書 (色、フォント、余白、コンポーネント)
+├── FIGURE.md                    ... 図表とスライドの規約 (グラフ、図解、表、見出しの階層)
 ├── index.html                   ... ビジュアルプレビュー (GitHub Pages)
+├── figure.html                  ... 図表のプレビュー (GitHub Pages)
 ├── contracts/
 │   └── rules.json               ... 禁止ルール8件 (hook で自動チェック)
 ├── hooks/
@@ -51,7 +57,9 @@ design-system/
 | [DESIGN.md](DESIGN.md) | 色、フォント、角丸、余白、シャドウを数値で定義。Claude Code はここを見てトークン準拠の CSS を書く <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | デザイントークン、情報ソース (コーポレートサイト、会社説明スライド)、品質 3 層定義 (L1/L2/L3)、アンチパターン、チェックリストを定義。Claude Code が UI を作る際の判断基準になる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 8 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する <!-- design-check: allow NO_TEXT_BLACK,NO_PERIOD_LINEBREAK --> |
+| [FIGURE.md](FIGURE.md) | グラフ、図解、表、見出しの階層、スライド固有の規約。色の値は持たず DESIGN.md を参照する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [index.html](index.html) | DESIGN.md をビジュアルで確認できるページ。チーム全員が同じトークンを見られる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| [figure.html](figure.html) | FIGURE.md の §1 〜 §3 を実物のグラフで確認できるページ。Chart.js で描いている <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 
 > 約物 ･ 記号の表記ルール ( 中黒 ･ スラッシュ ･ 引用符 ･ 括弧 ･ コロン ･ カンマ等の 11 項目 + 句点後改行ルール ) は [DESIGN.md §3.6](DESIGN.md) を一次情報源として参照してください。
 
