@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FIGURE.md プレビュー - 図表とスライドの規約</title>
+<link rel="icon" type="image/png" href="assets/logo/logo-clear-symbol.png">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   トークン
+   design-check で検査するときはこの :root と JS の FIG だけを見る
+   値の一次情報源は DESIGN.md / FIGURE.md
+   ============================================================ */
+:root{
+  /* Layer 1 : ブランド基調 */
+  --primary:#6E87B6; /* design-check: allow NO_HARDCODED_PRIMARY */
+  --primary-dark:#5A74A3;
+  --primary-light:#9BB0D0;
+  --accent:#C4A55A;
+  --accent-light:#E0D5A8;
+  --accent-dark:#B0923E;
+  --sub:#A18E6C;
+  --border:#E0E0E0;
+  --background:#F7F7F7;
+
+  /* Layer 2 : カテゴリ配色 ( 面 / 地 / マーカー / 文字 ) */
+  --cat1-fill:#A4A5D1; --cat1-bg:#F6F6FA; --cat1-mark:#DDDEEE; --cat1-text:#8D90CA;
+  --cat2-fill:#84B5B2; --cat2-bg:#F3F8F7; --cat2-mark:#D2E4E2; --cat2-text:#5CA09D;
+  --cat3-fill:#98BBDE; --cat3-bg:#F5F8FC; --cat3-mark:#D9E6F3; --cat3-text:#659AC7;
+  --cat4-fill:#EDB369; --cat4-bg:#FDF7F0; --cat4-mark:#F8E3C8; --cat4-text:#DE7C31;
+  --cat5-fill:#CB6378; --cat5-bg:#FAEFF2; --cat5-mark:#ECC5CD; --cat5-text:#CB6378;
+  --base-fill:#6E87B6; --base-bg:#F3F7FC; --base-mark:#C9D3E4; --base-text:#5A74A3; /* design-check: allow NO_HARDCODED_PRIMARY */
+
+  /* Layer 3 : 強調 */
+  --point:#CD5151;
+
+  /* グレー ( 実運用の5段 ) */
+  --g-text:#434343;
+  --g-note:#595959;
+  --g-cmp:#666666;
+  --g-weak:#999999;
+  --g-mute:#B7B7B7;
+
+  /* 線 */
+  --rule:#D9D9D9;
+  --hairline:#E0E0E0;
+
+  /* 濃淡4段 */
+  --sc1:#5A74A3; --sc2:#8496BE; --sc3:#AEBBD6; --sc4:#D8DEEA;
+
+  --page:#FFFFFF;
+  --shell:#F5F6F8;
+  --maxw:1280px;
+  --radius:6px;
+  --radius-l:8px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--shell); color:var(--g-text);
+  font-family:"Plus Jakarta Sans","Noto Sans JP",sans-serif;
+  font-size:16px; line-height:1.6; letter-spacing:0.05em;
+}
+h1,h2,h3,h4,
+.chapter > h2, .card > h3, .card > h4,
+.h1-num .t, .h2-rule, .h3-mark, .h4-blue, .h-alt{
+  font-weight:700;
+  font-feature-settings:"palt" 1,"kern" 1;
+  letter-spacing:0.05em;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px 96px}
+
+/* ---- ページヘッダ ---- */
+.masthead{padding:56px 0 32px}
+.masthead h1{font-size:30px; line-height:1.35; margin:0 0 8px; font-weight:700}
+.masthead .lede{color:var(--g-cmp); font-size:15px; margin:0}
+.masthead .meta{margin-top:18px; font-size:13px; color:var(--g-weak)}
+
+/* ---- 目次 ---- */
+.toc{background:var(--page); border:1px solid var(--hairline); border-radius:6px; padding:20px 24px; margin-bottom:40px}
+.toc h2{font-size:13px; letter-spacing:.08em; color:var(--g-weak); margin:0 0 12px; font-weight:700}
+.toc ol{margin:0; padding-left:0; list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:6px 24px}
+.toc a{color:var(--primary-dark); text-decoration:none; font-size:14px}
+.toc a:hover{text-decoration:underline}
+.toc .num{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; color:var(--g-weak); margin-right:8px; font-size:12px}
+
+/* ---- 章 ---- */
+.chapter{margin:56px 0 0}
+.chapter > h2{
+  font-size:24px; font-weight:700; margin:0 0 6px;
+  padding-left:14px; border-left:4px solid var(--primary);
+}
+.chapter > .chapter-note{color:var(--g-cmp); font-size:14px; margin:0 0 24px; padding-left:18px}
+
+/* ---- カード ---- */
+.card{background:var(--page); border:1px solid var(--hairline); border-radius:6px; padding:28px 28px 24px; margin-bottom:20px}
+.card > h3{font-size:18px; font-weight:700; color:var(--primary-dark); margin:0 0 4px}
+.card > .sub{color:var(--g-cmp); font-size:14px; margin:0 0 20px}
+.card > .sub:last-of-type{margin-bottom:20px}
+.rule-note{
+  margin:20px 0 0; padding:12px 16px; background:var(--background);
+  border-radius:var(--radius); font-size:13px; line-height:1.7; color:var(--g-note);
+}
+.rule-note strong{color:var(--g-text)}
+
+/* ---- 表 ---- */
+table.t{width:100%; border-collapse:collapse; font-size:13.5px}
+table.t th{background:var(--primary); color:#fff; font-weight:700; text-align:left; padding:9px 12px; border:1px solid var(--rule)}
+table.t td{padding:9px 12px; border:1px solid var(--rule); background:#fff; vertical-align:top}
+table.t td.num{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; text-align:right; white-space:nowrap}
+table.t tr.subhead td{font-weight:700; background:#EBEEF4}
+/* 変形 : 罫線を使わず地色の縞で分ける ( 例外 ) */
+table.t.striped th{background:var(--primary); border:none}
+table.t.striped td{border:none}
+table.t.striped tbody tr:nth-child(odd) td{background:var(--background)}
+
+/* ---- 色見本 ---- */
+.swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(148px,1fr)); gap:12px}
+.sw{border:1px solid var(--hairline); border-radius:6px; overflow:hidden; background:#fff}
+.sw .chip{height:56px}
+.sw .body{padding:8px 10px 10px}
+.sw .name{font-size:12.5px; font-weight:700; line-height:1.4}
+.sw .hex{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:11.5px; color:var(--g-cmp)}
+.sw .use{font-size:11.5px; color:var(--g-weak); margin-top:2px; line-height:1.5}
+.sw .ratio{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:11px; color:var(--g-weak)}
+
+/* カテゴリ 4値 */
+.cat-grid{display:grid; grid-template-columns:120px repeat(4,1fr); gap:8px; align-items:center; font-size:12.5px}
+.cat-grid .hd{font-size:11.5px; color:var(--g-weak); text-align:center}
+.cat-grid .rowname{font-weight:700}
+.cat-cell{border:1px solid var(--hairline); border-radius:var(--radius); overflow:hidden}
+.cat-cell .c{height:40px}
+.cat-cell .v{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:11px; color:var(--g-cmp); text-align:center; padding:3px 0}
+
+/* ---- グラフ ---- */
+.figure{margin:0}
+.chartbox{position:relative; width:100%}
+.chartbox.h240{height:240px}
+.chartbox.h280{height:280px}
+.chartbox.h320{height:320px}
+.donut-row{display:flex; min-width:0; gap:20px; align-items:center; overflow-x:auto; padding-bottom:4px}
+.donut-row > div{flex:0 0 auto}
+/* 幅の足りない画面では、表と図をページごと横に流さず、その要素の中だけでスクロールさせる */
+.scroll-x{overflow-x:auto}
+.figure figcaption{font-size:12.5px; color:var(--g-weak); margin-top:10px; line-height:1.6}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+/* グリッドの子は既定で min-width:auto なので、中身の広い列がページごと横に広がる。0 にして列の中で収める */
+.grid2 > *{min-width:0}
+@media (max-width:768px){
+  .wrap{padding:0 16px 64px}
+  .grid2{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:88px repeat(4,1fr)}
+  .masthead{padding:40px 0 24px}
+  .masthead h1{font-size:26px}
+  .chapter > h2{font-size:21px}
+  .card{padding:22px 20px 20px}
+}
+@media (max-width:480px){
+  .cat-grid{grid-template-columns:72px repeat(4,1fr); font-size:11px; gap:6px}
+  .cat-grid .hd{font-size:10px}
+  .cat-cell .v{font-size:9.5px}
+  .swatches{grid-template-columns:repeat(auto-fill,minmax(124px,1fr))}
+  .toc ol{grid-template-columns:1fr}
+}
+
+/* 使用色の帯 */
+.usedcolors{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; align-items:center}
+.usedcolors .lab{font-size:11.5px; color:var(--g-weak); margin-right:2px}
+.uc{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--hairline); border-radius:999px; padding:3px 10px 3px 4px; font-size:11px; font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; color:var(--g-cmp); background:#fff}
+.uc i{width:14px; height:14px; border-radius:3px; display:block; border:1px solid rgba(0,0,0,.06)}
+
+/* コピー用 */
+details.snippet{margin-top:14px; border:1px solid var(--hairline); border-radius:var(--radius); background:#FCFCFD}
+details.snippet summary{cursor:pointer; padding:8px 14px; font-size:12.5px; color:var(--primary-dark); list-style:none}
+details.snippet summary::-webkit-details-marker{display:none}
+details.snippet summary::before{content:"＋ "; color:var(--g-weak)}
+details.snippet[open] summary::before{content:"− "}
+details.snippet pre{margin:0; padding:0 14px 14px; overflow-x:auto; font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:12px; line-height:1.65; color:var(--g-text)}
+
+/* ---- 見出しの階層 ( §3 の実物 ) ---- */
+.h-demo{border:1px solid var(--hairline); border-radius:6px; padding:22px 24px; background:#fff}
+.h1-num{display:flex; align-items:stretch; gap:0; background:var(--base-bg); border-radius:var(--radius); overflow:hidden}
+.h1-num .n{
+  flex:0 0 52px; display:flex; align-items:center; justify-content:center;
+  font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:20px; font-weight:700;
+  color:var(--primary-dark);
+}
+.h1-num .t{padding:12px 16px 12px 0; font-size:20px; font-weight:700; line-height:1.4}
+.h2-rule{font-size:19px; font-weight:700; padding-bottom:8px; border-bottom:1px solid var(--hairline)}
+.h3-mark{font-size:17px; font-weight:700; color:var(--primary-dark); display:inline}
+.mk{background:linear-gradient(transparent 55%, var(--base-mark) 55%); padding:0 2px}
+.h4-blue{font-size:16px; font-weight:700; color:var(--primary-dark)}
+.h-alt{font-size:16px; font-weight:700; color:var(--g-text)}
+.h-demo p.dummy{font-size:14px; color:var(--g-cmp); margin:8px 0 22px}
+.h-demo p.dummy:last-child{margin-bottom:0}
+
+.bad-band{border-left:3px solid var(--cat1-fill); padding-left:12px; margin-bottom:10px}
+
+/* Do / Don't */
+.dd{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--hairline); border-radius:6px; overflow:hidden}
+.dd > div{padding:18px 20px}
+.dd > div + div{border-left:1px solid var(--hairline)}
+.dd h4{margin:0 0 10px; font-size:13px; letter-spacing:.06em; color:var(--g-weak)}
+.dd ul{margin:0; padding-left:1.1em; font-size:13.5px; line-height:1.9}
+@media (max-width:768px){ .dd{grid-template-columns:1fr} .dd > div + div{border-left:none; border-top:1px solid var(--hairline)} }
+
+footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--hairline); font-size:12.5px; color:var(--g-weak)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <h1>FIGURE.md プレビュー</h1>
+  <p class="lede">図表とスライドの規約のうち、§1 三層構造 / §2 グラフの描き方 / §3 見出しの階層 を実物で確認するページ。</p>
+  <p class="meta">
+    値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
+    このページは値を複製せず、先頭の <code>:root</code> と <code>FIG</code> にまとめて参照している。<br>
+    ΔE は CIEDE2000、コントラスト比は WCAG 2.x。
+    2026/9/8 時点の検討版。
+ </p>
+</header>
+
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#s11"><span class="num">1.1</span>Layer 1 ブランド基調</a></li>
+    <li><a href="#s12"><span class="num">1.2</span>Layer 2 カテゴリ配色</a></li>
+    <li><a href="#s13"><span class="num">1.3</span>グレーと線</a></li>
+    <li><a href="#s14"><span class="num">1.4</span>Layer 3 強調</a></li>
+    <li><a href="#s21"><span class="num">2.1</span>色数</a></li>
+    <li><a href="#s22"><span class="num">2.2</span>濃淡の段階</a></li>
+    <li><a href="#s23"><span class="num">2.3</span>軸の起点</a></li>
+    <li><a href="#s25"><span class="num">2.5</span>図解 ( 2軸4象限 )</a></li>
+    <li><a href="#s26"><span class="num">2.6</span>表</a></li>
+    <li><a href="#s28"><span class="num">2.8</span>円グラフ ･ ドーナツ</a></li>
+    <li><a href="#s29"><span class="num">2.9</span>コレスポンデンス分析</a></li>
+    <li><a href="#s210"><span class="num">2.10</span>軸 ･ 目盛り ･ 値ラベル</a></li>
+    <li><a href="#s3"><span class="num">3</span>見出しの階層</a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================ 1 ============================================================ -->
+<section class="chapter">
+  <h2>1. 三層構造</h2>
+  <p class="chapter-note">色は3つの層でできている。
+  Layer 1 は固定、Layer 2 は案件ごとに差し替え可、Layer 3 は意味が決まっている。
+  グレーはどの層にも属さない下地として分けて扱う。</p>
+
+  <div class="card" id="s11">
+    <h3>1.1 Layer 1 : ブランド基調</h3>
+    <p class="sub">既存トークンをそのまま使う。
+    図表のために新しい色を足さない。
+    数値は白文字を乗せたときのコントラスト比。</p>
+    <div class="swatches" id="sw-layer1"></div>
+    <div class="rule-note">
+      <strong>Primary と Primary Dark は使い分ける。</strong>
+      面 ( 見出し帯 ･ 表のヘッダ ･ カードの帯 ) には Primary、グラフの主色 ･ pill ･ グラデーションの起点には Primary Dark。
+      一本化しないのは、従来のスライドがすでにこの2値で運用されていたため。
+      2つは ΔE 7.3。<br>
+      <strong>ゴールドで白文字を乗せるなら SUB。</strong>
+      Accent 2.37 ･ Accent Dark 2.99 に対して SUB は 3.18 で、この色だけが条件を満たす。
+      Accent はグラフの系列に使い、白文字は乗せない。
+   </div>
+ </div>
+
+  <div class="card" id="s12">
+    <h3>1.2 Layer 2 : カテゴリ配色</h3>
+    <p class="sub">面 ･ 地 ･ マーカー ･ 文字 の4値でひと組。
+    面色がひとつ決まれば、残り3つは計算で出せる。
+    1案件あたり4色まで ( 定番は5色、そこから選ぶ )。</p>
+    <div class="cat-grid" id="cat-grid"></div>
+    <div class="rule-note">
+      <strong>4値の導き方。</strong>
+      地 ＝ 面を白 90% で薄める / マーカー ＝ 地の上に面を不透明度 30% / 文字 ＝ 彩度 ×1.35、黄系のみ色相 −15°、明度は白背景比 3.0 に届くまで下げる。
+   </div>
+ </div>
+
+  <div class="card">
+    <h3>白文字を乗せる面には「文字色」を敷く</h3>
+    <p class="sub">pill ･ 見出し帯 ･ 番号カードのように白文字を乗せる面は、面 ( fill ) ではなく文字の色を面として使う。</p>
+    <div class="grid2">
+      <div>
+        <p class="sub" style="margin-bottom:12px">面をそのまま敷く</p>
+        <div id="pill-fill"></div>
+     </div>
+      <div>
+        <p class="sub" style="margin-bottom:12px">文字色を面として敷く</p>
+        <div id="pill-text"></div>
+     </div>
+   </div>
+    <div class="rule-note">
+      面をそのまま敷くと CAT-4 山吹が <strong>1.87</strong> で選定条件 B ( 2.0 以上 ) を割る。
+      文字色を敷けば5色とも 2.99 〜 3.75 に揃い、色ごとの見え方の差もなくなる。
+      淡い面を使うのは「文字を乗せない」場面 ( タイルの地、グラフの系列、マーカー ) に限る。
+   </div>
+ </div>
+
+  <div class="card" id="s13">
+    <h3>1.3 グレーは実運用の5段から使う</h3>
+    <p class="sub">値を新しく作らない。
+    スライド本体で 50 回以上使われている5段だけを使う。
+    値は固定しすぎず、図ごとにトーンが揺れることは許容する。</p>
+    <div class="swatches" id="sw-gray"></div>
+    <table class="t" style="margin-top:20px">
+      <thead><tr><th>守ること</th><th style="width:34%">下限</th></tr></thead>
+      <tbody>
+        <tr><td>文字に使うグレー</td><td>本文サイズなら比 4.5 以上 ( <code>#767676</code> まで )、大きめの太字なら 3.0 以上 ( <code>#888888</code> まで )</td></tr>
+        <tr><td>面 ･ 罫線 ･ 非強調の系列</td><td>白と見分けがつくこと ＝ 比 1.2 以上</td></tr>
+        <tr><td>段として並べるとき</td><td>隣り合う段を ΔE 4 以上離す</td></tr>
+        <tr><td>例外</td><td>読ませない意図の文字 ( 弱い群 ) は比 3.0 を割ってよい。
+        1つの図に1役割まで</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-note">
+      <code>#999999</code>( 2.85 ) と <code>#B7B7B7</code>( 2.01 ) は文字の基準を割っているが、どちらも「読ませない」ことが目的の役割なので例外に当たる。
+      <code>#595959</code> と <code>#666666</code> は ΔE 4.8 と近いので、同じ図の中で両方を段として使わない。
+   </div>
+ </div>
+
+  <div class="card">
+    <h3>線は表の枠線だけにする</h3>
+    <p class="sub">スライド本体で線の指定を数えると、枠線なし ( noFill ) が 1,241 件で圧倒的。
+    図形には引かず、面と余白で形をつくる。</p>
+    <table class="t">
+      <thead><tr><th style="width:38%">用途</th><th>値</th></tr></thead>
+      <tbody>
+        <tr><td>図形の枠線</td><td>引かない</td></tr>
+        <tr class="subhead"><td>白背景の角丸囲み</td><td><code>#E0E0E0</code> ･ 0.75pt ･ 角丸 0.08in ･ 内側 0.5cm ( 可 )</td></tr>
+        <tr><td>区切り線 ･ 引き出し線</td><td><code>#999999</code></td></tr>
+        <tr><td>強めの区切り</td><td><code>#595959</code></td></tr>
+        <tr><td>表の罫線 ･ グラフの目盛り線</td><td><code>#D9D9D9</code></td></tr>
+        <tr><td>表の外枠</td><td><code>#D9D9D9</code>。
+        表は外側にも線を引く</td></tr>
+        <tr><td>見出しの下の細罫</td><td><code>#E0E0E0</code> ･ 0.75pt ( §3 )</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-note">
+      Border <code>#E0E0E0</code> は「面」としても残す ( 非強調の系列 ･ ドーナツのトラック )。
+      角丸そのものは可。
+      ただし角を丸めるほど Web UI に見えるので、KPIカードのような面の大きい要素では積極的には使わない。
+   </div>
+ </div>
+
+  <div class="card" id="s14">
+    <h3>1.4 Layer 3 : 強調</h3>
+    <p class="sub">案件で変わらない唯一の色。
+    カテゴリの識別には使わない。
+    1スライドにつき1箇所を原則とする。</p>
+    <div class="swatches" id="sw-point"></div>
+    <div class="rule-note">
+      面ではなく文字色として使うほうが、面積が小さく済み意味が立つ。
+      Point <code>#CD5151</code> は Danger <code>#D9534F</code> と ΔE 3.0 で見た目はほぼ同じだが、意味が違う。
+      Danger はエラー ･ 削除 ･ 危険な操作、Point は注目の誘導。
+      名前は必ず分けて使う。
+   </div>
+ </div>
+</section>
+
+<!-- ============================================================ 2 ============================================================ -->
+<section class="chapter">
+  <h2>2. グラフの描き方</h2>
+  <p class="chapter-note">作例はすべて Chart.js で描いている。
+  各図の下の「使っている色」と、開いて取り出せる設定をそのまま使えば同じ配色になる。</p>
+
+  <div class="card" id="s21">
+    <h3>2.1 色数 - 原則2色。
+    3色目が必要かを先に疑う</h3>
+    <div class="grid2">
+      <figure class="figure">
+        <div class="chartbox h280"><canvas id="c-bar-single"></canvas></div>
+        <figcaption>片側だけを読ませたい : 主役 Primary Dark ＋ 残り Border。
+        突出した1本だけ Point にして、注釈で数字を説明する。
+        軸は切らない。</figcaption>
+      </figure>
+      <figure class="figure">
+        <div class="chartbox h280"><canvas id="c-bar-contrast"></canvas></div>
+        <figcaption>両端に意味がある対比 : Primary Dark ＋ Accent の2色。
+        「正負を分ける」ではなく、両端に意味があるかどうかで決める。</figcaption>
+      </figure>
+   </div>
+    <div class="usedcolors" id="uc-21"></div>
+    <div class="rule-note">
+      性別 ･ 年代のようなセグメントも「順序のないカテゴリ」に当たる。
+      男性を青 ･ 女性を赤のように分けると、赤が Point ･ Danger と衝突して片方が警告に見えるので、Layer 2 から選ぶ。
+   </div>
+ </div>
+
+  <div class="card" id="s22">
+    <h3>2.2 濃淡の段階 - 順序尺度は色相を変えない</h3>
+    <div class="grid2">
+      <figure class="figure">
+        <div class="chartbox h280"><canvas id="c-scale"></canvas></div>
+        <figcaption>順序のあるデータは明度だけを段階的に変える。
+        凡例を読まなくても順序が分かる状態にする。</figcaption>
+      </figure>
+      <figure class="figure">
+        <div class="chartbox h280"><canvas id="c-cat4"></canvas></div>
+        <figcaption>順序のないカテゴリは Layer 2 を4色まで。
+        並列のものに濃淡を当てない。</figcaption>
+      </figure>
+   </div>
+    <div class="usedcolors" id="uc-22"></div>
+    <figure class="figure" style="margin-top:24px">
+      <div class="chartbox h240"><canvas id="c-stack"></canvas></div>
+      <figcaption>100% 積み上げも順序尺度なので濃淡4段で順序を残す。
+      幅が 5% に満たないセグメントは値を省いてよい ( 省いたら注記する )。</figcaption>
+    </figure>
+    <div class="rule-note">
+      表のカラースケール ( 値が高いほど濃い ) も順序尺度なので、この濃淡を使う。<strong>赤系のスケールは使わない。</strong>Point ･ Danger と意味が衝突する。
+   </div>
+    <details class="snippet">
+      <summary>濃淡4段をコピーする</summary>
+      <pre id="snip-scale"></pre>
+    </details>
+ </div>
+
+  <div class="card" id="s23">
+    <h3>2.3 軸の起点 - 0 が要るのは長さで量を読ませる図だけ</h3>
+    <p class="sub">値が狭い範囲に集まっているのに 0 起点のままだと、点が端に寄って差が読めない。
+    実測では、値が 60 〜 84% に集まったダンベル図で、点が使える幅の 28% にしか乗っていなかった。</p>
+    <div class="grid2">
+      <div>
+        <p class="sub" style="margin-bottom:8px">現状 : 0 起点</p>
+        <div id="dumbbell-0"></div>
+     </div>
+      <div>
+        <p class="sub" style="margin-bottom:8px">改良後 : 軸を 55 〜 90 に切る</p>
+        <div id="dumbbell-55"></div>
+     </div>
+   </div>
+    <table class="t" style="margin-top:20px">
+      <thead><tr><th style="width:26%">図の種類</th><th style="width:30%">目で読んでいるもの</th><th style="width:14%">0 起点</th><th>理由</th></tr></thead>
+      <tbody>
+        <tr class="subhead"><td>棒 ･ 面 ･ 積み上げ</td><td>原点からの長さ ･ 面積</td><td>必要</td><td>切ると長さの比が壊れる</td></tr>
+        <tr><td>ダンベル ･ 前後比較</td><td>2点の位置と、その間隔</td><td>不要</td><td>原点が符号に含まれていない</td></tr>
+        <tr><td>ドットプロット</td><td>点の位置</td><td>不要</td><td>同上</td></tr>
+        <tr><td>折れ線</td><td>傾きと上下</td><td>不要</td><td>ただし切った旨を軸に書く</td></tr>
+        <tr><td>散布図 ･ 対応分析</td><td>点どうしの距離</td><td>不要</td><td>縦横を同じ縮尺にするほうが効く</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-note">
+      <strong>切るときの条件。</strong>軸の目盛りを必ず出して範囲を隠さない / 同じページで並べる図は同じ範囲に揃える / 範囲はデータの最小 ･ 最大から少し広げた切りのいい値にする。
+   </div>
+ </div>
+
+  <div class="card">
+    <h3>折れ線 - 読ませたい線だけ主色にする</h3>
+    <figure class="figure">
+      <div class="chartbox h320"><canvas id="c-line"></canvas></div>
+      <figcaption>主役の線には値を全部付け、比較対象は Border に落として終点の値だけでよい。
+      凡例は線の脇か上に直接置くと視線が戻らない。</figcaption>
+    </figure>
+    <div class="usedcolors" id="uc-line"></div>
+ </div>
+
+  <div class="card" id="s25">
+    <h3>2.5 図解 ( 2軸4象限など )</h3>
+    <p class="sub">点ではなく名前を置くと、凡例が要らない。
+    色は個体ではなく群につける。
+    位置で読ませる図なので値ラベルは省いてよい。</p>
+    <div id="quadrant"></div>
+    <div class="usedcolors" id="uc-quad"></div>
+    <div class="rule-note">
+      領域の円は <code>#E6EBF7</code>。
+      白との比は 1.19 で、面の下限 1.2 をわずかに割っている。
+      群を囲む下地なので輪郭を読ませる必要はないが、下限ぎりぎりであることは覚えておく ( 観察項目 )。
+      象限の地は Background より薄い <code>#F8FAFD</code> 程度にとどめる。
+   </div>
+ </div>
+
+  <div class="card" id="s26">
+    <h3>2.6 表 - 見出しは塗り、罫線は #D9D9D9</h3>
+    <p class="sub">基本形は縦罫と外枠のある形。
+    表は外側にも線を引く。</p>
+    <table class="t">
+      <thead><tr><th>項目</th><th class="num" style="color:#fff">非常に重視する</th><th class="num" style="color:#fff">重視する計</th><th class="num" style="color:#fff">差</th></tr></thead>
+      <tbody>
+        <tr><td>自分の好みに合った味</td><td class="num">54.5%</td><td class="num">92.2%</td><td class="num">+37.7</td></tr>
+        <tr><td>手軽に食べられる</td><td class="num">47.2%</td><td class="num">90.4%</td><td class="num">+43.2</td></tr>
+        <tr class="subhead"><td>上位3項目の平均</td><td class="num">48.9%</td><td class="num">90.4%</td><td class="num">+41.5</td></tr>
+        <tr><td>見た目がおいしそう</td><td class="num">39.5%</td><td class="num">86.5%</td><td class="num">+47.0</td></tr>
+        <tr><td>新しさ ･ 特別感</td><td class="num">16.6%</td><td class="num">60.9%</td><td class="num">+44.3</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-note">
+      サブの見出しや強調する行は太字にするか、薄い青 <code>#EBEEF4</code> で塗る。
+      別の色を使う場合は CAT-2 青緑 か CAT-1 紫 を優先する。
+      見出しだけ色を替え、罫線とセルの地は変えない。<br>
+      ヘッダに Excel ･ Googleスプレッドシートの既定の濃紺 <code>#305496</code> が入っていることがある。
+      Primary Dark とは ΔE 11.7 の別色なので、Primary に置き換える。
+   </div>
+
+    <p class="sub" style="margin-top:26px; margin-bottom:12px">変形 : 罫線を使わず地色の縞で分ける ( 例外 )</p>
+    <table class="t striped">
+      <thead><tr><th>項目</th><th class="num" style="color:#fff">非常に重視する</th><th class="num" style="color:#fff">重視する計</th><th class="num" style="color:#fff">差</th></tr></thead>
+      <tbody>
+        <tr><td>自分の好みに合った味</td><td class="num">54.5%</td><td class="num">92.2%</td><td class="num">+37.7</td></tr>
+        <tr><td>手軽に食べられる</td><td class="num">47.2%</td><td class="num">90.4%</td><td class="num">+43.2</td></tr>
+        <tr><td>価格が手頃</td><td class="num">44.9%</td><td class="num">88.5%</td><td class="num">+43.6</td></tr>
+        <tr><td>見た目がおいしそう</td><td class="num">39.5%</td><td class="num">86.5%</td><td class="num">+47.0</td></tr>
+        <tr><td>新しさ ･ 特別感</td><td class="num">16.6%</td><td class="num">60.9%</td><td class="num">+44.3</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-note">
+      行数が多いときや、資料の中で表を目立たせたくないときの形。
+      基本形と混在させない。
+      1つの資料の中ではどちらかに統一する。
+   </div>
+ </div>
+
+  <div class="card" id="s28">
+    <h3>2.8 円グラフ ･ ドーナツ</h3>
+    <p class="sub">単一の値を見せるドーナツだけを使う。
+    弧に沿わせる ( 円錐 ) ･ 淡 → 濃 ･ 12時から時計回り。</p>
+    <div class="grid2">
+      <div>
+        <div class="donut-row">
+          <div><canvas id="donut-a" width="150" height="150"></canvas></div>
+          <div><canvas id="donut-b" width="150" height="150"></canvas></div>
+          <div><canvas id="donut-c" width="150" height="150"></canvas></div>
+       </div>
+        <p class="sub" style="margin-top:14px">複数並べるときは向き ･ 太さ ･ 色をすべて揃え、値だけが違う状態にする。
+        直径も揃える。</p>
+     </div>
+      <div>
+        <table class="t">
+          <thead><tr><th style="width:38%">項目</th><th>値</th></tr></thead>
+          <tbody>
+            <tr><td>色</td><td>グラデーション A ( <code>#9BB0D0</code> → <code>#5A74A3</code> )</td></tr>
+            <tr><td>向き</td><td>円錐 ･ 淡 → 濃 ･ 12時から</td></tr>
+            <tr><td>トラック</td><td><code>#F7F7F7</code></td></tr>
+            <tr><td>リングの太さ</td><td>直径の 0.22 ( 範囲 0.18 〜 0.28 )</td></tr>
+            <tr><td>内円の直径</td><td>直径の 0.56</td></tr>
+            <tr class="subhead"><td>中央の数値</td><td>内円径の 28% ･ 太字 ･ <code>#434343</code></td></tr>
+            <tr><td>中央のラベル</td><td>12pt ･ <code>#666666</code> ･ 数値の下</td></tr>
+            <tr><td>端の処理</td><td>直角。
+            角丸にすると値が実際より大きく見える</td></tr>
+          </tbody>
+        </table>
+     </div>
+   </div>
+    <div class="rule-note">
+      <strong>トラックの色。</strong>グラデーションを掛けるとリングの淡い端がトラックに溶ける。
+      淡端 <code>#9BB0D0</code> とトラック <code>#E0E0E0</code> の比は 1.67 で、輪郭として成立しない。
+      淡から始めて濃で終わらせる ( 終点の比 4.39 ) か、トラックを <code>#F7F7F7</code> に落とす ( 比 2.06 )。
+      フラット塗りのときは <code>#E0E0E0</code> のままでよい。<br>
+      <strong>分割数。</strong>1値 ＋ 残りはグラデーション可 / 2 〜 3 区分はフラットのみ / 4 区分以上は円をやめて横棒にする。
+   </div>
+ </div>
+
+  <div class="card" id="s29">
+    <h3>2.9 コレスポンデンス分析 ･ 散布図</h3>
+    <p class="sub">種類が違うものは色だけでなく形も変える。
+    ブランドは Primary Dark の丸、項目は Accent の菱形。</p>
+    <div id="ca"></div>
+    <div class="usedcolors" id="uc-ca"></div>
+    <div class="rule-note">
+      <strong>縦横比は固定する。</strong>ブラウザ幅やスライドサイズで変えない。
+      開くたびに比率が変わると、同じ図が違う印象になる。
+      距離を読ませるなら 1 : 1、偏りを見せるなら1次元、見慣れた散布図で出すなら縦を伸ばしてよいが軸ラベルに「縦の差は読まない」と書く。
+      第1軸の寄与率が 90% を超えているときは実質1次元なので、1次元に落とすほうが順序と距離がそのまま読める。<br>
+      ラベルは、右 → 左 → 上 → 下 の順に空いている側を探して逃がす。
+      重なりは機械で消し、手で動かさない。
+   </div>
+ </div>
+
+  <div class="card" id="s210">
+    <h3>2.10 軸 ･ 目盛り ･ 値ラベル</h3>
+    <p class="sub">装飾は減らしてよいが、軸 ･ 目盛り ･ 値は減らさない。
+    「何の線か」が軸だけを見て分かる状態を最低条件とする。</p>
+    <table class="t">
+      <thead><tr><th style="width:30%">要素</th><th style="width:38%">扱い</th><th>値</th></tr></thead>
+      <tbody>
+        <tr class="subhead"><td>軸の見出し ＝ 何の値か ＋ 単位</td><td>必ず付ける</td><td>9 〜 10pt ･ <code>#666666</code> ･ 横軸は右寄せ、縦軸は軸の上</td></tr>
+        <tr class="subhead"><td>目盛りラベル</td><td>必ず出す。
+        切った軸は始点を見出しにも書く</td><td>9 〜 10pt ･ <code>#666666</code></td></tr>
+        <tr class="subhead"><td>値ラベル</td><td>全部の棒 ･ 主役の線に付ける。
+        入らないときは省いた旨を注記する</td><td>9 〜 10pt ･ 本文色。
+        主役は太字でよい</td></tr>
+        <tr><td>基線</td><td>軸の位置を示す線として残す</td><td><code>#D9D9D9</code> ･ 0.75pt</td></tr>
+        <tr><td>目盛り線</td><td>要るときだけ ( 折れ線 ･ 縦棒で高さを読ませるとき )</td><td><code>#D9D9D9</code> ･ 0.75pt</td></tr>
+        <tr><td>凡例</td><td>2系列以上で付ける</td><td>枠なし ･ 横並び ･ 図の上か線の脇</td></tr>
+        <tr><td>図形の枠線 ･ 四辺の枠</td><td>引かない</td><td>―</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-note">
+      <strong>例外。</strong>位置で読ませる図解 ( 2軸4象限 ･ 対応分析 ) は値ラベルを省いてよい / 100% 積み上げで幅が 5% に満たないセグメントは省いてよい ( 省いたら注記する ) / 比較対象の線は終点の値だけでよい。<br>
+      値ラベルは棒の末尾を追いかけず、<strong>左寄せの固定カラムに揃える</strong>。
+      項目名は棒側に右寄せ。
+   </div>
+    <details class="snippet">
+      <summary>Chart.js の共通設定をコピーする ( 軸 ･ 目盛り ･ 値ラベル ･ 凡例 )</summary>
+      <pre id="snip-base"></pre>
+    </details>
+ </div>
+
+  <div class="card">
+    <h3>Do's and Don'ts</h3>
+    <div class="dd">
+      <div>
+        <h4>DO</h4>
+        <ul>
+          <li>1つのグラフで使う色は原則2色。
+          3色目が必要かどうかを先に疑う</li>
+          <li>順序のあるデータは色を変えず、同系の濃淡で表す</li>
+          <li>強調しない系列は Border に落とす</li>
+          <li>白文字を乗せる面には、面色ではなくカテゴリの文字色を敷く</li>
+          <li>外部から受け取ったグラフ画像は、貼らずに描き直す</li>
+          <li>軸の見出し ･ 目盛り ･ 値ラベルを付ける</li>
+        </ul>
+     </div>
+      <div>
+        <h4>DON'T</h4>
+        <ul>
+          <li>系列ごとに異なる色相を割り当てない ( 信号色の3色は特に ) </li>
+          <li>順序尺度に3色のカテゴリ配色を使わない</li>
+          <li>順序尺度のカラースケールに赤系を使わない</li>
+          <li>Point <code>#CD5151</code> をカテゴリの識別に使わない</li>
+          <li>面の色をそのまま文字色に使わない</li>
+          <li>突出値のために軸を途中で切らない</li>
+          <li>既定パレットのまま出さない</li>
+        </ul>
+     </div>
+   </div>
+    <div class="rule-note">
+      実測で確認できた既定値の流入 :
+      Googleスライド ･ スプレッドシート <code>#4285F4</code> <code>#EA4335</code> <code>#FBBC04</code> /
+      スプレッドシートのカラースケール <code>#F3F3F3</code> → <code>#E67C73</code> /
+      matplotlib の tab10 <code>#1F77B4</code> <code>#FF7F0E</code> /
+      Excel ･ Sheets の濃紺 <code>#305496</code>
+   </div>
+ </div>
+</section>
+
+<!-- ============================================================ 3 ============================================================ -->
+<section class="chapter" id="s3">
+  <h2>3. 見出しの階層</h2>
+  <p class="chapter-note">階層は線ではなく、面 ･ 余白 ･ 文字サイズ ･ 番号 で作る。
+  色帯を1本足しても段は増えない。</p>
+
+  <div class="card">
+    <h3>3.1 作り方</h3>
+    <p class="sub">上ほど強い。
+    ただし目安なので、どの段にどれを当てるかは資料ごとに決めてよい。</p>
+    <div class="h-demo">
+      <div class="h1-num"><div class="n">01</div><div class="t">左に番号を置き、地を薄青で塗る</div></div>
+      <p class="dummy">地 <code>#F3F7FC</code>。
+      いちばん強い段。
+      1画面に1つか2つまでにする。</p>
+
+      <div class="h2-rule">見出しの下に全幅の細罫を引く</div>
+      <p class="dummy">罫は <code>#E0E0E0</code> ･ 0.75pt。
+      線を引くならこの形にする。
+      見出しごとに色の違う線を引かない。</p>
+
+      <div><span class="h3-mark"><span class="mk">青字 ＋ マーカー ＋ 太字</span></span></div>
+      <p class="dummy">文字 <code>#5A74A3</code>、マーカー <code>#C9D3E4</code>。
+      カテゴリを割り当てていない資料の強調は、このマーカーを既定にする。</p>
+
+      <div class="h4-blue">青字 ＋ 太字</div>
+      <p class="dummy">いちばん軽い段。<code>#5A74A3</code> は白背景比 4.71 で、本文サイズでも読める。</p>
+
+      <div class="h-alt">基準のグレー ＋ 太字 ( 例外 )</div>
+      <p class="dummy">近くでマーカーを使っていて見出しと区別がつかないときは、本文色の太字に落としてよい。
+      スライドは <code>#434343</code>、HTML は <code>#333333</code>。</p>
+   </div>
+    <div class="rule-note">
+      Primary <code>#6E87B6</code> は白背景比 3.62 で本文サイズに届かないため、見出しの文字色には使わない。 <!-- design-check: allow NO_HARDCODED_PRIMARY -->
+      面には Primary、見出しの文字には Primary Dark。
+   </div>
+ </div>
+
+  <div class="card">
+    <h3>3.2 左の色帯</h3>
+    <p class="sub">見出しの左に色帯を敷くのは、スライドテンプレートに元からある縦棒 ( タイトル左 <code>#7288B2</code> ) だけとする。
+    これは版面の一部で、装飾ではない。</p>
+    <div class="grid2">
+      <div>
+        <p class="sub" style="margin-bottom:12px">使わない : カードごとに反復する色帯</p>
+        <div style="background:#fff; border:1px solid var(--hairline); border-radius:6px; padding:18px 20px">
+          <div class="bad-band"><strong style="font-size:15px">カードごとに同じ左3pxの帯がある</strong><br><span style="font-size:13px;color:var(--g-cmp)">帯が情報を持っていない</span></div>
+          <div class="bad-band"><strong style="font-size:15px">カードごとに同じ左3pxの帯がある</strong><br><span style="font-size:13px;color:var(--g-cmp)">消しても意味が変わらない</span></div>
+          <div class="bad-band" style="margin-bottom:0"><strong style="font-size:15px">カードごとに同じ左3pxの帯がある</strong><br><span style="font-size:13px;color:var(--g-cmp)">5つ目の合図として重複している</span></div>
+       </div>
+     </div>
+      <div>
+        <p class="sub" style="margin-bottom:12px">使う : §3.1 の作り方</p>
+        <div style="background:#fff; border:1px solid var(--hairline); border-radius:6px; padding:18px 20px">
+          <div class="h1-num" style="margin-bottom:14px"><div class="n">01</div><div class="t" style="font-size:15px">番号を前に置く</div></div>
+          <div class="h2-rule" style="font-size:15px; margin-bottom:14px">下に全幅の細罫</div>
+          <div style="margin-bottom:14px"><span class="h3-mark" style="font-size:15px"><span class="mk">太字とマーカー</span></span></div>
+          <div class="h4-blue" style="font-size:15px">太字とサイズだけ</div>
+       </div>
+     </div>
+   </div>
+    <div class="rule-note">
+      Web でも、スライドの見出しと見せ方をそろえたい場合に限り同じ形を使ってよい。
+      HTMLレポートの見出し設計そのものは txtToHTML の <code>specs/report-html-spec-v2.md</code> を一次情報源とする。
+   </div>
+ </div>
+</section>
+
+<footer class="page-foot">
+  2026/9/8 検討版。
+  値と根拠は <code>design-system</code> の <code>FIGURE.md</code> を一次情報源とする。
+  §4 Do's and Don'ts の全文と §5 スライド固有の規約は <code>FIGURE.md</code> を参照。
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<script>
+/* ============================================================
+   FIG : 図表のトークン
+   ここだけが色の出どころ。
+   canvas は DOM に色が出ないので、
+   検査するときはこのオブジェクトと :root を見る。
+   ============================================================ */
+const FIG = {
+  primary:'#6E87B6', primaryDark:'#5A74A3', primaryLight:'#9BB0D0', /* design-check: allow NO_HARDCODED_PRIMARY */
+  accent:'#C4A55A', accentLight:'#E0D5A8', accentDark:'#B0923E', sub:'#A18E6C',
+  border:'#E0E0E0', background:'#F7F7F7',
+  point:'#CD5151',
+  gray:{ text:'#434343', note:'#595959', cmp:'#666666', weak:'#999999', mute:'#B7B7B7' },
+  rule:'#D9D9D9',
+  scale:['#5A74A3','#8496BE','#AEBBD6','#D8DEEA'],
+  cat:[
+    {name:'CAT-1 紫',   fill:'#A4A5D1', bg:'#F6F6FA', mark:'#DDDEEE', text:'#8D90CA', onFill:2.36, onText:3.01},
+    {name:'CAT-2 青緑', fill:'#84B5B2', bg:'#F3F8F7', mark:'#D2E4E2', text:'#5CA09D', onFill:2.27, onText:3.01},
+    {name:'CAT-3 水色', fill:'#98BBDE', bg:'#F5F8FC', mark:'#D9E6F3', text:'#659AC7', onFill:2.00, onText:3.00},
+    {name:'CAT-4 山吹', fill:'#EDB369', bg:'#FDF7F0', mark:'#F8E3C8', text:'#DE7C31', onFill:1.87, onText:2.99},
+    {name:'CAT-5 ローズ',fill:'#CB6378', bg:'#FAEFF2', mark:'#ECC5CD', text:'#CB6378', onFill:3.75, onText:3.75}
+  ],
+  base:{name:'基調 ( Primary )', fill:'#6E87B6', bg:'#F3F7FC', mark:'#C9D3E4', text:'#5A74A3'}, /* design-check: allow NO_HARDCODED_PRIMARY */
+  quadrant:{ area:'#E6EBF7', ground:'#F8FAFD' }
+};
+
+const FONT = '"Plus Jakarta Sans","Noto Sans JP",sans-serif';
+
+/* ---------- Chart.js 共通設定 ( §2.10 ) ---------- */
+Chart.register(ChartDataLabels);
+Chart.defaults.font.family = FONT;
+Chart.defaults.font.size = 12;
+Chart.defaults.color = FIG.gray.cmp;
+Chart.defaults.plugins.datalabels.display = false;
+Chart.defaults.plugins.tooltip.enabled = false;
+Chart.defaults.animation = false;
+Chart.defaults.maintainAspectRatio = false;
+
+/* 軸の共通形 : 基線は残す / 目盛り線は要るときだけ / 四辺の枠は引かない */
+function axis(opts){
+  opts = opts || {};
+  return {
+    border:{ color: FIG.rule, width: 1 },
+    grid:{ display: !!opts.grid, color: FIG.rule, drawTicks:false, drawOnChartArea:!!opts.grid },
+    ticks:{ color: FIG.gray.cmp, font:{ size:11 }, padding:6 },
+    title:{ display: !!opts.title, text: opts.title || '', color: FIG.gray.cmp,
+            font:{ size:11 }, align: opts.titleAlign || 'end', padding:{ top:6 } }
+  };
+}
+function legendTop(show, align){
+  return { display: !!show, position:'top', align: align || 'start',
+           labels:{ boxWidth:10, boxHeight:10, usePointStyle:true, pointStyle:'rect',
+                    color: FIG.gray.cmp, font:{ size:11 }, padding:14 } };
+}
+
+/* 縦軸の見出しは回転させず「軸の上」に置く ( §2.10 ) */
+const yTitleTop = {
+  id:'yTitleTop',
+  afterDraw(chart, args, opts){
+    if(!opts || !opts.text) return;
+    const {ctx, chartArea} = chart;
+    ctx.save();
+    ctx.font = '11px ' + FONT;
+    ctx.fillStyle = FIG.gray.cmp;
+    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    ctx.fillText(opts.text, chartArea.left, chartArea.top - 8);
+    ctx.restore();
+  }
+};
+/* 値は棒の末尾を追わず、左寄せの固定カラムに揃える ( §2.10 ) */
+const valueColumn = {
+  id:'valueColumn',
+  afterDatasetsDraw(chart, args, opts){
+    if(!opts || !opts.data) return;
+    const {ctx, chartArea} = chart;
+    const meta = chart.getDatasetMeta(opts.datasetIndex || 0);
+    ctx.save();
+    ctx.font = (opts.bold ? '700 ' : '') + '11px ' + FONT;
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    meta.data.forEach(function(bar, i){
+      ctx.fillStyle = (opts.colors && opts.colors[i]) || FIG.gray.text;
+      ctx.fillText(opts.data[i], chartArea.right + (opts.gap == null ? 12 : opts.gap), bar.y);
+    });
+    ctx.restore();
+  }
+};
+/* 値ラベル : 全部の棒に付ける */
+function values(opts){
+  opts = opts || {};
+  return { display:true, anchor: opts.anchor||'end', align: opts.align||'end', offset: opts.offset==null?4:opts.offset,
+           color: opts.color || FIG.gray.text, font:{ size:11, weight: opts.bold?'bold':'normal', family:FONT },
+           formatter: opts.fmt || (v => v + '%') };
+}
+
+/* ---------- §1 の色見本を組み立てる ---------- */
+const LAYER1 = [
+  ['Primary','#6E87B6','表のヘッダ、帯、カードの見出し帯','3.62'], /* design-check: allow NO_HARDCODED_PRIMARY */
+  ['Primary Dark','#5A74A3','グラフの主色、pill、グラデーションの起点','4.71'],
+  ['Primary Light','#9BB0D0','濃淡の淡い側','2.21'],
+  ['Accent','#C4A55A','対比の2色目','2.37'],
+  ['Accent Light','#E0D5A8','対比 ･ 淡','1.44'],
+  ['Accent Dark','#B0923E','アイブロウ、章番号、帯の終点','2.99'],
+  ['SUB ( 深いゴールド )','#A18E6C','白文字を乗せるゴールドの面 ･ pill','3.18'],
+  ['Border','#E0E0E0','非強調の系列 ･ ドーナツのトラック','―'],
+  ['Background','#F7F7F7','注釈帯の地色、グラデーション時のトラック','―'],
+  ['Text Secondary','#666666','図解の比較対象','5.74']
+];
+const GRAYS = [
+  ['#434343','668','9.89','本文'],
+  ['#595959','131','7.00','補足 ･ 注記'],
+  ['#666666','138','5.74','図解の比較対象'],
+  ['#999999','178','2.85','図解の弱い群'],
+  ['#B7B7B7','59','2.01','非強調の面 ･ 罫線']
+];
+function swatch(chip,name,hex,use,ratio){
+  return '<div class="sw"><div class="chip" style="background:'+chip+'"></div>'+
+    '<div class="body"><div class="name">'+name+'</div>'+
+    '<div class="hex">'+hex+'</div>'+
+    (use?'<div class="use">'+use+'</div>':'')+
+    (ratio?'<div class="ratio">白文字比 '+ratio+'</div>':'')+
+    '</div></div>';
+}
+document.getElementById('sw-layer1').innerHTML =
+  LAYER1.map(r => swatch(r[1], r[0], r[1], r[2], r[3]==='―'?'':r[3])).join('');
+document.getElementById('sw-gray').innerHTML =
+  GRAYS.map(r => swatch(r[0], r[0], '本体で '+r[1]+' 回', r[3], '')
+    .replace('白文字比 ','') ).join('');
+document.getElementById('sw-gray').innerHTML =
+  GRAYS.map(r => '<div class="sw"><div class="chip" style="background:'+r[0]+'"></div>'+
+    '<div class="body"><div class="name">'+r[0]+'</div><div class="hex">白背景の比 '+r[2]+'</div>'+
+    '<div class="use">'+r[3]+'</div><div class="ratio">本体で '+r[1]+' 回</div></div></div>').join('');
+document.getElementById('sw-point').innerHTML =
+  swatch('#CD5151','Point','#CD5151','「ここを見て」の意味のみ','') +
+  swatch('#D9534F','Danger ( 別の意味 )','#D9534F','エラー ･ 削除 ･ 危険な操作','');
+
+/* カテゴリ 4値のグリッド */
+(function(){
+  const el = document.getElementById('cat-grid');
+  let h = '<div></div><div class="hd">面 ( fill )</div><div class="hd">地 ( 白90% )</div><div class="hd">マーカー ( 面30% )</div><div class="hd">文字</div>';
+  const rows = FIG.cat.concat([FIG.base]);
+  rows.forEach(function(c){
+    h += '<div class="rowname">'+c.name+'</div>';
+    ['fill','bg','mark','text'].forEach(function(k){
+      h += '<div class="cat-cell"><div class="c" style="background:'+c[k]+'"></div><div class="v">'+c[k]+'</div></div>';
+    });
+  });
+  el.innerHTML = h;
+})();
+
+/* pill : 面 vs 文字色 */
+(function(){
+  function pills(key, ratioKey){
+    return FIG.cat.map(function(c){
+      const bad = c[ratioKey] < 2.0;
+      return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">'+
+        '<span style="display:inline-block;min-width:104px;text-align:center;background:'+c[key]+';color:#fff;'+
+        'font-weight:700;font-size:13px;padding:6px 16px;border-radius:999px">'+c.name.replace(/^CAT-\d /,'')+'</span>'+
+        '<span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:'+(bad?FIG.point:FIG.gray.cmp)+';'+
+        (bad?'font-weight:700':'')+'">白文字比 '+c[ratioKey].toFixed(2)+'</span></div>';
+    }).join('');
+  }
+  document.getElementById('pill-fill').innerHTML = pills('fill','onFill');
+  document.getElementById('pill-text').innerHTML = pills('text','onText');
+})();
+
+/* 使用色の帯 */
+function usedColors(id, list){
+  document.getElementById(id).innerHTML =
+    '<span class="lab">この図で使っている色</span>' +
+    list.map(function(c){ return '<span class="uc"><i style="background:'+c[0]+'"></i>'+c[0]+(c[1]?' '+c[1]:'')+'</span>'; }).join('');
+}
+
+/* ============================================================
+   §2 グラフ
+   ============================================================ */
+const ITEMS = ['自分の好みに合った味','手軽に食べられる','価格が手頃','見た目がおいしそう','新しさ ･ 特別感'];
+const V1 = [54.5,47.2,44.9,39.5,16.6];
+
+/* 2.1 片側だけを読ませたい ( 主役 + Border、突出値だけ Point ) */
+new Chart(document.getElementById('c-bar-single'), {
+  type:'bar',
+  plugins:[valueColumn],
+  data:{ labels:['専門店監修の濃厚ラーメン','だしの効いた和風','あっさり塩','こってり豚骨','変わり種'],
+    datasets:[{ data:[7.3,3.1,2.8,2.4,1.9],
+      backgroundColor:[FIG.point, FIG.border, FIG.border, FIG.border, FIG.border],
+      borderWidth:0, barPercentage:.68 }]},
+  options:{ indexAxis:'y',
+    layout:{ padding:{ right:56 } },
+    scales:{ x:{ ...axis({ title:'選択率 ( % )' }), beginAtZero:true, max:8 },
+             y:{ ...axis(), ticks:{ color:FIG.gray.text, font:{size:11} } } },
+    plugins:{ legend:legendTop(false), datalabels:{ display:false },
+      valueColumn:{ data:['7.3%','3.1%','2.8%','2.4%','1.9%'], bold:true,
+        colors:[FIG.point, FIG.gray.text, FIG.gray.text, FIG.gray.text, FIG.gray.text] } } }
+});
+
+/* 2.1 両端に意味がある対比 */
+new Chart(document.getElementById('c-bar-contrast'), {
+  type:'bar',
+  data:{ labels:['20代','30代','40代','50代','60代'],
+    datasets:[
+      { label:'前年より増えた', data:[38.2,41.5,33.0,28.7,22.4], backgroundColor:FIG.primaryDark, borderWidth:0 },
+      { label:'前年より減った', data:[12.4,14.1,18.9,21.3,26.8], backgroundColor:FIG.accent, borderWidth:0 }
+    ]},
+  plugins:[yTitleTop],
+  options:{
+    layout:{ padding:{ top:34 } },
+    scales:{ x:axis({ title:'年代' , titleAlign:'end'}),
+             y:{ ...axis({ grid:true }), beginAtZero:true, max:50 } },
+    plugins:{ legend:legendTop(true,'end'), yTitleTop:{ text:'回答割合 ( % )' },
+      datalabels:values({ offset:2, fmt:v=>v.toFixed(1)+'%' }) } }
+});
+usedColors('uc-21', [[FIG.primaryDark,'Primary Dark'],[FIG.accent,'Accent'],[FIG.border,'Border'],[FIG.point,'Point']]);
+
+/* 2.2 濃淡4段 */
+new Chart(document.getElementById('c-scale'), {
+  type:'bar',
+  data:{ labels:['非常に重視','重視','どちらでもない','重視しない'],
+    datasets:[{ data:[54.5,37.7,5.9,1.9], backgroundColor:FIG.scale, borderWidth:0, barPercentage:.68 }]},
+  plugins:[yTitleTop],
+  options:{
+    layout:{ padding:{ top:30 } },
+    scales:{ x:axis({ title:'重視度' }),
+             y:{ ...axis({ grid:true }), beginAtZero:true, max:60 } },
+    plugins:{ legend:legendTop(false), yTitleTop:{ text:'回答割合 ( % )' },
+      datalabels:values({ offset:2, fmt:v=>v.toFixed(1)+'%' }) } }
+});
+
+/* 2.2 カテゴリ4色 */
+new Chart(document.getElementById('c-cat4'), {
+  type:'bar',
+  data:{ labels:['紫','青緑','水色','山吹'],
+    datasets:[{ data:[31.4,27.9,22.6,18.1],
+      backgroundColor:FIG.cat.slice(0,4).map(c=>c.fill), borderWidth:0, barPercentage:.68 }]},
+  plugins:[yTitleTop],
+  options:{
+    layout:{ padding:{ top:30 } },
+    scales:{ x:axis({ title:'カテゴリ' }),
+             y:{ ...axis({ grid:true }), beginAtZero:true, max:40 } },
+    plugins:{ legend:legendTop(false), yTitleTop:{ text:'構成比 ( % )' },
+      datalabels:values({ offset:2, fmt:v=>v.toFixed(1)+'%' }) } }
+});
+usedColors('uc-22', FIG.scale.map(function(c,i){ return [c,'段'+(i+1)]; })
+  .concat(FIG.cat.slice(0,4).map(function(c){ return [c.fill, c.name]; })));
+
+/* 2.2 100% 積み上げ */
+new Chart(document.getElementById('c-stack'), {
+  type:'bar',
+  data:{ labels:['全体','ヘビー','ミドル','ライト'],
+    datasets:[
+      { label:'非常に重視',      data:[54.5,62.1,51.0,40.2], backgroundColor:FIG.scale[0], borderWidth:0 },
+      { label:'重視',            data:[37.7,30.4,39.8,42.1], backgroundColor:FIG.scale[1], borderWidth:0 },
+      { label:'どちらでもない',  data:[5.9,5.1,6.4,13.5],    backgroundColor:FIG.scale[2], borderWidth:0 },
+      { label:'重視しない',      data:[1.9,2.4,2.8,4.2],     backgroundColor:FIG.scale[3], borderWidth:0 }
+    ]},
+  options:{ indexAxis:'y',
+    scales:{ x:{ ...axis({ title:'構成比 ( % )' }), stacked:true, beginAtZero:true, max:100 },
+             y:{ ...axis(), stacked:true, ticks:{ color:FIG.gray.text, font:{size:11} } } },
+    plugins:{ legend:legendTop(true),
+      datalabels:{ display:function(ctx){ return ctx.dataset.data[ctx.dataIndex] >= 5; },
+        color:function(ctx){ return ctx.datasetIndex <= 1 ? '#FFFFFF' : FIG.gray.text; },
+        font:{ size:11, family:FONT }, formatter:function(v){ return v.toFixed(1); } } } }
+});
+
+/* 折れ線 : 主役だけ主色 */
+new Chart(document.getElementById('c-line'), {
+  type:'line',
+  data:{ labels:['4月','5月','6月','7月','8月','9月'],
+    datasets:[
+      { label:'今週', data:[42,45,51,58,64,69], borderColor:FIG.primaryDark, backgroundColor:FIG.primaryDark,
+        borderWidth:2.5, pointRadius:3.5, tension:0,
+        datalabels: values({ anchor:'end', align:'top', offset:5, bold:true, fmt:function(v){ return v; } }) },
+      { label:'前週', data:[40,41,43,44,46,47], borderColor:FIG.border, backgroundColor:FIG.border,
+        borderWidth:2, pointRadius:3, tension:0,
+        datalabels:{ display:function(ctx){ return ctx.dataIndex === ctx.dataset.data.length-1; },
+          anchor:'end', align:'bottom', offset:5, color:FIG.gray.weak,
+          font:{ size:11, family:FONT }, formatter:function(v){ return v; } } }
+    ]},
+  plugins:[yTitleTop],
+  options:{
+    layout:{ padding:{ top:44, right:16 } },
+    scales:{ x:axis({ title:'月' }),
+             y:{ ...axis({ grid:true }), min:30, max:80 } },
+    plugins:{ legend:legendTop(true,'end'), yTitleTop:{ text:'購入件数 ( 千件 ) ･ 軸は 30 から' } } }
+});
+usedColors('uc-line', [[FIG.primaryDark,'主役'],[FIG.border,'比較対象'],[FIG.rule,'目盛り線']]);
+
+/* ---------- ダンベル図 ( 素の SVG ) ---------- */
+const DUM = [
+  ['洋風コク',60.4,73.9],['酸味',64.3,76.3],['スパイス香り',68.4,79.7],
+  ['辛い',69.0,79.0],['だしうま味',77.5,83.5]
+];
+function dumbbell(elId, min, max, ticks){
+  const W=470, rowH=42, padT=14, padB=42, labelW=96, valW=52;
+  const H = padT + DUM.length*rowH + padB;
+  const x0 = labelW, x1 = W - valW;
+  const sx = v => x0 + (v-min)/(max-min)*(x1-x0);
+  let s = '<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="display:block" font-family=\''+FONT+'\'>';
+  ticks.forEach(function(t){
+    s += '<line x1="'+sx(t)+'" y1="'+padT+'" x2="'+sx(t)+'" y2="'+(padT+DUM.length*rowH)+'" stroke="'+FIG.rule+'" stroke-width="1"/>';
+    s += '<text x="'+sx(t)+'" y="'+(padT+DUM.length*rowH+16)+'" font-size="10" fill="'+FIG.gray.cmp+'" text-anchor="middle">'+t+'</text>';
+  });
+  DUM.forEach(function(d,i){
+    const y = padT + i*rowH + rowH/2;
+    s += '<text x="'+(labelW-10)+'" y="'+(y+4)+'" font-size="11" fill="'+FIG.gray.text+'" text-anchor="end">'+d[0]+'</text>';
+    s += '<line x1="'+sx(d[1])+'" y1="'+y+'" x2="'+sx(d[2])+'" y2="'+y+'" stroke="'+FIG.primaryLight+'" stroke-width="2.5"/>';
+    s += '<circle cx="'+sx(d[1])+'" cy="'+y+'" r="5" fill="'+FIG.gray.weak+'"/>';
+    s += '<circle cx="'+sx(d[2])+'" cy="'+y+'" r="5" fill="'+FIG.primaryDark+'"/>';
+    /* 値は棒尻を追わず、左寄せの固定カラムに揃える */
+    s += '<text x="'+(W-valW+8)+'" y="'+(y+4)+'" font-size="11" font-weight="bold" fill="'+FIG.gray.text+'">+'+(d[2]-d[1]).toFixed(1)+'</text>';
+  });
+  s += '<line x1="'+x0+'" y1="'+(padT+DUM.length*rowH)+'" x2="'+x1+'" y2="'+(padT+DUM.length*rowH)+'" stroke="'+FIG.rule+'" stroke-width="1"/>';
+  s += '<text x="'+x1+'" y="'+(H-8)+'" font-size="10" fill="'+FIG.gray.cmp+'" text-anchor="end">好意度 TOP2 ( % )'+(min>0?' ･ 軸は '+min+' から':'')+'</text>';
+  s += '</svg>';
+  document.getElementById(elId).innerHTML = s;
+}
+dumbbell('dumbbell-0', 0, 100, [0,25,50,75,100]);
+dumbbell('dumbbell-55', 55, 90, [55,65,75,85]);
+
+/* ---------- 2軸4象限 ( 素の SVG ) ---------- */
+(function(){
+  const W=900,H=420,pad=52;
+  const P=[
+    {x:.72,y:.78,t:'ご褒美型',g:'key'},{x:.62,y:.68,t:'自分時間',g:'key'},{x:.78,y:.62,t:'気分転換',g:'key'},
+    {x:.30,y:.72,t:'家族の健康',g:'cmp'},{x:.24,y:.58,t:'献立の保険',g:'cmp'},
+    {x:.34,y:.26,t:'惰性',g:'weak'},{x:.68,y:.24,t:'話題性',g:'weak'},{x:.20,y:.34,t:'value',g:'weak'}
+  ];
+  const sx=v=>pad+v*(W-pad*2), sy=v=>H-pad-v*(H-pad*2);
+  const col={key:FIG.primaryDark, cmp:FIG.gray.cmp, weak:FIG.gray.weak};
+  let s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="display:block" font-family=\''+FONT+'\'>';
+  s+='<rect x="'+pad+'" y="'+pad+'" width="'+(W-pad*2)+'" height="'+(H-pad*2)+'" fill="'+FIG.quadrant.ground+'"/>';
+  /* 領域のラベルは大きな薄い円に置く ( 円は正円にする ) */
+  s+='<circle cx="'+sx(.80)+'" cy="'+sy(.86)+'" r="46" fill="'+FIG.quadrant.area+'"/>';
+  s+='<text x="'+sx(.80)+'" y="'+(sy(.86)+4)+'" font-size="12" font-weight="bold" fill="'+FIG.primaryDark+'" text-anchor="middle">注目する群</text>';
+  s+='<line x1="'+pad+'" y1="'+sy(.5)+'" x2="'+(W-pad)+'" y2="'+sy(.5)+'" stroke="'+FIG.rule+'" stroke-width="1"/>';
+  s+='<line x1="'+sx(.5)+'" y1="'+pad+'" x2="'+sx(.5)+'" y2="'+(H-pad)+'" stroke="'+FIG.rule+'" stroke-width="1"/>';
+  P.forEach(function(p){
+    s+='<circle cx="'+sx(p.x)+'" cy="'+sy(p.y)+'" r="5" fill="'+col[p.g]+'"/>';
+    s+='<text x="'+(sx(p.x)+10)+'" y="'+(sy(p.y)+4)+'" font-size="12" fill="'+col[p.g]+'"'+(p.g==='key'?' font-weight="bold"':'')+'>'+p.t+'</text>';
+  });
+  s+='<text x="'+(W-pad)+'" y="'+(H-pad+20)+'" font-size="11" fill="'+FIG.gray.cmp+'" text-anchor="end">新奇性が高い →</text>';
+  s+='<text x="'+pad+'" y="'+(pad-14)+'" font-size="11" fill="'+FIG.gray.cmp+'">↑ 実現可能性が高い</text>';
+  s+='</svg>';
+  document.getElementById('quadrant').innerHTML=s;
+  usedColors('uc-quad',[[FIG.primaryDark,'注目する群'],[FIG.gray.cmp,'比較対象'],[FIG.gray.weak,'弱い群'],[FIG.quadrant.area,'領域の円'],[FIG.quadrant.ground,'象限の地']]);
+})();
+
+/* ---------- コレスポンデンス分析 ( 素の SVG ･ 縦横 1:1 で固定 ) ---------- */
+(function(){
+  const S=520, pad=44;
+  const B=[{x:.68,y:.72,t:'A社'},{x:.34,y:.62,t:'B社'},{x:.56,y:.30,t:'C社'},{x:.24,y:.36,t:'D社'}];
+  const I=[{x:.78,y:.62,t:'ご褒美'},{x:.62,y:.82,t:'手軽'},{x:.30,y:.74,t:'定番'},
+           {x:.42,y:.22,t:'価格'},{x:.70,y:.40,t:'話題性'},{x:.20,y:.50,t:'健康'}];
+  const sx=v=>pad+v*(S-pad*2), sy=v=>S-pad-v*(S-pad*2);
+  let s='<svg viewBox="0 0 '+S+' '+S+'" width="100%" style="display:block;max-width:520px;margin:0 auto" font-family=\''+FONT+'\'>';
+  s+='<line x1="'+pad+'" y1="'+sy(.5)+'" x2="'+(S-pad)+'" y2="'+sy(.5)+'" stroke="'+FIG.rule+'" stroke-width="1"/>';
+  s+='<line x1="'+sx(.5)+'" y1="'+pad+'" x2="'+sx(.5)+'" y2="'+(S-pad)+'" stroke="'+FIG.rule+'" stroke-width="1"/>';
+  I.forEach(function(p){
+    const cx=sx(p.x), cy=sy(p.y), r=5;
+    s+='<polygon points="'+cx+','+(cy-r)+' '+(cx+r)+','+cy+' '+cx+','+(cy+r)+' '+(cx-r)+','+cy+'" fill="'+FIG.accent+'"/>';
+    s+='<text x="'+(cx+9)+'" y="'+(cy+4)+'" font-size="11" fill="'+FIG.gray.cmp+'">'+p.t+'</text>';
+  });
+  B.forEach(function(p){
+    s+='<circle cx="'+sx(p.x)+'" cy="'+sy(p.y)+'" r="6" fill="'+FIG.primaryDark+'"/>';
+    s+='<text x="'+(sx(p.x)+10)+'" y="'+(sy(p.y)+4)+'" font-size="12" font-weight="bold" fill="'+FIG.primaryDark+'">'+p.t+'</text>';
+  });
+  /* 凡例 : 枠なし ･ 横並び */
+  s+='<circle cx="'+pad+'" cy="'+(pad-16)+'" r="5" fill="'+FIG.primaryDark+'"/>';
+  s+='<text x="'+(pad+12)+'" y="'+(pad-12)+'" font-size="11" fill="'+FIG.gray.cmp+'">ブランド</text>';
+  s+='<polygon points="'+(pad+82)+','+(pad-21)+' '+(pad+87)+','+(pad-16)+' '+(pad+82)+','+(pad-11)+' '+(pad+77)+','+(pad-16)+'" fill="'+FIG.accent+'"/>';
+  s+='<text x="'+(pad+94)+'" y="'+(pad-12)+'" font-size="11" fill="'+FIG.gray.cmp+'">項目</text>';
+  s+='<text x="'+(S-pad)+'" y="'+(S-pad+18)+'" font-size="10" fill="'+FIG.gray.cmp+'" text-anchor="end">第1軸 ( 寄与率 62.4% )</text>';
+  s+='<text x="'+pad+'" y="'+(pad-30)+'" font-size="10" fill="'+FIG.gray.cmp+'">第2軸 ( 寄与率 21.8% ) ･ 縦横 1 : 1 で固定</text>';
+  s+='</svg>';
+  document.getElementById('ca').innerHTML=s;
+  usedColors('uc-ca',[[FIG.primaryDark,'ブランド ･ 丸'],[FIG.accent,'項目 ･ 菱形'],[FIG.gray.cmp,'項目のラベル'],[FIG.rule,'原点の線']]);
+})();
+
+/* ---------- ドーナツ ( 円錐グラデーション ) ---------- */
+function donut(id, pct, label, ratio){
+  ratio = ratio || 0.22;
+  const cv = document.getElementById(id);
+  const dpr = window.devicePixelRatio || 1;
+  const size = cv.width;
+  cv.width = size*dpr; cv.height = size*dpr;
+  cv.style.width = size+'px'; cv.style.height = size+'px';
+  const g = cv.getContext('2d');
+  g.scale(dpr,dpr);
+  const cx=size/2, cy=size/2, R=size/2-2, lw=size*ratio, r=R-lw/2;
+  /* トラック : グラデーション時は #F7F7F7 ( #E0E0E0 だと淡端との比が 1.67 で溶ける ) */
+  g.beginPath(); g.arc(cx,cy,r,0,Math.PI*2);
+  g.lineWidth=lw; g.strokeStyle=FIG.background; g.stroke();
+  /* 弧に沿わせる ( 円錐 ) ･ 淡 → 濃 ･ 12時から時計回り */
+  const start = -Math.PI/2;
+  const cg = g.createConicGradient ? g.createConicGradient(start, cx, cy) : null;
+  if (cg){ cg.addColorStop(0, FIG.primaryLight); cg.addColorStop(Math.max(pct,0.001), FIG.primaryDark); g.strokeStyle = cg; }
+  else { g.strokeStyle = FIG.primaryDark; }
+  g.beginPath(); g.arc(cx,cy,r,start,start+Math.PI*2*pct); g.lineCap='butt'; g.stroke();
+  /* 中央の数値 : 内円径の 28% */
+  const inner = size - lw*2;
+  g.fillStyle = FIG.gray.text;
+  g.font = '700 ' + Math.round(inner*0.28) + 'px ' + FONT;
+  g.textAlign='center'; g.textBaseline='alphabetic';
+  g.fillText(Math.round(pct*100)+'%', cx, label ? cy+2 : cy+Math.round(inner*0.28*0.36));
+  if (label){
+    g.fillStyle = FIG.gray.cmp;
+    g.font = Math.max(Math.round(inner*0.13),10) + 'px ' + FONT;
+    g.fillText(label, cx, cy + Math.round(inner*0.28*0.72) + 8);
+  }
+}
+donut('donut-a', 0.55, '認知率');
+donut('donut-b', 0.42, '興味あり');
+donut('donut-c', 0.28, '購入経験');
+
+/* ---------- コピー用スニペット ---------- */
+document.getElementById('snip-scale').textContent =
+`// 順序尺度の濃淡4段 ( FIGURE.md §2.2 )
+const SCALE = ['#5A74A3', '#8496BE', '#AEBBD6', '#D8DEEA'];
+
+// Chart.js
+datasets: [{ data: [...], backgroundColor: SCALE, borderWidth: 0 }]
+
+// matplotlib
+colors = ['#5A74A3', '#8496BE', '#AEBBD6', '#D8DEEA']`;
+
+document.getElementById('snip-base').textContent =
+`// Chart.js の共通設定 ( FIGURE.md §2.10 )
+Chart.defaults.font.family = '"Plus Jakarta Sans", "Noto Sans JP", sans-serif';
+Chart.defaults.color = '#666666';               // 目盛り ･ 軸の見出し
+Chart.defaults.plugins.tooltip.enabled = false; // 印刷 ･ 画像化が前提
+
+const options = {
+  scales: {
+    x: {
+      border: { color: '#D9D9D9', width: 1 },     // 基線は残す
+      grid:   { display: false },                 // 目盛り線は要るときだけ
+      ticks:  { color: '#666666', font: { size: 11 } },
+      title:  { display: true, text: '年代', align: 'end', color: '#666666' }
+    },
+    y: {
+      beginAtZero: true,                          // 棒 ･ 面 ･ 積み上げのみ
+      border: { color: '#D9D9D9', width: 1 },
+      grid:   { color: '#D9D9D9', drawTicks: false },
+      ticks:  { color: '#666666', font: { size: 11 } },
+      title:  { display: true, text: '回答割合 ( % )', align: 'end', color: '#666666' }
+    }
+  },
+  plugins: {
+    legend: {                                     // 2系列以上で付ける ･ 枠なし ･ 横並び
+      display: true, position: 'top', align: 'start',
+      labels: { boxWidth: 10, usePointStyle: true, pointStyle: 'rect', color: '#666666' }
+    },
+    datalabels: {                                 // 値ラベルは全部の棒に付ける
+      display: true, anchor: 'end', align: 'end', offset: 2,
+      color: '#434343', font: { size: 11 },
+      formatter: v => v + '%'
+    }
+  }
+};
+
+// 色 : 主役 #5A74A3 / 対比 #C4A55A / 非強調 #E0E0E0 / 注目 #CD5151
+
+// --- 縦軸の見出しは回転させず「軸の上」に置く ---
+// Chart.js の scales.y.title は縦書きになるので、小さなプラグインで左上に描く
+const yTitleTop = {
+  id: 'yTitleTop',
+  afterDraw(chart, args, opts) {
+    if (!opts || !opts.text) return;
+    const { ctx, chartArea } = chart;
+    ctx.save();
+    ctx.font = '11px sans-serif'; ctx.fillStyle = '#666666';
+    ctx.textAlign = 'left';
+    ctx.fillText(opts.text, chartArea.left, chartArea.top - 8);
+    ctx.restore();
+  }
+};
+// 使い方 : new Chart(el, { plugins:[yTitleTop],
+//   options:{ layout:{padding:{top:30}}, plugins:{ yTitleTop:{ text:'回答割合 ( % )' } } } })
+
+// --- 横棒の値は棒尻を追わず、左寄せの固定カラムに揃える ---
+const valueColumn = {
+  id: 'valueColumn',
+  afterDatasetsDraw(chart, args, opts) {
+    if (!opts || !opts.data) return;
+    const { ctx, chartArea } = chart;
+    ctx.save();
+    ctx.font = '700 11px sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    chart.getDatasetMeta(0).data.forEach((bar, i) => {
+      ctx.fillStyle = (opts.colors && opts.colors[i]) || '#434343';
+      ctx.fillText(opts.data[i], chartArea.right + 12, bar.y);
+    });
+    ctx.restore();
+  }
+};
+// 使い方 : layout:{padding:{right:56}} を空けて
+//   plugins:{ datalabels:{display:false}, valueColumn:{ data:['7.3%', ...] } }`;
+</script>
+</body>
+</html>

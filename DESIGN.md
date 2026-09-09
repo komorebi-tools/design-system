@@ -82,6 +82,12 @@
 - **Background** (`#F7F7F7`): ページ背景
 - **Surface** (`#FFFFFF`): カード、モーダル等の面
 
+### 図表 ･ スライド
+
+図表 ( グラフ ･ 図解 ･ 表 ) とスライドの配色は [FIGURE.md](FIGURE.md) を参照する。
+色の値の一次情報源はこのファイルのままで、`FIGURE.md` は使い方と図表固有の規約だけを持つ。
+図表のプレビューは [figure.html](figure.html)。
+
 ---
 
 ## 3. Typography Rules
