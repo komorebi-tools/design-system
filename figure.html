@@ -47,7 +47,7 @@
   --hairline:#E0E0E0;
 
   /* 濃淡4段 */
-  --sc1:#5A74A3; --sc2:#8496BE; --sc3:#AEBBD6; --sc4:#D8DEEA;
+  --sc1:#33559A; --sc2:#6280BC; --sc3:#9BACD2; --sc4:#D6DCEC;
 
   --page:#FFFFFF;
   --shell:#F5F6F8;
@@ -70,6 +70,46 @@ h1,h2,h3,h4,
   letter-spacing:0.05em;
 }
 .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px 96px}
+
+/* ---- サイト共通ヘッダ ( index.html と同じ形 ) ---- */
+.hero{
+  background:linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--primary-light) 100%);
+  color:#FFFFFF; padding:80px 40px; text-align:center;
+}
+.hero h1{font-size:48px; font-weight:700; line-height:1.3; margin:0 0 12px}
+.hero p{font-size:18px; opacity:0.9; margin:0}
+.nav-bar{
+  position:sticky; top:0; z-index:100;
+  background:var(--page); border-bottom:1px solid var(--border);
+  box-shadow:0 1px 3px rgba(0,0,0,0.06);
+  overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch;
+}
+.nav-inner{max-width:var(--maxw); margin:0 auto; padding:0 24px; display:flex; gap:0}
+.nav-link{
+  display:inline-block; padding:12px 16px;
+  font-size:13px; font-weight:600; color:var(--g-cmp);
+  text-decoration:none; border-bottom:2px solid transparent;
+  transition:color 0.2s, border-color 0.2s; flex-shrink:0;
+}
+.nav-link:hover{color:var(--primary); border-bottom-color:var(--primary)}
+.nav-link.current{color:var(--primary-dark); border-bottom-color:var(--primary-dark)}
+
+/* ---- ヒートマップ ( 塗りを面として見せるので .t とは別にする ) ---- */
+.heat{border-collapse:collapse; font-size:11.5px; line-height:1.4}
+.heat th{
+  background:var(--primary-dark); color:#FFFFFF; font-weight:600;
+  padding:6px 8px; text-align:center; white-space:nowrap;
+  border:1px solid #FFFFFF;
+}
+.heat th.rh{background:transparent; border-color:transparent}
+.heat td{padding:6px 8px; text-align:right; white-space:nowrap; border:1px solid #FFFFFF}
+.heat td.rh{
+  background:transparent; border-color:transparent;
+  text-align:right; padding-right:14px; color:var(--g-text);
+}
+.heat-legend{display:flex; align-items:center; gap:10px; margin-top:12px; font-size:11.5px; color:var(--g-weak)}
+.heat-legend .bar{display:flex; height:12px; width:180px}
+.heat-legend .bar i{flex:1 1 0}
 
 /* ---- ページヘッダ ---- */
 .masthead{padding:56px 0 32px}
@@ -149,6 +189,10 @@ table.t.striped tbody tr:nth-child(odd) td{background:var(--background)}
 .grid2 > *{min-width:0}
 @media (max-width:768px){
   .wrap{padding:0 16px 64px}
+  .hero{padding:48px 24px}
+  .hero h1{font-size:28px}
+  .hero p{font-size:15px}
+  .nav-inner{padding:0 16px}
   .grid2{grid-template-columns:1fr}
   .cat-grid{grid-template-columns:88px repeat(4,1fr)}
   .masthead{padding:40px 0 24px}
@@ -209,6 +253,30 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </style>
 </head>
 <body>
+
+<div class="hero">
+  <h1>Komorebi Design System</h1>
+  <p>コモレビ 全ツール共通のデザインガイドライン</p>
+</div>
+
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-link" href="index.html#logo">Logo</a>
+    <a class="nav-link" href="index.html#color">Color</a>
+    <a class="nav-link" href="index.html#typography">Typography</a>
+    <a class="nav-link" href="index.html#components">Components</a>
+    <a class="nav-link" href="index.html#icons">Icons</a>
+    <a class="nav-link" href="index.html#motion">Motion</a>
+    <a class="nav-link" href="index.html#spacing">Spacing</a>
+    <a class="nav-link" href="index.html#elevation">Elevation</a>
+    <a class="nav-link" href="index.html#responsive">Responsive</a>
+    <a class="nav-link" href="index.html#dark">Dark Mode</a>
+    <a class="nav-link" href="index.html#guidelines">Guidelines</a>
+    <a class="nav-link" href="index.html#formatting">JP Formatting</a>
+    <a class="nav-link current" href="figure.html" aria-current="page">Figure</a>
+  </div>
+</nav>
+
 <div class="wrap">
 
 <header class="masthead">
@@ -229,6 +297,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <li><a href="#s12"><span class="num">1.2</span>Layer 2 カテゴリ配色</a></li>
     <li><a href="#s13"><span class="num">1.3</span>グレーと線</a></li>
     <li><a href="#s14"><span class="num">1.4</span>Layer 3 強調</a></li>
+    <li><a href="#s15"><span class="num">1.5</span>色に意味を持たせるときの判断</a></li>
     <li><a href="#s21"><span class="num">2.1</span>色数</a></li>
     <li><a href="#s22"><span class="num">2.2</span>濃淡の段階</a></li>
     <li><a href="#s23"><span class="num">2.3</span>軸の起点</a></li>
@@ -237,6 +306,8 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <li><a href="#s28"><span class="num">2.8</span>円グラフ ･ ドーナツ</a></li>
     <li><a href="#s29"><span class="num">2.9</span>コレスポンデンス分析</a></li>
     <li><a href="#s210"><span class="num">2.10</span>軸 ･ 目盛り ･ 値ラベル</a></li>
+    <li><a href="#s211"><span class="num">2.11</span>ヒートマップ</a></li>
+    <li><a href="#s212"><span class="num">2.12</span>強調と非強調</a></li>
     <li><a href="#s3"><span class="num">3</span>見出しの階層</a></li>
   </ol>
 </nav>
@@ -356,6 +427,28 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       名前は必ず分けて使う。
    </div>
  </div>
+
+  <div class="card" id="s15">
+    <h3>1.5 色に意味を持たせるときの判断</h3>
+    <p class="sub">色そのものではなく、色のどの軸が何を担うかを決める。</p>
+    <table class="t">
+      <thead><tr><th style="width:24%">軸</th><th>担うもの</th></tr></thead>
+      <tbody>
+        <tr><td>濃さ</td><td>量 ･ 強弱 ･ 順序</td></tr>
+        <tr><td>色相</td><td>順序のないカテゴリの識別</td></tr>
+        <tr><td>無彩色</td><td>値ではないもの ( 比較対象 ･ 非該当 ･ 見出し )</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-note">
+      そのうえで、次の順に見る。<br>
+      1. データにカテゴリがあり、その意味が資料全体で一貫するときだけ色相を分ける<br>
+      2. 順序 ･ 量 ･ 強弱は色相ではなく濃さで示す<br>
+      3. 慣習の色 ( 赤 = 危険、緑 = 良い ) は、同じ資料に警告や正負の表現が無いときだけ使う<br>
+      4. <strong>1つの資料の中で、同じ色を2つの意味に使わない</strong><br>
+      実務でいちばん効くのは 4。
+      ヒートマップの塗りを表ごとに変えないのも、2群の色を資料内でそろえるのも、理由はここにある。
+   </div>
+ </div>
 </section>
 
 <!-- ============================================================ 2 ============================================================ -->
@@ -407,8 +500,20 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <figcaption>100% 積み上げも順序尺度なので濃淡4段で順序を残す。
       幅が 5% に満たないセグメントは値を省いてよい ( 省いたら注記する )。</figcaption>
     </figure>
+    <figure class="figure" style="margin-top:24px">
+      <div class="chartbox h240"><canvas id="c-stack-cat"></canvas></div>
+      <figcaption>同じ積み上げでも、中身が順序のないカテゴリなら色相で分ける。
+      並び順に意味が無いので濃淡にしない。</figcaption>
+    </figure>
     <div class="rule-note">
-      表のカラースケール ( 値が高いほど濃い ) も順序尺度なので、この濃淡を使う。<strong>赤系のスケールは使わない。</strong>Point ･ Danger と意味が衝突する。
+      <strong>4段の値 ( スライド )。</strong><code>#33559A</code> / <code>#6280BC</code> / <code>#9BACD2</code> / <code>#D6DCEC</code>。
+      隣り合う段の ΔE は 16.0 / 15.2 / 14.4。
+      白文字が乗るのは2段目まで ( 比 7.22 と 3.94 ) で、3段目からは値を <code>#434343</code> にする。<br>
+      <strong>4段の値 ( Web )。</strong>基調から始める従来の4段 <code>#5A74A3</code> / <code>#8496BE</code> / <code>#AEBBD6</code> / <code>#D8DEEA</code> も使える。
+      画面は投影より淡い段が残るため。
+      上の図はスライド用の4段で描いている。<br>
+      <strong>赤系のスケールは使わない。</strong>Point ･ Danger と意味が衝突する。
+      表のカラースケールは §2.11 を見る。
    </div>
     <details class="snippet">
       <summary>濃淡4段をコピーする</summary>
@@ -512,8 +617,9 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 
   <div class="card" id="s28">
     <h3>2.8 円グラフ ･ ドーナツ</h3>
-    <p class="sub">単一の値を見せるドーナツだけを使う。
-    弧に沿わせる ( 円錐 ) ･ 淡 → 濃 ･ 12時から時計回り。</p>
+    <p class="sub">円は塗り分けずドーナツにする。
+    1値のときは弧に沿わせる ( 円錐 ) ･ 淡 → 濃 ･ 12時から時計回り。
+    2 〜 3区分のときは下段の作りにする。</p>
     <div class="grid2">
       <div>
         <div class="donut-row">
@@ -534,7 +640,9 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
             <tr><td>リングの太さ</td><td>直径の 0.22 ( 範囲 0.18 〜 0.28 )</td></tr>
             <tr><td>内円の直径</td><td>直径の 0.56</td></tr>
             <tr class="subhead"><td>中央の数値</td><td>内円径の 28% ･ 太字 ･ <code>#434343</code></td></tr>
-            <tr><td>中央のラベル</td><td>12pt ･ <code>#666666</code> ･ 数値の下</td></tr>
+            <tr><td>中央のラベル</td><td>数値の 50% ･ 最小 10pt ･ <code>#666666</code> ･ 数値の下</td></tr>
+            <tr><td>中央の文字の幅</td><td>内円径の 80% 以内。
+            収まらなければ下げる ( 下限 18% )</td></tr>
             <tr><td>端の処理</td><td>直角。
             角丸にすると値が実際より大きく見える</td></tr>
           </tbody>
@@ -547,6 +655,31 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       淡から始めて濃で終わらせる ( 終点の比 4.39 ) か、トラックを <code>#F7F7F7</code> に落とす ( 比 2.06 )。
       フラット塗りのときは <code>#E0E0E0</code> のままでよい。<br>
       <strong>分割数。</strong>1値 ＋ 残りはグラデーション可 / 2 〜 3 区分はフラットのみ / 4 区分以上は円をやめて横棒にする。
+      円グラフとして塗り分けた形は使わない。
+   </div>
+
+    <h3 style="margin-top:34px">2.8.5 2 〜 3区分のドーナツ</h3>
+    <p class="sub">太さは直径の 0.22。
+    値はリングの外に出し、系列名の下に % を置く。
+    中央は主役の値 ＋ ラベル。
+    収まらないときは中央を空にして、外側に凡例やラベルを持たせる。</p>
+    <div class="grid2">
+      <figure class="figure">
+        <div class="chartbox h280"><canvas id="c-dseg-mono"></canvas></div>
+        <figcaption>単色系 ･ 濃淡3段。
+        区分に順序があるときはこちら。</figcaption>
+      </figure>
+      <figure class="figure">
+        <div class="chartbox h280"><canvas id="c-dseg-multi"></canvas></div>
+        <figcaption>多色系。
+        区分が順序のないカテゴリのときはこちら。</figcaption>
+      </figure>
+   </div>
+    <div class="rule-note">
+      <strong>中央に出した値は1箇所だけにする。</strong>外側からはその区分の % を落とす。<br>
+      <strong>ラベルの文字は面の色を使わない。</strong>水色は面 <code>#98BBDE</code> が白地で比 2.00 なので、文字色 <code>#659AC7</code> ( 比 3.00 ) を使う。<br>
+      <strong>青と水色。</strong>色相差 16.5° で §1.2 の 60° は満たさないが、L* 差 25.9 ･ ΔE 22.8 で代替条件を満たす。
+      3区分は3つとも互いに隣り合うので、並び順で近い色を離すことはできない。
    </div>
  </div>
 
@@ -594,6 +727,72 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <summary>Chart.js の共通設定をコピーする ( 軸 ･ 目盛り ･ 値ラベル ･ 凡例 )</summary>
       <pre id="snip-base"></pre>
     </details>
+ </div>
+
+  <div class="card" id="s211">
+    <h3>2.11 ヒートマップ ( クロス集計表 )</h3>
+    <p class="sub">数値はセルに入れ、色は偏りの形を見せる役に回す。</p>
+    <div id="heat-table"></div>
+    <figure class="figure" style="margin-top:24px; max-width:640px">
+      <div id="heat-table-div"></div>
+      <figcaption>100 を基準にする指数のように、両端に意味がある指標だけ発散配色にする。
+      ただの大小には使わない。</figcaption>
+    </figure>
+    <table class="t" style="margin-top:20px">
+      <thead><tr><th style="width:26%">項目</th><th>値</th></tr></thead>
+      <tbody>
+        <tr class="subhead"><td>正規化</td><td>標準は表全体。
+        行の中の順位を読ませたいときは行ごと。
+        列ごとは使わない</td></tr>
+        <tr class="subhead"><td>段数</td><td>セルに数値を入れて7段。
+        数値を入れず色だけで見せるのは例外で、そのときは5段</td></tr>
+        <tr><td>塗り</td><td>青。
+        上端は <code>#6779B1</code> で止める。
+        例外としてローズ</td></tr>
+        <tr><td>セルの文字</td><td>上2段だけ白。
+        それ以外は <code>#434343</code></td></tr>
+        <tr><td>見出し行</td><td>列見出しの帯はそのまま。
+        行見出しの列は白地</td></tr>
+        <tr><td>発散配色</td><td><code>#B0923E</code> ･ <code>#F5F4F1</code> ･ <code>#6779B1</code>。
+        基準がある指標のときだけ</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:24px">
+      <p class="sub" style="margin-bottom:10px">塗りの色を変える場合。
+      上端を青と同じ明度に揃えているので、白文字の比はどれも 4.25 で揃う。</p>
+      <div id="heat-hues"></div>
+   </div>
+    <div class="rule-note">
+      <strong>塗りの上端を下げる理由。</strong>見出し行と塗りが同じ色相なので、最濃まで使うと見出しが階調の一部に見える。<br>
+      <strong>連続グラデーションは使わない。</strong>隣り合うセルの差が刻みの基準 ΔE 4 を下回る。
+      7段の隣り合う ΔE は 6.0 〜 7.2、5段は 9.0 〜 10.6。<br>
+      <strong>発散の中央を白にしない。</strong>値のないセルと基準ちょうどのセルが同じ見え方になる。
+      ただの大小には使わない。<br>
+      1つの資料の中では塗りの色を1色に統一する ( §1.5 の 4 )。
+   </div>
+ </div>
+
+  <div class="card" id="s212">
+    <h3>2.12 強調と非強調</h3>
+    <p class="sub">読ませたいものだけ色を残し、残りは無彩色に寄せる。
+    色を足して強調をつくらない。
+    この考え方は図の種類を問わない。</p>
+    <div id="emph-rows"></div>
+    <table class="t" style="margin-top:20px">
+      <thead><tr><th style="width:18%">段数</th><th style="width:52%">値</th><th>隣り合う ΔE</th></tr></thead>
+      <tbody>
+        <tr><td>3段まで</td><td><code>#C4C4C4</code> <code>#D8D8D8</code> <code>#ECECEC</code></td><td>4.8 / 4.4</td></tr>
+        <tr><td>4段</td><td><code>#B7B7B7</code> <code>#C9C9C9</code> <code>#DBDBDB</code> <code>#EDEDED</code></td><td>4.6 / 4.3 / 4.0</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-note">
+      <strong>無彩色を段に分けるのは、残りに順序があるときだけ。</strong>横棒や散布図のように残りが並列なら1色でよい。
+      ドーナツや積み上げ棒のように順序が残るなら段にする。<br>
+      <strong>起点が濃すぎると、残りが「弱めた主役」ではなく「もうひとつの主役」に見える。</strong><code>#999999</code> から始めると、残りの段のうち上2段が主役級の重さになる。<br>
+      <strong>色以外も一段変える。</strong>面 ( 棒 ･ セル ･ 扇形 ) は色だけでよいが、線と点は面積が小さいので太さと大きさも一段変える。<br>
+      グレーの値は図ごとに変えてよい ( §1.3 )。
+      段として並べるときだけ、隣り合う段を ΔE 4 以上離す。
+   </div>
  </div>
 
   <div class="card">
@@ -726,7 +925,15 @@ const FIG = {
   point:'#CD5151',
   gray:{ text:'#434343', note:'#595959', cmp:'#666666', weak:'#999999', mute:'#B7B7B7' },
   rule:'#D9D9D9',
-  scale:['#5A74A3','#8496BE','#AEBBD6','#D8DEEA'],
+  scale:['#33559A','#6280BC','#9BACD2','#D6DCEC'],
+  muted3:['#C4C4C4','#D8D8D8','#ECECEC'],
+  muted4:['#B7B7B7','#C9C9C9','#DBDBDB','#EDEDED'],
+  heat7:['#EFF3F9','#D8DEED','#C2C9E1','#ABB4D5','#95A0C9','#7E8CBD','#6779B1'],
+  heat5:['#EFF3F9','#CDD3E7','#ABB4D5','#8A96C3','#6779B1'], /* 色だけで見せる5段 ･ 作例は載せていない */
+  heatTeal:['#EBF5F4','#CDE2E0','#B0CFCD','#93BDBA','#76ABA8','#579996','#348784'],
+  heatPurple:['#F2F2F9','#DDDCED','#C7C7E1','#B2B2D5','#9D9EC9','#878ABD','#7276B1'],
+  heatRose:['#FAF0F2','#F2D7DB','#E9BFC4','#DFA6AE','#D58D99','#CA7584','#BE5C70'],
+  div5:['#B0923E','#D6C296','#F5F4F1','#AFB4D1','#6779B1'],
   cat:[
     {name:'CAT-1 紫',   fill:'#A4A5D1', bg:'#F6F6FA', mark:'#DDDEEE', text:'#8D90CA', onFill:2.36, onText:3.01},
     {name:'CAT-2 青緑', fill:'#84B5B2', bg:'#F3F8F7', mark:'#D2E4E2', text:'#5CA09D', onFill:2.27, onText:3.01},
@@ -975,6 +1182,25 @@ new Chart(document.getElementById('c-stack'), {
         font:{ size:11, family:FONT }, formatter:function(v){ return v.toFixed(1); } } } }
 });
 
+/* 2.2 積み上げ ( カテゴリ配色 ) */
+new Chart(document.getElementById('c-stack-cat'), {
+  type:'bar',
+  data:{ labels:['コンビニ','スーパー','ドラッグストア'],
+    datasets:[
+      { label:'ホットスナック', data:[38.4,22.6,12.1], backgroundColor:FIG.cat[0].fill, borderWidth:0 },
+      { label:'チョコレート',   data:[26.2,30.8,34.5], backgroundColor:FIG.cat[1].fill, borderWidth:0 },
+      { label:'スナック菓子',   data:[22.9,28.4,20.3], backgroundColor:FIG.cat[2].fill, borderWidth:0 },
+      { label:'和菓子',         data:[12.5,18.2,33.1], backgroundColor:FIG.cat[3].fill, borderWidth:0 }
+    ]},
+  options:{ indexAxis:'y',
+    scales:{ x:{ ...axis({ title:'構成比 ( % )' }), stacked:true, beginAtZero:true, max:100 },
+             y:{ ...axis(), stacked:true, ticks:{ color:FIG.gray.text, font:{size:11} } } },
+    plugins:{ legend:legendTop(true),
+      datalabels:{ display:function(ctx){ return ctx.dataset.data[ctx.dataIndex] >= 5; },
+        color:FIG.gray.text,
+        font:{ size:11, family:FONT }, formatter:function(v){ return v.toFixed(1); } } } }
+});
+
 /* 折れ線 : 主役だけ主色 */
 new Chart(document.getElementById('c-line'), {
   type:'line',
@@ -1125,16 +1351,175 @@ donut('donut-a', 0.55, '認知率');
 donut('donut-b', 0.42, '興味あり');
 donut('donut-c', 0.28, '購入経験');
 
+/* ---------- 2 〜 3区分のドーナツ ( §2.8.5 ) ---------- */
+const centerText = {
+  id:'centerText',
+  afterDraw(chart, args, opts){
+    const o = chart.options.plugins.centerText;
+    if (!o || !o.value) return;
+    const {ctx, chartArea} = chart;
+    const cx = (chartArea.left + chartArea.right)/2;
+    const cy = (chartArea.top + chartArea.bottom)/2;
+    const d  = Math.min(chartArea.right-chartArea.left, chartArea.bottom-chartArea.top);
+    const inner = d * 0.56;
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.fillStyle = FIG.gray.cmp;
+    ctx.font = Math.max(Math.round(inner*0.11),10) + 'px ' + FONT;
+    ctx.fillText(o.label, cx, cy - inner*0.04);
+    ctx.fillStyle = FIG.gray.text;
+    ctx.font = '700 ' + Math.round(inner*0.18) + 'px ' + FONT;
+    ctx.fillText(o.value, cx, cy + inner*0.16);
+    ctx.restore();
+  }
+};
+
+function donutSeg(id, values, labels, fills, inks, center){
+  const el = document.getElementById(id);
+  if (!el) return;
+  new Chart(el, {
+    type:'doughnut',
+    plugins:[centerText],
+    data:{ labels:labels, datasets:[{ data:values, backgroundColor:fills,
+      borderColor:'#FFFFFF', borderWidth:2 }] },
+    options:{
+      cutout:'56%',
+      layout:{ padding:{ top:30, bottom:30, left:92, right:92 } },
+      plugins:{
+        legend:{ display:false },
+        centerText: center,
+        datalabels:{
+          display:true, anchor:'end', align:'end', offset:10, textAlign:'center',
+          color:(c)=>inks[c.dataIndex],
+          font:{ size:12, lineHeight:1.4 },
+          formatter:(v,c)=>{
+            const nm = c.chart.data.labels[c.dataIndex];
+            if (center && center.hideIndex === c.dataIndex) return nm;
+            return [nm, v + '%'];
+          }
+        }
+      }
+    }
+  });
+}
+donutSeg('c-dseg-mono', [20,57,23], ['購入経験あり','認知のみ','未認知'],
+  [FIG.scale[0], FIG.scale[1], FIG.scale[3]],
+  [FIG.gray.text, FIG.gray.cmp, FIG.gray.cmp],
+  { label:'購入経験あり', value:'20%', hideIndex:0 });
+donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッグストア'],
+  [FIG.primaryDark, FIG.cat[1].text, FIG.cat[2].fill],
+  [FIG.primaryDark, FIG.cat[1].text, FIG.cat[2].text],
+  null);
+
+/* ---------- ヒートマップ ( §2.11 ) ---------- */
+(function(){
+  const cols = ['チョコ','乳製品','和風','クッキー','果物','コーヒー','ミント'];
+  const rows = ['リラックス','小腹が空いた','ご褒美','贅沢な気分','家族 ･ 友人と',
+                '気分転換','ストレス発散','ひと段落','仕事の合間'];
+  const D = [[28.6,25.8,14.0,8.4,8.8,12.6,1.8],
+             [28.6,20.4,16.6,23.2,6.2,4.0,1.0],
+             [32.6,36.4,8.9,4.0,10.9,5.3,1.9],
+             [26.3,36.7,8.6,4.0,16.8,6.1,1.6],
+             [22.4,33.8,13.5,11.5,12.7,5.3,0.9],
+             [31.1,16.5,9.6,5.7,11.0,16.9,9.2],
+             [38.0,30.1,6.1,5.3,7.5,8.5,4.6],
+             [32.0,19.7,9.8,10.8,7.9,15.6,4.1],
+             [34.4,14.4,8.1,15.4,6.4,16.7,4.5]];
+
+  function render(id, pal, opt){
+    const box = document.getElementById(id);
+    if (!box) return;
+    opt = opt || {};
+    const cs = opt.cols || cols, rs = opt.rows || rows, dd = opt.data || D;
+    const num = opt.num !== false, div = !!opt.diverging, base = opt.base || 100;
+    let mx = 0, mn = Infinity;
+    dd.forEach(function(r){ r.forEach(function(v){ if (v>mx) mx=v; if (v<mn) mn=v; }); });
+    const span = Math.max(mx-base, base-mn) || 1;
+    let h = '<div style="overflow-x:auto"><table class="heat">';
+    h += '<thead><tr><th class="rh"></th>';
+    cs.forEach(function(c){ h += '<th>'+c+'</th>'; });
+    h += '</tr></thead><tbody>';
+    dd.forEach(function(r,i){
+      h += '<tr><td class="rh">'+rs[i]+'</td>';
+      r.forEach(function(v){
+        const k = div ? Math.round(((v-base)/span+1)/2*(pal.length-1))
+                      : Math.min(pal.length-1, Math.floor(v/mx*pal.length));
+        const ink = div ? (k === pal.length-1 ? '#FFFFFF' : FIG.gray.text)
+                        : (k >= pal.length-2 ? '#FFFFFF' : FIG.gray.text);
+        const txt = num ? v.toFixed(opt.dp === undefined ? 1 : opt.dp) + (opt.unit === undefined ? '%' : opt.unit)
+                        : '&nbsp;';
+        h += '<td style="text-align:right; background:'+pal[k]+'; color:'+ink+'">'+txt+'</td>';
+      });
+      h += '</tr>';
+    });
+    h += '</tbody></table>';
+    h += '<div class="heat-legend"><span>'+(opt.lo||'低')+'</span><span class="bar">';
+    pal.forEach(function(c){ h += '<i style="background:'+c+'"></i>'; });
+    h += '</span><span>'+(opt.hi||'高')+'</span></div></div>';
+    box.innerHTML = h;
+  }
+
+  render('heat-table', FIG.heat7);
+  render('heat-table-div', FIG.div5, {
+    cols:['認知','興味','購入','再購入'],
+    rows:['20代','30代','40代','50代','60代'],
+    data:[[112,124,131,118],[104,109,116,107],[98,96,101,99],[92,88,83,90],[84,76,71,79]],
+    diverging:true, base:100, dp:0, unit:'', lo:'下回る', hi:'上回る' });
+
+  const hbox = document.getElementById('heat-hues');
+  if (hbox) {
+    const sets = [['青 ( 標準 )', FIG.heat7], ['青緑', FIG.heatTeal],
+                  ['紫', FIG.heatPurple], ['ローズ ( 例外 )', FIG.heatRose]];
+    let g = '<div style="display:grid; gap:10px">';
+    sets.forEach(function(st){
+      g += '<div style="display:flex; align-items:center; gap:14px; min-width:0">'
+        +  '<div style="flex:0 0 120px; font-size:12.5px; color:'+FIG.gray.cmp+'">'+st[0]+'</div>'
+        +  '<div style="display:flex; flex:1 1 auto; min-width:0; height:22px">';
+      st[1].forEach(function(c){ g += '<div style="flex:1 1 0; background:'+c+'"></div>'; });
+      g += '</div></div>';
+    });
+    hbox.innerHTML = g + '</div>';
+  }
+})();
+
+/* ---------- 強調と非強調 ( §2.12 ) ---------- */
+(function(){
+  const box = document.getElementById('emph-rows');
+  if (!box) return;
+  const S = FIG.scale, M = FIG.muted3, M4 = FIG.muted4;
+  const sets = [
+    ['強調なし', [S[0],S[1],S[2],S[3]]],
+    ['上位2段だけ青', [S[0],S[1],M[0],M[1]]],
+    ['1段目だけ青', [S[0],M[0],M[1],M[2]]],
+    ['全部を無彩色に ( 背景の行 )', [M4[0],M4[1],M4[2],M4[3]]]
+  ];
+  const vals = [40,34,18,8];
+  let h = '<div style="display:grid; grid-template-columns:1fr; gap:14px">';
+  sets.forEach(([nm, cs])=>{
+    let x = 0, bars = '';
+    vals.forEach((v,i)=>{
+      bars += '<rect x="'+x+'" y="0" width="'+(v-0.6)+'" height="22" fill="'+cs[i]+'"></rect>';
+      x += v;
+    });
+    h += '<div style="display:flex; align-items:center; gap:14px; min-width:0">'
+      +  '<div style="flex:0 0 190px; font-size:12.5px; color:'+FIG.gray.cmp+'">'+nm+'</div>'
+      +  '<svg viewBox="0 0 100 22" preserveAspectRatio="none" style="flex:1 1 auto; height:22px; min-width:0">'+bars+'</svg>'
+      +  '</div>';
+  });
+  h += '</div>';
+  box.innerHTML = h;
+})();
+
 /* ---------- コピー用スニペット ---------- */
 document.getElementById('snip-scale').textContent =
 `// 順序尺度の濃淡4段 ( FIGURE.md §2.2 )
-const SCALE = ['#5A74A3', '#8496BE', '#AEBBD6', '#D8DEEA'];
+const SCALE = ['#33559A', '#6280BC', '#9BACD2', '#D6DCEC'];
 
 // Chart.js
 datasets: [{ data: [...], backgroundColor: SCALE, borderWidth: 0 }]
 
 // matplotlib
-colors = ['#5A74A3', '#8496BE', '#AEBBD6', '#D8DEEA']`;
+colors = ['#33559A', '#6280BC', '#9BACD2', '#D6DCEC']`;
 
 document.getElementById('snip-base').textContent =
 `// Chart.js の共通設定 ( FIGURE.md §2.10 )
