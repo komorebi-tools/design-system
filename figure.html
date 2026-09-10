@@ -187,6 +187,8 @@ table.t.striped tbody tr:nth-child(odd) td{background:var(--background)}
 .grid2{display:grid; grid-template-columns:1fr 1fr; gap:24px}
 /* グリッドの子は既定で min-width:auto なので、中身の広い列がページごと横に広がる。0 にして列の中で収める */
 .grid2 > *{min-width:0}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px}
+.grid3 > *{min-width:0}
 @media (max-width:768px){
   .wrap{padding:0 16px 64px}
   .hero{padding:48px 24px}
@@ -194,6 +196,7 @@ table.t.striped tbody tr:nth-child(odd) td{background:var(--background)}
   .hero p{font-size:15px}
   .nav-inner{padding:0 16px}
   .grid2{grid-template-columns:1fr}
+  .grid3{grid-template-columns:1fr}
   .cat-grid{grid-template-columns:88px repeat(4,1fr)}
   .masthead{padding:40px 0 24px}
   .masthead h1{font-size:26px}
@@ -301,6 +304,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <li><a href="#s21"><span class="num">2.1</span>色数</a></li>
     <li><a href="#s22"><span class="num">2.2</span>濃淡の段階</a></li>
     <li><a href="#s23"><span class="num">2.3</span>軸の起点</a></li>
+    <li><a href="#s24"><span class="num">2.4</span>2群を並べる</a></li>
     <li><a href="#s25"><span class="num">2.5</span>図解 ( 2軸4象限 )</a></li>
     <li><a href="#s26"><span class="num">2.6</span>表</a></li>
     <li><a href="#s28"><span class="num">2.8</span>円グラフ ･ ドーナツ</a></li>
@@ -547,6 +551,38 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     </table>
     <div class="rule-note">
       <strong>切るときの条件。</strong>軸の目盛りを必ず出して範囲を隠さない / 同じページで並べる図は同じ範囲に揃える / 範囲はデータの最小 ･ 最大から少し広げた切りのいい値にする。
+   </div>
+ </div>
+
+  <div class="card" id="s24">
+    <h3>2.4 2群を並べる</h3>
+    <p class="sub">両端に意味がある対比なので色相を分けてよい。
+    男女に限らず、自社と競合、前期と今期のような対比でも同じ。</p>
+    <div class="grid3">
+      <figure class="figure">
+        <div class="chartbox h280"><canvas id="c-two-teal"></canvas></div>
+        <figcaption>青 ＋ 青緑。
+        ΔE 25.6 ･ 色相差 84°</figcaption>
+      </figure>
+      <figure class="figure">
+        <div class="chartbox h280"><canvas id="c-two-purple"></canvas></div>
+        <figcaption>青 ＋ 紫。
+        ΔE 13.6 ･ L* 49 と 62</figcaption>
+      </figure>
+      <figure class="figure">
+        <div class="chartbox h280"><canvas id="c-two-rose"></canvas></div>
+        <figcaption>青 ＋ ローズ。
+        ΔE 33.1 ･ 白文字の比 3.16</figcaption>
+      </figure>
+   </div>
+    <div class="usedcolors" id="uc-24"></div>
+    <div class="rule-note">
+      <strong>2色目は面ではなく文字色を使う。</strong>面のままだと白文字が乗らず、外に出す系列名も読みにくい ( §1.2 )。<br>
+      <strong>山吹は2色目に使わない。</strong>Warning <code>#F0AD4E</code> と ΔE 3.6 で、状態表示と見分けがつかない。<br>
+      <strong>ローズは「明」<code>#D17686</code> を使う。</strong>CAT-5 の面 <code>#CB6378</code> を白 12% で薄めた値で、青と並べたときに重さが揃う ( §1.2 )。
+      Point <code>#CD5151</code> とも ΔE 12.9 離れる。<br>
+      目盛りの最大値は3つとも揃える。
+      揃えないと高さの比較が意味を失う。
    </div>
  </div>
 
@@ -1200,6 +1236,31 @@ new Chart(document.getElementById('c-stack-cat'), {
         color:FIG.gray.text,
         font:{ size:11, family:FONT }, formatter:function(v){ return v.toFixed(1); } } } }
 });
+
+/* 2.4 2群を並べる */
+(function(){
+  const items = ['手軽に食べられる','季節感がある','食感にこだわり','健康的である'];
+  const male   = [63.5,39.5,40.0,37.0];
+  const female = [71.5,46.0,44.5,40.5];
+  const sets = [['c-two-teal', FIG.cat[1].text], ['c-two-purple', FIG.cat[0].text], ['c-two-rose', '#D17686']];
+  sets.forEach(function(st){
+    new Chart(document.getElementById(st[0]), {
+      type:'bar',
+      data:{ labels:items,
+        datasets:[
+          { label:'男性', data:male,   backgroundColor:FIG.primaryDark, borderWidth:0 },
+          { label:'女性', data:female, backgroundColor:st[1], borderWidth:0 }
+        ]},
+      options:{ indexAxis:'y',
+        scales:{ x:{ ...axis({ title:'該当率 ( % )' }), beginAtZero:true, max:80 },
+                 y:{ ...axis(), ticks:{ color:FIG.gray.cmp, font:{size:10.5} } } },
+        plugins:{ legend:legendTop(true),
+          datalabels:values({ offset:2, fmt:function(v){ return v.toFixed(1); } }) } }
+    });
+  });
+  usedColors('uc-24', [[FIG.primaryDark,'Primary Dark'], [FIG.cat[1].text,'CAT-2 青緑 文字'],
+                       [FIG.cat[0].text,'CAT-1 紫 文字'], ['#D17686','CAT-5 ローズ 明']]);
+})();
 
 /* 折れ線 : 主役だけ主色 */
 new Chart(document.getElementById('c-line'), {
