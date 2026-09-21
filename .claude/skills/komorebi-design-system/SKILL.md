@@ -35,6 +35,7 @@ description: |
 グラフ ･ 図解 ･ 表 ･ スライドを作る、または直すときは、作業前に `FIGURE.md` を読む。
 このスキルには図表の値を書かない。
 `FIGURE.md` が一次情報源。
+スライドを作る ･ 直すときは `SLIDE.md` も読む。
 
 https://github.com/komorebi-tools/design-system/blob/main/FIGURE.md
 
@@ -46,9 +47,9 @@ https://github.com/komorebi-tools/design-system/blob/main/FIGURE.md
 | §2 グラフの描き方 | 色数 ･ 濃淡 ･ 軸の起点 ･ 表 ･ ドーナツ ･ 散布図 ･ 軸と値ラベル | 媒体を問わない |
 | §3 見出しの階層 | 面 ･ 余白 ･ 文字サイズ ･ 番号で段を作る | 媒体を問わない |
 | §4 Do's and Don'ts | やること ･ やらないこと | 媒体を問わない |
-| §5 スライド固有 | タイポグラフィ ･ 配置 ･ pill ･ テーマ配色 ･ 3カラム | **スライドのみ** |
+| §5 スライド固有 ( `SLIDE.md` ) | タイポグラフィ ･ 配置 ･ pill ･ テーマ配色 ･ 3カラム | **スライドのみ** |
 
-**§5 を Web に当てない**。
+**`SLIDE.md` ( §5 ) を Web に当てない**。
 §5 はスライド用のフォントと寸法なので、Web に持ち込むとこのスキルの house style から外れる。
 Web のタイポグラフィは下の「デザイントークン」の規定 ( Plus Jakarta Sans ＋ Noto Sans JP ) を使う。
 
