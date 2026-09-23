@@ -63,7 +63,7 @@ design-system/
 | [SLIDE.md](SLIDE.md) | スライド固有の規約。フォント、サイズの段階、配置、pill ･ マーカー、スライド/スプレッドシートのテーマ配色。スライドを作るときは FIGURE.md と合わせて読む <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [RATIONALE.md](RATIONALE.md) | FIGURE.md ･ SLIDE.md の規約をそう決めた根拠 (測定値、近似色の検査、選定の経緯)。既定では読まず、判断に迷ったときに開く <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [index.html](index.html) | DESIGN.md をビジュアルで確認できるページ。チーム全員が同じトークンを見られる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
-| [figure.html](figure.html) | FIGURE.md の §1 〜 §3 を実物のグラフで確認できるページ。Chart.js で描いている <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| [figure.html](figure.html) | FIGURE.md の §1 〜 §3 を実物のグラフで確認できるページ。規約の本文は FIGURE.md で、ここは見本。Chart.js で描いている <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 
 > 約物 ･ 記号の表記ルール ( 中黒 ･ スラッシュ ･ 引用符 ･ 括弧 ･ コロン ･ カンマ等の 11 項目 + 句点後改行ルール ) は [DESIGN.md §3.6](DESIGN.md) を一次情報源として参照してください。
 
