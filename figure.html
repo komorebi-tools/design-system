@@ -129,9 +129,8 @@ h1,h2,h3,h4,
 .chapter{margin:56px 0 0}
 .chapter > h2{
   font-size:24px; font-weight:700; margin:0 0 6px;
-  padding-left:14px; border-left:4px solid var(--primary);
 }
-.chapter > .chapter-note{color:var(--g-cmp); font-size:14px; margin:0 0 24px; padding-left:18px}
+.chapter > .chapter-note{color:var(--g-cmp); font-size:14px; margin:0 0 24px}
 
 /* ---- カード ---- */
 .card{background:var(--page); border:1px solid var(--hairline); border-radius:6px; padding:28px 28px 24px; margin-bottom:20px}
@@ -139,15 +138,15 @@ h1,h2,h3,h4,
 .card > .sub{color:var(--g-cmp); font-size:14px; margin:0 0 20px}
 .card > .sub:last-of-type{margin-bottom:20px}
 .rule-note{
-  margin:20px 0 0; padding:12px 16px; background:var(--background);
+  margin:20px 0 0; padding:18px 20px; background:var(--background);
   border-radius:var(--radius); font-size:13px; line-height:1.7; color:var(--g-note);
 }
 .rule-note strong{color:var(--g-text)}
 
 /* ---- 表 ---- */
 table.t{width:100%; border-collapse:collapse; font-size:13.5px}
-table.t th{background:var(--primary); color:#fff; font-weight:700; text-align:left; padding:9px 12px; border:1px solid var(--rule)}
-table.t td{padding:9px 12px; border:1px solid var(--rule); background:#fff; vertical-align:top}
+table.t th{background:var(--primary); color:#fff; font-weight:700; text-align:left; padding:10px 12px; border:1px solid var(--rule)}
+table.t td{padding:10px 12px; border:1px solid var(--rule); background:#fff; vertical-align:top}
 table.t td.num{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; text-align:right; white-space:nowrap}
 table.t tr.subhead td{font-weight:700; background:#EBEEF4}
 /* 変形 : 罫線を使わず地色の縞で分ける ( 例外 ) */
@@ -171,7 +170,7 @@ table.t.striped tbody tr:nth-child(odd) td{background:var(--background)}
 .cat-grid .rowname{font-weight:700}
 .cat-cell{border:1px solid var(--hairline); border-radius:var(--radius); overflow:hidden}
 .cat-cell .c{height:40px}
-.cat-cell .v{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:11px; color:var(--g-cmp); text-align:center; padding:3px 0}
+.cat-cell .v{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:11px; color:var(--g-cmp); text-align:center; padding:4px 0}
 
 /* ---- グラフ ---- */
 .figure{margin:0}
@@ -214,7 +213,7 @@ table.t.striped tbody tr:nth-child(odd) td{background:var(--background)}
 /* 使用色の帯 */
 .usedcolors{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; align-items:center}
 .usedcolors .lab{font-size:11.5px; color:var(--g-weak); margin-right:2px}
-.uc{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--hairline); border-radius:999px; padding:3px 10px 3px 4px; font-size:11px; font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; color:var(--g-cmp); background:#fff}
+.uc{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--hairline); border-radius:999px; padding:4px 10px 4px 4px; font-size:11px; font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; color:var(--g-cmp); background:#fff}
 .uc i{width:14px; height:14px; border-radius:3px; display:block; border:1px solid rgba(0,0,0,.06)}
 
 /* コピー用 */
@@ -289,7 +288,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
     このページは値を複製せず、先頭の <code>:root</code> と <code>FIG</code> にまとめて参照している。<br>
     ΔE は CIEDE2000、コントラスト比は WCAG 2.x。
-    2026/9/8 時点の検討版。
+    2026/9/22 時点の検討版。
  </p>
 </header>
 
@@ -948,7 +947,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </section>
 
 <footer class="page-foot">
-  2026/9/8 検討版。
+  2026/9/22 時点の検討版。
   値と根拠は <code>design-system</code> の <code>FIGURE.md</code> を一次情報源とする。
   §4 Do's and Don'ts の全文は <code>FIGURE.md</code>、スライド固有の規約は <code>SLIDE.md</code> を参照。
 </footer>
