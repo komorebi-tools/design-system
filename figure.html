@@ -351,6 +351,8 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <div class="rule-note">
       <strong>4値の導き方。</strong>
       地 ＝ 面を白 90% で薄める / マーカー ＝ 地の上に面を不透明度 30% / 文字 ＝ 彩度 ×1.35、黄系のみ色相 −15°、明度は白背景比 3.0 に届くまで下げる。
+      地とマーカーは sRGB の値のまま混ぜ、文字は CIELCh ( D65 ) で計算する。
+      計算値が既存の値と ΔE 1 未満なら、既存の値を採る ( 基調の地 ･ ローズ 明 ) 。
    </div>
  </div>
 
