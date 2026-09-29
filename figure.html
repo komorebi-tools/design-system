@@ -242,7 +242,6 @@ details.snippet pre{margin:0; padding:0 14px 14px; overflow-x:auto; font-family:
 .h-demo p.dummy{font-size:14px; color:var(--g-cmp); margin:8px 0 22px}
 .h-demo p.dummy:last-child{margin-bottom:0}
 
-.bad-band{border-left:3px solid var(--cat1-fill); padding-left:12px; margin-bottom:10px}
 
 /* Do / Don't */
 .dd{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--hairline); border-radius:6px; overflow:hidden}
@@ -336,7 +335,9 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       2つは ΔE 7.3。<br>
       <strong>ゴールドで白文字を乗せるなら SUB。</strong>
       Accent 2.37 ･ Accent Dark 2.99 に対して SUB は 3.18 で、この色だけが条件を満たす。
-      Accent はグラフの系列に使い、白文字は乗せない。
+      Accent には白文字を乗せない。<br>
+      <strong>ゴールドの持ち場は図解の面と装飾。</strong>
+      グラフの系列は §1.2「グラフで使う順番」の色で塗る。
    </div>
  </div>
 
@@ -481,7 +482,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       </figure>
       <figure class="figure">
         <div class="chartbox h280"><canvas id="c-bar-contrast"></canvas></div>
-        <figcaption>両端に意味がある対比 : Primary Dark ＋ Accent の2色。
+        <figcaption>両端に意味がある対比 : Primary Dark ＋ 2色目 ( §2.4 の組から選ぶ ･ ここでは青緑の文字色 ) 。
         「正負を分ける」ではなく、両端に意味があるかどうかで決める。</figcaption>
       </figure>
    </div>
@@ -502,7 +503,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       </figure>
       <figure class="figure">
         <div class="chartbox h280"><canvas id="c-cat4"></canvas></div>
-        <figcaption>順序のないカテゴリは Layer 2 を4色まで。
+        <figcaption>順序のないカテゴリは §1.2「グラフで使う順番」の順に塗る。
         並列のものに濃淡を当てない。</figcaption>
       </figure>
    </div>
@@ -721,8 +722,8 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
    </div>
     <div class="rule-note">
       <strong>中央に出した値は1箇所だけにする。</strong>外側からはその区分の % を落とす。<br>
-      <strong>ラベルの文字は面の色を使わない。</strong>水色は面 <code>#98BBDE</code> が白地で比 2.00 なので、文字色 <code>#659AC7</code> ( 比 3.00 ) を使う。<br>
-      <strong>青と水色。</strong>色相差 16.5° で §1.2 の 60° は満たさないが、L* 差 25.9 ･ ΔE 22.8 で代替条件を満たす。
+      <strong>ラベルの文字は面の色を使わない。</strong>紫は面 <code>#A4A5D1</code> が白地で比 2.36 なので、文字色 <code>#8D90CA</code> ( 比 3.01 ) を使う。<br>
+      <strong>青と紫。</strong>色相差 14.8° で §1.2 の 60° は満たさないが、L* 差 20.4 ･ ΔE 19.8 で代替条件を満たす。
       3区分は3つとも互いに隣り合うので、並び順で近い色を離すことはできない。
    </div>
  </div>
@@ -730,7 +731,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
   <div class="card" id="s29">
     <h3>2.9 コレスポンデンス分析 ･ 散布図</h3>
     <p class="sub">種類が違うものは色だけでなく形も変える。
-    ブランドは Primary Dark の丸、項目は Accent の菱形。</p>
+    ブランドは Primary Dark の丸、項目は青緑の文字色の菱形。</p>
     <div id="ca"></div>
     <div class="usedcolors" id="uc-ca"></div>
     <div class="rule-note">
@@ -923,10 +924,10 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <div class="grid2">
       <div>
         <p class="sub" style="margin-bottom:12px">使わない : カードごとに反復する色帯</p>
-        <div style="background:#fff; border:1px solid var(--hairline); border-radius:6px; padding:18px 20px">
-          <div class="bad-band"><strong style="font-size:15px">カードごとに同じ左3pxの帯がある</strong><br><span style="font-size:13px;color:var(--g-cmp)">帯が情報を持っていない</span></div>
-          <div class="bad-band"><strong style="font-size:15px">カードごとに同じ左3pxの帯がある</strong><br><span style="font-size:13px;color:var(--g-cmp)">消しても意味が変わらない</span></div>
-          <div class="bad-band" style="margin-bottom:0"><strong style="font-size:15px">カードごとに同じ左3pxの帯がある</strong><br><span style="font-size:13px;color:var(--g-cmp)">5つ目の合図として重複している</span></div>
+        <div class="rule-note" style="margin-top:0">
+          カードごとに同じ左の色帯を付けない。<br>
+          帯が情報を持っておらず、消しても意味が変わらない。
+          番号 ･ 大きさ ･ 太さ ･ 余白に続く5つ目の合図として重複する。
        </div>
      </div>
       <div>
@@ -990,6 +991,9 @@ const FIG = {
   base:{name:'基調 ( Primary )', fill:'#6E87B6', bg:'#F3F7FC', mark:'#C9D3E4', text:'#5A74A3'}, /* design-check: allow NO_HARDCODED_PRIMARY */
   quadrant:{ area:'#E6EBF7', ground:'#F8FAFD' }
 };
+/* グラフで使う順番 ( FIGURE.md §1.2 ) : 基調 → 青緑 → 紫 → 山吹 → ローズ ･ 面の値 */
+FIG.order = [FIG.primaryDark, FIG.cat[1].fill, FIG.cat[0].fill, FIG.cat[3].fill, FIG.cat[4].fill];
+FIG.orderName = ['基調','青緑','紫','山吹','ローズ'];
 
 const FONT = '"Plus Jakarta Sans","Noto Sans JP",sans-serif';
 
@@ -1064,8 +1068,8 @@ const LAYER1 = [
   ['Primary','#6E87B6','表のヘッダ、帯、カードの見出し帯','3.62'], /* design-check: allow NO_HARDCODED_PRIMARY */
   ['Primary Dark','#5A74A3','グラフの主色、pill、グラデーションの起点','4.71'],
   ['Primary Light','#9BB0D0','濃淡の淡い側','2.21'],
-  ['Accent','#C4A55A','対比の2色目','2.37'],
-  ['Accent Light','#E0D5A8','対比 ･ 淡','1.44'],
+  ['Accent','#C4A55A','図解の面 ･ 装飾','2.37'],
+  ['Accent Light','#E0D5A8','図解の地 ･ 装飾 ･ 淡','1.44'],
   ['Accent Dark','#B0923E','アイブロウ、章番号、帯の終点','2.99'],
   ['SUB ( 深いゴールド )','#A18E6C','白文字を乗せるゴールドの面 ･ pill','3.18'],
   ['Border','#E0E0E0','非強調の系列 ･ ドーナツのトラック','―'],
@@ -1166,7 +1170,7 @@ new Chart(document.getElementById('c-bar-contrast'), {
   data:{ labels:['20代','30代','40代','50代','60代'],
     datasets:[
       { label:'前年より増えた', data:[38.2,41.5,33.0,28.7,22.4], backgroundColor:FIG.primaryDark, borderWidth:0 },
-      { label:'前年より減った', data:[12.4,14.1,18.9,21.3,26.8], backgroundColor:FIG.accent, borderWidth:0 }
+      { label:'前年より減った', data:[12.4,14.1,18.9,21.3,26.8], backgroundColor:FIG.cat[1].text, borderWidth:0 }
     ]},
   plugins:[yTitleTop],
   options:{
@@ -1176,7 +1180,7 @@ new Chart(document.getElementById('c-bar-contrast'), {
     plugins:{ legend:legendTop(true,'end'), yTitleTop:{ text:'回答割合 ( % )' },
       datalabels:values({ offset:2, fmt:v=>v.toFixed(1)+'%' }) } }
 });
-usedColors('uc-21', [[FIG.primaryDark,'Primary Dark'],[FIG.accent,'Accent'],[FIG.border,'Border'],[FIG.point,'Point']]);
+usedColors('uc-21', [[FIG.primaryDark,'Primary Dark'],[FIG.cat[1].text,'CAT-2 青緑 文字'],[FIG.border,'Border'],[FIG.point,'Point']]);
 
 /* 2.2 濃淡4段 */
 new Chart(document.getElementById('c-scale'), {
@@ -1195,9 +1199,9 @@ new Chart(document.getElementById('c-scale'), {
 /* 2.2 カテゴリ4色 */
 new Chart(document.getElementById('c-cat4'), {
   type:'bar',
-  data:{ labels:['紫','青緑','水色','山吹'],
+  data:{ labels:FIG.orderName.slice(0,4),
     datasets:[{ data:[31.4,27.9,22.6,18.1],
-      backgroundColor:FIG.cat.slice(0,4).map(c=>c.fill), borderWidth:0, barPercentage:.68 }]},
+      backgroundColor:FIG.order.slice(0,4), borderWidth:0, barPercentage:.68 }]},
   plugins:[yTitleTop],
   options:{
     layout:{ padding:{ top:30 } },
@@ -1207,7 +1211,7 @@ new Chart(document.getElementById('c-cat4'), {
       datalabels:values({ offset:2, fmt:v=>v.toFixed(1)+'%' }) } }
 });
 usedColors('uc-22', FIG.scale.map(function(c,i){ return [c,'段'+(i+1)]; })
-  .concat(FIG.cat.slice(0,4).map(function(c){ return [c.fill, c.name]; })));
+  .concat(FIG.order.slice(0,4).map(function(c,i){ return [c, FIG.orderName[i]]; })));
 
 /* 2.2 100% 積み上げ */
 new Chart(document.getElementById('c-stack'), {
@@ -1233,10 +1237,10 @@ new Chart(document.getElementById('c-stack-cat'), {
   type:'bar',
   data:{ labels:['コンビニ','スーパー','ドラッグストア'],
     datasets:[
-      { label:'ホットスナック', data:[38.4,22.6,12.1], backgroundColor:FIG.cat[0].fill, borderWidth:0 },
-      { label:'チョコレート',   data:[26.2,30.8,34.5], backgroundColor:FIG.cat[1].fill, borderWidth:0 },
-      { label:'スナック菓子',   data:[22.9,28.4,20.3], backgroundColor:FIG.cat[2].fill, borderWidth:0 },
-      { label:'和菓子',         data:[12.5,18.2,33.1], backgroundColor:FIG.cat[3].fill, borderWidth:0 }
+      { label:'ホットスナック', data:[38.4,22.6,12.1], backgroundColor:FIG.order[0], borderWidth:0 },
+      { label:'チョコレート',   data:[26.2,30.8,34.5], backgroundColor:FIG.order[1], borderWidth:0 },
+      { label:'スナック菓子',   data:[22.9,28.4,20.3], backgroundColor:FIG.order[2], borderWidth:0 },
+      { label:'和菓子',         data:[12.5,18.2,33.1], backgroundColor:FIG.order[3], borderWidth:0 }
     ]},
   options:{ indexAxis:'y',
     scales:{ x:{ ...axis({ title:'構成比 ( % )' }), stacked:true, beginAtZero:true, max:100 },
@@ -1367,7 +1371,7 @@ dumbbell('dumbbell-55', 55, 90, [55,65,75,85]);
   s+='<line x1="'+sx(.5)+'" y1="'+pad+'" x2="'+sx(.5)+'" y2="'+(S-pad)+'" stroke="'+FIG.rule+'" stroke-width="1"/>';
   I.forEach(function(p){
     const cx=sx(p.x), cy=sy(p.y), r=5;
-    s+='<polygon points="'+cx+','+(cy-r)+' '+(cx+r)+','+cy+' '+cx+','+(cy+r)+' '+(cx-r)+','+cy+'" fill="'+FIG.accent+'"/>';
+    s+='<polygon points="'+cx+','+(cy-r)+' '+(cx+r)+','+cy+' '+cx+','+(cy+r)+' '+(cx-r)+','+cy+'" fill="'+FIG.cat[1].text+'"/>';
     s+='<text x="'+(cx+9)+'" y="'+(cy+4)+'" font-size="11" fill="'+FIG.gray.cmp+'">'+p.t+'</text>';
   });
   B.forEach(function(p){
@@ -1377,13 +1381,13 @@ dumbbell('dumbbell-55', 55, 90, [55,65,75,85]);
   /* 凡例 : 枠なし ･ 横並び */
   s+='<circle cx="'+pad+'" cy="'+(pad-16)+'" r="5" fill="'+FIG.primaryDark+'"/>';
   s+='<text x="'+(pad+12)+'" y="'+(pad-12)+'" font-size="11" fill="'+FIG.gray.cmp+'">ブランド</text>';
-  s+='<polygon points="'+(pad+82)+','+(pad-21)+' '+(pad+87)+','+(pad-16)+' '+(pad+82)+','+(pad-11)+' '+(pad+77)+','+(pad-16)+'" fill="'+FIG.accent+'"/>';
+  s+='<polygon points="'+(pad+82)+','+(pad-21)+' '+(pad+87)+','+(pad-16)+' '+(pad+82)+','+(pad-11)+' '+(pad+77)+','+(pad-16)+'" fill="'+FIG.cat[1].text+'"/>';
   s+='<text x="'+(pad+94)+'" y="'+(pad-12)+'" font-size="11" fill="'+FIG.gray.cmp+'">項目</text>';
   s+='<text x="'+(S-pad)+'" y="'+(S-pad+18)+'" font-size="10" fill="'+FIG.gray.cmp+'" text-anchor="end">第1軸 ( 寄与率 62.4% )</text>';
   s+='<text x="'+pad+'" y="'+(pad-30)+'" font-size="10" fill="'+FIG.gray.cmp+'">第2軸 ( 寄与率 21.8% ) ･ 縦横 1 : 1 で固定</text>';
   s+='</svg>';
   document.getElementById('ca').innerHTML=s;
-  usedColors('uc-ca',[[FIG.primaryDark,'ブランド ･ 丸'],[FIG.accent,'項目 ･ 菱形'],[FIG.gray.cmp,'項目のラベル'],[FIG.rule,'原点の線']]);
+  usedColors('uc-ca',[[FIG.primaryDark,'ブランド ･ 丸'],[FIG.cat[1].text,'項目 ･ 菱形'],[FIG.gray.cmp,'項目のラベル'],[FIG.rule,'原点の線']]);
 })();
 
 /* ---------- ドーナツ ( 円錐グラデーション ) ---------- */
@@ -1478,8 +1482,8 @@ donutSeg('c-dseg-mono', [20,57,23], ['購入経験あり','認知のみ','未認
   [FIG.gray.text, FIG.gray.cmp, FIG.gray.cmp],
   { label:'購入経験あり', value:'20%', hideIndex:0 });
 donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッグストア'],
-  [FIG.primaryDark, FIG.cat[1].text, FIG.cat[2].fill],
-  [FIG.primaryDark, FIG.cat[1].text, FIG.cat[2].text],
+  [FIG.primaryDark, FIG.cat[1].text, FIG.cat[0].fill],
+  [FIG.primaryDark, FIG.cat[1].text, FIG.cat[0].text],
   null);
 
 /* ---------- ヒートマップ ( §2.11 ) ---------- */
@@ -1627,7 +1631,7 @@ const options = {
   }
 };
 
-// 色 : 主役 #5A74A3 / 対比 #C4A55A / 非強調 #E0E0E0 / 注目 #CD5151
+// 色 : 主役 #5A74A3 / 系列は FIG.order の順 / 非強調 #E0E0E0 / 注目 #CD5151
 
 // --- 縦軸の見出しは回転させず「軸の上」に置く ---
 // Chart.js の scales.y.title は縦書きになるので、小さなプラグインで左上に描く
