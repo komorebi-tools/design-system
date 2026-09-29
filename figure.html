@@ -473,8 +473,10 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
   各図の下の「使っている色」と、開いて取り出せる設定をそのまま使えば同じ配色になる。</p>
 
   <div class="card" id="s21">
-    <h3>2.1 色数 - 原則2色。
-    3色目が必要かを先に疑う</h3>
+    <h3>2.1 色数 - 見せたいことで決める</h3>
+    <p class="sub">色が要るのは、同じカテゴリが図の中の2か所以上に出てきて、色でつなぐ必要があるときだけ ( 凡例 ･ 積み上げの段 ･ 折れ線 ･ 棒の組 ) 。
+    項目名が軸で読める棒には色を分けない。
+    資料の中でカテゴリと色の対応表を決めているときは、その色で塗ってよい。</p>
     <div class="grid2">
       <figure class="figure">
         <div class="chartbox h280"><canvas id="c-bar-single"></canvas></div>
@@ -856,8 +858,8 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <div>
         <h4>DO</h4>
         <ul>
-          <li>1つのグラフで使う色は原則2色。
-          3色目が必要かどうかを先に疑う</li>
+          <li>色の数は見せたいことで決める。
+          同じカテゴリが図の中の2か所以上に出てくるときは、その数だけ §1.2 の順に使う</li>
           <li>順序のあるデータは色を変えず、同系の濃淡で表す</li>
           <li>強調しない系列は Border に落とす</li>
           <li>白文字を乗せる面には、面色ではなくカテゴリの文字色を敷く</li>
@@ -868,8 +870,9 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <div>
         <h4>DON'T</h4>
         <ul>
-          <li>系列ごとに異なる色相を割り当てない ( 信号色の3色は特に ) </li>
-          <li>順序尺度に3色のカテゴリ配色を使わない</li>
+          <li>項目名が軸で読める棒を、1本ずつ別の色にしない ( 資料の対応表で色を決めているときを除く ) </li>
+          <li>信号色 ( 赤 ･ 黄 ･ 緑 ) を系列の色に使わない</li>
+          <li>順序のあるデータをカテゴリの色で塗り分けない</li>
           <li>順序尺度のカラースケールに赤系を使わない</li>
           <li>Point <code>#CD5151</code> をカテゴリの識別に使わない</li>
           <li>面の色をそのまま文字色に使わない</li>
