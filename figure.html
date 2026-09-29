@@ -47,7 +47,7 @@
   --hairline:#E0E0E0;
 
   /* 濃淡4段 */
-  --sc1:#33559A; --sc2:#6280BC; --sc3:#9BACD2; --sc4:#D6DCEC;
+  --sc1:#5A74A3; --sc2:#8496BE; --sc3:#AEBBD6; --sc4:#D8DEEA;
 
   --page:#FFFFFF;
   --shell:#F5F6F8;
@@ -522,14 +522,12 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       並び順に意味が無いので濃淡にしない。</figcaption>
     </figure>
     <div class="rule-note">
-      <strong>4段の値 ( スライド )。</strong><code>#33559A</code> / <code>#6280BC</code> / <code>#9BACD2</code> / <code>#D6DCEC</code>。
-      隣り合う段の ΔE は 16.0 / 15.2 / 14.4。
-      白文字が乗るのは2段目まで ( 比 7.22 と 3.94 ) で、3段目からは値を <code>#434343</code> にする。<br>
-      <strong>4段の値 ( Web )。</strong>基調から始める従来の4段 <code>#5A74A3</code> / <code>#8496BE</code> / <code>#AEBBD6</code> / <code>#D8DEEA</code> も使える。
-      画面は投影より淡い段が残るため。
-      上の図はスライド用の4段で描いている。<br>
+      <strong>4段の値。</strong><code>#5A74A3</code> / <code>#8496BE</code> / <code>#AEBBD6</code> / <code>#D8DEEA</code>。
+      基調 Primary Dark から始め、媒体を問わず使う。
+      隣り合う段の ΔE は 12.9 / 11.5 / 10.3。
+      白文字が乗るのは1段目だけ ( 比 4.71 ) で、2段目からは値を <code>#434343</code> にする。<br>
+      <strong>ヒートマップは別枠。</strong>表の塗りは §2.11 のとおり端の青 <code>#3F6BA9</code> から連続で塗り、この4段は使わない。<br>
       <strong>赤系のスケールは使わない。</strong>Point ･ Danger と意味が衝突する。
-      表のカラースケールは §2.11 を見る。
    </div>
     <details class="snippet">
       <summary>濃淡4段をコピーする</summary>
@@ -983,7 +981,7 @@ const FIG = {
   point:'#CD5151',
   gray:{ text:'#434343', note:'#595959', cmp:'#666666', weak:'#999999', mute:'#B7B7B7' },
   rule:'#D9D9D9',
-  scale:['#33559A','#6280BC','#9BACD2','#D6DCEC'],
+  scale:['#5A74A3','#8496BE','#AEBBD6','#D8DEEA'],
   muted3:['#C4C4C4','#D8D8D8','#ECECEC'],
   muted4:['#B7B7B7','#C9C9C9','#DBDBDB','#EDEDED'],
   /* ヒートマップ ( §2.11 ) : 端の値だけを持ち、間は OKLab で連続に混ぜる */
@@ -1243,7 +1241,7 @@ new Chart(document.getElementById('c-stack'), {
              y:{ ...axis(), stacked:true, ticks:{ color:FIG.gray.text, font:{size:11} } } },
     plugins:{ legend:legendTop(true),
       datalabels:{ display:function(ctx){ return ctx.dataset.data[ctx.dataIndex] >= 5; },
-        color:function(ctx){ return ctx.datasetIndex <= 1 ? '#FFFFFF' : FIG.gray.text; },
+        color:function(ctx){ return inkOn(ctx.dataset.backgroundColor); },
         font:{ size:11, family:FONT }, formatter:function(v){ return v.toFixed(1); } } } }
 });
 
@@ -1609,13 +1607,13 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
 /* ---------- コピー用スニペット ---------- */
 document.getElementById('snip-scale').textContent =
 `// 順序尺度の濃淡4段 ( FIGURE.md §2.2 )
-const SCALE = ['#33559A', '#6280BC', '#9BACD2', '#D6DCEC'];
+const SCALE = ['#5A74A3', '#8496BE', '#AEBBD6', '#D8DEEA'];
 
 // Chart.js
 datasets: [{ data: [...], backgroundColor: SCALE, borderWidth: 0 }]
 
 // matplotlib
-colors = ['#33559A', '#6280BC', '#9BACD2', '#D6DCEC']`;
+colors = ['#5A74A3', '#8496BE', '#AEBBD6', '#D8DEEA']`;
 
 document.getElementById('snip-base').textContent =
 `// Chart.js の共通設定 ( FIGURE.md §2.10 )
