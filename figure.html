@@ -97,19 +97,21 @@ h1,h2,h3,h4,
 /* ---- ヒートマップ ( 塗りを面として見せるので .t とは別にする ) ---- */
 .heat{border-collapse:collapse; font-size:11.5px; line-height:1.4}
 .heat th{
-  background:var(--primary-dark); color:#FFFFFF; font-weight:600;
+  background:transparent; color:var(--g-text); font-weight:700;
   padding:6px 8px; text-align:center; white-space:nowrap;
-  border:1px solid #FFFFFF;
+  border:none; border-bottom:1px solid #B7B7B7;
 }
-.heat th.rh{background:transparent; border-color:transparent}
-.heat td{padding:6px 8px; text-align:right; white-space:nowrap; border:1px solid #FFFFFF}
+.heat th.rh{border-bottom:1px solid #B7B7B7}
+.heat td{padding:6px 8px; text-align:center; white-space:nowrap; border:1px solid #FFFFFF; font-weight:700}
 .heat td.rh{
-  background:transparent; border-color:transparent;
-  text-align:right; padding-right:14px; color:var(--g-text);
+  background:transparent; border-color:transparent; font-weight:400;
+  text-align:left; padding-right:14px; color:var(--g-text);
 }
+.heat tr.base td{background:transparent; color:var(--g-note); font-weight:400; border-bottom:1px solid #B7B7B7}
+.heat tr.base td.rh{font-weight:700; color:var(--g-text)}
+.heat td.na{background:#FFFFFF; color:var(--g-weak); font-weight:400; outline:1px dashed #C9C9C9; outline-offset:-3px}
 .heat-legend{display:flex; align-items:center; gap:10px; margin-top:12px; font-size:11.5px; color:var(--g-weak)}
-.heat-legend .bar{display:flex; height:12px; width:180px}
-.heat-legend .bar i{flex:1 1 0}
+.heat-legend .bar{display:block; height:12px; width:200px}
 
 /* ---- ページヘッダ ---- */
 .masthead{padding:56px 0 32px}
@@ -470,8 +472,10 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
   各図の下の「使っている色」と、開いて取り出せる設定をそのまま使えば同じ配色になる。</p>
 
   <div class="card" id="s21">
-    <h3>2.1 色数 - 原則2色。
-    3色目が必要かを先に疑う</h3>
+    <h3>2.1 色数 - 見せたいことで決める</h3>
+    <p class="sub">色が要るのは、同じカテゴリが図の中の2か所以上に出てきて、色でつなぐ必要があるときだけ ( 凡例 ･ 積み上げの段 ･ 折れ線 ･ 棒の組 ) 。
+    項目名が軸で読める棒には色を分けない。
+    資料の中でカテゴリと色の対応表を決めているときは、その色で塗ってよい。</p>
     <div class="grid2">
       <figure class="figure">
         <div class="chartbox h280"><canvas id="c-bar-single"></canvas></div>
@@ -776,12 +780,22 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 
   <div class="card" id="s211">
     <h3>2.11 ヒートマップ ( クロス集計表 )</h3>
-    <p class="sub">数値はセルに入れ、色は偏りの形を見せる役に回す。</p>
-    <div id="heat-table"></div>
-    <figure class="figure" style="margin-top:24px; max-width:640px">
-      <div id="heat-table-div"></div>
-      <figcaption>100 を基準にする指数のように、両端に意味がある指標だけ発散配色にする。
-      ただの大小には使わない。</figcaption>
+    <p class="sub">数値はセルに入れ、色は偏りの形を見せる役に回す。
+    数値を入れる表は段で区切らず連続で塗る。</p>
+    <figure class="figure" style="max-width:720px">
+      <div id="heat-a"></div>
+      <figcaption>A 単色 ･ 青 : 量や比率だけを見せる表。
+      白から <code>#3F6BA9</code> まで。</figcaption>
+    </figure>
+    <figure class="figure" style="margin-top:28px; max-width:720px">
+      <div id="heat-b"></div>
+      <figcaption>B 青 〜 グレー : 基準より上を見せたい表 ( 全体 = 100 の指数など ) 。
+      下回る側は淡いグレー <code>#B6B6B6</code> で止め、青のセルだけが浮くようにする。</figcaption>
+    </figure>
+    <figure class="figure" style="margin-top:28px; max-width:720px">
+      <div id="heat-c"></div>
+      <figcaption>C ローズ 〜 青 : 両端に意味がある表 ( 前年比など ) 。
+      減った側だけにローズ <code>#B3445E</code> を当てる。</figcaption>
     </figure>
     <table class="t" style="margin-top:20px">
       <thead><tr><th style="width:26%">項目</th><th>値</th></tr></thead>
@@ -789,31 +803,28 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
         <tr class="subhead"><td>正規化</td><td>標準は表全体。
         行の中の順位を読ませたいときは行ごと。
         列ごとは使わない</td></tr>
-        <tr class="subhead"><td>段数</td><td>セルに数値を入れて7段。
+        <tr class="subhead"><td>塗り方</td><td>数値を入れる表は連続で塗る。
         数値を入れず色だけで見せるのは例外で、そのときは5段</td></tr>
-        <tr><td>塗り</td><td>青。
-        上端は <code>#6779B1</code> で止める。
-        例外としてローズ</td></tr>
-        <tr><td>セルの文字</td><td>上2段だけ白。
-        それ以外は <code>#434343</code></td></tr>
-        <tr><td>見出し行</td><td>列見出しの帯はそのまま。
+        <tr><td>使い分け</td><td>A 量 ･ 比率 / B 基準より上を見せる / C 両端に意味がある。
+        3つとも「青 = 上 ･ 増」</td></tr>
+        <tr><td>基準と値のないセル</td><td>基準ちょうどは <code>#F0F0F0</code> 。
+        値のないセルは白地 ･ 点線 ･「―」。
+        基準の行は塗らない</td></tr>
+        <tr><td>セルの文字</td><td>白と <code>#434343</code> のうち比が大きいほう。
+        表のセルの数値は 3.0 以上</td></tr>
+        <tr><td>見出し行</td><td>帯を敷かず、太字と下の罫線。
         行見出しの列は白地</td></tr>
-        <tr><td>発散配色</td><td><code>#B0923E</code> ･ <code>#F5F4F1</code> ･ <code>#6779B1</code>。
-        基準がある指標のときだけ</td></tr>
       </tbody>
     </table>
-    <div style="margin-top:24px">
-      <p class="sub" style="margin-bottom:10px">塗りの色を変える場合。
-      上端を青と同じ明度に揃えているので、白文字の比はどれも 4.25 で揃う。</p>
-      <div id="heat-hues"></div>
-   </div>
     <div class="rule-note">
-      <strong>塗りの上端を下げる理由。</strong>見出し行と塗りが同じ色相なので、最濃まで使うと見出しが階調の一部に見える。<br>
-      <strong>連続グラデーションは使わない。</strong>隣り合うセルの差が刻みの基準 ΔE 4 を下回る。
-      7段の隣り合う ΔE は 6.0 〜 7.2、5段は 9.0 〜 10.6。<br>
-      <strong>発散の中央を白にしない。</strong>値のないセルと基準ちょうどのセルが同じ見え方になる。
-      ただの大小には使わない。<br>
-      1つの資料の中では塗りの色を1色に統一する ( §1.5 の 4 )。
+      <strong>連続で塗る理由。</strong>数値が値を担うので、色は近い値が近い色に見えればよい。
+      段で区切ると、1しか違わない値でも境目で色が変わる。<br>
+      <strong>基準ちょうどを白にしない。</strong>値のないセルと同じ見え方になる。
+      <code>#F0F0F0</code> と白は ΔE 3.0 。<br>
+      <strong>C のローズと Point。</strong><code>#B3445E</code> は Point <code>#CD5151</code> と ΔE 11.0 と近い。
+      C の表を置くページでは、Point で注目の1点を示す書き方と並べない。<br>
+      <strong>見出しに帯を敷かない理由。</strong>最も濃い <code>#3F6BA9</code> が Primary Dark より濃く、帯を敷くと見出しが階調の途中に見える。<br>
+      1つの資料の中で、同じ種類の表は同じ型で塗る ( §1.5 の 4 )。
    </div>
  </div>
 
@@ -846,8 +857,8 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <div>
         <h4>DO</h4>
         <ul>
-          <li>1つのグラフで使う色は原則2色。
-          3色目が必要かどうかを先に疑う</li>
+          <li>色の数は見せたいことで決める。
+          同じカテゴリが図の中の2か所以上に出てくるときは、その数だけ §1.2 の順に使う</li>
           <li>順序のあるデータは色を変えず、同系の濃淡で表す</li>
           <li>強調しない系列は Border に落とす</li>
           <li>白文字を乗せる面には、面色ではなくカテゴリの文字色を敷く</li>
@@ -858,8 +869,9 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <div>
         <h4>DON'T</h4>
         <ul>
-          <li>系列ごとに異なる色相を割り当てない ( 信号色の3色は特に ) </li>
-          <li>順序尺度に3色のカテゴリ配色を使わない</li>
+          <li>項目名が軸で読める棒を、1本ずつ別の色にしない ( 資料の対応表で色を決めているときを除く ) </li>
+          <li>信号色 ( 赤 ･ 黄 ･ 緑 ) を系列の色に使わない</li>
+          <li>順序のあるデータをカテゴリの色で塗り分けない</li>
           <li>順序尺度のカラースケールに赤系を使わない</li>
           <li>Point <code>#CD5151</code> をカテゴリの識別に使わない</li>
           <li>面の色をそのまま文字色に使わない</li>
@@ -974,12 +986,8 @@ const FIG = {
   scale:['#33559A','#6280BC','#9BACD2','#D6DCEC'],
   muted3:['#C4C4C4','#D8D8D8','#ECECEC'],
   muted4:['#B7B7B7','#C9C9C9','#DBDBDB','#EDEDED'],
-  heat7:['#EFF3F9','#D8DEED','#C2C9E1','#ABB4D5','#95A0C9','#7E8CBD','#6779B1'],
-  heat5:['#EFF3F9','#CDD3E7','#ABB4D5','#8A96C3','#6779B1'], /* 色だけで見せる5段 ･ 作例は載せていない */
-  heatTeal:['#EBF5F4','#CDE2E0','#B0CFCD','#93BDBA','#76ABA8','#579996','#348784'],
-  heatPurple:['#F2F2F9','#DDDCED','#C7C7E1','#B2B2D5','#9D9EC9','#878ABD','#7276B1'],
-  heatRose:['#FAF0F2','#F2D7DB','#E9BFC4','#DFA6AE','#D58D99','#CA7584','#BE5C70'],
-  div5:['#B0923E','#D6C296','#F5F4F1','#AFB4D1','#6779B1'],
+  /* ヒートマップ ( §2.11 ) : 端の値だけを持ち、間は OKLab で連続に混ぜる */
+  heat:{ up:'#3F6BA9', down:'#B3445E', downGray:'#B6B6B6', base:'#F0F0F0', white:'#FFFFFF' },
   cat:[
     {name:'CAT-1 紫',   fill:'#A4A5D1', bg:'#F6F6FA', mark:'#DDDEEE', text:'#8D90CA', onFill:2.36, onText:3.01},
     {name:'CAT-2 青緑', fill:'#84B5B2', bg:'#F3F8F7', mark:'#D2E4E2', text:'#5CA09D', onFill:2.27, onText:3.01},
@@ -1055,6 +1063,14 @@ const valueColumn = {
   }
 };
 /* 値ラベル : 全部の棒に付ける */
+/* 面の上に置く文字 : 白と #434343 のうちコントラスト比が大きいほう ( FIGURE.md §2.10 ) */
+function inkOn(bg){
+  function ch(c){ c/=255; return c<=0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055,2.4); }
+  function lum(h){ return 0.2126*ch(parseInt(h.substr(1,2),16))+0.7152*ch(parseInt(h.substr(3,2),16))+0.0722*ch(parseInt(h.substr(5,2),16)); }
+  function cr(a,b){ const x=lum(a), y=lum(b); return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05); }
+  return cr(bg,'#FFFFFF') > cr(bg,FIG.gray.text) ? '#FFFFFF' : FIG.gray.text;
+}
+
 function values(opts){
   opts = opts || {};
   return { display:true, anchor: opts.anchor||'end', align: opts.align||'end', offset: opts.offset==null?4:opts.offset,
@@ -1246,7 +1262,7 @@ new Chart(document.getElementById('c-stack-cat'), {
              y:{ ...axis(), stacked:true, ticks:{ color:FIG.gray.text, font:{size:11} } } },
     plugins:{ legend:legendTop(true),
       datalabels:{ display:function(ctx){ return ctx.dataset.data[ctx.dataIndex] >= 5; },
-        color:FIG.gray.text,
+        color:function(ctx){ return inkOn(ctx.dataset.backgroundColor); },
         font:{ size:11, family:FONT }, formatter:function(v){ return v.toFixed(1); } } } }
 });
 
@@ -1487,73 +1503,79 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
 
 /* ---------- ヒートマップ ( §2.11 ) ---------- */
 (function(){
-  const cols = ['チョコ','乳製品','和風','クッキー','果物','コーヒー','ミント'];
-  const rows = ['リラックス','小腹が空いた','ご褒美','贅沢な気分','家族 ･ 友人と',
-                '気分転換','ストレス発散','ひと段落','仕事の合間'];
-  const D = [[28.6,25.8,14.0,8.4,8.8,12.6,1.8],
-             [28.6,20.4,16.6,23.2,6.2,4.0,1.0],
-             [32.6,36.4,8.9,4.0,10.9,5.3,1.9],
-             [26.3,36.7,8.6,4.0,16.8,6.1,1.6],
-             [22.4,33.8,13.5,11.5,12.7,5.3,0.9],
-             [31.1,16.5,9.6,5.7,11.0,16.9,9.2],
-             [38.0,30.1,6.1,5.3,7.5,8.5,4.6],
-             [32.0,19.7,9.8,10.8,7.9,15.6,4.1],
-             [34.4,14.4,8.1,15.4,6.4,16.7,4.5]];
+  /* OKLab で2色を混ぜる */
+  function s2l(c){ c/=255; return c<=0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055,2.4); }
+  function l2s(v){ v=Math.max(0,Math.min(1,v)); v = v<=0.0031308 ? v*12.92 : 1.055*Math.pow(v,1/2.4)-0.055; return Math.round(v*255); }
+  function toOk(h){
+    const r=s2l(parseInt(h.substr(1,2),16)), g=s2l(parseInt(h.substr(3,2),16)), b=s2l(parseInt(h.substr(5,2),16));
+    const l=Math.cbrt(0.4122214708*r+0.5363325363*g+0.0514459929*b),
+          m=Math.cbrt(0.2119034982*r+0.6806995451*g+0.1073969566*b),
+          s=Math.cbrt(0.0883024619*r+0.2817188376*g+0.6299787005*b);
+    return [0.2104542553*l+0.7936177850*m-0.0040720468*s, 1.9779984951*l-2.4285922050*m+0.4505937099*s, 0.0259040371*l+0.7827717662*m-0.8086757660*s];
+  }
+  function fromOk(L,a,b){
+    const l=Math.pow(L+0.3963377774*a+0.2158037573*b,3), m=Math.pow(L-0.1055613458*a-0.0638541728*b,3), s=Math.pow(L-0.0894841775*a-1.2914855480*b,3);
+    const R=4.0767416621*l-3.3077115913*m+0.2309699292*s, G=-1.2684380046*l+2.6097574011*m-0.3413193965*s, B=-0.0041960863*l-0.7034186147*m+1.7076147010*s;
+    return '#'+[R,G,B].map(function(v){ return ('0'+l2s(v).toString(16)).slice(-2); }).join('').toUpperCase();
+  }
+  function mix(a,b,t){ t=Math.max(0,Math.min(1,t)); const A=toOk(a), B=toOk(b); return fromOk(A[0]+(B[0]-A[0])*t, A[1]+(B[1]-A[1])*t, A[2]+(B[2]-A[2])*t); }
+  function lum(h){ return 0.2126*s2l(parseInt(h.substr(1,2),16))+0.7152*s2l(parseInt(h.substr(3,2),16))+0.0722*s2l(parseInt(h.substr(5,2),16)); }
+  function cr(a,b){ const x=lum(a), y=lum(b); return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05); }
+  /* セルの文字 : 白と #434343 のうち比が大きいほう */
+  function ink(bg){ return inkOn(bg); }
 
-  function render(id, pal, opt){
+  function render(id, o){
     const box = document.getElementById(id);
     if (!box) return;
-    opt = opt || {};
-    const cs = opt.cols || cols, rs = opt.rows || rows, dd = opt.data || D;
-    const num = opt.num !== false, div = !!opt.diverging, base = opt.base || 100;
-    let mx = 0, mn = Infinity;
-    dd.forEach(function(r){ r.forEach(function(v){ if (v>mx) mx=v; if (v<mn) mn=v; }); });
-    const span = Math.max(mx-base, base-mn) || 1;
     let h = '<div style="overflow-x:auto"><table class="heat">';
     h += '<thead><tr><th class="rh"></th>';
-    cs.forEach(function(c){ h += '<th>'+c+'</th>'; });
+    o.cols.forEach(function(c){ h += '<th>'+c+'</th>'; });
     h += '</tr></thead><tbody>';
-    dd.forEach(function(r,i){
-      h += '<tr><td class="rh">'+rs[i]+'</td>';
-      r.forEach(function(v){
-        const k = div ? Math.round(((v-base)/span+1)/2*(pal.length-1))
-                      : Math.min(pal.length-1, Math.floor(v/mx*pal.length));
-        const ink = div ? (k === pal.length-1 ? '#FFFFFF' : FIG.gray.text)
-                        : (k >= pal.length-2 ? '#FFFFFF' : FIG.gray.text);
-        const txt = num ? v.toFixed(opt.dp === undefined ? 1 : opt.dp) + (opt.unit === undefined ? '%' : opt.unit)
-                        : '&nbsp;';
-        h += '<td style="text-align:right; background:'+pal[k]+'; color:'+ink+'">'+txt+'</td>';
+    o.rows.forEach(function(rn,i){
+      const isBase = o.baseRow === i;
+      h += '<tr'+(isBase?' class="base"':'')+'><td class="rh">'+rn+'</td>';
+      o.data[i].forEach(function(v){
+        if (isBase){ h += '<td>'+o.fmt(v)+'</td>'; return; }
+        if (v === null){ h += '<td class="na">―</td>'; return; }
+        const c = o.color(v);
+        h += '<td style="background:'+c+'; color:'+ink(c)+'">'+o.fmt(v)+'</td>';
       });
       h += '</tr>';
     });
     h += '</tbody></table>';
-    h += '<div class="heat-legend"><span>'+(opt.lo||'低')+'</span><span class="bar">';
-    pal.forEach(function(c){ h += '<i style="background:'+c+'"></i>'; });
-    h += '</span><span>'+(opt.hi||'高')+'</span></div></div>';
+    h += '<div class="heat-legend"><span>'+o.lo+'</span><span class="bar" style="background:linear-gradient(to right in oklab, '+o.stops.join(', ')+')"></span><span>'+o.hi+'</span></div></div>';
     box.innerHTML = h;
   }
+  const H = FIG.heat;
 
-  render('heat-table', FIG.heat7);
-  render('heat-table-div', FIG.div5, {
-    cols:['認知','興味','購入','再購入'],
-    rows:['20代','30代','40代','50代','60代'],
-    data:[[112,124,131,118],[104,109,116,107],[98,96,101,99],[92,88,83,90],[84,76,71,79]],
-    diverging:true, base:100, dp:0, unit:'', lo:'下回る', hi:'上回る' });
+  /* A : 量 ･ 比率 ( 時間帯別の金額構成比 ) */
+  render('heat-a', {
+    cols:['朝','昼','夕','夜'],
+    rows:['おにぎり','サンドイッチ','サラダ','麺類','お弁当','和惣菜','お寿司','スープ'],
+    data:[[46,26,17,11],[41,30,18,11],[21,31,24,24],[13,39,22,26],[18,35,25,22],[20,27,27,26],[30,37,21,12],[12,22,33,33]],
+    color:function(v){ return mix(H.white, H.up, v/50); },
+    fmt:function(v){ return v+'%'; }, stops:[H.white, H.up], lo:'0%', hi:'50% 〜' });
 
-  const hbox = document.getElementById('heat-hues');
-  if (hbox) {
-    const sets = [['青 ( 標準 )', FIG.heat7], ['青緑', FIG.heatTeal],
-                  ['紫', FIG.heatPurple], ['ローズ ( 例外 )', FIG.heatRose]];
-    let g = '<div style="display:grid; gap:10px">';
-    sets.forEach(function(st){
-      g += '<div style="display:flex; align-items:center; gap:14px; min-width:0">'
-        +  '<div style="flex:0 0 120px; font-size:12.5px; color:'+FIG.gray.cmp+'">'+st[0]+'</div>'
-        +  '<div style="display:flex; flex:1 1 auto; min-width:0; height:22px">';
-      st[1].forEach(function(c){ g += '<div style="flex:1 1 0; background:'+c+'"></div>'; });
-      g += '</div></div>';
-    });
-    hbox.innerHTML = g + '</div>';
-  }
+  /* B : 基準より上を見せる ( 指数 ･ 全体 = 100 ) */
+  render('heat-b', {
+    cols:['手軽さ','ご褒美','健康','量','価格','新しさ','季節感'],
+    rows:['全体','男性 20代','男性 40代','男性 60代以上','女性 20代','女性 40代','女性 60代以上','単身世帯'],
+    baseRow:0,
+    data:[[100,100,100,100,100,100,100],
+          [113,105,82,112,95,112,88],[103,94,94,110,100,94,96],[88,88,113,98,111,83,104],
+          [113,114,84,100,85,120,96],[97,102,104,88,99,105,null],[90,97,126,85,112,87,111],[114,103,87,104,92,113,97]],
+    color:function(v){ return v>=100 ? mix(H.base, H.up, (v-100)/20) : mix(H.base, H.downGray, (100-v)/20); },
+    fmt:function(v){ return String(v); }, stops:[H.downGray, H.base, H.up], lo:'80 以下', hi:'120 以上' });
+
+  /* C : 両端に意味がある ( 前年比 ) */
+  render('heat-c', {
+    cols:['3月','4月','5月','6月','7月','8月'],
+    rows:['おにぎり','サンドイッチ','サラダ','冷し麺','温かい麺','和惣菜','お寿司','スープ'],
+    data:[[3.2,3.7,1.3,2.3,3.7,-0.1],[-1.5,-6.8,-2.6,-4.9,-5.5,-3.1],[10.1,8.7,11.1,9.0,8.2,12.2],[-14.4,-6.9,-4.5,-3.7,0.5,1.8],
+          [4.7,2.3,0.0,-0.2,-7.0,null],[6.0,6.6,7.6,4.2,8.5,6.9],[-7.4,-8.3,-5.0,-8.0,-6.9,-8.8],[13.4,12.6,10.1,4.7,2.1,4.0]],
+    color:function(v){ return v>=0 ? mix(H.base, H.up, v/15) : mix(H.base, H.down, -v/15); },
+    fmt:function(v){ return (v>0?'+':(v<0?'−':'±'))+Math.abs(v).toFixed(1)+'%'; },
+    stops:[H.down, H.base, H.up], lo:'−15% 以下', hi:'+15% 以上' });
 })();
 
 /* ---------- 強調と非強調 ( §2.12 ) ---------- */
