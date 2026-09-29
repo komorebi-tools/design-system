@@ -781,7 +781,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
   <div class="card" id="s211">
     <h3>2.11 ヒートマップ ( クロス集計表 )</h3>
     <p class="sub">数値はセルに入れ、色は偏りの形を見せる役に回す。
-    数値を入れる表は段で区切らず連続で塗る。</p>
+    数値を入れる表は、端の値までの位置を 10% 単位に丸め、値の表から色を拾う。</p>
     <figure class="figure" style="max-width:720px">
       <div id="heat-a"></div>
       <figcaption>A 単色 ･ 青 : 量や比率だけを見せる表。
@@ -797,28 +797,33 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <figcaption>C ローズ 〜 青 : 両端に意味がある表 ( 前年比など ) 。
       減った側だけにローズ <code>#B3445E</code> を当てる。</figcaption>
     </figure>
+    <div id="heat-stops" style="margin-top:24px; overflow-x:auto"></div>
     <table class="t" style="margin-top:20px">
       <thead><tr><th style="width:26%">項目</th><th>値</th></tr></thead>
       <tbody>
         <tr class="subhead"><td>正規化</td><td>標準は表全体。
         行の中の順位を読ませたいときは行ごと。
         列ごとは使わない</td></tr>
-        <tr class="subhead"><td>塗り方</td><td>数値を入れる表は連続で塗る。
+        <tr class="subhead"><td>端の値</td><td>基準からの差の最大を切りのいい値に切り上げる。
+        B ･ C は上と下で同じ値。
+        凡例の両端に書く</td></tr>
+        <tr class="subhead"><td>塗り方</td><td>位置を 10% 単位に丸め、下の値の表から拾う。
         数値を入れず色だけで見せるのは例外で、そのときは5段</td></tr>
         <tr><td>使い分け</td><td>A 量 ･ 比率 / B 基準より上を見せる / C 両端に意味がある。
         3つとも「青 = 上 ･ 増」</td></tr>
         <tr><td>基準と値のないセル</td><td>基準ちょうどは <code>#F0F0F0</code> 。
         値のないセルは白地 ･ 点線 ･「―」。
         基準の行は塗らない</td></tr>
-        <tr><td>セルの文字</td><td>白と <code>#434343</code> のうち比が大きいほう。
+        <tr><td>セルの文字</td><td>値の表の「白」の印は白、ほかは <code>#434343</code> 。
         表のセルの数値は 3.0 以上</td></tr>
         <tr><td>見出し行</td><td>帯を敷かず、太字と下の罫線。
         行見出しの列は白地</td></tr>
       </tbody>
     </table>
     <div class="rule-note">
-      <strong>連続で塗る理由。</strong>数値が値を担うので、色は近い値が近い色に見えればよい。
-      段で区切ると、1しか違わない値でも境目で色が変わる。<br>
+      <strong>10% 刻みにする理由。</strong>数値が値を担うので、色は近い値が近い色に見えればよい。
+      隣り合う値の差は ΔE 4.2 〜 6.8 で、見た目はほぼ連続になる。
+      値を表にしておけば、描くたびに計算しなくて済む。<br>
       <strong>基準ちょうどを白にしない。</strong>値のないセルと同じ見え方になる。
       <code>#F0F0F0</code> と白は ΔE 3.0 。<br>
       <strong>C のローズと Point。</strong><code>#B3445E</code> は Point <code>#CD5151</code> と ΔE 11.0 と近い。
@@ -988,6 +993,13 @@ const FIG = {
   muted4:['#B7B7B7','#C9C9C9','#DBDBDB','#EDEDED'],
   /* ヒートマップ ( §2.11 ) : 端の値だけを持ち、間は OKLab で連続に混ぜる */
   heat:{ up:'#3F6BA9', down:'#B3445E', downGray:'#B6B6B6', base:'#F0F0F0', white:'#FFFFFF' },
+  /* ヒートマップの 10% 刻みの値 ( FIGURE.md §2.11.2 ) 。white は白文字になる最初の位置 */
+  heatStops:{
+    a:   { v:['#FFFFFF','#EBF0F7','#D7E1EF','#C3D2E6','#AFC3DE','#9CB4D5','#89A5CD','#7696C4','#6488BB','#5179B2','#3F6BA9'], white:8 },
+    up:  { v:['#F0F0F0','#DDE2E9','#CBD5E3','#B9C7DC','#A7BAD5','#95ADCE','#849FC7','#7292C0','#6185B8','#5078B1','#3F6BA9'], white:7 },
+    gray:{ v:['#F0F0F0','#EAEAEA','#E4E4E4','#DEDEDE','#D8D8D8','#D3D3D3','#CDCDCD','#C7C7C7','#C1C1C1','#BCBCBC','#B6B6B6'], white:99 },
+    down:{ v:['#F0F0F0','#ECDFE0','#E7CED1','#E2BDC2','#DDACB3','#D79BA4','#D18A96','#CA7987','#C36879','#BB576C','#B3445E'], white:7 }
+  },
   cat:[
     {name:'CAT-1 紫',   fill:'#A4A5D1', bg:'#F6F6FA', mark:'#DDDEEE', text:'#8D90CA', onFill:2.36, onText:3.01},
     {name:'CAT-2 青緑', fill:'#84B5B2', bg:'#F3F8F7', mark:'#D2E4E2', text:'#5CA09D', onFill:2.27, onText:3.01},
@@ -1537,8 +1549,9 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
       o.data[i].forEach(function(v){
         if (isBase){ h += '<td>'+o.fmt(v)+'</td>'; return; }
         if (v === null){ h += '<td class="na">―</td>'; return; }
-        const c = o.color(v);
-        h += '<td style="background:'+c+'; color:'+ink(c)+'">'+o.fmt(v)+'</td>';
+        const k = o.color(v);   /* [段の名前, 位置 0 〜 10] */
+        const st = FIG.heatStops[k[0]], c = st.v[k[1]], fg = k[1] >= st.white ? '#FFFFFF' : '#434343';
+        h += '<td style="background:'+c+'; color:'+fg+'">'+o.fmt(v)+'</td>';
       });
       h += '</tr>';
     });
@@ -1547,13 +1560,15 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
     box.innerHTML = h;
   }
   const H = FIG.heat;
+  /* 端までの割合を 10% 単位に丸めて 0 〜 10 の位置にする */
+  function pos(t){ return Math.round(Math.max(0, Math.min(1, t)) * 10); }
 
   /* A : 量 ･ 比率 ( 時間帯別の金額構成比 ) */
   render('heat-a', {
     cols:['朝','昼','夕','夜'],
     rows:['おにぎり','サンドイッチ','サラダ','麺類','お弁当','和惣菜','お寿司','スープ'],
     data:[[46,26,17,11],[41,30,18,11],[21,31,24,24],[13,39,22,26],[18,35,25,22],[20,27,27,26],[30,37,21,12],[12,22,33,33]],
-    color:function(v){ return mix(H.white, H.up, v/50); },
+    color:function(v){ return ['a', pos(v/50)]; },   /* 端の値 50 ( 最大 46 を切り上げ ) */
     fmt:function(v){ return v+'%'; }, stops:[H.white, H.up], lo:'0%', hi:'50% 〜' });
 
   /* B : 基準より上を見せる ( 指数 ･ 全体 = 100 ) */
@@ -1564,8 +1579,8 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
     data:[[100,100,100,100,100,100,100],
           [113,105,82,112,95,112,88],[103,94,94,110,100,94,96],[88,88,113,98,111,83,104],
           [113,114,84,100,85,120,96],[97,102,104,88,99,105,null],[90,97,126,85,112,87,111],[114,103,87,104,92,113,97]],
-    color:function(v){ return v>=100 ? mix(H.base, H.up, (v-100)/20) : mix(H.base, H.downGray, (100-v)/20); },
-    fmt:function(v){ return String(v); }, stops:[H.downGray, H.base, H.up], lo:'80 以下', hi:'120 以上' });
+    color:function(v){ return v>=100 ? ['up', pos((v-100)/30)] : ['gray', pos((100-v)/30)]; },   /* 端の値 30 ( 差の最大 26 を切り上げ ) */
+    fmt:function(v){ return String(v); }, stops:[H.downGray, H.base, H.up], lo:'70 以下', hi:'130 以上' });
 
   /* C : 両端に意味がある ( 前年比 ) */
   render('heat-c', {
@@ -1573,9 +1588,30 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
     rows:['おにぎり','サンドイッチ','サラダ','冷し麺','温かい麺','和惣菜','お寿司','スープ'],
     data:[[3.2,3.7,1.3,2.3,3.7,-0.1],[-1.5,-6.8,-2.6,-4.9,-5.5,-3.1],[10.1,8.7,11.1,9.0,8.2,12.2],[-14.4,-6.9,-4.5,-3.7,0.5,1.8],
           [4.7,2.3,0.0,-0.2,-7.0,null],[6.0,6.6,7.6,4.2,8.5,6.9],[-7.4,-8.3,-5.0,-8.0,-6.9,-8.8],[13.4,12.6,10.1,4.7,2.1,4.0]],
-    color:function(v){ return v>=0 ? mix(H.base, H.up, v/15) : mix(H.base, H.down, -v/15); },
+    color:function(v){ return v>=0 ? ['up', pos(v/15)] : ['down', pos(-v/15)]; },   /* 端の値 15 ( 差の最大 14.4 を切り上げ ) */
     fmt:function(v){ return (v>0?'+':(v<0?'−':'±'))+Math.abs(v).toFixed(1)+'%'; },
     stops:[H.down, H.base, H.up], lo:'−15% 以下', hi:'+15% 以上' });
+})();
+
+/* ---------- ヒートマップの値の表 ( §2.11.2 ) ---------- */
+(function(){
+  const box = document.getElementById('heat-stops');
+  if (!box) return;
+  const S = FIG.heatStops;
+  const cols = [['a','A 青 ( 白から )'],['up','B ･ C 青 ( 基準から )'],['gray','B グレー ( 下回る側 )'],['down','C ローズ ( 減った側 )']];
+  let h = '<table class="heat"><thead><tr><th class="rh">位置</th>';
+  cols.forEach(function(c){ h += '<th>'+c[1]+'</th>'; });
+  h += '</tr></thead><tbody>';
+  for (let i = 0; i <= 10; i++){
+    h += '<tr><td class="rh">'+(i*10)+'%</td>';
+    cols.forEach(function(c){
+      const st = S[c[0]], v = st.v[i], w = i >= st.white;
+      h += '<td style="background:'+v+'; color:'+(w?'#FFFFFF':'#434343')+'">'+v+(w?' 白':'')+'</td>';
+    });
+    h += '</tr>';
+  }
+  h += '</tbody></table>';
+  box.innerHTML = h;
 })();
 
 /* ---------- 強調と非強調 ( §2.12 ) ---------- */
