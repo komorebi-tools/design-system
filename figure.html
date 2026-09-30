@@ -619,7 +619,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       領域の円は <code>#E6EBF7</code>。
       白との比は 1.19 で、面の下限 1.2 をわずかに割っている。
       群を囲む下地なので輪郭を読ませる必要はないが、下限ぎりぎりであることは覚えておく ( 観察項目 )。
-      象限の地は Background より薄い <code>#F8FAFD</code> 程度にとどめる。
+      象限の地は、汎用スライドの地色の 60% <code>#F7FAFD</code> にとどめる ( SLIDE.md §5.4 ) 。
    </div>
  </div>
 
@@ -1008,7 +1008,7 @@ const FIG = {
     {name:'CAT-5 ローズ',fill:'#CB6378', bg:'#FAEFF2', mark:'#ECC5CD', text:'#CB6378', onFill:3.75, onText:3.75}
   ],
   base:{name:'基調 ( Primary )', fill:'#6E87B6', bg:'#F3F7FC', mark:'#C9D3E4', text:'#5A74A3'}, /* design-check: allow NO_HARDCODED_PRIMARY */
-  quadrant:{ area:'#E6EBF7', ground:'#F8FAFD' }
+  quadrant:{ area:'#E6EBF7', ground:'#F7FAFD' }
 };
 /* グラフで使う順番 ( FIGURE.md §1.2 ) : 基調 → 青緑 → 紫 → 山吹 → ローズ ･ 面の値 */
 FIG.order = [FIG.primaryDark, FIG.cat[1].fill, FIG.cat[0].fill, FIG.cat[3].fill, FIG.cat[4].fill];
