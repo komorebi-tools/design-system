@@ -781,7 +781,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
   <div class="card" id="s211">
     <h3>2.11 ヒートマップ ( クロス集計表 )</h3>
     <p class="sub">数値はセルに入れ、色は偏りの形を見せる役に回す。
-    数値を入れる表は、端の値までの位置を 10% 単位に丸め、値の表から色を拾う。</p>
+    数値を入れる表は、端の値までの位置を 10% 単位に四捨五入し ( ちょうど半分は上へ ) 、値の表から色を拾う。</p>
     <figure class="figure" style="max-width:720px">
       <div id="heat-a"></div>
       <figcaption>A 単色 ･ 青 : 量や比率だけを見せる表。
@@ -807,7 +807,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
         <tr class="subhead"><td>端の値</td><td>基準からの差の最大を切りのいい値に切り上げる。
         B ･ C は上と下で同じ値。
         凡例の両端に書く</td></tr>
-        <tr class="subhead"><td>塗り方</td><td>位置を 10% 単位に丸め、下の値の表から拾う。
+        <tr class="subhead"><td>塗り方</td><td>位置を 10% 単位に四捨五入 ( ちょうど半分は上へ ) し、下の値の表から拾う。
         数値を入れず色だけで見せるのは例外で、そのときは5段</td></tr>
         <tr><td>使い分け</td><td>A 量 ･ 比率 / B 基準より上を見せる / C 両端に意味がある。
         3つとも「青 = 上 ･ 増」</td></tr>
@@ -991,7 +991,7 @@ const FIG = {
   scale:['#5A74A3','#8496BE','#AEBBD6','#D8DEEA'],
   muted3:['#C4C4C4','#D8D8D8','#ECECEC'],
   muted4:['#B7B7B7','#C9C9C9','#DBDBDB','#EDEDED'],
-  /* ヒートマップ ( §2.11 ) : 端の値だけを持ち、間は OKLab で連続に混ぜる */
+  /* ヒートマップ ( §2.11.3 ) の端の色。セルの塗りと凡例は、下の heatStops ( 10% 刻みの値の表 ) から拾う */
   heat:{ up:'#3F6BA9', down:'#B3445E', downGray:'#B6B6B6', base:'#F0F0F0', white:'#FFFFFF' },
   /* ヒートマップの 10% 刻みの値 ( FIGURE.md §2.11.2 ) 。white は白文字になる最初の位置 */
   heatStops:{
@@ -1515,26 +1515,6 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
 
 /* ---------- ヒートマップ ( §2.11 ) ---------- */
 (function(){
-  /* OKLab で2色を混ぜる */
-  function s2l(c){ c/=255; return c<=0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055,2.4); }
-  function l2s(v){ v=Math.max(0,Math.min(1,v)); v = v<=0.0031308 ? v*12.92 : 1.055*Math.pow(v,1/2.4)-0.055; return Math.round(v*255); }
-  function toOk(h){
-    const r=s2l(parseInt(h.substr(1,2),16)), g=s2l(parseInt(h.substr(3,2),16)), b=s2l(parseInt(h.substr(5,2),16));
-    const l=Math.cbrt(0.4122214708*r+0.5363325363*g+0.0514459929*b),
-          m=Math.cbrt(0.2119034982*r+0.6806995451*g+0.1073969566*b),
-          s=Math.cbrt(0.0883024619*r+0.2817188376*g+0.6299787005*b);
-    return [0.2104542553*l+0.7936177850*m-0.0040720468*s, 1.9779984951*l-2.4285922050*m+0.4505937099*s, 0.0259040371*l+0.7827717662*m-0.8086757660*s];
-  }
-  function fromOk(L,a,b){
-    const l=Math.pow(L+0.3963377774*a+0.2158037573*b,3), m=Math.pow(L-0.1055613458*a-0.0638541728*b,3), s=Math.pow(L-0.0894841775*a-1.2914855480*b,3);
-    const R=4.0767416621*l-3.3077115913*m+0.2309699292*s, G=-1.2684380046*l+2.6097574011*m-0.3413193965*s, B=-0.0041960863*l-0.7034186147*m+1.7076147010*s;
-    return '#'+[R,G,B].map(function(v){ return ('0'+l2s(v).toString(16)).slice(-2); }).join('').toUpperCase();
-  }
-  function mix(a,b,t){ t=Math.max(0,Math.min(1,t)); const A=toOk(a), B=toOk(b); return fromOk(A[0]+(B[0]-A[0])*t, A[1]+(B[1]-A[1])*t, A[2]+(B[2]-A[2])*t); }
-  function lum(h){ return 0.2126*s2l(parseInt(h.substr(1,2),16))+0.7152*s2l(parseInt(h.substr(3,2),16))+0.0722*s2l(parseInt(h.substr(5,2),16)); }
-  function cr(a,b){ const x=lum(a), y=lum(b); return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05); }
-  /* セルの文字 : 白と #434343 のうち比が大きいほう */
-  function ink(bg){ return inkOn(bg); }
 
   function render(id, o){
     const box = document.getElementById(id);
@@ -1556,11 +1536,11 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
       h += '</tr>';
     });
     h += '</tbody></table>';
-    h += '<div class="heat-legend"><span>'+o.lo+'</span><span class="bar" style="background:linear-gradient(to right in oklab, '+o.stops.join(', ')+')"></span><span>'+o.hi+'</span></div></div>';
+    h += '<div class="heat-legend"><span>'+o.lo+'</span><span class="bar" style="display:flex">'+o.steps.map(function(c){ return '<span style="flex:1 1 0; background:'+c+'"></span>'; }).join('')+'</span><span>'+o.hi+'</span></div></div>';
     box.innerHTML = h;
   }
-  const H = FIG.heat;
-  /* 端までの割合を 10% 単位に丸めて 0 〜 10 の位置にする */
+  const S = FIG.heatStops;
+  /* 端までの割合を 10% 単位に四捨五入して ( ちょうど半分は上へ ) 0 〜 10 の位置にする */
   function pos(t){ return Math.round(Math.max(0, Math.min(1, t)) * 10); }
 
   /* A : 量 ･ 比率 ( 時間帯別の金額構成比 ) */
@@ -1569,7 +1549,7 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
     rows:['おにぎり','サンドイッチ','サラダ','麺類','お弁当','和惣菜','お寿司','スープ'],
     data:[[46,26,17,11],[41,30,18,11],[21,31,24,24],[13,39,22,26],[18,35,25,22],[20,27,27,26],[30,37,21,12],[12,22,33,33]],
     color:function(v){ return ['a', pos(v/50)]; },   /* 端の値 50 ( 最大 46 を切り上げ ) */
-    fmt:function(v){ return v+'%'; }, stops:[H.white, H.up], lo:'0%', hi:'50% 〜' });
+    fmt:function(v){ return v+'%'; }, steps:S.a.v, lo:'0%', hi:'50% 〜' });
 
   /* B : 基準より上を見せる ( 指数 ･ 全体 = 100 ) */
   render('heat-b', {
@@ -1580,7 +1560,7 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
           [113,105,82,112,95,112,88],[103,94,94,110,100,94,96],[88,88,113,98,111,83,104],
           [113,114,84,100,85,120,96],[97,102,104,88,99,105,null],[90,97,126,85,112,87,111],[114,103,87,104,92,113,97]],
     color:function(v){ return v>=100 ? ['up', pos((v-100)/30)] : ['gray', pos((100-v)/30)]; },   /* 端の値 30 ( 差の最大 26 を切り上げ ) */
-    fmt:function(v){ return String(v); }, stops:[H.downGray, H.base, H.up], lo:'70 以下', hi:'130 以上' });
+    fmt:function(v){ return String(v); }, steps:S.gray.v.slice().reverse().concat(S.up.v.slice(1)), lo:'70 以下', hi:'130 以上' });
 
   /* C : 両端に意味がある ( 前年比 ) */
   render('heat-c', {
@@ -1590,7 +1570,7 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
           [4.7,2.3,0.0,-0.2,-7.0,null],[6.0,6.6,7.6,4.2,8.5,6.9],[-7.4,-8.3,-5.0,-8.0,-6.9,-8.8],[13.4,12.6,10.1,4.7,2.1,4.0]],
     color:function(v){ return v>=0 ? ['up', pos(v/15)] : ['down', pos(-v/15)]; },   /* 端の値 15 ( 差の最大 14.4 を切り上げ ) */
     fmt:function(v){ return (v>0?'+':(v<0?'−':'±'))+Math.abs(v).toFixed(1)+'%'; },
-    stops:[H.down, H.base, H.up], lo:'−15% 以下', hi:'+15% 以上' });
+    steps:S.down.v.slice().reverse().concat(S.up.v.slice(1)), lo:'−15% 以下', hi:'+15% 以上' });
 })();
 
 /* ---------- ヒートマップの値の表 ( §2.11.2 ) ---------- */
