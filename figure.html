@@ -25,12 +25,12 @@
   --background:#F7F7F7;
 
   /* Layer 2 : カテゴリ配色 ( 面 / 地 / マーカー / 文字 ) */
-  --cat1-fill:#A4A5D1; --cat1-bg:#F6F6FA; --cat1-mark:#DDDEEE; --cat1-text:#8D90CA;
-  --cat2-fill:#84B5B2; --cat2-bg:#F3F8F7; --cat2-mark:#D2E4E2; --cat2-text:#5CA09D;
-  --cat3-fill:#98BBDE; --cat3-bg:#F5F8FC; --cat3-mark:#D9E6F3; --cat3-text:#659AC7;
-  --cat4-fill:#EDB369; --cat4-bg:#FDF7F0; --cat4-mark:#F8E3C8; --cat4-text:#DE7C31;
-  --cat5-fill:#CB6378; --cat5-bg:#FAEFF2; --cat5-mark:#ECC5CD; --cat5-text:#CB6378;
-  --base-fill:#6E87B6; --base-bg:#F3F7FC; --base-mark:#C9D3E4; --base-text:#5A74A3; /* design-check: allow NO_HARDCODED_PRIMARY */
+  --cat1-fill:#A4A5D1; --cat1-bg:#F6F6FA; --cat1-mark:#E6E6F2; --cat1-text:#8D90CA;
+  --cat2-fill:#84B5B2; --cat2-bg:#F3F8F7; --cat2-mark:#DDEBE9; --cat2-text:#5CA09D;
+  --cat3-fill:#98BBDE; --cat3-bg:#F5F8FC; --cat3-mark:#E2ECF6; --cat3-text:#659AC7;
+  --cat4-fill:#EDB369; --cat4-bg:#FDF7F0; --cat4-mark:#FAE9D5; --cat4-text:#DE7C31;
+  --cat5-fill:#CB6378; --cat5-bg:#FAEFF2; --cat5-mark:#F1D3DA; --cat5-text:#CB6378;
+  --base-fill:#6E87B6; --base-bg:#F3F7FC; --base-mark:#D6DDEB; --base-text:#5A74A3; /* design-check: allow NO_HARDCODED_PRIMARY */
 
   /* Layer 3 : 強調 */
   --point:#CD5151;
@@ -350,7 +350,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <div class="cat-grid" id="cat-grid"></div>
     <div class="rule-note">
       <strong>4値の導き方。</strong>
-      地 ＝ 面を白 90% で薄める / マーカー ＝ 地の上に面を不透明度 30% / 文字 ＝ 彩度 ×1.35、黄系のみ色相 −15°、明度は白背景比 3.0 に届くまで下げる。
+      地 ＝ 面を白 90% で薄める / マーカー ＝ 地の上に面を不透明度 20% / 文字 ＝ 彩度 ×1.35、黄系のみ色相 −15°、明度は白背景比 3.0 に届くまで下げる。
       地とマーカーは sRGB の値のまま混ぜ、文字は CIELCh ( D65 ) で計算する。
       計算値が既存の値と ΔE 1 未満なら、既存の値を採る ( 基調の地 ･ ローズ 明 ) 。
    </div>
@@ -917,7 +917,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       見出しごとに色の違う線を引かない。</p>
 
       <div><span class="h3-mark"><span class="mk">青字 ＋ マーカー ＋ 太字</span></span></div>
-      <p class="dummy">文字 <code>#5A74A3</code>、マーカー <code>#C9D3E4</code>。
+      <p class="dummy">文字 <code>#5A74A3</code>、マーカー <code>#D6DDEB</code>。
       カテゴリを割り当てていない資料の強調は、このマーカーを既定にする。</p>
 
       <div class="h4-blue">青字 ＋ 太字</div>
@@ -1001,13 +1001,13 @@ const FIG = {
     down:{ v:['#F0F0F0','#ECDFE0','#E7CED1','#E2BDC2','#DDACB3','#D79BA4','#D18A96','#CA7987','#C36879','#BB576C','#B3445E'], white:7 }
   },
   cat:[
-    {name:'CAT-1 紫',   fill:'#A4A5D1', bg:'#F6F6FA', mark:'#DDDEEE', text:'#8D90CA', onFill:2.36, onText:3.01},
-    {name:'CAT-2 青緑', fill:'#84B5B2', bg:'#F3F8F7', mark:'#D2E4E2', text:'#5CA09D', onFill:2.27, onText:3.01},
-    {name:'CAT-3 水色', fill:'#98BBDE', bg:'#F5F8FC', mark:'#D9E6F3', text:'#659AC7', onFill:2.00, onText:3.00},
-    {name:'CAT-4 山吹', fill:'#EDB369', bg:'#FDF7F0', mark:'#F8E3C8', text:'#DE7C31', onFill:1.87, onText:2.99},
-    {name:'CAT-5 ローズ',fill:'#CB6378', bg:'#FAEFF2', mark:'#ECC5CD', text:'#CB6378', onFill:3.75, onText:3.75}
+    {name:'CAT-1 紫',   fill:'#A4A5D1', bg:'#F6F6FA', mark:'#E6E6F2', text:'#8D90CA', onFill:2.36, onText:3.01},
+    {name:'CAT-2 青緑', fill:'#84B5B2', bg:'#F3F8F7', mark:'#DDEBE9', text:'#5CA09D', onFill:2.27, onText:3.01},
+    {name:'CAT-3 水色', fill:'#98BBDE', bg:'#F5F8FC', mark:'#E2ECF6', text:'#659AC7', onFill:2.00, onText:3.00},
+    {name:'CAT-4 山吹', fill:'#EDB369', bg:'#FDF7F0', mark:'#FAE9D5', text:'#DE7C31', onFill:1.87, onText:2.99},
+    {name:'CAT-5 ローズ',fill:'#CB6378', bg:'#FAEFF2', mark:'#F1D3DA', text:'#CB6378', onFill:3.75, onText:3.75}
   ],
-  base:{name:'基調 ( Primary )', fill:'#6E87B6', bg:'#F3F7FC', mark:'#C9D3E4', text:'#5A74A3'}, /* design-check: allow NO_HARDCODED_PRIMARY */
+  base:{name:'基調 ( Primary )', fill:'#6E87B6', bg:'#F3F7FC', mark:'#D6DDEB', text:'#5A74A3'}, /* design-check: allow NO_HARDCODED_PRIMARY */
   quadrant:{ area:'#E6EBF7', ground:'#F7FAFD' }
 };
 /* グラフで使う順番 ( FIGURE.md §1.2 ) : 基調 → 青緑 → 紫 → 山吹 → ローズ ･ 面の値 */
@@ -1134,7 +1134,7 @@ document.getElementById('sw-point').innerHTML =
 /* カテゴリ 4値のグリッド */
 (function(){
   const el = document.getElementById('cat-grid');
-  let h = '<div></div><div class="hd">面 ( fill )</div><div class="hd">地 ( 白90% )</div><div class="hd">マーカー ( 面30% )</div><div class="hd">文字</div>';
+  let h = '<div></div><div class="hd">面 ( fill )</div><div class="hd">地 ( 白90% )</div><div class="hd">マーカー ( 面20% )</div><div class="hd">文字</div>';
   const rows = FIG.cat.concat([FIG.base]);
   rows.forEach(function(c){
     h += '<div class="rowname">'+c.name+'</div>';
