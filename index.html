@@ -202,10 +202,6 @@
     padding: 0 16px; font-size: 13px; font-weight: 600; color: white;
   }
 
-  /* Chart colors */
-  .chart-strip { display: flex; height: 48px; border-radius: 8px; overflow: hidden; }
-  .chart-strip div { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
-
   /* Icons grid */
   .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
   .icon-item {
@@ -485,26 +481,12 @@
       </div>
     </div>
 
-    <!-- Chart Colors -->
+    <!-- グラフ ･ 図解 ･ 表の配色 -->
     <div style="margin-top: 40px;">
-      <div class="component-label">Chart Colors (PPTX / データ可視化用)</div>
-      <div class="chart-strip">
-        <div style="background:#6E87B6;color:#fff">#6E87B6</div> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
-        <div style="background:#5A74A3;color:#fff">#5A74A3</div>
-        <div style="background:#9BB0D0;color:#333">#9BB0D0</div>
-        <div style="background:#333333;color:#fff">#333</div>
-        <div style="background:#999999;color:#fff">#999</div>
-        <div style="background:#D9534F;color:#fff">#D9534F</div>
-        <div style="background:#5CB85C;color:#fff">#5CB85C</div>
-        <div style="background:#E8EDF5;color:#333">#E8EDF5</div>
-        <div style="background:#666666;color:#fff">#666</div>
-        <div style="background:#D0DAE8;color:#333">#D0DAE8</div>
-        <div style="background:#AAAAAA;color:#fff">#AAA</div>
-        <div style="background:#F7F7F7;color:#999">#F7F7F7</div>
-      </div>
+      <div class="component-label">グラフ ･ 図解 ･ 表の配色</div>
       <div style="margin-top:16px;padding:16px 20px;background:var(--bg);border-radius:6px;font-size:14px;line-height:1.7">
         グラフ ･ 図解 ･ 表 ･ スライドの配色は <a href="FIGURE.md">FIGURE.md</a>、スライドのフォント ･ 配置 ･ テーマ配色は <a href="SLIDE.md">SLIDE.md</a> が一次情報源です。
-        上の並びは従来の作図用で、系列の選び方 ･ 濃淡の段階 ･ 軸と値ラベルの規約は FIGURE.md 側にあります。
+        系列に使う色の順番 ･ 濃淡の段階 ･ ヒートマップの値 ･ 軸と値ラベルの規約は FIGURE.md にあります。
         実物は <a href="figure.html">figure.html</a> で確認できます。
       </div>
     </div>
