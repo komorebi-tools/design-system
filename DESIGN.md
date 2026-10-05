@@ -87,7 +87,7 @@
 
 図表 ( グラフ ･ 図解 ･ 表 ) とスライドの配色は [FIGURE.md](FIGURE.md)、スライド固有の規約 ( フォント ･ 配置 ･ テーマ配色 ) は [SLIDE.md](SLIDE.md) を参照する。
 色の値の一次情報源はこのファイルのままで、`FIGURE.md` ･ `SLIDE.md` は使い方とそれぞれ固有の規約だけを持つ。
-図表のプレビューは [figure.html](figure.html)。
+図表のプレビューは [figure.html](figure.html)、整理の図 ( 図解 ) の構図は [DIAGRAM.md](DIAGRAM.md) とそのプレビュー [diagram.html](diagram.html)。
 
 ---
 
