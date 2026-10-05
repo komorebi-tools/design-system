@@ -21,7 +21,7 @@
   --background:#F7F7F7;
 
   --cat1-text:#8D90CA; --cat1-bg:#F6F6FA;
-  --cat2-text:#5CA09D; --cat2-bg:#F3F8F7;
+  --cat2-fill:#84B5B2; --cat2-text:#5CA09D; --cat2-bg:#F3F8F7;
   --cat4-fill:#EDB369;
   --base-bg:#F3F7FC;
 
@@ -142,11 +142,11 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-colhead{font-size:14px; font-weight:700; color:var(--primary-dark); padding-bottom:6px; border-bottom:2px solid var(--primary-dark)}
 .dg-label{background:var(--primary-dark); color:#fff; font-weight:700; font-size:16px; border-radius:4px; padding:14px 16px; display:flex; align-items:center; line-height:1.5}
 .dg-cw{background:#fff; border:1px solid var(--hairline); border-radius:4px; padding:12px 15px; font-size:13px; line-height:1.75; display:flex; align-items:center}
-.dg-cl{background:#F4F6F9; border-radius:4px; padding:12px 15px; font-size:13px; line-height:1.75; display:flex; align-items:center}
+.dg-cl{background:var(--background); border-radius:4px; padding:12px 15px; font-size:13px; line-height:1.75; display:flex; align-items:center}
 
 /* 3 ステップ ( 帯＋カード ) */
 .dg-steps{display:grid; grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr; align-items:stretch}
-.dg-step{border-radius:6px; overflow:hidden; display:flex; flex-direction:column; background:#F4F6F9}
+.dg-step{border-radius:6px; overflow:hidden; display:flex; flex-direction:column; background:var(--background)}
 .dg-step .band{background:var(--primary-dark); color:#fff; font-size:17px; font-weight:700; text-align:center; padding:12px 8px}
 .dg-step .body{padding:14px 16px 16px; font-size:13px; line-height:1.75; flex:1}
 
@@ -237,7 +237,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-mx .c.na{color:var(--g-weak)}
 
 /* §1 の小さな見本 */
-.dg-demo{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.dg-demo{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px}
 .dg-demo .cell{border:1px solid var(--hairline); border-radius:6px; padding:18px 16px; text-align:center}
 .dg-demo .sw{width:96px; height:96px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700}
 .dg-demo .nm{font-size:14px; font-weight:700}
@@ -339,7 +339,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="ds">グレーは面の塗りに使わない。
 線 ･ つなぎ ･ ミニ棒には使ってよい</div>
 </div>
-<div class="cell"><div class="sw dg-round" style="background:linear-gradient(in oklab 90deg,var(--primary-dark),var(--cat2-text));color:#fff">両方</div>
+<div class="cell"><div class="sw dg-round" style="background:linear-gradient(in oklab 135deg,var(--primary-dark) 10%,var(--cat2-fill) 100%);color:#fff">両方</div>
 <div class="nm">グラデーション</div>
 <div class="ds">2色に挟まれた要素を強調したいとき。
 必須ではない</div>
@@ -359,7 +359,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div><div class="dg-sl">基準のある指数 ( 中央の線 = 100 ･ 端は 70 〜 130 )</div>
 <div class="dg-row"><span class="l">小型の鉢</span><span class="dg-dev"><i></i><b style="left:50%;width:30%;background:var(--primary-dark);border-radius:0 2px 2px 0"></b></span><span class="v" style="color:var(--primary-dark)">118</span></div>
 <div class="dg-row"><span class="l">中型の鉢</span><span class="dg-dev"><i></i><b style="left:50%;width:7%;background:var(--primary-dark);border-radius:0 2px 2px 0"></b></span><span class="v" style="color:var(--primary-dark)">104</span></div>
-<div class="dg-row"><span class="l">大型の鉢</span><span class="dg-dev"><i></i><b style="right:50%;width:23%;background:#B7B7B7;border-radius:2px 0 0 2px"></b></span><span class="v" style="color:var(--g-cmp)">86</span></div>
+<div class="dg-row"><span class="l">大型の鉢</span><span class="dg-dev"><i></i><b style="right:50%;width:23%;background:var(--g-mute);border-radius:2px 0 0 2px"></b></span><span class="v" style="color:var(--g-cmp)">86</span></div>
 </div>
 <div><div class="dg-sl">棒にしない数値 ( 比較の土俵がないとき )</div>
 <div style="font-size:13px;line-height:1.9">回答者 <b style="font-size:18px">n=1,200</b><br>相関係数 <b style="font-size:18px">0.42</b></div>
@@ -375,9 +375,9 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="card" id="s18"><h3>1.8 つなぎ ( ＋ ･ 矢印 ･ 山形 )</h3><p class="sub">少し太めにして、色はやや薄いグレーか山吹を使う。
 </p>
 <div class="scroll-x"><div class="dg" style="display:flex;gap:44px;align-items:center"><div style="display:flex;align-items:center;gap:10px"><span class="dg-plus">＋</span><span style="font-size:13px">足す</span></div>
-<div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="#B7B7B7"/></svg></div>
+<div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <span style="font-size:13px">導く</span></div>
-<div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="22" height="44" viewBox="0 0 22 44" aria-hidden="true"><path d="M3 3 L19 22 L3 41" fill="none" stroke="#B7B7B7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="22" height="44" viewBox="0 0 22 44" aria-hidden="true"><path d="M3 3 L19 22 L3 41" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <span style="font-size:13px">次の段へ</span></div>
 <div style="display:flex;align-items:center;gap:10px"><svg width="22" height="44" viewBox="0 0 22 44" aria-hidden="true"><path d="M3 3 L19 22 L3 41" fill="none" stroke="var(--cat4-fill)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="font-size:13px">山吹でもよい</span></div>
 </div>
@@ -444,15 +444,15 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-steps"><div class="dg-step"><div class="band">気になる</div>
 <div class="body">友人の部屋や投稿で見かけて、自分の部屋にも置きたくなる</div>
 </div>
-<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="#B7B7B7"/></svg></div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <div class="dg-step"><div class="band">調べる</div>
 <div class="body">育てやすさと置き場所を調べ、候補を2 〜 3品に絞る</div>
 </div>
-<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="#B7B7B7"/></svg></div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <div class="dg-step"><div class="band">店で見る</div>
 <div class="body">葉の色つやと大きさを実物で確かめる</div>
 </div>
-<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="#B7B7B7"/></svg></div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <div class="dg-step"><div class="band">持ち帰る</div>
 <div class="body">鉢の重さと持ち帰り方が、最後の決め手になる</div>
 </div>
@@ -470,15 +470,15 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-flow"><div class="dg-box"><div class="n">置き場所を<br>決める</div>
 <div class="d">明るさと風通しを見る</div>
 </div>
-<div class="dg-conn"><svg width="22" height="44" viewBox="0 0 22 44" aria-hidden="true"><path d="M3 3 L19 22 L3 41" fill="none" stroke="#B7B7B7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="dg-conn"><svg width="22" height="44" viewBox="0 0 22 44" aria-hidden="true"><path d="M3 3 L19 22 L3 41" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <div class="dg-box"><div class="n">水やりに<br>慣れる</div>
 <div class="d">土の乾きで判断する</div>
 </div>
-<div class="dg-conn"><svg width="22" height="44" viewBox="0 0 22 44" aria-hidden="true"><path d="M3 3 L19 22 L3 41" fill="none" stroke="#B7B7B7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="dg-conn"><svg width="22" height="44" viewBox="0 0 22 44" aria-hidden="true"><path d="M3 3 L19 22 L3 41" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <div class="dg-box"><div class="n">新芽を<br>見つける</div>
 <div class="d">育っている実感が出る</div>
 </div>
-<div class="dg-conn"><svg width="22" height="44" viewBox="0 0 22 44" aria-hidden="true"><path d="M3 3 L19 22 L3 41" fill="none" stroke="#B7B7B7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="dg-conn"><svg width="22" height="44" viewBox="0 0 22 44" aria-hidden="true"><path d="M3 3 L19 22 L3 41" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <div class="dg-box"><div class="n">鉢を<br>増やす</div>
 <div class="d">2鉢目を探しはじめる</div>
 </div>
@@ -527,17 +527,17 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-cl">はじめての人は、育てやすさで選ぶ</div>
 <div class="dg-conn dg-plus">＋</div>
 <div class="dg-cw"><span>店頭では、<b>持ち帰りやすさ</b>も決め手になっていた</span></div>
-<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="#B7B7B7"/></svg></div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <div class="dg-out">小型の鉢に、持ち手付きの袋を用意する</div>
 <div class="dg-cl">2鉢目は、1鉢目と違う葉の形を選ぶ</div>
 <div class="dg-conn dg-plus">＋</div>
 <div class="dg-cw"><span>並べたときの<b>高さの違い</b>も意識されていた</span></div>
-<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="#B7B7B7"/></svg></div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <div class="dg-out">高さの違う品を、組み合わせで見せる</div>
 <div class="dg-cl">贈りものは、見た目の華やかさで選ぶ</div>
 <div class="dg-conn dg-plus">＋</div>
 <div class="dg-cw"><span>贈る側は、<b>相手が育てられるか</b>を気にしていた</span></div>
-<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="#B7B7B7"/></svg></div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <div class="dg-out">育て方の札を、贈りもの用にも付ける</div>
 </div>
 <div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 ) ･ 青の地 = 売り場への示唆 ( 仮説 )</div>
@@ -614,7 +614,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="card" id="c9"><h3>9. 中心放射 ( ハブ )</h3><p class="sub">1つの土台と、その周りの要素のとき。
 </p>
 <div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図9</span><span class="dg-h">6つの価値の土台は「暮らしに緑を足す」</span></div>
-<div class="dg-hub"><svg width="1080" height="700" aria-hidden="true"><line x1="540" y1="350" x2="330" y2="125" stroke="#B7B7B7" stroke-width="5"/><line x1="540" y1="350" x2="750" y2="125" stroke="#B7B7B7" stroke-width="5"/><line x1="540" y1="350" x2="130" y2="350" stroke="#B7B7B7" stroke-width="5"/><line x1="540" y1="350" x2="950" y2="350" stroke="#B7B7B7" stroke-width="5"/><line x1="540" y1="350" x2="330" y2="575" stroke="#B7B7B7" stroke-width="5"/><line x1="540" y1="350" x2="750" y2="575" stroke="#B7B7B7" stroke-width="5"/></svg><div class="dg-node dg-round" style="left:224px;top:19px"><div class="t">部屋が<br>整って見える</div>
+<div class="dg-hub"><svg width="1080" height="700" aria-hidden="true"><line x1="540" y1="350" x2="330" y2="125" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="750" y2="125" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="130" y2="350" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="950" y2="350" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="330" y2="575" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="750" y2="575" stroke="var(--g-mute)" stroke-width="5"/></svg><div class="dg-node dg-round" style="left:224px;top:19px"><div class="t">部屋が<br>整って見える</div>
 <div class="s">置くだけで印象が変わる</div>
 </div>
 <div class="dg-node dg-round" style="left:644px;top:19px"><div class="t">育てる<br>楽しみがある</div>
@@ -675,11 +675,11 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="card" id="c11"><h3>11. 階段ロードマップ</h3><p class="sub">段階が積み上がる戦略 ･ 長期計画のとき。
 </p>
 <div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図11</span><span class="dg-h">3年かけて、点から線、線から面へ広げる</span></div>
-<div class="dg-stairs"><div class="dg-stair" style="height:150px;background:var(--sc3);color:var(--g-text)"><div class="y">1年目</div>
+<div class="dg-stairs"><div class="dg-stair" style="height:150px;background:var(--sc4);color:var(--g-text)"><div class="y">1年目</div>
 <div class="n">点</div>
 <div class="d">入口の鉢を1品決め、売り場の手前に置く</div>
 </div>
-<div class="dg-stair" style="height:220px;background:var(--sc2);color:var(--g-text)"><div class="y">2年目</div>
+<div class="dg-stair" style="height:220px;background:var(--sc3);color:var(--g-text)"><div class="y">2年目</div>
 <div class="n">線</div>
 <div class="d">2鉢目の候補を隣に並べ、買い足しの流れをつくる</div>
 </div>
