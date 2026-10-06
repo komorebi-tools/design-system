@@ -144,6 +144,24 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-cw{background:#fff; border:1px solid var(--hairline); border-radius:4px; padding:12px 15px; font-size:13px; line-height:1.75; display:flex; align-items:center}
 .dg-cl{background:var(--background); border-radius:4px; padding:12px 15px; font-size:13px; line-height:1.75; display:flex; align-items:center}
 
+/* 2 分類表 ( 3つのバリエーション ) : 区分の色を子に引き継ぐ。--k20 は面の20% ( FIGURE.md §1.2 のマーカー ) */
+.dg-k0{--k:var(--primary-dark); --k20:#D6DDEB; --kbg:var(--base-bg)}
+.dg-k1{--k:var(--cat2-text); --k20:#DDEBE9; --kbg:var(--cat2-bg)}
+.dg-k2{--k:var(--cat1-text); --k20:#E6E6F2; --kbg:var(--cat1-bg)}
+.dg-cls-head{display:grid; grid-template-columns:230px 1.25fr 1fr; gap:0 2px; margin-bottom:8px}
+.dg-cls-head div{font-size:14px; font-weight:700; color:var(--primary-dark); padding:0 18px 6px}
+.dg-cls{display:grid; grid-template-columns:230px 1.25fr 1fr; gap:2px; margin-bottom:12px}
+.dg-cls .l{background:var(--k); color:#fff; font-size:17px; font-weight:700; padding:13px 18px; display:flex; align-items:center}
+.dg-cls .a{background:var(--k20); font-size:16px; font-weight:700; padding:13px 18px; display:flex; align-items:center}
+.dg-cls .b{background:var(--kbg); font-size:13px; line-height:1.7; padding:13px 18px; display:flex; align-items:center}
+.dg-kv{display:flex; align-items:center; gap:26px; margin:18px 0}
+.dg-kv .pill{background:var(--k); color:#fff; font-size:20px; font-weight:700; width:270px; height:62px; border-radius:999px; display:flex; align-items:center; justify-content:center; flex:none}
+.dg-kv .circ{background:var(--k); color:#fff; font-size:18px; font-weight:700; line-height:1.35; text-align:center; width:124px; height:124px; display:flex; align-items:center; justify-content:center; flex:none}
+.dg-kv svg{flex:none}
+.dg-kv .t1{font-size:21px; font-weight:700; line-height:1.5}
+.dg-kv .t1 span{background:linear-gradient(transparent 55%, var(--k20) 55%)}
+.dg-kv .t2{font-size:14px; color:var(--g-cmp); line-height:1.7; margin-top:2px}
+
 /* 3 ステップ ( 帯＋カード ) */
 .dg-steps{display:grid; grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr; align-items:stretch}
 .dg-step{border-radius:6px; overflow:hidden; display:flex; flex-direction:column; background:var(--background)}
@@ -430,25 +448,41 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </div>
 <div class="card" id="c2"><h3>2. 分類表</h3><p class="sub">区分ごとに性質が違うとき。
 </p>
+<p class="sub" style="margin:0 0 12px"><strong>面で組む</strong> … 項目が2つ以上あって、列の見出しが要るとき。
+</p>
 <div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図2</span><span class="dg-h">購入の目的によって、選ぶ基準が違う</span></div>
-<div class="dg-def" style="grid-template-columns:230px 1.35fr 1fr"><div></div>
-<div class="dg-colhead">選ぶ基準</div>
-<div class="dg-colhead">主に選ばれる品</div>
-<div class="dg-label" style="background:var(--primary-dark)">はじめての1鉢</div>
-<div class="dg-cw">育てやすさ、置き場所を選ばないこと</div>
-<div class="dg-cl">小型の鉢 ･ 水やりの少ない品</div>
-<div class="dg-label" style="background:var(--cat2-text)">買い足し</div>
-<div class="dg-cw">手持ちの鉢との並び、葉の形の違い</div>
-<div class="dg-cl">中型の鉢 ･ つる性の品</div>
-<div class="dg-label" style="background:var(--cat1-text)">贈りもの</div>
-<div class="dg-cw">見た目の華やかさ、持ち帰りやすさ</div>
-<div class="dg-cl">鉢カバー付き ･ 花の咲く品</div>
-</div>
-<div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 ) ･ ラベルの色 = 購入の目的 ( ラベルに区分名を書いたので凡例は省略 )</div>
+<div class="dg-cls-head"><div></div><div>選ぶ基準</div><div>主に選ばれる品</div></div>
+<div class="dg-cls dg-k0"><div class="l">はじめての1鉢</div><div class="a">育てやすさ、置き場所を選ばないこと</div><div class="b">小型の鉢 ･ 水やりの少ない品</div></div>
+<div class="dg-cls dg-k1"><div class="l">買い足し</div><div class="a">手持ちの鉢との並び、葉の形の違い</div><div class="b">中型の鉢 ･ つる性の品</div></div>
+<div class="dg-cls dg-k2"><div class="l">贈りもの</div><div class="a">見た目の華やかさ、持ち帰りやすさ</div><div class="b">鉢カバー付き ･ 花の咲く品</div></div>
+<div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 ) ･ 色 = 購入の目的 ( ラベルに区分名を書いたので凡例は省略 )</div>
 </div>
 </div>
-<div class="rule-note">ラベルの色で区分を示す。
-ラベルに区分名が書けるときは凡例を省略してよい。
+<p class="sub" style="margin:28px 0 0"><strong>ピルの見出し → 要素</strong> … 区分ごとに一言で言い切れるとき。
+スライドで軽く見せたいとき。</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図2</span><span class="dg-h">購入の目的によって、選ぶ基準が違う</span></div>
+<div class="dg-kv dg-k0"><div class="pill">はじめての1鉢</div><svg width="54" height="30" viewBox="0 0 54 30" aria-hidden="true"><path d="M0 11h32V2l22 13-22 13v-9H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>育てやすさ、置き場所を選ばないこと</span></div><div class="t2">小型の鉢 ･ 水やりの少ない品</div></div></div>
+<div class="dg-kv dg-k1"><div class="pill">買い足し</div><svg width="54" height="30" viewBox="0 0 54 30" aria-hidden="true"><path d="M0 11h32V2l22 13-22 13v-9H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>手持ちの鉢との並び、葉の形の違い</span></div><div class="t2">中型の鉢 ･ つる性の品</div></div></div>
+<div class="dg-kv dg-k2"><div class="pill">贈りもの</div><svg width="54" height="30" viewBox="0 0 54 30" aria-hidden="true"><path d="M0 11h32V2l22 13-22 13v-9H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>見た目の華やかさ、持ち帰りやすさ</span></div><div class="t2">鉢カバー付き ･ 花の咲く品</div></div></div>
+<div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 ) ･ 色 = 購入の目的 ( ラベルに区分名を書いたので凡例は省略 )</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>円の見出し → 要素</strong> … 区分名が短く、区分そのものを強く見せたいとき。
+前後のページでも同じ円で区分を見せているとき。</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図2</span><span class="dg-h">購入の目的によって、選ぶ基準が違う</span></div>
+<div class="dg-kv dg-k0"><div class="circ dg-round">はじめての<br>1鉢</div><svg width="54" height="30" viewBox="0 0 54 30" aria-hidden="true"><path d="M0 11h32V2l22 13-22 13v-9H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>育てやすさ、置き場所を選ばないこと</span></div><div class="t2">小型の鉢 ･ 水やりの少ない品</div></div></div>
+<div class="dg-kv dg-k1"><div class="circ dg-round">買い足し</div><svg width="54" height="30" viewBox="0 0 54 30" aria-hidden="true"><path d="M0 11h32V2l22 13-22 13v-9H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>手持ちの鉢との並び、葉の形の違い</span></div><div class="t2">中型の鉢 ･ つる性の品</div></div></div>
+<div class="dg-kv dg-k2"><div class="circ dg-round">贈りもの</div><svg width="54" height="30" viewBox="0 0 54 30" aria-hidden="true"><path d="M0 11h32V2l22 13-22 13v-9H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>見た目の華やかさ、持ち帰りやすさ</span></div><div class="t2">鉢カバー付き ･ 花の咲く品</div></div></div>
+<div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 ) ･ 色 = 購入の目的 ( ラベルに区分名を書いたので凡例は省略 )</div>
+</div>
+</div>
+<div class="rule-note">区分の色を、子の要素に薄く引き継ぐ。
+面で組むときは、1列目に面の 20%、2列目に地色を敷く。
+ピル ･ 円のときは、要素の太字の下に面の 20% をマーカーとして敷く。
+セルを枠線で囲まない。
+面で組むときは白のすき間で区切り、区分ごとに1つの塊にする ( 角は丸めない ) 。
+矢印は区分ごとに1本で、2本以上を重ねない。
+3つの型は、1つの資料の中で混ぜてよい。
 </div>
 </div>
 <div class="card" id="c3"><h3>3. ステップ ( 帯＋カード )</h3><p class="sub">各段の説明をしっかり読ませるとき。
