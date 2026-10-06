@@ -804,7 +804,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
         <tr class="subhead"><td>正規化</td><td>標準は表全体。
         行の中の順位を読ませたいときは行ごと。
         列ごとは使わない</td></tr>
-        <tr class="subhead"><td>端の値</td><td>基準からの差の最大を切りのいい値に切り上げる。
+        <tr class="subhead"><td>端の値</td><td>基準からの差の最大を、上から2桁目で5刻みに切り上げる ( 26 → 30、0.46 → 0.50 ) 。
         B ･ C は上と下で同じ値。
         凡例の両端に書く</td></tr>
         <tr class="subhead"><td>塗り方</td><td>位置を 10% 単位に四捨五入 ( ちょうど半分は上へ ) し、下の値の表から拾う。
