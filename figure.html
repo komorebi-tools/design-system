@@ -213,9 +213,9 @@ table.t.striped tbody tr:nth-child(odd) td{background:var(--background)}
 }
 
 /* 使用色の帯 */
-.usedcolors{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; align-items:center}
+.usedcolors{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:14px; align-items:center}
 .usedcolors .lab{font-size:11.5px; color:var(--g-weak); margin-right:2px}
-.uc{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--hairline); border-radius:999px; padding:4px 10px 4px 4px; font-size:11px; font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; color:var(--g-cmp); background:#fff}
+.uc{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; color:var(--g-cmp)}
 .uc i{width:14px; height:14px; border-radius:3px; display:block; border:1px solid rgba(0,0,0,.06)}
 
 /* コピー用 */
@@ -290,7 +290,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
     このページは値を複製せず、先頭の <code>:root</code> と <code>FIG</code> にまとめて参照している。<br>
     ΔE は CIEDE2000、コントラスト比は WCAG 2.x。
-    2026/9/22 時点の検討版。
+    2026/10/6 時点の検討版。
  </p>
 </header>
 
@@ -769,8 +769,8 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       </tbody>
     </table>
     <div class="rule-note">
-      <strong>例外。</strong>位置で読ませる図解 ( 2軸4象限 ･ 対応分析 ) は値ラベルを省いてよい / 100% 積み上げで幅が 5% に満たないセグメントは省いてよい ( 省いたら注記する ) / 比較対象の線は終点の値だけでよい。<br>
-      値ラベルは棒の末尾を追いかけず、<strong>左寄せの固定カラムに揃える</strong>。
+      <strong>例外。</strong>位置で読ませる図解 ( 2軸4象限 ･ 対応分析 ) は値ラベルを省いてよい / 100% 積み上げで幅が 5% に満たないセグメントは省いてよい ( 省いたら注記する ) / 比較対象の線は終点の値だけでよく、色は <code>#999999</code> に落としてよい。<br>
+      横棒の値ラベルは棒の末尾を追いかけず、<strong>プロット領域の右外の固定カラムに左寄せで揃える</strong>。
       項目名は棒側に右寄せ。
    </div>
     <details class="snippet">
@@ -805,7 +805,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
         <tr class="subhead"><td>正規化</td><td>標準は表全体。
         行の中の順位を読ませたいときは行ごと。
         列ごとは使わない</td></tr>
-        <tr class="subhead"><td>端の値</td><td>基準からの差の最大を切りのいい値に切り上げる。
+        <tr class="subhead"><td>端の値</td><td>基準からの差の最大を、上から2桁目で5刻みに切り上げる ( 26 → 30、0.46 → 0.50 ) 。
         B ･ C は上と下で同じ値。
         凡例の両端に書く</td></tr>
         <tr class="subhead"><td>塗り方</td><td>位置を 10% 単位に四捨五入 ( ちょうど半分は上へ ) し、下の値の表から拾う。
@@ -966,7 +966,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </section>
 
 <footer class="page-foot">
-  2026/9/22 時点の検討版。
+  2026/10/6 時点の検討版。
   値と根拠は <code>design-system</code> の <code>FIGURE.md</code> を一次情報源とする。
   §4 Do's and Don'ts の全文は <code>FIGURE.md</code>、スライド固有の規約は <code>SLIDE.md</code> を参照。
 </footer>
