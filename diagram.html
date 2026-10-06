@@ -137,12 +137,29 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-sl{font-size:12px; font-weight:700; color:var(--g-cmp); margin-bottom:4px}
 .dg-conn{display:flex; align-items:center; justify-content:center}
 
-/* 1 導入 ･ 定義表 / 2 分類表 */
-.dg-def{display:grid; gap:12px 14px}
+/* 6 ビフォーアフターで使う見出しと箱 */
 .dg-colhead{font-size:14px; font-weight:700; color:var(--primary-dark); padding-bottom:6px; border-bottom:2px solid var(--primary-dark)}
-.dg-label{background:var(--primary-dark); color:#fff; font-weight:700; font-size:16px; border-radius:4px; padding:14px 16px; display:flex; align-items:center; line-height:1.5}
 .dg-cw{background:#fff; border:1px solid var(--hairline); border-radius:4px; padding:12px 15px; font-size:13px; line-height:1.75; display:flex; align-items:center}
 .dg-cl{background:var(--background); border-radius:4px; padding:12px 15px; font-size:13px; line-height:1.75; display:flex; align-items:center}
+
+/* 1 導入 ･ 定義表 ( 3つのバリエーション ) */
+.dg-intro{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+.dg-intro .cd{background:var(--base-bg); padding:22px 22px 24px}
+.dg-intro .hd{display:flex; align-items:baseline; gap:10px; color:var(--primary-dark); font-weight:700}
+.dg-intro .no{font-size:40px; line-height:1}
+.dg-intro .nm{font-size:20px}
+.dg-intro .da{font-size:15px; font-weight:700; line-height:1.55; margin-top:14px}
+.dg-intro .lb{font-size:11.5px; font-weight:700; color:var(--g-cmp); margin-top:14px}
+.dg-intro .tx{font-size:13px; line-height:1.7; margin-top:2px}
+.dg-tb{display:grid; grid-template-columns:200px 1fr 1.2fr; align-items:center; border-bottom:1px solid var(--hairline)}
+.dg-tb.h{border-bottom:2px solid var(--primary-dark)}
+.dg-tb.h div{font-size:14px; font-weight:700; color:var(--primary-dark); padding:0 18px 8px}
+.dg-tb .k{display:flex; align-items:center; gap:12px; padding:16px 0; font-size:18px; font-weight:700; color:var(--primary-dark)}
+.dg-tb .k b{font-size:26px; line-height:1; width:22px}
+.dg-tb .a{font-size:16px; font-weight:700; padding:16px 18px}
+.dg-tb .b{font-size:13.5px; line-height:1.7; padding:16px 18px}
+.dg-cls.one{grid-template-columns:200px 1fr 1.2fr; margin-bottom:6px}
+.dg-cls.one .l b{font-size:22px; line-height:1; margin-right:12px}
 
 /* 2 分類表 ( 3つのバリエーション ) : 区分の色を子に引き継ぐ。--k20 は面の20% ( FIGURE.md §1.2 のマーカー ) */
 .dg-k0{--k:var(--primary-dark); --k20:#D6DDEB; --kbg:var(--base-bg)}
@@ -431,27 +448,62 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </p>
 <div class="card" id="c1"><h3>1. 導入 ･ 定義表</h3><p class="sub">資料の構成 ･ 用語を最初に示すとき。
 </p>
+<p class="sub" style="margin:0 0 12px"><strong>番号つきのカード ( 基本 )</strong> … 項目が2つまでで、数と全体像を先に見せたいとき。
+</p>
 <div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図1</span><span class="dg-h">4つのデータを重ねて、売り場の仮説をつくる</span></div>
-<div class="dg-def" style="grid-template-columns:190px 1fr 1.25fr"><div></div>
-<div class="dg-colhead">使用データ</div>
-<div class="dg-colhead">確認すること</div>
-<div class="dg-label">1 定量</div>
-<div class="dg-cw">購入者アンケート ( n=1,200 )</div>
-<div class="dg-cl">選ぶ基準、置き場所、購入の目的</div>
-<div class="dg-label">2 定性</div>
-<div class="dg-cw">購入者インタビュー ( 12人 )</div>
-<div class="dg-cl">育てはじめの不安、続いた理由、やめた理由</div>
-<div class="dg-label">3 購買データ</div>
-<div class="dg-cw">店頭とオンラインの販売データ 24か月分</div>
-<div class="dg-cl">季節ごとの販売傾向、2鉢目に選ばれる品</div>
-<div class="dg-label">4 投稿</div>
-<div class="dg-cw">観葉植物に関する投稿</div>
-<div class="dg-cl">語られる魅力、飾り方の工夫</div>
+<div class="dg-intro"><div class="cd"><div class="hd"><span class="no">1</span><span class="nm">定量</span></div>
+<div class="da">購入者アンケート ( n=1,200 )</div>
+<div class="lb">確認すること</div>
+<div class="tx">選ぶ基準、置き場所、購入の目的</div>
+</div>
+<div class="cd"><div class="hd"><span class="no">2</span><span class="nm">定性</span></div>
+<div class="da">購入者インタビュー ( 12人 )</div>
+<div class="lb">確認すること</div>
+<div class="tx">育てはじめの不安、続いた理由、やめた理由</div>
+</div>
+<div class="cd"><div class="hd"><span class="no">3</span><span class="nm">購買データ</span></div>
+<div class="da">店頭とオンラインの販売データ 24か月分</div>
+<div class="lb">確認すること</div>
+<div class="tx">季節ごとの販売傾向、2鉢目に選ばれる品</div>
+</div>
+<div class="cd"><div class="hd"><span class="no">4</span><span class="nm">投稿</span></div>
+<div class="da">観葉植物に関する投稿</div>
+<div class="lb">確認すること</div>
+<div class="tx">語られる魅力、飾り方の工夫</div>
+</div>
 </div>
 <div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 )</div>
 </div>
 </div>
-<div class="rule-note">ラベル列は Primary Dark の面に白文字。
+<p class="sub" style="margin:28px 0 0"><strong>表として見せる</strong> … 項目を横に読み比べたいとき。
+行が多いとき。
+</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図1</span><span class="dg-h">4つのデータを重ねて、売り場の仮説をつくる</span></div>
+<div class="dg-tb h"><div></div><div>使用データ</div><div>確認すること</div></div>
+<div class="dg-tb"><div class="k"><b>1</b>定量</div><div class="a">購入者アンケート ( n=1,200 )</div><div class="b">選ぶ基準、置き場所、購入の目的</div></div>
+<div class="dg-tb"><div class="k"><b>2</b>定性</div><div class="a">購入者インタビュー ( 12人 )</div><div class="b">育てはじめの不安、続いた理由、やめた理由</div></div>
+<div class="dg-tb"><div class="k"><b>3</b>購買データ</div><div class="a">店頭とオンラインの販売データ 24か月分</div><div class="b">季節ごとの販売傾向、2鉢目に選ばれる品</div></div>
+<div class="dg-tb"><div class="k"><b>4</b>投稿</div><div class="a">観葉植物に関する投稿</div><div class="b">語られる魅力、飾り方の工夫</div></div>
+<div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 )</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>面で組む</strong> … 分類表と並べて、同じ作りで見せたいとき。
+色は1色にする。
+</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図1</span><span class="dg-h">4つのデータを重ねて、売り場の仮説をつくる</span></div>
+<div class="dg-cls-head" style="grid-template-columns:200px 1fr 1.2fr"><div></div><div>使用データ</div><div>確認すること</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>1</b>定量</div><div class="a">購入者アンケート ( n=1,200 )</div><div class="b">選ぶ基準、置き場所、購入の目的</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>2</b>定性</div><div class="a">購入者インタビュー ( 12人 )</div><div class="b">育てはじめの不安、続いた理由、やめた理由</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>3</b>購買データ</div><div class="a">店頭とオンラインの販売データ 24か月分</div><div class="b">季節ごとの販売傾向、2鉢目に選ばれる品</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>4</b>投稿</div><div class="a">観葉植物に関する投稿</div><div class="b">語られる魅力、飾り方の工夫</div></div>
+<div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 )</div>
+</div>
+</div>
+<div class="rule-note">番号つきのカードを基本にする。
+数と全体像が先に伝わる。
+セルを枠線で囲まない。
+番号は大きく置き、ラベルは Primary Dark の太字にする。
+3つの型は、1つの資料の中で混ぜてよい。
 </div>
 </div>
 <div class="card" id="c2"><h3>2. 分類表</h3><p class="sub">区分ごとに性質が違うとき。
