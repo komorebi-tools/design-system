@@ -163,11 +163,13 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-kv .t2{font-size:14px; color:var(--g-cmp); line-height:1.7; margin-top:2px}
 
 /* 3 ステップ ( 帯＋カード ) */
-.dg-steps{display:grid; grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr; align-items:stretch}
+.dg-steps{display:grid; grid-template-columns:1fr 16px 1fr 16px 1fr 16px 1fr; align-items:stretch}
+.dg-steps .dg-conn{position:relative; z-index:1; overflow:visible}
+.dg-steps .dg-conn svg{flex:none}
 .dg-step{border-radius:6px; overflow:hidden; display:flex; flex-direction:column; background:var(--background)}
 .dg-step .band{background:var(--primary-dark); color:#fff; font-size:17px; font-weight:700; text-align:center; padding:12px 8px}
 .dg-step .band.goal{background:linear-gradient(in oklab 90deg, var(--primary-dark) 30%, var(--cat2-fill) 100%)}
-.dg-step .body{padding:14px 16px 16px; font-size:13px; line-height:1.75; flex:1}
+.dg-step .body{padding:20px 26px 22px; font-size:13px; line-height:1.75; flex:1}
 
 /* 4 ステップ ( 箱と山形 ) */
 .dg-flow{display:grid; grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr; align-items:stretch}
@@ -405,9 +407,12 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </div>
 <div class="card" id="s18"><h3>1.8 つなぎ ( ＋ ･ 矢印 ･ 山形 )</h3><p class="sub">少し太めにして、色はやや薄いグレーか山吹を使う。
 </p>
-<div class="scroll-x"><div class="dg" style="display:flex;gap:44px;align-items:center"><div style="display:flex;align-items:center;gap:10px"><span class="dg-conn"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 3 V23 M3 13 H23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round"/></svg></span><span style="font-size:13px">足す</span></div>
+<div class="scroll-x"><div class="dg" style="display:flex;flex-wrap:wrap;gap:22px 44px;align-items:center"><div style="display:flex;align-items:center;gap:10px"><span class="dg-conn"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 3 V23 M3 13 H23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round"/></svg></span><span style="font-size:13px">足す</span></div>
 <div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
-<span style="font-size:13px">導く</span></div>
+<span style="font-size:13px">記号の矢印 ( 対になる ･ 意味を示す ･ 次の段へ )</span></div>
+<div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="56" height="22" viewBox="0 0 56 22" aria-hidden="true"><path d="M2 11 H40" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M38 3 L54 11 L38 19 Z" fill="var(--g-mute)"/></svg></div>
+<div class="dg-conn"><svg width="56" height="40" viewBox="0 0 56 40" aria-hidden="true"><path d="M4 36 Q6 10 38 10" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M36 2 L52 10 L36 18 Z" fill="var(--g-mute)"/></svg></div>
+<span style="font-size:13px">線の矢印 ( 関係のつなぎ ･ 流れ )</span></div>
 <div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="15" height="26" viewBox="0 0 15 26" aria-hidden="true"><path d="M3 3 L12 13 L3 23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <span style="font-size:13px">次の段へ</span></div>
 <div style="display:flex;align-items:center;gap:10px"><svg width="15" height="26" viewBox="0 0 15 26" aria-hidden="true"><path d="M3 3 L12 13 L3 23" fill="none" stroke="var(--cat4-fill)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="font-size:13px">山吹でもよい</span></div>
@@ -415,6 +420,9 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </div>
 <div class="rule-note">見出しや面に使っている色と同じ色のつなぎにしない。
 つなぎは脇役で、ノードより目立たせない。
+矢印は2種類を使い分ける。
+記号の矢印は太くて野暮ったくなりやすいので、やや小さめに使うか、箱に少しかぶせる。
+かぶせるときは、箱の中の余白を上下左右とも広めに取る。
 </div>
 </div>
 </section>
