@@ -236,6 +236,18 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-mx .c{font-size:13px; line-height:1.7; padding:14px; border-bottom:1px solid var(--hairline); display:flex; align-items:center}
 .dg-mx .c.na{color:var(--g-weak)}
 
+/* 15 ツリー */
+.dg-tree{position:relative; width:1080px; height:418px}
+.dg-tree svg{position:absolute; left:0; top:0}
+.dg-root{position:absolute; left:350px; top:0; width:380px; height:104px; background:var(--primary-dark); color:#fff; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center}
+.dg-root .k{font-size:12.5px; font-weight:700}
+.dg-root .t{font-size:28px; font-weight:700; line-height:1.35}
+.dg-grp{position:absolute; top:156px; width:340px; height:262px; background:#fff; border:1px solid var(--hairline); padding:20px 24px}
+.dg-grp .gh{font-size:22px; font-weight:700; color:var(--primary-dark); line-height:1.3; padding-bottom:10px; border-bottom:1px solid var(--hairline)}
+.dg-grp .it{margin-top:14px}
+.dg-grp .it b{display:block; font-size:17px; line-height:1.4}
+.dg-grp .it span{display:block; font-size:12.5px; color:var(--g-cmp); line-height:1.6}
+
 /* §1 の小さな見本 */
 .dg-demo{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px}
 .dg-demo .cell{border:1px solid var(--hairline); border-radius:6px; padding:18px 16px; text-align:center}
@@ -305,6 +317,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <li><a href="#c12"><span class="num">2.12</span>中心軸タイムライン</a></li>
 <li><a href="#c13"><span class="num">2.13</span>象限</a></li>
 <li><a href="#c14"><span class="num">2.14</span>マトリクス</a></li>
+<li><a href="#c15"><span class="num">2.15</span>ツリー</a></li>
 <li><a href="#s3"><span class="num">3</span>構図の選び方</a></li>
 </ol></nav>
 <section class="chapter"><h2>1. 共通の視覚言語</h2><p class="chapter-note">どの構図でも共通の決まり。
@@ -687,6 +700,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 奇数は中心の円を上に寄せ、下の3つを弧にする。
 真上にはノードを置かない。
 7個 ･ 8個は使ってよいが、推奨しない。
+7個以上は、群に分けて <a href="#c15">ツリー</a> にするほうが読みやすい。
 線の長さは揃えなくてよい。
 </div>
 </div>
@@ -802,6 +816,38 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 該当なしは <code>#999999</code> の「―」にして、キャプションに断る。
 </div>
 </div>
+<div class="card" id="c15"><h3>15. ツリー</h3><p class="sub">1つの土台の下に、要素を群に分けて見せるとき。
+ハブの要素が7個以上のとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図15</span><span class="dg-h">8つの価値は、3つの群に分けると読みやすい</span></div>
+<div class="dg-tree"><svg width="1080" height="418" aria-hidden="true"><line x1="540" y1="104" x2="540" y2="130" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/><line x1="170" y1="130" x2="910" y2="130" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/><line x1="170" y1="130" x2="170" y2="156" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/><line x1="540" y1="130" x2="540" y2="156" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/><line x1="910" y1="130" x2="910" y2="156" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/></svg><div class="dg-root"><div class="k">8つの価値が重なる土台</div>
+<div class="t">暮らしに緑を足す</div>
+</div>
+<div class="dg-grp" style="left:0px"><div class="gh">見た目と気分</div>
+<div class="it"><b>部屋が整って見える</b><span>置くだけで印象が変わる</span></div>
+<div class="it"><b>季節を感じられる</b><span>花 ･ 紅葉 ･ 新芽</span></div>
+<div class="it"><b>気持ちがやわらぐ</b><span>緑があると落ち着く</span></div>
+</div>
+<div class="dg-grp" style="left:370px"><div class="gh">育てやすさ</div>
+<div class="it"><b>手間がかからない</b><span>水やりは週に1回</span></div>
+<div class="it"><b>長くそばに置ける</b><span>数年単位で育つ</span></div>
+<div class="it"><b>育てる楽しみがある</b><span>新芽 ･ 植え替え</span></div>
+</div>
+<div class="dg-grp" style="left:740px"><div class="gh">広がり</div>
+<div class="it"><b>贈りものにしやすい</b><span>好みが分かれにくい</span></div>
+<div class="it"><b>買い足して広げられる</b><span>2鉢目 ･ 3鉢目</span></div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 ) ･ 濃い箱 = 土台 ･ 群の分け方は見本用</div>
+</div>
+</div>
+<div class="rule-note">土台は塗りの角丸、群は白地に細い枠の四角を1つずつ。
+箱の中は見出しと本文で組み、要素ごとに箱を分けない。
+つなぎは幹 ･ 横棒 ･ 短い枝だけにして、矢印を付けない。
+箱と線が増えると、手順に見える。
+ハブの要素が7個以上になるときは、群に分けてこの型にする。
+</div>
+</div>
 </section>
 <section class="chapter" id="s3"><h2>3. 構図の選び方</h2><p class="chapter-note">見せたい関係性から選ぶ。
 </p>
@@ -816,6 +862,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <tr><td>並列の柱</td><td>7</td></tr>
 <tr><td>対になる2側面</td><td>8</td></tr>
 <tr><td>土台と周辺</td><td>9</td></tr>
+<tr><td>土台と、群に分けた要素</td><td>15</td></tr>
 <tr><td>1年 ･ 長期の時間</td><td>10 ･ 11 ･ 12</td></tr>
 </table><div class="rule-note">図解にするのは、本文の関係性が構図に合う部分だけ。
 数値 ･ 語は本文にあるものだけを使い、仮説は「仮説」と明記する。
