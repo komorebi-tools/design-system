@@ -66,7 +66,7 @@ design-system/
 | [SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | デザイントークン、情報ソース (コーポレートサイト、会社説明スライド)、品質 3 層定義 (L1/L2/L3)、アンチパターン、チェックリストを定義。Claude Code が UI を作る際の判断基準になる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 8 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する <!-- design-check: allow NO_TEXT_BLACK,NO_PERIOD_LINEBREAK --> |
 | [FIGURE.md](FIGURE.md) | グラフ、表、見出しの階層。図解は2軸4象限だけを扱う。色の一次情報源は DESIGN.md だが、カテゴリ配色 ･ グレーの段など DESIGN.md に対応がない値はここで定義する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
-| [DIAGRAM.md](DIAGRAM.md) | 整理の図 ( 図解 ) の規約。関係を構図で見せるときの構図カタログ15型と選び方、図解の中での色 ･ 文字の使い方。色の値は持たず、DESIGN.md と FIGURE.md を参照する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| [DIAGRAM.md](DIAGRAM.md) | 整理の図 ( 図解 ) の規約。関係を構図で見せるときの構図カタログ17型と選び方、図解の中での色 ･ 文字の使い方。色の値は持たず、DESIGN.md と FIGURE.md を参照する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [SLIDE.md](SLIDE.md) | スライド固有の規約。フォント、サイズの段階、配置、pill ･ マーカー、スライド/スプレッドシートのテーマ配色。スライドを作るときは FIGURE.md と合わせて読む <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [RATIONALE.md](RATIONALE.md) | FIGURE.md ･ SLIDE.md の規約をそう決めた根拠 (測定値、近似色の検査、選定の経緯)。既定では読まず、判断に迷ったときに開く <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [index.html](index.html) | DESIGN.md をビジュアルで確認できるページ。チーム全員が同じトークンを見られる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
