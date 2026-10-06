@@ -137,11 +137,6 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-sl{font-size:12px; font-weight:700; color:var(--g-cmp); margin-bottom:4px}
 .dg-conn{display:flex; align-items:center; justify-content:center}
 
-/* 6 ビフォーアフターで使う見出しと箱 */
-.dg-colhead{font-size:14px; font-weight:700; color:var(--primary-dark); padding-bottom:6px; border-bottom:2px solid var(--primary-dark)}
-.dg-cw{background:#fff; border:1px solid var(--hairline); border-radius:4px; padding:12px 15px; font-size:13px; line-height:1.75; display:flex; align-items:center}
-.dg-cl{background:var(--background); border-radius:4px; padding:12px 15px; font-size:13px; line-height:1.75; display:flex; align-items:center}
-
 /* 1 導入 ･ 定義表 ( 3つのバリエーション ) */
 .dg-intro{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
 .dg-intro .cd{background:var(--base-bg); padding:22px 22px 24px}
@@ -204,8 +199,20 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-num .d{font-size:13px; line-height:1.8; text-align:left}
 
 /* 6 ビフォーアフター */
-.dg-ba{display:grid; grid-template-columns:1fr 34px 1.05fr 34px 1.15fr; gap:12px 0; align-items:stretch}
-.dg-out{background:var(--base-bg); border-radius:4px; padding:12px 15px; font-size:14px; line-height:1.7; font-weight:700; color:var(--primary-dark); display:flex; align-items:center}
+.dg-ba{display:grid; grid-template-columns:0.82fr 18px 1.3fr; align-items:stretch; margin-bottom:10px}
+.dg-ba .pb, .dg-ba .pa{display:inline-block; color:#fff; font-size:14px; font-weight:700; padding:6px 24px; border-radius:999px}
+.dg-ba .pb{background:var(--g-weak)}
+.dg-ba .pa{background:var(--primary-dark)}
+.dg-ba .bf{background:var(--track); color:var(--g-cmp); font-size:15px; line-height:1.65; padding:20px 34px 20px 26px; display:flex; align-items:center}
+.dg-ba .dg-conn{position:relative; z-index:1; overflow:visible}
+.dg-ba .dg-conn svg{flex:none}
+.dg-ba .af{display:grid; grid-template-columns:1fr 250px; gap:2px}
+.dg-ba .af > div{background:var(--base-bg); display:flex; flex-direction:column; justify-content:center}
+.dg-ba .af .m{font-size:15px; line-height:1.5; padding:18px 20px 18px 36px}
+.dg-ba .af .m b{font-size:25px; color:var(--primary-dark)}
+.dg-ba .af .s{padding:14px 22px}
+.dg-ba .af .s .k{font-size:11.5px; font-weight:700; color:var(--g-cmp)}
+.dg-ba .af .s .v{font-size:14px; font-weight:700; color:var(--primary-dark); line-height:1.6; margin-top:2px}
 
 /* 7 柱カード */
 .dg-pil{display:grid; gap:16px}
@@ -625,36 +632,42 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 丸数字は円に入れない。
 </div>
 </div>
-<div class="card" id="c6"><h3>6. ビフォーアフター</h3><p class="sub">前提に何かを足して結論を出すとき。
+<div class="card" id="c6"><h3>6. ビフォーアフター</h3><p class="sub">前後で何が変わったかを見せるとき。
 </p>
-<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図6</span><span class="dg-h">今回の調査は、これまでの整理を置き換えずに補う</span></div>
-<div class="dg-ba"><div class="dg-colhead">これまでの整理</div>
-<div></div>
-<div class="dg-colhead">今回の調査で補うこと</div>
-<div></div>
-<div class="dg-colhead">売り場への示唆 ( 仮説 )</div>
-<div class="dg-cl">はじめての人は、育てやすさで選ぶ</div>
-<div class="dg-conn"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 3 V23 M3 13 H23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round"/></svg></div>
-<div class="dg-cw"><span>店頭では、<b>持ち帰りやすさ</b>も決め手になっていた</span></div>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図6</span><span class="dg-h">今回の調査で、選ぶ基準の見え方が変わった</span></div>
+<div class="dg-ba"><div><span class="pb">これまで</span></div><div></div><div><span class="pa">これから</span></div></div>
+<div class="dg-ba"><div class="bf">はじめての人は、<br>育てやすさで選ぶ</div>
 <div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
-<div class="dg-out">小型の鉢に、持ち手付きの袋を用意する</div>
-<div class="dg-cl">2鉢目は、1鉢目と違う葉の形を選ぶ</div>
-<div class="dg-conn"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 3 V23 M3 13 H23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round"/></svg></div>
-<div class="dg-cw"><span>並べたときの<b>高さの違い</b>も意識されていた</span></div>
-<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
-<div class="dg-out">高さの違う品を、組み合わせで見せる</div>
-<div class="dg-cl">贈りものは、見た目の華やかさで選ぶ</div>
-<div class="dg-conn"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 3 V23 M3 13 H23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round"/></svg></div>
-<div class="dg-cw"><span>贈る側は、<b>相手が育てられるか</b>を気にしていた</span></div>
-<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
-<div class="dg-out">育て方の札を、贈りもの用にも付ける</div>
-</div>
-<div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 ) ･ 青の地 = 売り場への示唆 ( 仮説 )</div>
+<div class="af"><div class="m"><span>育てやすさに加えて、<br><b>持ち帰りやすさ</b>も決め手になる</span></div>
+<div class="s"><div class="k">売り場への示唆 ( 仮説 )</div>
+<div class="v">小型の鉢に、持ち手付きの袋を用意する</div>
 </div>
 </div>
-<div class="rule-note">＋ と矢印で結ぶ。
-前提が多いときは列を足してよい。
-結論の列に色の意味を持たせる。
+</div>
+<div class="dg-ba"><div class="bf">2鉢目は、1鉢目と<br>違う葉の形を選ぶ</div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
+<div class="af"><div class="m"><span>葉の形に加えて、<br><b>高さの違い</b>も意識している</span></div>
+<div class="s"><div class="k">売り場への示唆 ( 仮説 )</div>
+<div class="v">高さの違う品を、組み合わせで見せる</div>
+</div>
+</div>
+</div>
+<div class="dg-ba"><div class="bf">贈りものは、見た目の<br>華やかさで選ぶ</div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
+<div class="af"><div class="m"><span>華やかさに加えて、<br><b>相手が育てられるか</b>も気にしている</span></div>
+<div class="s"><div class="k">売り場への示唆 ( 仮説 )</div>
+<div class="v">育て方の札を、贈りもの用にも付ける</div>
+</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( 観葉植物の店 ･ 見本用 ) ･ グレー = これまで ･ 青 = これから</div>
+</div>
+</div>
+<div class="rule-note">ぱっと見て、良くなったことが先に分かるようにする。
+左の「これまで」は、ごく薄いグレーの面にして、文字も薄くする。
+右の「これから」は、薄い青の面にして、変わった言葉を Primary Dark で大きく見せる。
+左右の要素が対応するときは段ごとに分け、矢印を段ごとに1本付ける。
+「これまで」「これから」はピルで示す。
 </div>
 </div>
 <div class="card" id="c7"><h3>7. 柱カード</h3><p class="sub">並列の仮説 ･ 価値を数本立てるとき。
@@ -956,7 +969,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <tr><td>並べて比べる</td><td>1 ･ 2 ･ 14</td></tr>
 <tr><td>位置で比べる</td><td>13</td></tr>
 <tr><td>流れ ･ 手順</td><td>3 ･ 4 ･ 5</td></tr>
-<tr><td>前後の変化 ･ 結論の導出</td><td>6</td></tr>
+<tr><td>前後の変化</td><td>6</td></tr>
 <tr><td>並列の柱</td><td>7</td></tr>
 <tr><td>対になる2側面</td><td>8</td></tr>
 <tr><td>土台と周辺</td><td>9</td></tr>
