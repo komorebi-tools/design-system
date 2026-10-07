@@ -69,7 +69,7 @@ console.log("=== 1. 静的チェック ===");
 }
 
 // ---------------------------------------------------------------------------
-console.log("\n=== 2. 8件すべての挙動 (違反する入力 / 違反しない入力) ===");
+console.log("\n=== 2. 9件すべての挙動 (違反する入力 / 違反しない入力) ===");
 const rules = JSON.parse(readFileSync(RULES_MAIN, "utf8"));
 // 各規則につき、違反する入力と違反しない入力を1つずつ
 const CASES = {
@@ -77,6 +77,7 @@ const CASES = {
   NO_TEXT_BLACK: { bad: "color: #000000;", good: "color: #333333;" },
   NO_FULLWIDTH_SLASH: { bad: "A／B", good: "A / B" },
   NO_FULLWIDTH_PAREN: { bad: "これは（補足）です", good: "これは (補足) です" },
+  NO_PAREN_INNER_SPACE: { bad: "これは ( 補足 ) です", good: "これは (補足) です" },
   NO_FULLWIDTH_COLON: { bad: "仮説：結論", good: "仮説 : 結論" },
   NO_FULLWIDTH_NAKAGURO: { bad: "Notion・Slack", good: "Notion ･ Slack" },
   NO_BORDER_RADIUS_50: { bad: "border-radius: 50%;", good: "border-radius: 8px;" },
