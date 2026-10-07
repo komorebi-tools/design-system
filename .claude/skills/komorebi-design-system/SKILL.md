@@ -36,6 +36,7 @@ description: |
 このスキルには図表の値を書かない。
 `FIGURE.md` が一次情報源。
 スライドを作る ･ 直すときは `SLIDE.md` も読む。
+図解を作る ･ 直すときは `DIAGRAM.md` も読む。
 
 https://github.com/komorebi-tools/design-system/blob/main/FIGURE.md
 
