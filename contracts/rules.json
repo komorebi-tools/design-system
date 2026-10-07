@@ -34,7 +34,7 @@
   {
     "id": "NO_PAREN_INNER_SPACE",
     "severity": "warning",
-    "description": "半角丸括弧の内側にスペースを入れない (DESIGN.md §3.6 規則4)。括弧の中に日本語 (漢字 ･ ひらがな ･ カタカナ) があるときだけ検出する。コードの括弧は対象外",
+    "description": "半角丸括弧の内側にスペースを入れない (DESIGN.md §3.6 規則4)。括弧の中に日本語 (漢字・ひらがな・カタカナ) があるときだけ検出する。コードの括弧は対象外",
     "detector": "regex",
     "pattern": "\\([ \\t\\u3000]+[^()\\n]*[\\p{Script=Han}\\p{Script=Hiragana}\\p{Script=Katakana}][^()\\n]*\\)|\\([^()\\n]*[\\p{Script=Han}\\p{Script=Hiragana}\\p{Script=Katakana}][^()\\n]*[ \\t\\u3000]+\\)",
     "alternative": "(テキスト) : 外側に半角スペース、内側はスペースなし"
@@ -48,12 +48,20 @@
     "alternative": " : "
   },
   {
-    "id": "NO_FULLWIDTH_NAKAGURO",
+    "id": "NO_HALFWIDTH_NAKAGURO",
     "severity": "warning",
-    "description": "中黒は半角 U+FF65 を使う。全角 ・ (U+30FB) と中点 · (U+00B7) は禁止",
+    "description": "中黒は全角 U+30FB を使う。半角 U+FF65 と中点 U+00B7 は使わない。スライドの中に直接打つ文字だけは半角 (SLIDE.md §5.1) なので、その行は allow 注釈で黙らせる",
     "detector": "regex",
-    "pattern": "[\\u30FB\\u00B7]",
-    "alternative": "･ (半角中黒 U+FF65)"
+    "pattern": "[\\uFF65\\u00B7]",
+    "alternative": "全角中黒「・」(U+30FB)"
+  },
+  {
+    "id": "NO_NAKAGURO_SPACE",
+    "severity": "warning",
+    "description": "中黒の前後にスペースを入れない (全角 U+30FB・半角 U+FF65・中点 U+00B7 のどれでも)",
+    "detector": "regex",
+    "pattern": "[ \\t\\u3000][\\u30FB\\uFF65\\u00B7]|[\\u30FB\\uFF65\\u00B7][ \\t\\u3000]",
+    "alternative": "A・B (前後スペースなし)"
   },
   {
     "id": "NO_BORDER_RADIUS_50",
