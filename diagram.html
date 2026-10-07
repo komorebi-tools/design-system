@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DIAGRAM.md プレビュー - 整理の図 ( 図解 ) の規約</title>
+<link rel="icon" type="image/png" href="assets/logo/logo-clear-symbol.png">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   トークン
+   値の一次情報源は DESIGN.md / FIGURE.md。
+このページは値を複製せず、ここにまとめて参照する
+   ============================================================ */
+:root{
+  --primary:#6E87B6; /* design-check: allow NO_HARDCODED_PRIMARY */
+  --primary-dark:#5A74A3;
+  --primary-light:#9BB0D0;
+  --sub:#A18E6C;
+  --border:#E0E0E0;
+  --background:#F7F7F7;
+
+  --cat1-text:#8D90CA; --cat1-bg:#F6F6FA;
+  --cat2-fill:#84B5B2; --cat2-text:#5CA09D; --cat2-bg:#F3F8F7;
+  --cat4-fill:#EDB369;
+  --base-bg:#F3F7FC;
+
+  --g-text:#434343;
+  --g-note:#595959;
+  --g-cmp:#666666;
+  --g-weak:#999999;
+  --g-mute:#B7B7B7;
+  --hairline:#E0E0E0;
+  --track:#F0F0F0;
+
+  --sc1:#5A74A3; --sc2:#8496BE; --sc3:#AEBBD6; --sc4:#D8DEEA;
+
+  --page:#FFFFFF;
+  --shell:#F5F6F8;
+  --maxw:1280px;
+  --radius:6px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--shell); color:var(--g-text);
+  font-family:"Plus Jakarta Sans","Noto Sans JP",sans-serif;
+  font-size:16px; line-height:1.6; letter-spacing:0.05em;
+}
+h1,h2,h3{font-weight:700; font-feature-settings:"palt" 1,"kern" 1; letter-spacing:0.05em}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px 96px}
+
+/* ---- サイト共通ヘッダ ( index.html ･ figure.html と同じ形 ) ---- */
+.hero{
+  background:linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--primary-light) 100%);
+  color:#FFFFFF; padding:80px 40px; text-align:center;
+}
+.hero h1{font-size:48px; font-weight:700; line-height:1.3; margin:0 0 12px}
+.hero p{font-size:18px; opacity:0.9; margin:0}
+.nav-bar{
+  position:sticky; top:0; z-index:100;
+  background:var(--page); border-bottom:1px solid var(--border);
+  box-shadow:0 1px 3px rgba(0,0,0,0.06);
+  overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch;
+}
+.nav-inner{max-width:var(--maxw); margin:0 auto; padding:0 24px; display:flex; gap:0}
+.nav-link{
+  display:inline-block; padding:12px 16px;
+  font-size:13px; font-weight:600; color:var(--g-cmp);
+  text-decoration:none; border-bottom:2px solid transparent;
+  transition:color 0.2s, border-color 0.2s; flex-shrink:0;
+}
+.nav-link:hover{color:var(--primary); border-bottom-color:var(--primary)}
+.nav-link.current{color:var(--primary-dark); border-bottom-color:var(--primary-dark)}
+
+.masthead{padding:56px 0 32px}
+.masthead h1{font-size:30px; line-height:1.35; margin:0 0 8px; font-weight:700}
+.masthead .lede{color:var(--g-cmp); font-size:15px; margin:0}
+.masthead .meta{margin-top:18px; font-size:13px; color:var(--g-weak)}
+
+.toc{background:var(--page); border:1px solid var(--hairline); border-radius:6px; padding:20px 24px; margin-bottom:40px}
+.toc h2{font-size:13px; letter-spacing:.08em; color:var(--g-weak); margin:0 0 12px; font-weight:700}
+.toc ol{margin:0; padding-left:0; list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:6px 24px}
+.toc a{color:var(--primary-dark); text-decoration:none; font-size:14px}
+.toc a:hover{text-decoration:underline}
+.toc .num{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; color:var(--g-weak); margin-right:8px; font-size:12px}
+
+.chapter{margin:56px 0 0}
+.chapter > h2{font-size:24px; font-weight:700; margin:0 0 6px}
+.chapter > .chapter-note{color:var(--g-cmp); font-size:14px; margin:0 0 24px}
+
+.card{background:var(--page); border:1px solid var(--hairline); border-radius:6px; padding:28px 28px 24px; margin-bottom:20px}
+.card > h3{font-size:18px; font-weight:700; color:var(--primary-dark); margin:0 0 4px}
+.card > .sub{color:var(--g-cmp); font-size:14px; margin:0 0 20px}
+.rule-note{
+  margin:20px 0 0; padding:18px 20px; background:var(--background);
+  border-radius:var(--radius); font-size:13px; line-height:1.7; color:var(--g-note);
+}
+.rule-note strong{color:var(--g-text)}
+table.t{width:100%; border-collapse:collapse; font-size:13.5px}
+table.t th{background:var(--primary); color:#fff; font-weight:700; text-align:left; padding:10px 12px; border:1px solid #D9D9D9}
+table.t td{padding:10px 12px; border:1px solid #D9D9D9; background:#fff; vertical-align:top}
+.scroll-x{overflow-x:auto}
+footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--hairline); font-size:12.5px; color:var(--g-weak)}
+@media (max-width:768px){
+  .wrap{padding:0 16px 64px}
+  .hero{padding:48px 24px}
+  .hero h1{font-size:28px}
+  .hero p{font-size:15px}
+  .nav-inner{padding:0 16px}
+  .masthead{padding:40px 0 24px}
+  .masthead h1{font-size:26px}
+  .chapter > h2{font-size:21px}
+  .card{padding:22px 20px 20px}
+}
+
+/* ============================================================
+   図解 ( DIAGRAM.md §1 の共通の視覚言語 )
+   図は幅 1080px で組み、狭い画面では .scroll-x の中で横に流す
+   ============================================================ */
+.dg{width:1080px; letter-spacing:0; line-height:1.6; word-break:auto-phrase; line-break:strict; color:var(--g-text)}
+.dg b{font-weight:700}
+/* 円は図解のノード ･ 番号 ･ 中心にだけ使う ( UI 部品の角丸 6-8px とは別 ) */
+.dg-round{border-radius:50%} /* design-check: allow NO_BORDER_RADIUS_50 */
+.dg-title{display:flex; align-items:center; gap:14px; padding-bottom:14px; border-bottom:1px solid var(--hairline); margin-bottom:22px}
+.dg-badge{background:var(--primary-dark); color:#fff; font-weight:700; font-size:14px; padding:4px 14px; border-radius:999px; flex:none}
+.dg-h{font-size:24px; font-weight:700; color:var(--primary-dark); line-height:1.35}
+.dg-cap{font-size:11.5px; color:var(--g-weak); margin-top:18px; line-height:1.6}
+.dg-concl{background:var(--base-bg); border-radius:6px; padding:14px 20px; font-size:17px; font-weight:700; color:var(--primary-dark); margin-top:18px; line-height:1.5}
+.dg-legend{display:flex; gap:22px; align-items:center; font-size:12.5px; margin-bottom:14px}
+.dg-legend i{display:inline-block; width:12px; height:12px; margin-right:6px; vertical-align:-1px}
+.dg-bar{height:9px; background:var(--track); border-radius:2px; position:relative; flex:1}
+.dg-bar b{position:absolute; top:0; bottom:0; border-radius:2px}
+.dg-row{display:flex; align-items:center; gap:8px; margin-top:6px}
+.dg-row .l{font-size:12.5px; width:132px; flex:none}
+.dg-row .v{font-size:16px; font-weight:700; width:44px; text-align:right; flex:none}
+.dg-sl{font-size:12px; font-weight:700; color:var(--g-cmp); margin-bottom:4px}
+.dg-conn{display:flex; align-items:center; justify-content:center}
+
+/* 1 導入 ･ 定義表 ( 3つのバリエーション ) */
+.dg-intro{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+.dg-intro .cd{background:var(--base-bg); padding:22px 22px 24px}
+.dg-intro .hd{display:flex; align-items:baseline; gap:10px; color:var(--primary-dark); font-weight:700}
+.dg-intro .no{font-size:40px; line-height:1}
+.dg-intro .nm{font-size:20px}
+.dg-intro .da{font-size:15px; font-weight:700; line-height:1.55; margin-top:14px}
+.dg-intro .lb{font-size:11.5px; font-weight:700; color:var(--g-cmp); margin-top:14px}
+.dg-intro .tx{font-size:13px; line-height:1.7; margin-top:2px}
+.dg-tb{display:grid; grid-template-columns:200px 1fr 1.2fr; align-items:center; border-bottom:1px solid var(--hairline)}
+.dg-tb.h{border-bottom:2px solid var(--primary-dark)}
+.dg-tb.h div{font-size:14px; font-weight:700; color:var(--primary-dark); padding:0 18px 8px}
+.dg-tb .k{display:flex; align-items:center; gap:12px; padding:16px 0; font-size:18px; font-weight:700; color:var(--primary-dark)}
+.dg-tb .k b{font-size:26px; line-height:1; width:22px}
+.dg-tb .a{font-size:16px; font-weight:700; padding:16px 18px}
+.dg-tb .b{font-size:13.5px; line-height:1.7; padding:16px 18px}
+.dg-cls.one{grid-template-columns:200px 1fr 1.2fr; margin-bottom:6px}
+.dg-cls.one .l b{font-size:22px; line-height:1; margin-right:12px}
+
+/* 2 分類表 ( 3つのバリエーション ) : 区分の色を子に引き継ぐ。--k20 は面の20% ( FIGURE.md §1.2 のマーカー ) */
+.dg-k0{--k:var(--primary-dark); --k20:#D6DDEB; --kbg:var(--base-bg)}
+.dg-k1{--k:var(--cat2-text); --k20:#DDEBE9; --kbg:var(--cat2-bg)}
+.dg-k2{--k:var(--cat1-text); --k20:#E6E6F2; --kbg:var(--cat1-bg)}
+.dg-cls-head{display:grid; grid-template-columns:230px 1.25fr 1fr; gap:0 2px; margin-bottom:8px}
+.dg-cls-head div{font-size:14px; font-weight:700; color:var(--primary-dark); padding:0 18px 6px}
+.dg-cls{display:grid; grid-template-columns:230px 1.25fr 1fr; gap:2px; margin-bottom:12px}
+.dg-cls .l{background:var(--k); color:#fff; font-size:17px; font-weight:700; padding:13px 18px; display:flex; align-items:center}
+.dg-cls .a{background:var(--k20); font-size:16px; font-weight:700; padding:13px 18px; display:flex; align-items:center}
+.dg-cls .b{background:var(--kbg); font-size:13px; line-height:1.7; padding:13px 18px; display:flex; align-items:center}
+.dg-kv{display:flex; align-items:center; gap:16px; margin:18px 0}
+.dg-kv .pill{background:var(--k); color:#fff; font-size:20px; font-weight:700; width:270px; height:62px; border-radius:999px; display:flex; align-items:center; justify-content:center; flex:none}
+.dg-kv .circ{background:var(--k); color:#fff; font-size:18px; font-weight:700; line-height:1.35; text-align:center; width:124px; height:124px; display:flex; align-items:center; justify-content:center; flex:none}
+.dg-kv .circ.ml{padding-top:10px} /* 2行以上のときだけ 5px 下げる */
+.dg-kv svg{flex:none}
+.dg-kv .t1{font-size:21px; font-weight:700; line-height:1.5}
+.dg-kv .t1 span{background:linear-gradient(transparent 55%, var(--k20) 55%)}
+.dg-kv .t2{font-size:14px; color:var(--g-cmp); line-height:1.7; margin-top:2px}
+
+/* 3 ステップ ( 帯＋カード ) */
+.dg-steps{display:grid; grid-template-columns:1fr 16px 1fr 16px 1fr 16px 1fr; align-items:stretch}
+.dg-steps .dg-conn{position:relative; z-index:1; overflow:visible}
+.dg-steps .dg-conn svg{flex:none}
+.dg-step{border-radius:6px; overflow:hidden; display:flex; flex-direction:column; background:var(--background)}
+.dg-step .band{background:var(--primary-dark); color:#fff; font-size:17px; font-weight:700; text-align:center; padding:12px 8px}
+.dg-step .band.goal{background:linear-gradient(in oklab 90deg, var(--primary-dark) 30%, var(--cat2-fill) 100%)}
+.dg-step .body{padding:20px 26px 22px; font-size:13px; line-height:1.75; flex:1}
+
+/* 4 ステップ ( 箱と山形 ) */
+.dg-flow{display:grid; grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr; align-items:stretch}
+.dg-box{background:var(--base-bg); border-radius:8px; padding:20px 16px; text-align:center}
+.dg-box .n{font-size:21px; font-weight:700; color:var(--primary-dark); line-height:1.35}
+.dg-box .d{font-size:13px; line-height:1.7; margin-top:8px}
+
+/* 5 番号ステップ */
+.dg-nums{position:relative; display:grid; grid-template-columns:1fr 1fr 1fr; gap:26px}
+.dg-nums .line{position:absolute; top:31px; left:16.6%; right:16.6%; height:2px; background:var(--g-mute)}
+.dg-num{text-align:center; position:relative}
+.dg-num .c{width:64px; height:64px; background:var(--primary-dark); color:#fff; font-weight:700; font-size:28px; display:inline-flex; align-items:center; justify-content:center}
+.dg-num .n{font-size:19px; font-weight:700; color:var(--primary-dark); margin:12px 0 8px}
+.dg-num .d{font-size:13px; line-height:1.8; text-align:left}
+
+/* 6 ビフォーアフター */
+.dg-ba{display:grid; grid-template-columns:0.82fr 18px 1.3fr; align-items:stretch; margin-bottom:10px}
+.dg-ba .pb, .dg-ba .pa{display:inline-block; color:#fff; font-size:14px; font-weight:700; padding:6px 24px; border-radius:999px}
+.dg-ba .pb{background:var(--g-weak)}
+.dg-ba .pa{background:var(--primary-dark)}
+.dg-ba .bf{background:var(--track); color:var(--g-cmp); font-size:15px; line-height:1.65; padding:20px 34px 20px 26px; display:flex; align-items:center}
+.dg-ba .dg-conn{position:relative; z-index:1; overflow:visible}
+.dg-ba .dg-conn svg{flex:none}
+.dg-ba .af{display:grid; grid-template-columns:1fr 250px; gap:2px}
+.dg-ba .af > div{background:var(--base-bg); display:flex; flex-direction:column; justify-content:center}
+.dg-ba .af .m{font-size:15px; line-height:1.5; padding:18px 20px 18px 36px}
+.dg-ba .af .m b{font-size:25px; color:var(--primary-dark)}
+.dg-ba .af .s{padding:14px 22px}
+.dg-ba .af .s .k{font-size:11.5px; font-weight:700; color:var(--g-cmp)}
+.dg-ba .af .s .v{font-size:14px; font-weight:700; color:var(--primary-dark); line-height:1.6; margin-top:2px}
+
+/* 7 柱カード */
+.dg-pil{display:grid; gap:16px}
+.dg-p{border:1px solid var(--hairline); border-radius:8px; overflow:hidden; display:flex; flex-direction:column}
+.dg-p .ph{background:var(--primary-dark); color:#fff; font-size:19px; font-weight:700; text-align:center; padding:13px 8px}
+.dg-p .pb{padding:14px 18px 16px; flex:1}
+.dg-p .big{font-size:32px; font-weight:700; color:var(--primary-dark); line-height:1.3}
+.dg-p .txt{font-size:13px; line-height:1.75}
+.dg-p .want{background:var(--base-bg); padding:14px 18px 16px; font-size:15px; font-weight:700; color:var(--primary-dark); line-height:1.6}
+
+/* 8 バタフライ */
+.dg-bf{display:grid; grid-template-columns:1fr 230px 1fr; align-items:stretch}
+.dg-wing{border-radius:8px; overflow:hidden; display:flex; flex-direction:column; border:1px solid var(--hairline)}
+.dg-wing .who{color:#fff; font-size:21px; font-weight:700; text-align:center; padding:12px}
+.dg-wing .in{padding:14px 26px 22px; flex:1}
+.dg-wing .rl{font-size:14px; font-weight:700; margin-top:14px; margin-bottom:2px}
+.dg-wing .rw{display:flex; align-items:center; gap:12px}
+.dg-wing .rw .dg-bar{height:10px}
+.dg-wing .rv{font-size:34px; font-weight:700; width:86px; flex:none; text-align:center; line-height:1.2}
+.dg-wing .want{font-size:19px; font-weight:700; line-height:1.5; text-align:center; margin-top:22px; padding-top:18px; border-top:1px solid var(--hairline)}
+.dg-mid{position:relative; display:flex; align-items:center; justify-content:center}
+.dg-mid .link{position:absolute; left:0; right:0; top:50%; height:6px; margin-top:-3px; background:var(--g-mute)}
+.dg-mid .ctr{position:relative; width:180px; height:180px; background:linear-gradient(in oklab 135deg, var(--primary-dark) 10%, var(--cat2-fill) 100%); color:#fff; display:flex; align-items:center; justify-content:center; text-align:center; font-size:27px; font-weight:700; line-height:1.3; padding-top:12px} /* 6px 下げる */
+
+/* 9 中心放射 ( ハブ ) */
+.dg-hub{position:relative; width:1080px; height:700px}
+.dg-hub svg{position:absolute; left:0; top:0}
+.dg-node{position:absolute; width:212px; height:212px; background:var(--base-bg); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:14px 14px 0} /* 7px 下げる */
+.dg-node .t{font-size:18px; font-weight:700; color:var(--primary-dark); line-height:1.4}
+.dg-node .s{font-size:12px; color:var(--g-cmp); line-height:1.5; margin-top:8px}
+.dg-hubc{position:absolute; left:400px; top:210px; width:280px; height:280px; background:var(--primary-dark); color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-top:18px} /* 9px 下げる */
+.dg-hubc .t{font-size:30px; font-weight:700; line-height:1.3; margin:12px 0}
+.dg-hubc .s{font-size:13.5px; font-weight:700; line-height:1.55}
+
+/* 10 年間ロードマップ */
+.dg-year{position:relative; height:330px}
+.dg-months{display:grid; grid-template-columns:repeat(12,1fr); border-bottom:3px solid var(--primary-dark); padding:0 60px 6px}
+.dg-months span{text-align:center; font-size:17px; font-weight:700; color:var(--g-weak)}
+.dg-months span.on{font-size:24px; color:var(--primary-dark)}
+.dg-hang{position:absolute; top:44px; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center}
+.dg-hang .ln{width:2px; background:var(--g-mute)}
+.dg-hang .c{display:flex; align-items:center; justify-content:center; text-align:center; font-weight:700; line-height:1.35; padding-top:8px} /* 4px 下げる */
+
+/* 11 階段ロードマップ */
+.dg-stairs{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; align-items:end; height:330px}
+.dg-stair{border-radius:8px 8px 0 0; padding:18px 22px}
+.dg-stair .y{font-size:15px; font-weight:700}
+.dg-stair .n{font-size:30px; font-weight:700; line-height:1.3; margin:2px 0 8px}
+.dg-stair .d{font-size:13px; line-height:1.75}
+
+/* 12 中心軸タイムライン */
+.dg-tl{display:grid; grid-template-columns:70px repeat(4,1fr); gap:0 14px; align-items:stretch}
+.dg-tl .side{font-size:13px; font-weight:700; display:flex; align-items:center}
+.dg-tl .up, .dg-tl .dn{border-radius:6px; padding:12px 14px; font-size:13px; line-height:1.7}
+.dg-tl .up{background:var(--base-bg)}
+.dg-tl .up b{color:var(--primary-dark); font-size:16px}
+.dg-tl .dn{background:#fff; border:1px solid var(--hairline)}
+.dg-tl .dn b{font-size:16px}
+.dg-tl .ax{border-top:3px solid var(--primary-dark); margin:14px 0; padding-top:8px; text-align:center; font-size:26px; font-weight:700; color:var(--primary-dark); line-height:1.2}
+.dg-tl .ax0{margin:14px 0}
+
+/* 14 マトリクス */
+.dg-mx{display:grid; grid-template-columns:200px repeat(3,1fr)}
+.dg-mx .h{font-size:15px; font-weight:700; padding:0 14px 8px; border-bottom:2px solid var(--hairline)}
+.dg-mx .r{font-size:16px; font-weight:700; color:var(--primary-dark); padding:14px 0; border-bottom:1px solid var(--hairline); display:flex; align-items:center}
+.dg-mx .c{font-size:13px; line-height:1.7; padding:14px; border-bottom:1px solid var(--hairline); display:flex; align-items:center}
+.dg-mx .c.na{color:var(--g-weak)}
+
+/* 15 ツリー */
+.dg-tree{position:relative; width:1080px; height:418px}
+.dg-tree svg{position:absolute; left:0; top:0}
+.dg-root{position:absolute; left:350px; top:0; width:380px; height:104px; background:var(--primary-dark); color:#fff; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center}
+.dg-root .k{font-size:12.5px; font-weight:700}
+.dg-root .t{font-size:28px; font-weight:700; line-height:1.35}
+.dg-grp{position:absolute; top:156px; width:340px; height:262px; background:#fff; border:1px solid var(--hairline); padding:20px 24px}
+.dg-grp .gh{font-size:22px; font-weight:700; color:var(--primary-dark); line-height:1.3; padding-bottom:10px; border-bottom:1px solid var(--hairline)}
+.dg-grp .it{margin-top:14px}
+.dg-grp .it b{display:block; font-size:17px; line-height:1.4}
+.dg-grp .it span{display:block; font-size:12.5px; color:var(--g-cmp); line-height:1.6}
+
+/* 16 サイクル */
+.dg-cyc{position:relative; width:1080px; height:500px}
+.dg-cyc svg, .dg-fl svg{position:absolute; left:0; top:0}
+.dg-cyc .n{position:absolute; width:190px; height:64px; border-radius:999px; background:var(--primary-dark); color:#fff; font-size:22px; font-weight:700; display:flex; align-items:center; justify-content:center}
+.dg-cyc .ctr{position:absolute; left:445px; top:155px; width:190px; height:190px; background:linear-gradient(in oklab 135deg, var(--primary-dark) 10%, var(--cat2-fill) 100%); color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-top:12px} /* 6px 下げる */
+.dg-cyc .ctr .k{font-size:12.5px; font-weight:700}
+.dg-cyc .ctr .t{font-size:26px; font-weight:700; line-height:1.3; margin-top:4px}
+
+/* 17 フロー図 */
+.dg-fl{position:relative; width:1080px; height:250px}
+.dg-fl .bx{position:absolute; top:20px; width:270px; height:128px; background:var(--base-bg); padding:22px 24px}
+.dg-fl .bx .t{font-size:21px; font-weight:700; color:var(--primary-dark); line-height:1.35}
+.dg-fl .bx .d{font-size:13px; line-height:1.7; margin-top:8px}
+.dg-fl .bx.goal{background:linear-gradient(in oklab 135deg, var(--primary-dark) 60%, var(--cat2-fill) 100%); color:#fff}
+.dg-fl .bx.goal .t{color:#fff}
+.dg-fl .lb{position:absolute; top:39px; height:30px; border-radius:999px; background:var(--primary-dark); color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center}
+.dg-fl .back{position:absolute; left:135px; top:206px; width:810px; text-align:center}
+.dg-fl .back span{background:#fff; padding:0 16px; font-size:14px; font-weight:700; color:var(--g-cmp)}
+
+/* §1 の小さな見本 */
+.dg-demo{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px}
+.dg-demo .cell{border:1px solid var(--hairline); border-radius:6px; padding:18px 16px; text-align:center}
+.dg-demo .sw{width:96px; height:96px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700}
+.dg-demo .nm{font-size:14px; font-weight:700}
+.dg-demo .ds{font-size:12.5px; color:var(--g-cmp); line-height:1.6; margin-top:4px}
+.dg-dev{position:relative; height:9px; background:var(--track); border-radius:2px; flex:1}
+.dg-dev i{position:absolute; left:50%; top:-3px; bottom:-3px; width:2px; background:var(--g-mute)}
+.dg-dev b{position:absolute; top:0; height:9px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Komorebi Design System</h1>
+  <p>コモレビ 全ツール共通のデザインガイドライン</p>
+</div>
+
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-link" href="index.html#logo">Logo</a>
+    <a class="nav-link" href="index.html#color">Color</a>
+    <a class="nav-link" href="index.html#typography">Typography</a>
+    <a class="nav-link" href="index.html#components">Components</a>
+    <a class="nav-link" href="index.html#icons">Icons</a>
+    <a class="nav-link" href="index.html#motion">Motion</a>
+    <a class="nav-link" href="index.html#spacing">Spacing</a>
+    <a class="nav-link" href="index.html#elevation">Elevation</a>
+    <a class="nav-link" href="index.html#responsive">Responsive</a>
+    <a class="nav-link" href="index.html#dark">Dark Mode</a>
+    <a class="nav-link" href="index.html#guidelines">Guidelines</a>
+    <a class="nav-link" href="index.html#formatting">JP Formatting</a>
+    <a class="nav-link" href="figure.html">Figure</a>
+    <a class="nav-link current" href="diagram.html" aria-current="page">Diagram</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header class="masthead">
+  <h1>DIAGRAM.md プレビュー</h1>
+  <p class="lede">整理の図 ( 図解 ) の規約のうち、§1 共通の視覚言語 / §2 構図カタログ / §3 構図の選び方 を実物で確認するページ。
+</p>
+  <p class="meta">
+    規約の本文は <code>DIAGRAM.md</code>、色の値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
+<br>
+    このページは図の内側 1080px を表示する。PNG 書き出し時の外幅 1160px と上下左右の余白は含めない。
+<br>
+    見本の題材 ( コンビニのスイーツの調査 ) と数値は、すべてこのページのために作った架空のもの。
+<br>
+    2026/10/6 時点の検討版 v2。
+  </p>
+</header>
+<nav class="toc"><h2>目次</h2><ol><li><a href="#s12"><span class="num">1.2</span>ジャンプ率</a></li>
+<li><a href="#s151"><span class="num">1.5.1</span>属さない塗り</a></li>
+<li><a href="#s17"><span class="num">1.7</span>図解の中のグラフ表現</a></li>
+<li><a href="#s18"><span class="num">1.8</span>つなぎ</a></li>
+<li><a href="#c1"><span class="num">2.1</span>導入 ･ 定義表</a></li>
+<li><a href="#c2"><span class="num">2.2</span>分類表</a></li>
+<li><a href="#c3"><span class="num">2.3</span>ステップ ( 帯＋カード )</a></li>
+<li><a href="#c4"><span class="num">2.4</span>ステップ ( 箱と山形 )</a></li>
+<li><a href="#c5"><span class="num">2.5</span>番号ステップ</a></li>
+<li><a href="#c6"><span class="num">2.6</span>ビフォーアフター</a></li>
+<li><a href="#c7"><span class="num">2.7</span>柱カード</a></li>
+<li><a href="#c8"><span class="num">2.8</span>バタフライ</a></li>
+<li><a href="#c9"><span class="num">2.9</span>中心放射 ( ハブ )</a></li>
+<li><a href="#c10"><span class="num">2.10</span>年間ロードマップ</a></li>
+<li><a href="#c11"><span class="num">2.11</span>階段ロードマップ</a></li>
+<li><a href="#c12"><span class="num">2.12</span>中心軸タイムライン</a></li>
+<li><a href="#c13"><span class="num">2.13</span>象限</a></li>
+<li><a href="#c14"><span class="num">2.14</span>マトリクス</a></li>
+<li><a href="#c15"><span class="num">2.15</span>ツリー</a></li>
+<li><a href="#c16"><span class="num">2.16</span>サイクル</a></li>
+<li><a href="#c17"><span class="num">2.17</span>フロー図</a></li>
+<li><a href="#s3"><span class="num">3</span>構図の選び方</a></li>
+</ol></nav>
+<section class="chapter"><h2>1. 共通の視覚言語</h2><p class="chapter-note">どの構図でも共通の決まり。
+</p>
+<div class="card" id="s12"><h3>1.2 ジャンプ率</h3><p class="sub">箱の中でも、収まる範囲でできるだけ上げる。
+</p>
+<table class="t"><tr><th>要素</th><th>大きさ</th><th>見本</th></tr>
+<tr><td>タイトル</td><td>24px 太字</td><td><span style="font-size:24px;font-weight:700;color:var(--primary-dark)">食べきれる大きさが、最初の1個を決める</span></td></tr>
+<tr><td>円 ･ ラベルの見出し語</td><td>15 〜 21px 太字</td><td><span style="font-size:19px;font-weight:700;color:var(--primary-dark)">自分へのご褒美</span></td></tr>
+<tr><td>数値</td><td>15 〜 18px 太字 ( 強調は上限なし )</td><td><span style="font-size:32px;font-weight:700;color:var(--primary-dark)">62%</span></td></tr>
+<tr><td>本文</td><td>13px</td><td><span style="font-size:13px">ひとりで食べきれる大きさの品から選ばれている。
+</span></td></tr>
+<tr><td>キャプション</td><td>11.5px ･ <code>#999999</code></td><td><span style="font-size:11.5px;color:var(--g-weak)">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 買う場面</span></td></tr>
+</table><div class="rule-note">強調したい語 ･ 数字は、文字サイズの上限なしで大きく見せてよい。
+<strong>ただし余白を潰さない。
+</strong> はみ出しは禁止で、入らないときは文を短くするか、図を分ける。
+キャプションは分かっている項目だけを書き、見本にない実施時期 ･ n は作らない。
+数値や色の意味が図の中で分かるときは、重ねて書かなくてよい。
+</div>
+</div>
+<div class="card" id="s151"><h3>1.5.1 どのカテゴリにも属さない塗り</h3><p class="sub">合計 ･ 全体 ･ 2群の中心など、台帳のどの色にも当てはまらない要素の塗り方。
+</p>
+<div class="dg-demo"><div class="cell"><div class="sw dg-round" style="background:var(--cat1-text);color:#fff">合計</div>
+<div class="nm">紫</div>
+<div class="ds">同じ図の中で紫を使っていなければ、紫を使う</div>
+</div>
+<div class="cell"><div class="sw dg-round" style="background:var(--sc4);color:var(--g-text)">全体</div>
+<div class="nm">淡いブルー</div>
+<div class="ds">紫が使えない ･ 選びにくいとき。
+文字は <code>#434343</code></div>
+</div>
+<div class="cell"><div class="sw dg-round" style="background:#fff;border:2px solid var(--hairline);color:var(--g-text)">全体</div>
+<div class="nm">グレーは囲みだけ</div>
+<div class="ds">グレーは面の塗りに使わない。
+線 ･ つなぎ ･ ミニ棒には使ってよい</div>
+</div>
+<div class="cell"><div class="sw dg-round" style="background:linear-gradient(in oklab 135deg,var(--primary-dark) 10%,var(--cat2-fill) 100%);color:#fff">両方</div>
+<div class="nm">グラデーション</div>
+<div class="ds">2色に挟まれた要素を強調したいとき。
+必須ではない</div>
+</div>
+</div>
+<div class="rule-note">グラデーションで文字が読みにくくなるときは、囲みだけ、または単色にする。
+</div>
+</div>
+<div class="card" id="s17"><h3>1.7 図解の中のグラフ表現</h3><p class="sub">長さの比較が意味を持つときは、数値を小さな棒で見せる。
+伝わらないときは、数字そのものを大きく見せる。
+</p>
+<div class="scroll-x"><div class="dg" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px"><div><div class="dg-sl">ミニ棒 ( 長さの比較が意味を持つとき )</div>
+<div class="dg-row"><span class="l">濃厚さ</span><span class="dg-bar"><b style="left:0;width:62%;background:var(--primary-dark)"></b></span><span class="v" style="color:var(--primary-dark)">62%</span></div>
+<div class="dg-row"><span class="l">見た目</span><span class="dg-bar"><b style="left:0;width:41%;background:var(--primary-dark)"></b></span><span class="v" style="color:var(--primary-dark)">41%</span></div>
+<div class="dg-row"><span class="l">価格</span><span class="dg-bar"><b style="left:0;width:28%;background:var(--primary-dark)"></b></span><span class="v" style="color:var(--primary-dark)">28%</span></div>
+</div>
+<div><div class="dg-sl">基準のある指数 ( 中央の線 = 100 ･ 端は 70 〜 130 )</div>
+<div class="dg-row"><span class="l">プリン</span><span class="dg-dev"><i></i><b style="left:50%;width:30%;background:var(--primary-dark);border-radius:0 2px 2px 0"></b></span><span class="v" style="color:var(--primary-dark)">118</span></div>
+<div class="dg-row"><span class="l">シュークリーム</span><span class="dg-dev"><i></i><b style="left:50%;width:7%;background:var(--primary-dark);border-radius:0 2px 2px 0"></b></span><span class="v" style="color:var(--primary-dark)">104</span></div>
+<div class="dg-row"><span class="l">ロールケーキ</span><span class="dg-dev"><i></i><b style="right:50%;width:23%;background:var(--g-mute);border-radius:2px 0 0 2px"></b></span><span class="v" style="color:var(--g-cmp)">86</span></div>
+</div>
+<div><div class="dg-sl">棒にしない数値 ( 比較の土俵がないとき )</div>
+<div style="font-size:13px;line-height:1.9">回答者<b style="font-size:18px;margin-left:14px">n=1,200</b><br>相関係数<b style="font-size:18px;margin-left:14px">0.42</b></div>
+</div>
+</div>
+</div>
+<div class="rule-note">ミニ棒は高さ 8 〜 10px ･ トラック <code>#F0F0F0</code> ･ 軸と目盛りは付けない。
+地色を敷いた箱の中ではトラックが沈むので、白い箱の中で使う。
+基準のある指数は 0 起点にせず、基準線からの差を出す。
+軸と目盛りが要る本式のグラフは <a href="figure.html">figure.html</a> の描き方に従う。
+</div>
+</div>
+<div class="card" id="s18"><h3>1.8 つなぎ ( ＋ ･ 矢印 ･ 山形 )</h3><p class="sub">少し太めにして、色はやや薄いグレーか山吹を使う。
+</p>
+<div class="scroll-x"><div class="dg" style="display:flex;flex-wrap:wrap;gap:22px 44px;align-items:center"><div style="display:flex;align-items:center;gap:10px"><span class="dg-conn"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 3 V23 M3 13 H23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round"/></svg></span><span style="font-size:13px">足す</span></div>
+<div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
+<span style="font-size:13px">記号の矢印 ( 対になる ･ 意味を示す ･ 次の段へ )</span></div>
+<div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="56" height="22" viewBox="0 0 56 22" aria-hidden="true"><path d="M2 11 H40" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M38 3 L54 11 L38 19 Z" fill="var(--g-mute)"/></svg></div>
+<div class="dg-conn"><svg width="56" height="40" viewBox="0 0 56 40" aria-hidden="true"><path d="M4 36 Q6 10 38 10" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M36 2 L52 10 L36 18 Z" fill="var(--g-mute)"/></svg></div>
+<span style="font-size:13px">線の矢印 ( 関係のつなぎ ･ 流れ ･ サイクル ･ フロー図 )</span></div>
+<div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="15" height="26" viewBox="0 0 15 26" aria-hidden="true"><path d="M3 3 L12 13 L3 23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<span style="font-size:13px">次の段へ</span></div>
+<div style="display:flex;align-items:center;gap:10px"><svg width="15" height="26" viewBox="0 0 15 26" aria-hidden="true"><path d="M3 3 L12 13 L3 23" fill="none" stroke="var(--cat4-fill)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="font-size:13px">山吹でもよい</span></div>
+</div>
+</div>
+<div class="rule-note">見出しや面に使っている色と同じ色のつなぎにしない。
+つなぎは脇役で、ノードより目立たせない。
+矢印は2種類を使い分ける。
+記号の矢印は太くて野暮ったくなりやすいので、やや小さめに使うか、箱に少しかぶせる。
+かぶせるときは、箱の中の余白を上下左右とも広めに取る。
+</div>
+</div>
+</section>
+<section class="chapter" id="s2"><h2>2. 構図カタログ</h2><p class="chapter-note">使う条件に合うときだけ使う。
+合う構図がないときは、表のまま整形するだけでよい。
+導入 ･ 定義表と分類表は、構成や区分の関係を見せる図解として扱う。
+「表として見せる」型もセルを枠線で囲まない。
+行と列の値を照合する通常の表は、<a href="FIGURE.md">FIGURE.md</a> §2.6 に従う。
+</p>
+<div class="card" id="c1"><h3>1. 導入 ･ 定義表</h3><p class="sub">資料の構成 ･ 用語を最初に示すとき。
+</p>
+<p class="sub" style="margin:0 0 12px"><strong>番号つきのカード ( 基本 )</strong> … 数と全体像を先に見せたいとき。
+項目が増えて文字が窮屈になるときは、表として見せる。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図1</span><span class="dg-h">4つのデータを重ねて、売り場の仮説をつくる</span></div>
+<div class="dg-intro"><div class="cd"><div class="hd"><span class="no">1</span><span class="nm">定量</span></div>
+<div class="da">購入者アンケート ( n=1,200 )</div>
+<div class="lb">確認すること</div>
+<div class="tx">選ぶ基準、食べる場面、買う目的</div>
+</div>
+<div class="cd"><div class="hd"><span class="no">2</span><span class="nm">定性</span></div>
+<div class="da">購入者インタビュー ( 12人 )</div>
+<div class="lb">確認すること</div>
+<div class="tx">買うきっかけ、くり返す理由、やめた理由</div>
+</div>
+<div class="cd"><div class="hd"><span class="no">3</span><span class="nm">購買データ</span></div>
+<div class="da">店頭の販売データ 24か月分</div>
+<div class="lb">確認すること</div>
+<div class="tx">季節ごとの販売傾向、一緒に買われる品</div>
+</div>
+<div class="cd"><div class="hd"><span class="no">4</span><span class="nm">投稿</span></div>
+<div class="da">コンビニのスイーツに関する投稿</div>
+<div class="lb">確認すること</div>
+<div class="tx">語られる魅力、食べ方の工夫</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 )</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>表として見せる</strong> … 項目を横に読み比べたいとき。
+行が多いとき。
+</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図1</span><span class="dg-h">4つのデータを重ねて、売り場の仮説をつくる</span></div>
+<div class="dg-tb h"><div></div><div>使用データ</div><div>確認すること</div></div>
+<div class="dg-tb"><div class="k"><b>1</b>定量</div><div class="a">購入者アンケート ( n=1,200 )</div><div class="b">選ぶ基準、食べる場面、買う目的</div></div>
+<div class="dg-tb"><div class="k"><b>2</b>定性</div><div class="a">購入者インタビュー ( 12人 )</div><div class="b">買うきっかけ、くり返す理由、やめた理由</div></div>
+<div class="dg-tb"><div class="k"><b>3</b>購買データ</div><div class="a">店頭の販売データ 24か月分</div><div class="b">季節ごとの販売傾向、一緒に買われる品</div></div>
+<div class="dg-tb"><div class="k"><b>4</b>投稿</div><div class="a">コンビニのスイーツに関する投稿</div><div class="b">語られる魅力、食べ方の工夫</div></div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 )</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>面で組む</strong> … 分類表と並べて、同じ作りで見せたいとき。
+色は1色にする。
+</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図1</span><span class="dg-h">4つのデータを重ねて、売り場の仮説をつくる</span></div>
+<div class="dg-cls-head" style="grid-template-columns:200px 1fr 1.2fr"><div></div><div>使用データ</div><div>確認すること</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>1</b>定量</div><div class="a">購入者アンケート ( n=1,200 )</div><div class="b">選ぶ基準、食べる場面、買う目的</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>2</b>定性</div><div class="a">購入者インタビュー ( 12人 )</div><div class="b">買うきっかけ、くり返す理由、やめた理由</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>3</b>購買データ</div><div class="a">店頭の販売データ 24か月分</div><div class="b">季節ごとの販売傾向、一緒に買われる品</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>4</b>投稿</div><div class="a">コンビニのスイーツに関する投稿</div><div class="b">語られる魅力、食べ方の工夫</div></div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 )</div>
+</div>
+</div>
+<div class="rule-note">番号つきのカードを基本にする。
+数と全体像が先に伝わる。
+セルを枠線で囲まない。
+番号は大きく置き、ラベルは Primary Dark の太字にする。
+3つの型は、1つの資料の中で混ぜてよい。
+</div>
+</div>
+<div class="card" id="c2"><h3>2. 分類表</h3><p class="sub">区分ごとに性質が違うとき。
+</p>
+<p class="sub" style="margin:0 0 12px"><strong>面で組む</strong> … 項目が2つ以上あって、列の見出しが要るとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図2</span><span class="dg-h">買う場面によって、選ぶ基準が違う</span></div>
+<div class="dg-cls-head"><div></div><div>選ぶ基準</div><div>主に選ばれる品</div></div>
+<div class="dg-cls dg-k0"><div class="l">自分へのご褒美</div><div class="a">濃厚さ、食べきれる大きさ</div><div class="b">プリン ･ 濃厚なチーズケーキ</div></div>
+<div class="dg-cls dg-k1"><div class="l">家族と分ける</div><div class="a">個数、好みが分かれにくい味</div><div class="b">複数入りのシュークリーム ･ ロールケーキ</div></div>
+<div class="dg-cls dg-k2"><div class="l">手みやげ</div><div class="a">見た目の華やかさ、持ち運びやすさ</div><div class="b">箱入りの焼き菓子 ･ 季節の限定品</div></div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 買う場面 ( ラベルに区分名を書いたので凡例は省略 )</div>
+</div>
+</div>
+<div class="scroll-x" style="margin-top:28px"><div class="dg"><div class="dg-title"><span class="dg-badge">図2</span><span class="dg-h">8つの価値は、3つの群に分けられる</span></div>
+<div class="dg-cls-head"><div></div><div>価値</div><div>具体的には</div></div>
+<div class="dg-cls dg-k0"><div class="l" style="grid-row:span 3">気分</div><div class="a">気分が切り替わる</div><div class="b">食べると一息つける</div><div class="a">季節を感じられる</div><div class="b">いちご ･ 栗 ･ さつまいも</div><div class="a">自分をねぎらえる</div><div class="b">がんばった日の1個</div></div>
+<div class="dg-cls dg-k1"><div class="l" style="grid-row:span 3">ふだん使い</div><div class="a">すぐに買える</div><div class="b">帰り道に1個だけ</div><div class="a">いつも同じ味</div><div class="b">定番は外れがない</div><div class="a">選ぶ楽しみがある</div><div class="b">新商品 ･ 季節の限定</div></div>
+<div class="dg-cls dg-k2"><div class="l" style="grid-row:span 2">広がり</div><div class="a">手みやげにしやすい</div><div class="b">好みが分かれにくい</div><div class="a">少しずつ試せる</div><div class="b">小さい量 ･ 手頃な値段</div></div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 価値の群 ( ラベルに群の名前を書いたので凡例は省略 ) ･ 1つの区分に複数の行があるとき</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>ピルの見出し → 要素</strong> … 区分ごとに一言で言い切れるとき。
+スライドで軽く見せたいとき。</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図2</span><span class="dg-h">買う場面によって、選ぶ基準が違う</span></div>
+<div class="dg-kv dg-k0"><div class="pill">自分へのご褒美</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>濃厚さ、食べきれる大きさ</span></div><div class="t2">プリン ･ 濃厚なチーズケーキ</div></div></div>
+<div class="dg-kv dg-k1"><div class="pill">家族と分ける</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>個数、好みが分かれにくい味</span></div><div class="t2">複数入りのシュークリーム ･ ロールケーキ</div></div></div>
+<div class="dg-kv dg-k2"><div class="pill">手みやげ</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>見た目の華やかさ、持ち運びやすさ</span></div><div class="t2">箱入りの焼き菓子 ･ 季節の限定品</div></div></div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 買う場面 ( ラベルに区分名を書いたので凡例は省略 )</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>円の見出し → 要素</strong> … 区分名が短く、区分そのものを強く見せたいとき。
+前後のページでも同じ円で区分を見せているとき。</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図2</span><span class="dg-h">買う場面によって、選ぶ基準が違う</span></div>
+<div class="dg-kv dg-k0"><div class="circ ml dg-round">自分への<br>ご褒美</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>濃厚さ、食べきれる大きさ</span></div><div class="t2">プリン ･ 濃厚なチーズケーキ</div></div></div>
+<div class="dg-kv dg-k1"><div class="circ ml dg-round">家族と<br>分ける</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>個数、好みが分かれにくい味</span></div><div class="t2">複数入りのシュークリーム ･ ロールケーキ</div></div></div>
+<div class="dg-kv dg-k2"><div class="circ dg-round">手みやげ</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>見た目の華やかさ、持ち運びやすさ</span></div><div class="t2">箱入りの焼き菓子 ･ 季節の限定品</div></div></div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 買う場面 ( ラベルに区分名を書いたので凡例は省略 )</div>
+</div>
+</div>
+<div class="rule-note">区分の色を、子の要素に薄く引き継ぐ。
+面で組むときは、1列目に面の 20%、2列目に地色を敷く。
+ピル ･ 円のときは、要素の太字の下に面の 20% をマーカーとして敷く。
+セルを枠線で囲まない。
+面で組むときは白のすき間で区切り、区分ごとに1つの塊にする ( 角は丸めない ) 。
+矢印は区分ごとに1本で、2本以上を重ねない。
+3つの型は、1つの資料の中で混ぜてよい。
+</div>
+</div>
+<div class="card" id="c3"><h3>3. ステップ ( 帯＋カード )</h3><p class="sub">各段の説明をしっかり読ませるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図3</span><span class="dg-h">お弁当を買うまでの4段階で、確かめることが変わる</span></div>
+<div class="dg-steps"><div class="dg-step"><div class="band">昼前に思い出す</div>
+<div class="body">午前の仕事の合間に、今日の昼を考えはじめる</div>
+</div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
+<div class="dg-step"><div class="band">売り場で比べる</div>
+<div class="body">量と値段を見比べ、候補を2 〜 3品に絞る</div>
+</div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
+<div class="dg-step"><div class="band">中身を確かめる</div>
+<div class="body">おかずの数と、ごはんの量を確かめる</div>
+</div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
+<div class="dg-step"><div class="band goal">温めて持ち帰る</div>
+<div class="body">温めたあとの持ちやすさが、最後の決め手になる</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのお弁当 ･ 見本用 )</div>
+</div>
+</div>
+<div class="rule-note">帯はカードの上辺として一体にする。
+矢印は太く、図の高さの中央に置く。
+文字とかぶりそうなときだけ、ずらす。
+強調したい段やゴールの段は、帯をグラデーションにしてよい ( 横 ･ 青の側を 30% まで取る ) 。
+</div>
+</div>
+<div class="card" id="c4"><h3>4. ステップ ( 箱と山形 )</h3><p class="sub">段の名前が主役で、説明が短いとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図4</span><span class="dg-h">AIに分析を頼むときは、4つの段を踏む</span></div>
+<div class="dg-flow"><div class="dg-box"><div class="n">データを<br>渡す</div>
+<div class="d">行と列の意味を伝える</div>
+</div>
+<div class="dg-conn"><svg width="15" height="26" viewBox="0 0 15 26" aria-hidden="true"><path d="M3 3 L12 13 L3 23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="dg-box"><div class="n">構造を<br>確かめる</div>
+<div class="d">欠けた値と粒度を見る</div>
+</div>
+<div class="dg-conn"><svg width="15" height="26" viewBox="0 0 15 26" aria-hidden="true"><path d="M3 3 L12 13 L3 23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="dg-box"><div class="n">計画を<br>立てる</div>
+<div class="d">指標と手順を提案させる</div>
+</div>
+<div class="dg-conn"><svg width="15" height="26" viewBox="0 0 15 26" aria-hidden="true"><path d="M3 3 L12 13 L3 23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="dg-box"><div class="n">分析を<br>実行する</div>
+<div class="d">確認した計画で進める</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の例 ( AIでの分析 ･ 見本用 )</div>
+</div>
+</div>
+<div class="rule-note">薄青の箱と山形のつなぎ。
+</div>
+</div>
+<div class="card" id="c5"><h3>5. 番号ステップ</h3><p class="sub">段に順番の意味が強いとき ･ 提案の手順。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図5</span><span class="dg-h">3つの手順で、朝のパンから昼のパンへつなげる</span></div>
+<div class="dg-nums"><div class="line"></div>
+<div class="dg-num"><div class="c dg-round">1</div>
+<div class="n">入口の品を決める</div>
+<div class="d">定番の菓子パンを、入口の品として売り場の手前に置く。
+</div>
+</div>
+<div class="dg-num"><div class="c dg-round">2</div>
+<div class="n">選ぶ迷いを減らす</div>
+<div class="d">甘さと食べごたえの目安を、品ごとの札で伝える。
+</div>
+</div>
+<div class="dg-num"><div class="c dg-round">3</div>
+<div class="n">昼の1個につなげる</div>
+<div class="d">総菜パンを隣に並べ、昼に食べる候補を見せる。
+</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのパン ･ 見本用 )</div>
+</div>
+</div>
+<div class="rule-note">円そのものに素の数字を置く。
+丸数字は円に入れない。
+</div>
+</div>
+<div class="card" id="c6"><h3>6. ビフォーアフター</h3><p class="sub">前後で何が変わったかを見せるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図6</span><span class="dg-h">今回の調査で、選ぶ基準の見え方が変わった</span></div>
+<div class="dg-ba"><div><span class="pb">これまで</span></div><div></div><div><span class="pa">これから</span></div></div>
+<div class="dg-ba"><div class="bf">自分用は、<br>濃厚さで選ぶ</div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
+<div class="af"><div class="m"><span>濃厚さに加えて、<br><b>食べきれる大きさ</b>も決め手になる</span></div>
+<div class="s"><div class="k">売り場への示唆 ( 仮説 )</div>
+<div class="v">小さい量の品を、定番の隣に置く</div>
+</div>
+</div>
+</div>
+<div class="dg-ba"><div class="bf">家族用は、<br>個数で選ぶ</div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
+<div class="af"><div class="m"><span>個数に加えて、<br><b>味の違い</b>も意識している</span></div>
+<div class="s"><div class="k">売り場への示唆 ( 仮説 )</div>
+<div class="v">味の違う品を、組み合わせで見せる</div>
+</div>
+</div>
+</div>
+<div class="dg-ba"><div class="bf">手みやげは、見た目の<br>華やかさで選ぶ</div>
+<div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
+<div class="af"><div class="m"><span>華やかさに加えて、<br><b>持ち運びやすさ</b>も気にしている</span></div>
+<div class="s"><div class="k">売り場への示唆 ( 仮説 )</div>
+<div class="v">崩れにくい箱を、手みやげ用に用意する</div>
+</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ グレー = これまで ･ 青 = これから</div>
+</div>
+</div>
+<div class="rule-note">ぱっと見て、良くなったことが先に分かるようにする。
+左の「これまで」は、ごく薄いグレーの面にして、文字も薄くする。
+右の「これから」は、薄い青の面にして、変わった言葉を Primary Dark で大きく見せる。
+左右の要素が対応するときは段ごとに分け、矢印を段ごとに1本付ける。
+「これまで」「これから」はピルで示す。
+</div>
+</div>
+<div class="card" id="c7"><h3>7. 柱カード</h3><p class="sub">並列の仮説 ･ 価値を数本立てるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図7</span><span class="dg-h">コンビニのパンの価値は、3本の柱で語られる</span></div>
+<div class="dg-pil" style="grid-template-columns:repeat(3,1fr)"><div class="dg-p"><div class="ph">手軽さ</div>
+<div class="pb"><div class="dg-sl">挙げた人の割合</div>
+<div class="big">71%</div>
+<div class="txt">「片手で食べられる」</div>
+</div>
+<div class="want"><div class="dg-sl">求められていること</div>移動しながらでも、食べられること</div>
+</div>
+<div class="dg-p"><div class="ph">満足感</div>
+<div class="pb"><div class="dg-sl">挙げた人の割合</div>
+<div class="big">58%</div>
+<div class="txt">「1個で昼が済む」</div>
+</div>
+<div class="want"><div class="dg-sl">求められていること</div>1個で、しっかり満たされること</div>
+</div>
+<div class="dg-p"><div class="ph">選ぶ楽しみ</div>
+<div class="pb"><div class="dg-sl">挙げた人の割合</div>
+<div class="big">34%</div>
+<div class="txt">「新商品を試したい」</div>
+</div>
+<div class="want"><div class="dg-sl">求められていること</div>行くたびに、新しい品があること</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのパン ･ 見本用 ) ･ 青の地 = 求められていること</div>
+</div>
+</div>
+<div class="rule-note">上に濃い面の見出し。
+見出しと本文は一体の箱にする。
+</div>
+</div>
+<div class="card" id="c8"><h3>8. バタフライ</h3><p class="sub">1つの対象を、対になる2側面で見るとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図8</span><span class="dg-h">同じお弁当でも、平日の昼と休日の昼では選ぶ基準が逆になる</span></div>
+<div class="dg-bf"><div class="dg-wing"><div class="who" style="background:var(--primary-dark)">平日の昼</div>
+<div class="in"><div class="rl" style="text-align:right">早く食べられる</div>
+<div class="rw"><span class="rv" style="color:var(--primary-dark)">62%</span><span class="dg-bar"><b style="right:0;width:78%;background:var(--primary-dark)"></b></span></div>
+<div class="rl" style="text-align:right">おかずの品数</div>
+<div class="rw"><span class="rv" style="color:var(--primary-dark)">24%</span><span class="dg-bar"><b style="right:0;width:30%;background:var(--primary-dark)"></b></span></div>
+<div class="want" style="color:var(--primary-dark)">短い時間で済ませることを求める</div>
+</div>
+</div>
+<div class="dg-mid"><div class="link"></div>
+<div class="ctr dg-round">お弁当を<br>買う人</div>
+</div>
+<div class="dg-wing"><div class="who" style="background:var(--cat2-text)">休日の昼</div>
+<div class="in"><div class="rl" style="text-align:left">早く食べられる</div>
+<div class="rw"><span class="dg-bar"><b style="left:0;width:39%;background:var(--cat2-text)"></b></span><span class="rv" style="color:var(--cat2-text)">31%</span></div>
+<div class="rl" style="text-align:left">おかずの品数</div>
+<div class="rw"><span class="dg-bar"><b style="left:0;width:85%;background:var(--cat2-text)"></b></span><span class="rv" style="color:var(--cat2-text)">68%</span></div>
+<div class="want" style="color:var(--cat2-text)">ゆっくり楽しめることを求める</div>
+</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのお弁当 ･ 見本用 ) ･ 数値は各群の中で選ぶ基準に挙げた人の割合 ･ 棒の目盛りは左右とも 0 〜 80% ･ 色 = 買う場面 ( 青 = 平日の昼 / 青緑 = 休日の昼 ･ 中心のグラデーション = 両方を含む )</div>
+</div>
+</div>
+<div class="rule-note">中心は円で、Primary Dark か紫。
+2群の色に挟まれた中心は、2色を結ぶグラデーションを積極的に使う ( 斜め 45度 ･ 青の側を長く ) 。
+枠だけ ･ 白い地でもよい。
+翼は2群の2色のカードかミニ棒。
+左右の目盛りは必ずそろえる。
+</div>
+</div>
+<div class="card" id="c9"><h3>9. 中心放射 ( ハブ )</h3><p class="sub">1つの土台と、その周りの要素のとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図9</span><span class="dg-h">6つの価値の土台は「いつもの小さなご褒美」</span></div>
+<div class="dg-hub"><svg width="1080" height="700" aria-hidden="true"><line x1="540" y1="350" x2="330" y2="125" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="750" y2="125" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="130" y2="350" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="950" y2="350" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="330" y2="575" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="750" y2="575" stroke="var(--g-mute)" stroke-width="5"/></svg><div class="dg-node dg-round" style="left:224px;top:19px"><div class="t">気分が<br>切り替わる</div>
+<div class="s">食べると一息つける</div>
+</div>
+<div class="dg-node dg-round" style="left:644px;top:19px"><div class="t">選ぶ<br>楽しみがある</div>
+<div class="s">新商品 ･ 季節の限定</div>
+</div>
+<div class="dg-node dg-round" style="left:24px;top:244px"><div class="t">すぐに<br>買える</div>
+<div class="s">帰り道に1個だけ</div>
+</div>
+<div class="dg-node dg-round" style="left:844px;top:244px"><div class="t">いつも<br>同じ味</div>
+<div class="s">定番は外れがない</div>
+</div>
+<div class="dg-node dg-round" style="left:224px;top:469px"><div class="t">手みやげに<br>しやすい</div>
+<div class="s">好みが分かれにくい</div>
+</div>
+<div class="dg-node dg-round" style="left:644px;top:469px"><div class="t">少しずつ<br>試せる</div>
+<div class="s">小さい量 ･ 手頃な値段</div>
+</div>
+<div class="dg-hubc dg-round"><div style="font-size:13px">6つの価値が重なる土台</div>
+<div class="t">いつもの<br>小さなご褒美</div>
+<div class="s">無理なく、毎週</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 中央の濃い円 = 土台 ･ 6個は上2 ･ 横2 ･ 下2</div>
+</div>
+</div>
+<div class="scroll-x" style="margin-top:28px"><div class="dg"><div class="dg-title"><span class="dg-badge">図9</span><span class="dg-h">5つの価値の土台は「いつもの小さなご褒美」</span></div>
+<div class="dg-hub" style="height:560px"><svg width="1080" height="560" aria-hidden="true"><line x1="540" y1="170" x2="200" y2="125" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="170" x2="880" y2="125" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="170" x2="245" y2="405" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="170" x2="540" y2="444" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="170" x2="835" y2="405" stroke="var(--g-mute)" stroke-width="5"/></svg><div class="dg-node dg-round" style="left:94px;top:19px"><div class="t">気分が<br>切り替わる</div>
+<div class="s">食べると一息つける</div>
+</div>
+<div class="dg-node dg-round" style="left:774px;top:19px"><div class="t">選ぶ<br>楽しみがある</div>
+<div class="s">新商品 ･ 季節の限定</div>
+</div>
+<div class="dg-node dg-round" style="left:139px;top:299px"><div class="t">すぐに<br>買える</div>
+<div class="s">帰り道に1個だけ</div>
+</div>
+<div class="dg-node dg-round" style="left:434px;top:338px"><div class="t">いつも<br>同じ味</div>
+<div class="s">定番は外れがない</div>
+</div>
+<div class="dg-node dg-round" style="left:729px;top:299px"><div class="t">手みやげに<br>しやすい</div>
+<div class="s">好みが分かれにくい</div>
+</div>
+<div class="dg-hubc dg-round" style="left:400px;top:30px"><div style="font-size:13px">5つの価値が重なる土台</div>
+<div class="t">いつもの<br>小さなご褒美</div>
+<div class="s">無理なく、毎週</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 中央の濃い円 = 土台 ･ 5個は上2 ･ 下3</div>
+</div>
+</div>
+<div class="scroll-x" style="margin-top:28px"><div class="dg"><div class="dg-title"><span class="dg-badge">図9</span><span class="dg-h">4つの価値の土台は「いつもの小さなご褒美」</span></div>
+<div class="dg-hub" style="height:590px"><svg width="1080" height="590" aria-hidden="true"><line x1="540" y1="295" x2="250" y2="116" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="295" x2="830" y2="116" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="295" x2="250" y2="474" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="295" x2="830" y2="474" stroke="var(--g-mute)" stroke-width="5"/></svg><div class="dg-node dg-round" style="left:144px;top:10px"><div class="t">気分が<br>切り替わる</div>
+<div class="s">食べると一息つける</div>
+</div>
+<div class="dg-node dg-round" style="left:724px;top:10px"><div class="t">選ぶ<br>楽しみがある</div>
+<div class="s">新商品 ･ 季節の限定</div>
+</div>
+<div class="dg-node dg-round" style="left:144px;top:368px"><div class="t">すぐに<br>買える</div>
+<div class="s">帰り道に1個だけ</div>
+</div>
+<div class="dg-node dg-round" style="left:724px;top:368px"><div class="t">いつも<br>同じ味</div>
+<div class="s">定番は外れがない</div>
+</div>
+<div class="dg-hubc dg-round" style="left:400px;top:155px"><div style="font-size:13px">4つの価値が重なる土台</div>
+<div class="t">いつもの<br>小さなご褒美</div>
+<div class="s">無理なく、毎週</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 中央の濃い円 = 土台 ･ 4個は四隅</div>
+</div>
+</div>
+<div class="scroll-x" style="margin-top:28px"><div class="dg"><div class="dg-title"><span class="dg-badge">図9</span><span class="dg-h">3つの価値の土台は「いつもの小さなご褒美」</span></div>
+<div class="dg-hub" style="height:560px"><svg width="1080" height="560" aria-hidden="true"><line x1="540" y1="170" x2="245" y2="405" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="170" x2="540" y2="444" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="170" x2="835" y2="405" stroke="var(--g-mute)" stroke-width="5"/></svg><div class="dg-node dg-round" style="left:139px;top:299px"><div class="t">気分が<br>切り替わる</div>
+<div class="s">食べると一息つける</div>
+</div>
+<div class="dg-node dg-round" style="left:434px;top:338px"><div class="t">すぐに<br>買える</div>
+<div class="s">帰り道に1個だけ</div>
+</div>
+<div class="dg-node dg-round" style="left:729px;top:299px"><div class="t">いつも<br>同じ味</div>
+<div class="s">定番は外れがない</div>
+</div>
+<div class="dg-hubc dg-round" style="left:400px;top:30px"><div style="font-size:13px">3つの価値が重なる土台</div>
+<div class="t">いつもの<br>小さなご褒美</div>
+<div class="s">無理なく、毎週</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 中央の濃い円 = 土台 ･ 3個は下3</div>
+</div>
+</div>
+<div class="rule-note">ノード数で並べ方を決める。
+3個は下3、4個は四隅、5個は上2 ･ 下3、6個は上2 ･ 横2 ･ 下2。
+奇数は中心の円を上に寄せ、下の3つを弧にする。
+真上にはノードを置かない。
+7個 ･ 8個は使ってよいが、推奨しない。
+7個以上は、群に分けて <a href="#c15">ツリー</a> にするほうが読みやすい。
+線の長さは揃えなくてよい。
+</div>
+</div>
+<div class="card" id="c10"><h3>10. 年間ロードマップ</h3><p class="sub">1年の中の「いつ打つか」のとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図10</span><span class="dg-h">打ち出しの山は、春と年末にある</span></div>
+<div class="dg-year"><div class="dg-months"><span>1月</span><span>2月</span><span>3月</span><span class="on">4月</span><span class="on">5月</span><span>6月</span><span class="on">7月</span><span>8月</span><span class="on">9月</span><span>10月</span><span>11月</span><span class="on">12月</span></div>
+<div class="dg-hang" style="left:340px"><div class="ln" style="height:20px"></div>
+<div class="c dg-round" style="width:120px;height:120px;background:var(--sc1);color:#fff;font-size:17px">新生活の<br>ご褒美</div>
+</div>
+<div class="dg-hang" style="left:420px"><div class="ln" style="height:150px"></div>
+<div class="c dg-round" style="width:120px;height:120px;background:var(--sc1);color:#fff;font-size:17px">母の日の<br>手みやげ</div>
+</div>
+<div class="dg-hang" style="left:580px"><div class="ln" style="height:30px"></div>
+<div class="c dg-round" style="width:78px;height:78px;background:var(--sc3);color:var(--g-text);font-size:12.5px">ゼリーと<br>アイス</div>
+</div>
+<div class="dg-hang" style="left:740px"><div class="ln" style="height:40px"></div>
+<div class="c dg-round" style="width:98px;height:98px;background:var(--sc2);color:var(--g-text);font-size:14.5px">栗と芋の<br>限定品</div>
+</div>
+<div class="dg-hang" style="left:980px"><div class="ln" style="height:30px"></div>
+<div class="c dg-round" style="width:120px;height:120px;background:var(--sc1);color:#fff;font-size:17px">年末の<br>手みやげ</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 円の大きさと濃さ = 重点の度合い ( 3段 )</div>
+</div>
+</div>
+<div class="rule-note">月のルーラーと吊り下げ円。
+図に関わる月は Primary Dark の太字で、一回り大きくする。
+</div>
+</div>
+<div class="card" id="c11"><h3>11. 階段ロードマップ</h3><p class="sub">段階が積み上がる戦略 ･ 長期計画のとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図11</span><span class="dg-h">3年かけて、点から線、線から面へ広げる</span></div>
+<div class="dg-stairs"><div class="dg-stair" style="height:150px;background:var(--sc4);color:var(--g-text)"><div class="y">1年目</div>
+<div class="n">点</div>
+<div class="d">入口の品を1品決め、売り場の手前に置く</div>
+</div>
+<div class="dg-stair" style="height:220px;background:var(--sc3);color:var(--g-text)"><div class="y">2年目</div>
+<div class="n">線</div>
+<div class="d">次に試す候補を隣に並べ、くり返し買う流れをつくる</div>
+</div>
+<div class="dg-stair" style="height:290px;background:var(--sc1);color:#fff"><div class="y">3年目</div>
+<div class="n">面</div>
+<div class="d">食べる場面ごとの組み合わせを、売り場全体で見せる</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニの売り場 ･ 見本用 ) ･ 段の高さと濃さ = 広がり</div>
+</div>
+</div>
+<div class="rule-note">高さと濃さで広がりを表す。
+白文字が乗るのは濃淡の1段目だけ。
+</div>
+</div>
+<div class="card" id="c12"><h3>12. 中心軸タイムライン</h3><p class="sub">時点ごとに中身が入れ替わるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図12</span><span class="dg-h">季節ごとに、伸びる品と落ち着く品が入れ替わる</span></div>
+<div class="dg-tl"><div class="side" style="color:var(--primary-dark)">伸びる品</div>
+<div class="up"><b>いちごのスイーツ</b><br>春の限定で伸びる</div>
+<div class="up"><b>ゼリー</b><br>暑さで手に取られる</div>
+<div class="up"><b>栗と芋のスイーツ</b><br>秋の限定で伸びる</div>
+<div class="up"><b>箱入りの焼き菓子</b><br>年末の手みやげに選ばれる</div>
+<div class="ax0"></div>
+<div class="ax">3月</div>
+<div class="ax">6月</div>
+<div class="ax">9月</div>
+<div class="ax">12月</div>
+<div class="side" style="color:var(--g-cmp)">落ち着く品</div>
+<div class="dn"><b>焼き菓子</b><br>冬の手みやげが一段落</div>
+<div class="dn"><b>シュークリーム</b><br>暑くなると落ち着く</div>
+<div class="dn"><b>ゼリー</b><br>夏の需要が一段落</div>
+<div class="dn"><b>栗と芋のスイーツ</b><br>秋の限定が終わる</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 軸の上 = 伸びる品 / 軸の下 = 落ち着く品</div>
+</div>
+</div>
+<div class="rule-note">軸の上下に意味を分ける。
+</div>
+</div>
+<div class="card" id="c13"><h3>13. 象限</h3><p class="sub">2軸で位置を読ませるとき。
+</p>
+<p style="font-size:14px;margin:0">描き方は <code>FIGURE.md</code> §2.5 に従う。
+見本は <a href="figure.html#s25">figure.html</a> の「2.5 図解 ( 2軸4象限など )」にある。
+</p>
+</div>
+<div class="card" id="c14"><h3>14. マトリクス</h3><p class="sub">場面 × 区分の対応を示すとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図14</span><span class="dg-h">場面によって、選ばれるパンが違う</span></div>
+<div class="dg-mx"><div class="h"></div>
+<div class="h">菓子パン</div>
+<div class="h">総菜パン</div>
+<div class="h">食パン ･ ロールパン</div>
+<div class="r">朝の通勤</div>
+<div class="c">甘い1個を、移動中に食べる</div>
+<div class="c na">―</div>
+<div class="c">職場の朝食に、ロールパンを選ぶ</div>
+<div class="r">昼の休憩</div>
+<div class="c na">―</div>
+<div class="c">1個で昼を済ませる</div>
+<div class="c na">―</div>
+<div class="r">休日の朝</div>
+<div class="c na">―</div>
+<div class="c na">―</div>
+<div class="c">家族の分を、まとめて買う</div>
+<div class="r">夕方の小腹</div>
+<div class="c">新商品を試しに買う</div>
+<div class="c">温めて、軽い夕食にする</div>
+<div class="c na">―</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのパン ･ 見本用 ) ･ 「―」は該当する回答がなかった組み合わせ</div>
+</div>
+</div>
+<div class="rule-note">列見出しは太字と下罫線で、帯は敷かない。
+該当なしは <code>#999999</code> の「―」にして、キャプションに断る。
+</div>
+</div>
+<div class="card" id="c15"><h3>15. ツリー</h3><p class="sub">1つの土台の下に、要素を群に分けて見せるとき。
+ハブの要素が7個以上のとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図15</span><span class="dg-h">8つの価値は、3つの群に分けると読みやすい</span></div>
+<div class="dg-tree"><svg width="1080" height="418" aria-hidden="true"><line x1="540" y1="104" x2="540" y2="130" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/><line x1="170" y1="130" x2="910" y2="130" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/><line x1="170" y1="130" x2="170" y2="156" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/><line x1="540" y1="130" x2="540" y2="156" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/><line x1="910" y1="130" x2="910" y2="156" stroke="var(--g-mute)" stroke-width="4" stroke-linecap="square"/></svg><div class="dg-root"><div class="k">8つの価値が重なる土台</div>
+<div class="t">いつもの小さなご褒美</div>
+</div>
+<div class="dg-grp" style="left:0px"><div class="gh">気分</div>
+<div class="it"><b>気分が切り替わる</b><span>食べると一息つける</span></div>
+<div class="it"><b>季節を感じられる</b><span>いちご ･ 栗 ･ さつまいも</span></div>
+<div class="it"><b>自分をねぎらえる</b><span>がんばった日の1個</span></div>
+</div>
+<div class="dg-grp" style="left:370px"><div class="gh">ふだん使い</div>
+<div class="it"><b>すぐに買える</b><span>帰り道に1個だけ</span></div>
+<div class="it"><b>いつも同じ味</b><span>定番は外れがない</span></div>
+<div class="it"><b>選ぶ楽しみがある</b><span>新商品 ･ 季節の限定</span></div>
+</div>
+<div class="dg-grp" style="left:740px"><div class="gh">広がり</div>
+<div class="it"><b>手みやげにしやすい</b><span>好みが分かれにくい</span></div>
+<div class="it"><b>少しずつ試せる</b><span>小さい量 ･ 手頃な値段</span></div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 濃い箱 = 土台 ･ 群の分け方は見本用</div>
+</div>
+</div>
+<div class="rule-note">土台は塗りの角丸、群は白地に細い枠の四角を1つずつ。
+箱の中は見出しと本文で組み、要素ごとに箱を分けない。
+つなぎは幹 ･ 横棒 ･ 短い枝だけにして、矢印を付けない。
+箱と線が増えると、手順に見える。
+ハブの要素が7個以上になるときは、群に分けてこの型にするほうが読みやすい。
+</div>
+</div>
+<div class="card" id="c16"><h3>16. サイクル</h3><p class="sub">段が回りつづけるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図16</span><span class="dg-h">AIとの分析は、4つの段を回して深める</span></div>
+<div class="dg-cyc"><svg width="1080" height="500" aria-hidden="true"><path d="M643 66 Q800 70 818.3 198.1" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M820.0 210.0 L810.0 196.3 L825.8 194.0 Z" fill="var(--g-mute)"/><path d="M820 290 Q800 430 655.0 433.7" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M643.0 434.0 L657.8 425.6 L658.2 441.6 Z" fill="var(--g-mute)"/><path d="M437 434 Q280 430 261.7 301.9" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M260.0 290.0 L270.0 303.7 L254.2 306.0 Z" fill="var(--g-mute)"/><path d="M260 210 Q280 70 425.0 66.3" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M437.0 66.0 L422.2 74.4 L421.8 58.4 Z" fill="var(--g-mute)"/></svg><div class="n" style="left:445px;top:30px">問いを立てる</div>
+<div class="n" style="left:725px;top:218px">分析する</div>
+<div class="n" style="left:445px;top:406px">確かめる</div>
+<div class="n" style="left:165px;top:218px">直す</div>
+<div class="ctr dg-round"><div class="k">回りつづける中心</div>
+<div class="t">知りたい<br>こと</div>
+</div>
+</div>
+<div class="dg-cap">出典 : 架空の例 ( AIでの分析 ･ 見本用 ) ･ 中央 = 回りつづける中心</div>
+</div>
+</div>
+<div class="rule-note">段はピルにして、曲線の線の矢印でつなぐ。
+回る向きは時計回りにそろえる。
+中心には、回りつづける対象を置く。
+中心は強く見せたい1箇所なので、グラデーションにしてよい。
+</div>
+</div>
+<div class="card" id="c17"><h3>17. フロー図</h3><p class="sub">関係でつながる流れや、構造を見せるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図17</span><span class="dg-h">定番ができるほど、次の1個を試したくなる</span></div>
+<div class="dg-fl"><svg width="1080" height="250" aria-hidden="true"><path d="M280.0 84.0 L385.0 84.0" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M397.0 84.0 L382.0 92.0 L382.0 76.0 Z" fill="var(--g-mute)"/><path d="M685.0 84.0 L790.0 84.0" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M802.0 84.0 L787.0 92.0 L787.0 76.0 Z" fill="var(--g-mute)"/><path d="M945.0 158.0 L945.0 218.0 L135.0 218.0 L135.0 170.0" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 9"/><path d="M135.0 158.0 L143.0 173.0 L127.0 173.0 Z" fill="var(--g-mute)"/></svg><div class="bx" style="left:0px"><div class="t">はじめての1個を買う</div>
+<div class="d">食べきれる大きさの<br>定番から選ぶ</div>
+</div>
+<div class="bx" style="left:405px"><div class="t">定番ができる</div>
+<div class="d">迷わずに選べる<br>ようになる</div>
+</div>
+<div class="bx goal" style="left:810px"><div class="t">新商品を試す</div>
+<div class="d">味わいの違う品を<br>選びたくなる</div>
+</div>
+<div class="lb" style="left:295px;width:84px">だから</div>
+<div class="lb" style="left:694px;width:96px">その結果</div>
+<div class="back"><span>外れると、定番に戻る</span></div>
+</div>
+<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 点線 = 戻り</div>
+</div>
+</div>
+<div class="rule-note">箱を線の矢印でつなぎ、矢印の上に関係を表す言葉 ( だから ･ その結果 ) をピルで添える。
+行き着く先の箱だけ強く見せる。
+戻りがあるときは、点線の矢印で描き、理由を点線の途中に書く。
+戻りがないときは、点線を省く。
+順番に進むだけの手順は、ステップ ( 3 ･ 4 ･ 5 ) を使う。
+</div>
+</div>
+</section>
+<section class="chapter" id="s3"><h2>3. 構図の選び方</h2><p class="chapter-note">見せたい関係性から選ぶ。
+</p>
+<div class="card" id="s3t"><h3>関係性と構図の対応</h3><p class="sub">ステップ系は同じ見た目になりやすい。
+1つの資料の中で 3 ･ 4 ･ 5 を混ぜて、単調にならないようにする。
+</p>
+<table class="t"><tr><th>見せたい関係性</th><th>構図</th></tr>
+<tr><td>並べて比べる</td><td>1 ･ 2 ･ 14</td></tr>
+<tr><td>位置で比べる</td><td>13</td></tr>
+<tr><td>流れ ･ 手順</td><td>3 ･ 4 ･ 5</td></tr>
+<tr><td>前後の変化</td><td>6</td></tr>
+<tr><td>並列の柱</td><td>7</td></tr>
+<tr><td>対になる2側面</td><td>8</td></tr>
+<tr><td>土台と周辺</td><td>9</td></tr>
+<tr><td>土台と、群に分けた要素</td><td>15</td></tr>
+<tr><td>回りつづける循環</td><td>16</td></tr>
+<tr><td>関係でつながる流れ ･ 構造</td><td>17</td></tr>
+<tr><td>1年 ･ 長期の時間</td><td>10 ･ 11 ･ 12</td></tr>
+</table><div class="rule-note">図解にするのは、本文の関係性が構図に合う部分だけ。
+数値 ･ 語は本文にあるものだけを使い、仮説は「仮説」と明記する。
+</div>
+</div>
+</section>
+
+<footer class="page-foot">
+  2026/10/6 時点の検討版 v2。
+  規約の本文は <code>design-system</code> の <code>DIAGRAM.md</code> を一次情報源とする。
+  軸と目盛りで読ませるグラフは <code>FIGURE.md</code> と <a href="figure.html">figure.html</a> を参照。
+</footer>
+
+</div>
+</body>
+</html>
