@@ -220,7 +220,7 @@
   }
   .icon-item .material-icons { font-size: 28px; color: var(--text); }
   .icon-item span:last-child { font-size: 11px; color: var(--text-disabled); font-family: 'SF Mono', monospace; }
-  .icon-size-row { display: flex; align-items: center; gap: 24px; margin-top: 24px; }
+  .icon-size-row { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 24px; }
   .icon-size-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .icon-size-item span:last-child { font-size: 11px; color: var(--text-disabled); }
 
@@ -274,13 +274,15 @@
   .dark-token-hex { font-size: 11px; color: #707090; font-family: 'SF Mono', monospace; }
 
   /* Button states */
-  .state-row { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .state-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-bottom: 16px; }
   .state-label { width: 80px; font-size: 12px; font-weight: 600; color: var(--text-secondary); flex-shrink: 0; }
 
   @media (max-width: 768px) {
     .hero { padding: 48px 24px; }
     .hero h1 { font-size: 28px; }
     .component-grid, .rule-grid, .motion-grid { grid-template-columns: 1fr; }
+    /* 中身の最小幅でグリッドの列が画面より広がらないようにする */
+    .component-grid > *, .rule-grid > *, .motion-grid > * { min-width: 0; }
     .type-row { flex-direction: column; gap: 8px; }
     .type-meta { width: auto; }
     .elevation-grid { grid-template-columns: repeat(2, 1fr); }
@@ -951,7 +953,7 @@
     <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap">
 
     <!-- Device illustrations (left) -->
-    <div style="display:flex;align-items:flex-end;gap:24px;flex-shrink:0">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:24px;max-width:100%">
       <!-- Mobile -->
       <div style="text-align:center">
         <svg width="60" height="100" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1178,7 +1180,7 @@
     <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap">
 
     <!-- Table (left) -->
-    <div style="flex:1;min-width:400px">
+    <div style="flex:1;min-width:min(400px,100%)">
     <table style="width:100%;border-collapse:collapse;font-size:14px">
       <thead>
         <tr>
