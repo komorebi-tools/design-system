@@ -1469,6 +1469,8 @@ const centerText = {
 function donutSeg(id, values, labels, fills, inks, center){
   const el = document.getElementById(id);
   if (!el) return;
+  /* 中央に出した区分は、外側の値を落とす */
+  const hidden = (c)=> !!(center && center.hideIndex === c.dataIndex);
   new Chart(el, {
     type:'doughnut',
     plugins:[centerText],
@@ -1476,18 +1478,29 @@ function donutSeg(id, values, labels, fills, inks, center){
       borderColor:'#FFFFFF', borderWidth:2 }] },
     options:{
       cutout:'56%',
-      layout:{ padding:{ top:30, bottom:30, left:92, right:92 } },
+      /* 上下は、真下や真上に来る2行のラベル (系列名と値) が切れない幅を取る */
+      layout:{ padding:{ top:46, bottom:46, left:92, right:92 } },
       plugins:{
         legend:{ display:false },
         centerText: center,
+        /* 系列名は系列の文字色、値は本文色 (FIGURE.md §1.2、§2.10)。
+           色を分けるためにラベルを2つにし、空の行を入れて同じ位置に2行で重ねる */
         datalabels:{
           display:true, anchor:'end', align:'end', offset:10, textAlign:'center',
-          color:(c)=>inks[c.dataIndex],
           font:{ size:12, lineHeight:1.4 },
-          formatter:(v,c)=>{
-            const nm = c.chart.data.labels[c.dataIndex];
-            if (center && center.hideIndex === c.dataIndex) return nm;
-            return [nm, v + '%'];
+          labels:{
+            name:{
+              color:(c)=>inks[c.dataIndex],
+              formatter:(v,c)=>{
+                const nm = c.chart.data.labels[c.dataIndex];
+                return hidden(c) ? nm : [nm, ''];
+              }
+            },
+            value:{
+              display:(c)=>!hidden(c),
+              color:FIG.gray.text,
+              formatter:(v)=>['', v + '%']
+            }
           }
         }
       }
