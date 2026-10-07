@@ -155,7 +155,7 @@ AI エージェントがテキストを生成 ･ 編集する際は必ず従う
 | 1 | 中黒は半角 `･` (U+FF65)、**前後に半角スペース有り** | `Notion ･ Slack ･ Email` | `Notion・Slack` (全角 U+30FB)、`Notion·Slack` (中点 U+00B7)、`Notion･Slack` (スペース無し) <!-- design-check: allow NO_FULLWIDTH_NAKAGURO --> |
 | 2 | スラッシュ `/` は半角。**要素並列は前後にスペース有り、日付 ･ パス ･ 単位 ･ 二者択一 (compound) は前後スペース無し** | `Notion / Slack / Email`、`7/27`、`2026/04/28`、`src/foo`、`km/h`、`ON/OFF` | `Notion/Slack/Email`、`7 / 27`、`2026 / 04 / 28` <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | 3 | 引用符 `"..."` は前後にスペース有り (文中の場合、文末は閉じ後スペース不要) | `これは "重要" な点` | `これは"重要"な点` |
-| 4 | 半角丸括弧 `()`: **外側に半角スペース、内側にスペース無し** | `この (テキスト) として` | `この(テキスト)として`、`この ( テキスト ) として` |
+| 4 | 半角丸括弧 `()`: **外側に半角スペース、内側にスペース無し** | `この (テキスト) として` | `この(テキスト)として`、`この ( テキスト ) として` <!-- design-check: allow NO_PAREN_INNER_SPACE --> |
 | 5 | 全角丸括弧 `（）` は禁止、半角 `()` に置換 | `(ピザのみ)` | `（ピザのみ）` <!-- design-check: allow NO_FULLWIDTH_PAREN --> |
 | 6 | 全角括弧 (「」 `『』` ［］ 【】) の前後にスペース無し (前後がどんな文字でも同様) | `この「テキスト」として`、`「タイトル」「サブ」`、`「テキスト」(補足)` | `この 「テキスト」 として` |
 | 7 | 表示用途の角括弧は全角 `［］`、半角 `[]` 禁止。**例外**: Markdown リンク `[text](url)` ･ 配列 ･ 正規表現等のコード構文は半角必須 | `［補足］` | `[補足]` (display 用途で半角) <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
@@ -456,7 +456,7 @@ Border Radius: 6px
 
 ## 11. 検査と allow 注釈
 
-このリポジトリの `hooks/design-check.sh` は、保存されたファイルを `contracts/rules.json` の8件と
+このリポジトリの `hooks/design-check.sh` は、保存されたファイルを `contracts/rules.json` の9件と
 「。」改行チェックに掛ける。
 検査を飛ばしたとき (node ･ jq ･ rules.json が無いなど) は必ず1行出す。
 無出力は「違反なし」だけを意味する。

@@ -41,7 +41,7 @@ design-system/
 ├── figure.html                  ... 図表のプレビュー (GitHub Pages)
 ├── diagram.html                 ... 図解のプレビュー (GitHub Pages)
 ├── contracts/
-│   └── rules.json               ... 禁止ルール8件 (hook で自動チェック)
+│   └── rules.json               ... 禁止ルール9件 (hook で自動チェック)
 ├── hooks/
 │   └── design-check.sh          ... 違反を検出する hook の本体 (各自 ~/.claude/hooks/ へコピー)
 ├── scripts/
@@ -64,7 +64,7 @@ design-system/
 |---|---|
 | [DESIGN.md](DESIGN.md) | 色、フォント、角丸、余白、シャドウを数値で定義。Claude Code はここを見てトークン準拠の CSS を書く <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | デザイントークン、情報ソース (コーポレートサイト、会社説明スライド)、品質 3 層定義 (L1/L2/L3)、アンチパターン、チェックリストを定義。Claude Code が UI を作る際の判断基準になる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
-| [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 8 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する <!-- design-check: allow NO_TEXT_BLACK,NO_PERIOD_LINEBREAK --> |
+| [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 9 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する <!-- design-check: allow NO_TEXT_BLACK,NO_PERIOD_LINEBREAK --> |
 | [FIGURE.md](FIGURE.md) | グラフ、表、見出しの階層。図解は2軸4象限だけを扱う。色の一次情報源は DESIGN.md だが、カテゴリ配色 ･ グレーの段など DESIGN.md に対応がない値はここで定義する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [DIAGRAM.md](DIAGRAM.md) | 整理の図 (図解) の規約。関係を構図で見せるときの構図カタログ17型と選び方、図解の中での色 ･ 文字の使い方。色の値は持たず、DESIGN.md と FIGURE.md を参照する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [SLIDE.md](SLIDE.md) | スライド固有の規約。フォント、サイズの段階、配置、pill ･ マーカー、スライド/スプレッドシートのテーマ配色。スライドを作るときは FIGURE.md と合わせて読む <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
@@ -159,7 +159,7 @@ URL を除外することを狙って書かれた条件ではなく**現状そ�
 | 読み手 | 評価の仕方 |
 | --- | --- |
 | report-studio `utils/report-verify.js` の `DESIGN_RULE_CHECKS` | `new RegExp(rule.pattern, "gu")` |
-| design-system の hook [hooks/design-check.sh](hooks/design-check.sh) | 同上 (bash から node を1回呼んで8件まとめて評価) |
+| design-system の hook [hooks/design-check.sh](hooks/design-check.sh) | 同上 (bash から node を1回呼んで9件まとめて評価) |
 
 **読み手を増やすときは、そのエンジンが同じ方言を解釈できるか必ず確認してください**。
 
@@ -172,8 +172,8 @@ POSIX ERE は `\p{...}` を解釈できませんが、**エラーも出さずに
 パターンを変えたら、次のテストを両方回してください。
 
 ```bash
-node scripts/check-rules.mjs   # rules.json 自体 (8件 ･ 全 pattern が RegExp で生成できるか ･ NO_EMOJI の検出期待値)
-node scripts/check-hook.mjs    # hook 経由の挙動 (8件の検出 / 非検出 ･ 各種スキップ表示)
+node scripts/check-rules.mjs   # rules.json 自体 (9件 ･ 全 pattern が RegExp で生成できるか ･ NO_EMOJI の検出期待値)
+node scripts/check-hook.mjs    # hook 経由の挙動 (9件の検出 / 非検出 ･ 各種スキップ表示)
 ```
 
 ---

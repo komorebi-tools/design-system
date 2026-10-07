@@ -26,10 +26,18 @@
   {
     "id": "NO_FULLWIDTH_PAREN",
     "severity": "warning",
-    "description": "全角括弧禁止。半角 + スペース",
+    "description": "全角括弧禁止。半角 () にする (外側に半角スペース、内側はスペースなし)",
     "detector": "regex",
     "pattern": "[（）]",
-    "alternative": " ( ) with spaces"
+    "alternative": "半角 () にする。外側に半角スペース、内側はスペースなし"
+  },
+  {
+    "id": "NO_PAREN_INNER_SPACE",
+    "severity": "warning",
+    "description": "半角丸括弧の内側にスペースを入れない (DESIGN.md §3.6 規則4)。括弧の中に日本語 (漢字 ･ ひらがな ･ カタカナ) があるときだけ検出する。コードの括弧は対象外",
+    "detector": "regex",
+    "pattern": "\\([ \\t\\u3000]+[^()\\n]*[\\p{Script=Han}\\p{Script=Hiragana}\\p{Script=Katakana}][^()\\n]*\\)|\\([^()\\n]*[\\p{Script=Han}\\p{Script=Hiragana}\\p{Script=Katakana}][^()\\n]*[ \\t\\u3000]+\\)",
+    "alternative": "(テキスト) : 外側に半角スペース、内側はスペースなし"
   },
   {
     "id": "NO_FULLWIDTH_COLON",
