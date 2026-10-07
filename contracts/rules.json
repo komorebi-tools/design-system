@@ -26,7 +26,7 @@
   {
     "id": "NO_FULLWIDTH_PAREN",
     "severity": "warning",
-    "description": "全角括弧禁止。半角 + スペース",
+    "description": "全角括弧禁止。半角 () にする (外側に半角スペース、内側はスペースなし)",
     "detector": "regex",
     "pattern": "[（）]",
     "alternative": "半角 () にする。外側に半角スペース、内側はスペースなし"
