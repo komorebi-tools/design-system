@@ -12,7 +12,7 @@ DESIGN.md の内容をビジュアルで確認できるページです。
 
 https://komorebi-tools.github.io/design-system/
 
-グラフ ･ 図解 ･ 表の配色は、実物で確認できる別ページがあります。
+グラフ・図解・表の配色は、実物で確認できる別ページがあります。
 
 https://komorebi-tools.github.io/design-system/figure.html
 
@@ -41,7 +41,7 @@ design-system/
 ├── figure.html                  ... 図表のプレビュー (GitHub Pages)
 ├── diagram.html                 ... 図解のプレビュー (GitHub Pages)
 ├── contracts/
-│   └── rules.json               ... 禁止ルール9件 (hook で自動チェック)
+│   └── rules.json               ... 禁止ルール10件 (hook で自動チェック)
 ├── hooks/
 │   └── design-check.sh          ... 違反を検出する hook の本体 (各自 ~/.claude/hooks/ へコピー)
 ├── scripts/
@@ -64,16 +64,16 @@ design-system/
 |---|---|
 | [DESIGN.md](DESIGN.md) | 色、フォント、角丸、余白、シャドウを数値で定義。Claude Code はここを見てトークン準拠の CSS を書く <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | デザイントークン、情報ソース (コーポレートサイト、会社説明スライド)、品質 3 層定義 (L1/L2/L3)、アンチパターン、チェックリストを定義。Claude Code が UI を作る際の判断基準になる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
-| [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 9 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する <!-- design-check: allow NO_TEXT_BLACK,NO_PERIOD_LINEBREAK --> |
-| [FIGURE.md](FIGURE.md) | グラフ、表、見出しの階層。図解は2軸4象限だけを扱う。色の一次情報源は DESIGN.md だが、カテゴリ配色 ･ グレーの段など DESIGN.md に対応がない値はここで定義する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
-| [DIAGRAM.md](DIAGRAM.md) | 整理の図 (図解) の規約。関係を構図で見せるときの構図カタログ17型と選び方、図解の中での色 ･ 文字の使い方。色の値は持たず、DESIGN.md と FIGURE.md を参照する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
-| [SLIDE.md](SLIDE.md) | スライド固有の規約。フォント、サイズの段階、配置、pill ･ マーカー、スライド/スプレッドシートのテーマ配色。スライドを作るときは FIGURE.md と合わせて読む <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
-| [RATIONALE.md](RATIONALE.md) | FIGURE.md ･ SLIDE.md の規約をそう決めた根拠 (測定値、近似色の検査、選定の経緯)。既定では読まず、判断に迷ったときに開く <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 10 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する <!-- design-check: allow NO_TEXT_BLACK,NO_PERIOD_LINEBREAK --> |
+| [FIGURE.md](FIGURE.md) | グラフ、表、見出しの階層。図解は2軸4象限だけを扱う。色の一次情報源は DESIGN.md だが、カテゴリ配色・グレーの段など DESIGN.md に対応がない値はここで定義する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| [DIAGRAM.md](DIAGRAM.md) | 整理の図 (図解) の規約。関係を構図で見せるときの構図カタログ17型と選び方、図解の中での色・文字の使い方。色の値は持たず、DESIGN.md と FIGURE.md を参照する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| [SLIDE.md](SLIDE.md) | スライド固有の規約。フォント、サイズの段階、配置、pill・マーカー、スライド/スプレッドシートのテーマ配色。スライドを作るときは FIGURE.md と合わせて読む <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| [RATIONALE.md](RATIONALE.md) | FIGURE.md・SLIDE.md の規約をそう決めた根拠 (測定値、近似色の検査、選定の経緯)。既定では読まず、判断に迷ったときに開く <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [index.html](index.html) | DESIGN.md をビジュアルで確認できるページ。チーム全員が同じトークンを見られる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [figure.html](figure.html) | FIGURE.md の §1 〜 §3 を実物のグラフで確認できるページ。規約の本文は FIGURE.md で、ここは見本。Chart.js で描いている <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [diagram.html](diagram.html) | DIAGRAM.md の §1 〜 §3 を実物の図解で確認できるページ。規約の本文は DIAGRAM.md で、ここは見本。題材と数値は架空のもの <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 
-> 約物 ･ 記号の表記ルール (中黒 ･ スラッシュ ･ 引用符 ･ 括弧 ･ コロン ･ カンマ等の 11 項目 + 句点後改行ルール) は [DESIGN.md §3.6](DESIGN.md) を一次情報源として参照してください。
+> 約物・記号の表記ルール (中黒・スラッシュ・引用符・括弧・コロン・カンマ等の 11 項目 + 句点後改行ルール) は [DESIGN.md §3.6](DESIGN.md) を一次情報源として参照してください。
 
 #### 2026/9/1 の `NO_EMOJI` の変更について
 
@@ -132,7 +132,7 @@ hook 本体はコピー先に置かれるため、`rules.json` の場所を自�
 export KOMOREBI_RULES_FILE=/path/to/design-system/contracts/rules.json
 ```
 
-**`rules.json` ･ `node` ･ `jq` のどれかが見つからないときは、黙って通さず「検査を飛ばした」と1行出します**。
+**`rules.json`・`node`・`jq` のどれかが見つからないときは、黙って通さず「検査を飛ばした」と1行出します**。
 編集自体は止めません。
 「検査を飛ばした」と「違反なし」が見分けられることが大事なので、無出力で終わることはありません。
 
@@ -140,7 +140,7 @@ export KOMOREBI_RULES_FILE=/path/to/design-system/contracts/rules.json
 **それに気づけなかったのは、黙って終わっていたからです**。
 探索順と失敗時の表示は、この一件を受けて入れています。
 
-なお「。」改行チェックは、`<script` ･ `<style` ･ `//` ･ `/*` ･ `*/` のいずれかを含む行を除外します。**この条件は HTML の属性値やコメントを避けるためのものですが、URL の `//` にも当たります。**結果として `https://example.com` を含む行は、「。」の直後に文字が続いていても指摘されません (実測で確認済み)。
+なお「。」改行チェックは、`<script`・`<style`・`//`・`/*`・`*/` のいずれかを含む行を除外します。**この条件は HTML の属性値やコメントを避けるためのものですが、URL の `//` にも当たります。**結果として `https://example.com` を含む行は、「。」の直後に文字が続いていても指摘されません (実測で確認済み)。
 
 URL を除外することを狙って書かれた条件ではなく**現状そうなっているという既存の挙動**なので、見直す余地はあります。
 
@@ -149,9 +149,9 @@ URL を除外することを狙って書かれた条件ではなく**現状そ�
 ## rules.json の pattern を書くときの決まり
 
 `contracts/rules.json` の `pattern` の方言は **JS の `RegExp` ＋ `u` フラグ**です。
-`\p{...}` ･ 先読み `(?!…)` ･ `\u{...}` が使えます。
+`\p{...}`・先読み `(?!…)`・`\u{...}` が使えます。
 
-`rules.json` は JSON なのでコメントを書けず、トップレベルの配列構造も変えられません (読み手が `rules.length` ･ `rules.map` ･ `rules.find` を前提にしています)。
+`rules.json` は JSON なのでコメントを書けず、トップレベルの配列構造も変えられません (読み手が `rules.length`・`rules.map`・`rules.find` を前提にしています)。
 そのため方言の決まりをここに書いています。
 
 読み手は次の2つで、**どちらも Node で評価します**。
@@ -159,7 +159,7 @@ URL を除外することを狙って書かれた条件ではなく**現状そ�
 | 読み手 | 評価の仕方 |
 | --- | --- |
 | report-studio `utils/report-verify.js` の `DESIGN_RULE_CHECKS` | `new RegExp(rule.pattern, "gu")` |
-| design-system の hook [hooks/design-check.sh](hooks/design-check.sh) | 同上 (bash から node を1回呼んで9件まとめて評価) |
+| design-system の hook [hooks/design-check.sh](hooks/design-check.sh) | 同上 (bash から node を1回呼んで10件まとめて評価) |
 
 **読み手を増やすときは、そのエンジンが同じ方言を解釈できるか必ず確認してください**。
 
@@ -172,8 +172,8 @@ POSIX ERE は `\p{...}` を解釈できませんが、**エラーも出さずに
 パターンを変えたら、次のテストを両方回してください。
 
 ```bash
-node scripts/check-rules.mjs   # rules.json 自体 (9件 ･ 全 pattern が RegExp で生成できるか ･ NO_EMOJI の検出期待値)
-node scripts/check-hook.mjs    # hook 経由の挙動 (9件の検出 / 非検出 ･ 各種スキップ表示)
+node scripts/check-rules.mjs   # rules.json 自体 (10件・全 pattern が RegExp で生成できるか・NO_EMOJI の検出期待値)
+node scripts/check-hook.mjs    # hook 経由の挙動 (10件の検出 / 非検出・各種スキップ表示)
 ```
 
 ---
@@ -238,4 +238,4 @@ clone したフォルダで Claude Code を開けば、スキルが自動的に�
 
 社内ツールの標準構成 (`STACK.md`) と作業記録は、2026/9/2 に別のリポジトリへ移しました。
 
-**このリポジトリはデザインシステム本体 (色 ･ フォント ･ 約物ルール ･ 検査ルール) のみを扱います**。
+**このリポジトリはデザインシステム本体 (色・フォント・約物ルール・検査ルール) のみを扱います**。

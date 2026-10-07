@@ -39,7 +39,7 @@ NODE_BIN=$(find_node)
 # ─── jq が無いときは黙って終わらない ───
 # INPUT の解釈に jq を使うため、無いと FILE が空になり
 # 「対象ファイルなし」として静かに exit 0 していた。
-# node ･ rules.json の不在と同じ扱いにする。
+# node・rules.json の不在と同じ扱いにする。
 if ! command -v jq >/dev/null 2>&1; then
   echo "[Design System Check] スキップ : jq が見つからないため設計チェックを行いませんでした (PATH を確認)。brew install jq で入ります"
   exit 0
@@ -60,7 +60,7 @@ esac
 # 規則を説明する文書は規則違反そのものを引用するが、ファイル単位で除外すると
 # 引用も実違反もまとめて黙る。実際 DESIGN.md には地の文の実違反が43行たまっていて、
 # 2026/9/3 の PR #2 まで誰も気づいていなかった。除外があったからである。
-# 意図的な違反 (引用) は下の「行単位の許可注釈」で 1行 ･ 1規則ずつ黙らせる。
+# 意図的な違反 (引用) は下の「行単位の許可注釈」で 1行・1規則ずつ黙らせる。
 #
 # contracts/rules.json だけは残す。JSON にはコメントを書けず、注釈を置く場所がない。
 # description に禁止文字そのものを書いている行が7件あり、他に黙らせる手段がないため。
@@ -74,7 +74,7 @@ esac
 # ─── node が無いときは黙って終わらない ───
 # 「node が無くて検査を飛ばした」と「違反なし」は区別できなければならない。
 if [ -z "$NODE_BIN" ]; then
-  echo "[Design System Check] スキップ : node が見つからないため設計チェックを行いませんでした (PATH ･ \$HOME/.nvm ･ /opt/homebrew/bin ･ /usr/local/bin を確認)。KOMOREBI_NODE で明示できます"
+  echo "[Design System Check] スキップ : node が見つからないため設計チェックを行いませんでした (PATH・\$HOME/.nvm・/opt/homebrew/bin・/usr/local/bin を確認)。KOMOREBI_NODE で明示できます"
   exit 0
 fi
 
@@ -102,7 +102,7 @@ if [ -z "$RULES_FILE" ]; then
 fi
 
 # ─── 検査本体 ───
-# 9件を1回の node 起動でまとめて評価する。PostToolUse は編集のたびに走るため、
+# 10件を1回の node 起動でまとめて評価する。PostToolUse は編集のたびに走るため、
 # 規則ごとに node を起動しない。
 read -r -d '' NODE_SRC <<'NODEJS'
 const fs = require("fs");
@@ -177,7 +177,7 @@ for (let i = 0; i < lines.length; i++) {
   }
   if (found.length === 0) continue;
 
-  // その行が「注釈だけの行」か ･ フェンス行かで、覆う範囲が変わる
+  // その行が「注釈だけの行」か・フェンス行かで、覆う範囲が変わる
   let rest = lines[i];
   for (const f of found) rest = rest.replace(f.span, "");
   const commentOnly = COMMENT_ONLY.test(rest);
@@ -305,7 +305,7 @@ if (periodHits.length > 0) {
 }
 
 // ─── 注釈そのものの問題を報告する ───
-// 知らない規則 ID ･ ID 無し ･ allow all は、黙って無視しない。
+// 知らない規則 ID・ID 無し・allow all は、黙って無視しない。
 if (allowProblems.length > 0) {
   out += "\n--- Design System Check: allow 注釈の問題 ---\n";
   for (const m of allowProblems) out += "[allow] " + m + "\n";

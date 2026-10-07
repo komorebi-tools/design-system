@@ -42,7 +42,7 @@ cp contracts/rules.json tests/fixtures/rules-after.json
 
 ### `pattern` 以外を変えたときは取り直さない
 
-`alternative` ･ `description` ･ `severity` の文言を直しただけのときは、**取り直さないでください。**この fixture は「`NO_EMOJI` の判定がどう変わったか」を比べるためのもので、比較に効くのは `pattern` だけです。文言の修正まで取り込むと、`rules-after.json` が「PR #4 時点の記録」でなくなります。
+`alternative`・`description`・`severity` の文言を直しただけのときは、**取り直さないでください。**この fixture は「`NO_EMOJI` の判定がどう変わったか」を比べるためのもので、比較に効くのは `pattern` だけです。文言の修正まで取り込むと、`rules-after.json` が「PR #4 時点の記録」でなくなります。
 
 そのため、次の `diff` に差分が出るのは**正常です。**
 
@@ -50,7 +50,7 @@ cp contracts/rules.json tests/fixtures/rules-after.json
 diff contracts/rules.json tests/fixtures/rules-after.json
 ```
 
-2026/9/2 時点では `NO_FULLWIDTH_NAKAGURO` の `alternative` の1行だけ差分が出ます (`\u00B7 (half-width)` というエスケープ表記が hook の出力にそのまま出ていたため、`･ (半角中黒 U+FF65)` に直したもの)。
+2026/9/2 時点では `NO_FULLWIDTH_NAKAGURO` の `alternative` の1行だけ差分が出ます (`\u00B7 (half-width)` というエスケープ表記が hook の出力にそのまま出ていたため、`･ (半角中黒 U+FF65)` に直したもの)。 <!-- design-check: allow NO_HALFWIDTH_NAKAGURO,NO_NAKAGURO_SPACE -->
 
 **`pattern` に差分が出ていたら異常です。**その場合は取り直しが漏れています。`pattern` だけを比べるにはこうします。
 

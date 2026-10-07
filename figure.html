@@ -297,9 +297,9 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <li><a href="#s24"><span class="num">2.4</span>2群を並べる</a></li>
     <li><a href="#s25"><span class="num">2.5</span>図解 (2軸4象限)</a></li>
     <li><a href="#s26"><span class="num">2.6</span>表</a></li>
-    <li><a href="#s28"><span class="num">2.8</span>円グラフ ･ ドーナツ</a></li>
+    <li><a href="#s28"><span class="num">2.8</span>円グラフ・ドーナツ</a></li>
     <li><a href="#s29"><span class="num">2.9</span>コレスポンデンス分析</a></li>
-    <li><a href="#s210"><span class="num">2.10</span>軸 ･ 目盛り ･ 値ラベル</a></li>
+    <li><a href="#s210"><span class="num">2.10</span>軸・目盛り・値ラベル</a></li>
     <li><a href="#s211"><span class="num">2.11</span>ヒートマップ</a></li>
     <li><a href="#s212"><span class="num">2.12</span>強調と非強調</a></li>
     <li><a href="#s3"><span class="num">3</span>見出しの階層</a></li>
@@ -321,11 +321,11 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <div class="swatches" id="sw-layer1"></div>
     <div class="rule-note">
       <strong>Primary と Primary Dark は使い分ける。</strong>
-      面 (見出し帯 ･ 表のヘッダ ･ カードの帯) には Primary、グラフの主色 ･ pill ･ グラデーションの起点には Primary Dark。
+      面 (見出し帯・表のヘッダ・カードの帯) には Primary、グラフの主色・pill・グラデーションの起点には Primary Dark。
       一本化しないのは、従来のスライドがすでにこの2値で運用されていたため。
       2つは ΔE 7.3。<br>
       <strong>ゴールドで白文字を乗せるなら SUB。</strong>
-      Accent 2.37 ･ Accent Dark 2.99 に対して SUB は 3.18 で、この色だけが条件を満たす。
+      Accent 2.37・Accent Dark 2.99 に対して SUB は 3.18 で、この色だけが条件を満たす。
       Accent には白文字を乗せない。<br>
       <strong>ゴールドの持ち場は図解の面と装飾。</strong>
       グラフの系列は §1.2「グラフで使う順番」の色で塗る。
@@ -334,7 +334,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 
   <div class="card" id="s12">
     <h3>1.2 Layer 2 : カテゴリ配色</h3>
-    <p class="sub">面 ･ 地 ･ マーカー ･ 文字 の4値でひと組。
+    <p class="sub">面・地・マーカー・文字 の4値でひと組。
     面色がひとつ決まれば、残り3つは計算で出せる。
     1案件あたり4色まで (定番は5色、そこから選ぶ)。</p>
     <div class="cat-grid" id="cat-grid"></div>
@@ -342,13 +342,13 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <strong>4値の導き方。</strong>
       地 ＝ 面を白 90% で薄める / マーカー ＝ 地の上に面を不透明度 20% / 文字 ＝ 彩度 ×1.35、黄系のみ色相 −15°、明度は白背景比 3.0 に届くまで下げる。
       地とマーカーは sRGB の値のまま混ぜ、文字は CIELCh (D65) で計算する。
-      計算値が既存の値と ΔE 1 未満なら、既存の値を採る (基調の地 ･ ローズ 明) 。
+      計算値が既存の値と ΔE 1 未満なら、既存の値を採る (基調の地・ローズ 明) 。
    </div>
  </div>
 
   <div class="card">
     <h3>白文字を乗せる面には「文字色」を敷く</h3>
-    <p class="sub">pill ･ 見出し帯 ･ 番号カードのように白文字を乗せる面は、面 (fill) ではなく文字の色を面として使う。</p>
+    <p class="sub">pill・見出し帯・番号カードのように白文字を乗せる面は、面 (fill) ではなく文字の色を面として使う。</p>
     <div class="grid2">
       <div>
         <p class="sub" style="margin-bottom:12px">面をそのまま敷く</p>
@@ -376,7 +376,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <thead><tr><th>守ること</th><th style="width:34%">下限</th></tr></thead>
       <tbody>
         <tr><td>文字に使うグレー</td><td>文章なら比 4.5 以上 (<code>#767676</code> まで) 、図表の中の短い文字なら 3.0 以上 (<code>#888888</code> まで)</td></tr>
-        <tr><td>面 ･ 罫線 ･ 非強調の系列</td><td>白と見分けがつくこと ＝ 比 1.2 以上</td></tr>
+        <tr><td>面・罫線・非強調の系列</td><td>白と見分けがつくこと ＝ 比 1.2 以上</td></tr>
         <tr><td>段として並べるとき</td><td>隣り合う段を ΔE 4 以上離す</td></tr>
         <tr><td>例外</td><td>読ませない意図の文字 (弱い群) は比 3.0 を割ってよい。
         1つの図に1役割まで</td></tr>
@@ -396,17 +396,17 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <thead><tr><th style="width:38%">用途</th><th>値</th></tr></thead>
       <tbody>
         <tr><td>図形の枠線</td><td>引かない</td></tr>
-        <tr class="subhead"><td>白背景の角丸囲み</td><td><code>#E0E0E0</code> ･ 0.75pt ･ 角丸 0.08in ･ 内側 0.5cm (可)</td></tr>
-        <tr><td>区切り線 ･ 引き出し線</td><td><code>#999999</code></td></tr>
+        <tr class="subhead"><td>白背景の角丸囲み</td><td><code>#E0E0E0</code>・0.75pt・角丸 0.08in・内側 0.5cm (可)</td></tr>
+        <tr><td>区切り線・引き出し線</td><td><code>#999999</code></td></tr>
         <tr><td>強めの区切り</td><td><code>#595959</code></td></tr>
-        <tr><td>表の罫線 ･ グラフの目盛り線</td><td><code>#D9D9D9</code></td></tr>
+        <tr><td>表の罫線・グラフの目盛り線</td><td><code>#D9D9D9</code></td></tr>
         <tr><td>表の外枠</td><td><code>#D9D9D9</code>。
         表は外側にも線を引く</td></tr>
-        <tr><td>見出しの下の細罫</td><td><code>#E0E0E0</code> ･ 0.75pt (§3)</td></tr>
+        <tr><td>見出しの下の細罫</td><td><code>#E0E0E0</code>・0.75pt (§3)</td></tr>
       </tbody>
     </table>
     <div class="rule-note">
-      Border <code>#E0E0E0</code> は「面」としても残す (非強調の系列 ･ ドーナツのトラック)。
+      Border <code>#E0E0E0</code> は「面」としても残す (非強調の系列・ドーナツのトラック)。
       角丸そのものは可。
       ただし角を丸めるほど Web UI に見えるので、KPIカードのような面の大きい要素では積極的には使わない。
    </div>
@@ -421,7 +421,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <div class="rule-note">
       面ではなく文字色として使うほうが、面積が小さく済み意味が立つ。
       Point <code>#CD5151</code> は Danger <code>#D9534F</code> と ΔE 3.0 で見た目はほぼ同じだが、意味が違う。
-      Danger はエラー ･ 削除 ･ 危険な操作、Point は注目の誘導。
+      Danger はエラー・削除・危険な操作、Point は注目の誘導。
       名前は必ず分けて使う。
    </div>
  </div>
@@ -432,15 +432,15 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <table class="t">
       <thead><tr><th style="width:24%">軸</th><th>担うもの</th></tr></thead>
       <tbody>
-        <tr><td>濃さ</td><td>量 ･ 強弱 ･ 順序</td></tr>
+        <tr><td>濃さ</td><td>量・強弱・順序</td></tr>
         <tr><td>色相</td><td>順序のないカテゴリの識別</td></tr>
-        <tr><td>無彩色</td><td>値ではないもの (比較対象 ･ 非該当 ･ 見出し)</td></tr>
+        <tr><td>無彩色</td><td>値ではないもの (比較対象・非該当・見出し)</td></tr>
       </tbody>
     </table>
     <div class="rule-note">
       そのうえで、次の順に見る。<br>
       1. データにカテゴリがあり、その意味が資料全体で一貫するときだけ色相を分ける<br>
-      2. 順序 ･ 量 ･ 強弱は色相ではなく濃さで示す<br>
+      2. 順序・量・強弱は色相ではなく濃さで示す<br>
       3. 慣習の色 (赤 = 危険、緑 = 良い) は、同じ資料に警告や正負の表現が無いときだけ使う<br>
       4. <strong>1つの資料の中で、同じ色を2つの意味に使わない</strong><br>
       実務でいちばん効くのは 4。
@@ -448,11 +448,11 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
    </div>
     <div class="rule-note">
       <strong>色面だけに意味を持たせない。</strong>
-      印刷では背景色が落ちることがある (Chrome ･ Edge は印刷の「背景のグラフィック」が既定でオフ) 。
-      色で示した意味は、文字 ･ 記号 ･ 太さのどれかでも同じことを示す。<br>
-      左 ･ 上の色帯も同じ扱い。
+      印刷では背景色が落ちることがある (Chrome・Edge は印刷の「背景のグラフィック」が既定でオフ) 。
+      色で示した意味は、文字・記号・太さのどれかでも同じことを示す。<br>
+      左・上の色帯も同じ扱い。
       反復する色帯は §3.2 のとおり使わない。
-      使う場合は、1つの資料の中で帯に持たせる意味を1つにし (強調 ･ 区切り ･ 危険を混ぜない) 、帯だけで意味を伝えない。
+      使う場合は、1つの資料の中で帯に持たせる意味を1つにし (強調・区切り・危険を混ぜない) 、帯だけで意味を伝えない。
    </div>
  </div>
 </section>
@@ -465,7 +465,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 
   <div class="card" id="s21">
     <h3>2.1 色数 - 見せたいことで決める</h3>
-    <p class="sub">色が要るのは、同じカテゴリが図の中の2か所以上に出てきて、色でつなぐ必要があるときだけ (凡例 ･ 積み上げの段 ･ 折れ線 ･ 棒の組) 。
+    <p class="sub">色が要るのは、同じカテゴリが図の中の2か所以上に出てきて、色でつなぐ必要があるときだけ (凡例・積み上げの段・折れ線・棒の組) 。
     項目名が軸で読める棒には色を分けない。
     資料の中でカテゴリと色の対応表を決めているときは、その色で塗ってよい。</p>
     <div class="grid2">
@@ -477,14 +477,14 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       </figure>
       <figure class="figure">
         <div class="chartbox h280"><canvas id="c-bar-contrast"></canvas></div>
-        <figcaption>両端に意味がある対比 : Primary Dark ＋ 2色目 (§2.4 の組から選ぶ ･ ここでは青緑の文字色) 。
+        <figcaption>両端に意味がある対比 : Primary Dark ＋ 2色目 (§2.4 の組から選ぶ・ここでは青緑の文字色) 。
         「正負を分ける」ではなく、両端に意味があるかどうかで決める。</figcaption>
       </figure>
    </div>
     <div class="usedcolors" id="uc-21"></div>
     <div class="rule-note">
-      性別 ･ 年代のようなセグメントも「順序のないカテゴリ」に当たる。
-      男性を青 ･ 女性を赤のように分けると、赤が Point ･ Danger と衝突して片方が警告に見えるので、Layer 2 から選ぶ。
+      性別・年代のようなセグメントも「順序のないカテゴリ」に当たる。
+      男性を青・女性を赤のように分けると、赤が Point・Danger と衝突して片方が警告に見えるので、Layer 2 から選ぶ。
    </div>
  </div>
 
@@ -519,7 +519,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       隣り合う段の ΔE は 12.9 / 11.5 / 10.3。
       白文字が乗るのは1段目だけ (比 4.71) で、2段目からは値を <code>#434343</code> にする。<br>
       <strong>ヒートマップは別枠。</strong>表の塗りは §2.11 のとおり端の青 <code>#3F6BA9</code> から連続で塗り、この4段は使わない。<br>
-      <strong>赤系のスケールは使わない。</strong>Point ･ Danger と意味が衝突する。
+      <strong>赤系のスケールは使わない。</strong>Point・Danger と意味が衝突する。
    </div>
     <details class="snippet">
       <summary>濃淡4段をコピーする</summary>
@@ -544,15 +544,15 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <table class="t" style="margin-top:20px">
       <thead><tr><th style="width:26%">図の種類</th><th style="width:30%">目で読んでいるもの</th><th style="width:14%">0 起点</th><th>理由</th></tr></thead>
       <tbody>
-        <tr class="subhead"><td>棒 ･ 面 ･ 積み上げ</td><td>原点からの長さ ･ 面積</td><td>必要</td><td>切ると長さの比が壊れる</td></tr>
-        <tr><td>ダンベル ･ 前後比較</td><td>2点の位置と、その間隔</td><td>不要</td><td>原点が符号に含まれていない</td></tr>
+        <tr class="subhead"><td>棒・面・積み上げ</td><td>原点からの長さ・面積</td><td>必要</td><td>切ると長さの比が壊れる</td></tr>
+        <tr><td>ダンベル・前後比較</td><td>2点の位置と、その間隔</td><td>不要</td><td>原点が符号に含まれていない</td></tr>
         <tr><td>ドットプロット</td><td>点の位置</td><td>不要</td><td>同上</td></tr>
         <tr><td>折れ線</td><td>傾きと上下</td><td>不要</td><td>ただし切った旨を軸に書く</td></tr>
-        <tr><td>散布図 ･ 対応分析</td><td>点どうしの距離</td><td>不要</td><td>縦横を同じ縮尺にするほうが効く</td></tr>
+        <tr><td>散布図・対応分析</td><td>点どうしの距離</td><td>不要</td><td>縦横を同じ縮尺にするほうが効く</td></tr>
       </tbody>
     </table>
     <div class="rule-note">
-      <strong>切るときの条件。</strong>軸の目盛りを必ず出して範囲を隠さない / 同じページで並べる図は同じ範囲に揃える / 範囲はデータの最小 ･ 最大から少し広げた切りのいい値にする。
+      <strong>切るときの条件。</strong>軸の目盛りを必ず出して範囲を隠さない / 同じページで並べる図は同じ範囲に揃える / 範囲はデータの最小・最大から少し広げた切りのいい値にする。
    </div>
  </div>
 
@@ -564,17 +564,17 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <figure class="figure">
         <div class="chartbox h280"><canvas id="c-two-teal"></canvas></div>
         <figcaption>青 ＋ 青緑。
-        ΔE 25.6 ･ 色相差 84°</figcaption>
+        ΔE 25.6・色相差 84°</figcaption>
       </figure>
       <figure class="figure">
         <div class="chartbox h280"><canvas id="c-two-purple"></canvas></div>
         <figcaption>青 ＋ 紫。
-        ΔE 13.6 ･ L* 49 と 62</figcaption>
+        ΔE 13.6・L* 49 と 62</figcaption>
       </figure>
       <figure class="figure">
         <div class="chartbox h280"><canvas id="c-two-rose"></canvas></div>
         <figcaption>青 ＋ ローズ。
-        ΔE 33.1 ･ 白文字の比 3.16</figcaption>
+        ΔE 33.1・白文字の比 3.16</figcaption>
       </figure>
    </div>
     <div class="usedcolors" id="uc-24"></div>
@@ -624,14 +624,14 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
         <tr><td>手軽に食べられる</td><td class="num">47.2%</td><td class="num">90.4%</td><td class="num">+43.2</td></tr>
         <tr class="subhead"><td>上位3項目の平均</td><td class="num">48.9%</td><td class="num">90.4%</td><td class="num">+41.5</td></tr>
         <tr><td>見た目がおいしそう</td><td class="num">39.5%</td><td class="num">86.5%</td><td class="num">+47.0</td></tr>
-        <tr><td>新しさ ･ 特別感</td><td class="num">16.6%</td><td class="num">60.9%</td><td class="num">+44.3</td></tr>
+        <tr><td>新しさ・特別感</td><td class="num">16.6%</td><td class="num">60.9%</td><td class="num">+44.3</td></tr>
       </tbody>
     </table>
     <div class="rule-note">
       サブの見出しや強調する行は太字にするか、基調の地 <code>#F3F7FC</code> で塗る。
       別の色を使う場合は CAT-2 青緑 か CAT-1 紫 を優先する。
       見出しだけ色を替え、罫線とセルの地は変えない。<br>
-      ヘッダに Excel ･ Googleスプレッドシートの既定の濃紺 <code>#305496</code> が入っていることがある。
+      ヘッダに Excel・Googleスプレッドシートの既定の濃紺 <code>#305496</code> が入っていることがある。
       Primary Dark とは ΔE 11.7 の別色なので、Primary に置き換える。
    </div>
 
@@ -643,7 +643,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
         <tr><td>手軽に食べられる</td><td class="num">47.2%</td><td class="num">90.4%</td><td class="num">+43.2</td></tr>
         <tr><td>価格が手頃</td><td class="num">44.9%</td><td class="num">88.5%</td><td class="num">+43.6</td></tr>
         <tr><td>見た目がおいしそう</td><td class="num">39.5%</td><td class="num">86.5%</td><td class="num">+47.0</td></tr>
-        <tr><td>新しさ ･ 特別感</td><td class="num">16.6%</td><td class="num">60.9%</td><td class="num">+44.3</td></tr>
+        <tr><td>新しさ・特別感</td><td class="num">16.6%</td><td class="num">60.9%</td><td class="num">+44.3</td></tr>
       </tbody>
     </table>
     <div class="rule-note">
@@ -654,9 +654,9 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
  </div>
 
   <div class="card" id="s28">
-    <h3>2.8 円グラフ ･ ドーナツ</h3>
+    <h3>2.8 円グラフ・ドーナツ</h3>
     <p class="sub">円は塗り分けずドーナツにする。
-    1値のときは弧に沿わせる (円錐) ･ 淡 → 濃 ･ 12時から時計回り。
+    1値のときは弧に沿わせる (円錐)・淡 → 濃・12時から時計回り。
     2 〜 3区分のときは下段の作りにする。</p>
     <div class="grid2">
       <div>
@@ -665,7 +665,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
           <div><canvas id="donut-b" width="150" height="150"></canvas></div>
           <div><canvas id="donut-c" width="150" height="150"></canvas></div>
        </div>
-        <p class="sub" style="margin-top:14px">複数並べるときは向き ･ 太さ ･ 色をすべて揃え、値だけが違う状態にする。
+        <p class="sub" style="margin-top:14px">複数並べるときは向き・太さ・色をすべて揃え、値だけが違う状態にする。
         直径も揃える。</p>
      </div>
       <div>
@@ -673,12 +673,12 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
           <thead><tr><th style="width:38%">項目</th><th>値</th></tr></thead>
           <tbody>
             <tr><td>色</td><td>グラデーション A (<code>#9BB0D0</code> → <code>#5A74A3</code>)</td></tr>
-            <tr><td>向き</td><td>円錐 ･ 淡 → 濃 ･ 12時から</td></tr>
+            <tr><td>向き</td><td>円錐・淡 → 濃・12時から</td></tr>
             <tr><td>トラック</td><td><code>#F7F7F7</code></td></tr>
             <tr><td>リングの太さ</td><td>直径の 0.22 (範囲 0.18 〜 0.28)</td></tr>
             <tr><td>内円の直径</td><td>直径の 0.56</td></tr>
-            <tr class="subhead"><td>中央の数値</td><td>内円径の 28% ･ 太字 ･ <code>#434343</code></td></tr>
-            <tr><td>中央のラベル</td><td>数値の 50% ･ 最小 10pt ･ <code>#666666</code> ･ 数値の下</td></tr>
+            <tr class="subhead"><td>中央の数値</td><td>内円径の 28%・太字・<code>#434343</code></td></tr>
+            <tr><td>中央のラベル</td><td>数値の 50%・最小 10pt・<code>#666666</code>・数値の下</td></tr>
             <tr><td>中央の文字の幅</td><td>内円径の 80% 以内。
             収まらなければ下げる (下限 18%)</td></tr>
             <tr><td>端の処理</td><td>直角。
@@ -704,7 +704,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <div class="grid2">
       <figure class="figure">
         <div class="chartbox h280"><canvas id="c-dseg-mono"></canvas></div>
-        <figcaption>単色系 ･ 濃淡3段。
+        <figcaption>単色系・濃淡3段。
         区分に順序があるときはこちら。</figcaption>
       </figure>
       <figure class="figure">
@@ -716,13 +716,13 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     <div class="rule-note">
       <strong>中央に出した値は1箇所だけにする。</strong>外側からはその区分の % を落とす。<br>
       <strong>ラベルの文字は面の色を使わない。</strong>紫は面 <code>#A4A5D1</code> が白地で比 2.36 なので、文字色 <code>#8D90CA</code> (比 3.01) を使う。<br>
-      <strong>青と紫。</strong>色相差 14.8° で §1.2 の 60° は満たさないが、L* 差 20.4 ･ ΔE 19.8 で代替条件を満たす。
+      <strong>青と紫。</strong>色相差 14.8° で §1.2 の 60° は満たさないが、L* 差 20.4・ΔE 19.8 で代替条件を満たす。
       3区分は3つとも互いに隣り合うので、並び順で近い色を離すことはできない。
    </div>
  </div>
 
   <div class="card" id="s29">
-    <h3>2.9 コレスポンデンス分析 ･ 散布図</h3>
+    <h3>2.9 コレスポンデンス分析・散布図</h3>
     <p class="sub">種類が違うものは色だけでなく形も変える。
     ブランドは Primary Dark の丸、項目は青緑の文字色の菱形。</p>
     <div id="ca"></div>
@@ -732,38 +732,38 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       開くたびに比率が変わると、同じ図が違う印象になる。
       距離を読ませるなら縦軸と横軸の1単位を同じ長さ (1 : 1) 、偏りを見せるなら1次元、見慣れた散布図で出すなら縦を伸ばしてよいが軸ラベルに「縦の差は読まない」と書く。
       第1軸の寄与率が 90% を超えているときは実質1次元なので、1次元に落とすほうが順序と距離がそのまま読める。<br>
-      ラベルは最低でも 右 ･ 左 ･ 上 ･ 下 の4方向を試し、空いている側に逃がす。
+      ラベルは最低でも 右・左・上・下 の4方向を試し、空いている側に逃がす。
       可能なら重なりが最小になる位置を選ぶ。
       重なりは機械で消し、手で動かさない。
    </div>
  </div>
 
   <div class="card" id="s210">
-    <h3>2.10 軸 ･ 目盛り ･ 値ラベル</h3>
-    <p class="sub">装飾は減らしてよいが、軸 ･ 目盛り ･ 値は減らさない。
+    <h3>2.10 軸・目盛り・値ラベル</h3>
+    <p class="sub">装飾は減らしてよいが、軸・目盛り・値は減らさない。
     「何の線か」が軸だけを見て分かる状態を最低条件とする。</p>
     <table class="t">
       <thead><tr><th style="width:30%">要素</th><th style="width:38%">扱い</th><th>値</th></tr></thead>
       <tbody>
-        <tr class="subhead"><td>軸の見出し ＝ 何の値か ＋ 単位</td><td>必ず付ける</td><td>9 〜 10pt ･ <code>#666666</code> ･ 横軸は右寄せ、縦軸は軸の上</td></tr>
+        <tr class="subhead"><td>軸の見出し ＝ 何の値か ＋ 単位</td><td>必ず付ける</td><td>9 〜 10pt・<code>#666666</code>・横軸は右寄せ、縦軸は軸の上</td></tr>
         <tr class="subhead"><td>目盛りラベル</td><td>必ず出す。
-        切った軸は始点を見出しにも書く</td><td>9 〜 10pt ･ <code>#666666</code></td></tr>
-        <tr class="subhead"><td>値ラベル</td><td>全部の棒 ･ 主役の線に付ける。
-        入らないときは省いた旨を注記する</td><td>9 〜 10pt ･ 本文色。
+        切った軸は始点を見出しにも書く</td><td>9 〜 10pt・<code>#666666</code></td></tr>
+        <tr class="subhead"><td>値ラベル</td><td>全部の棒・主役の線に付ける。
+        入らないときは省いた旨を注記する</td><td>9 〜 10pt・本文色。
         主役は太字でよい</td></tr>
-        <tr><td>基線</td><td>軸の位置を示す線として残す</td><td><code>#D9D9D9</code> ･ 0.75pt</td></tr>
-        <tr><td>目盛り線</td><td>要るときだけ (折れ線 ･ 縦棒で高さを読ませるとき)</td><td><code>#D9D9D9</code> ･ 0.75pt</td></tr>
-        <tr><td>凡例</td><td>2系列以上で付ける</td><td>枠なし ･ 横並び ･ 図の上か線の脇</td></tr>
-        <tr><td>図形の枠線 ･ 四辺の枠</td><td>引かない</td><td>―</td></tr>
+        <tr><td>基線</td><td>軸の位置を示す線として残す</td><td><code>#D9D9D9</code>・0.75pt</td></tr>
+        <tr><td>目盛り線</td><td>要るときだけ (折れ線・縦棒で高さを読ませるとき)</td><td><code>#D9D9D9</code>・0.75pt</td></tr>
+        <tr><td>凡例</td><td>2系列以上で付ける</td><td>枠なし・横並び・図の上か線の脇</td></tr>
+        <tr><td>図形の枠線・四辺の枠</td><td>引かない</td><td>―</td></tr>
       </tbody>
     </table>
     <div class="rule-note">
-      <strong>例外。</strong>位置で読ませる図解 (2軸4象限 ･ 対応分析) は値ラベルを省いてよい / 100% 積み上げで幅が 5% に満たないセグメントは省いてよい (省いたら注記する) / 比較対象の線は終点の値だけでよく、色は <code>#999999</code> に落としてよい。<br>
+      <strong>例外。</strong>位置で読ませる図解 (2軸4象限・対応分析) は値ラベルを省いてよい / 100% 積み上げで幅が 5% に満たないセグメントは省いてよい (省いたら注記する) / 比較対象の線は終点の値だけでよく、色は <code>#999999</code> に落としてよい。<br>
       横棒の値ラベルは棒の末尾を追いかけず、<strong>プロット領域の右外の固定カラムに左寄せで揃える</strong>。
       項目名は棒側に右寄せ。
    </div>
     <details class="snippet">
-      <summary>Chart.js の共通設定をコピーする (軸 ･ 目盛り ･ 値ラベル ･ 凡例)</summary>
+      <summary>Chart.js の共通設定をコピーする (軸・目盛り・値ラベル・凡例)</summary>
       <pre id="snip-base"></pre>
     </details>
  </div>
@@ -774,7 +774,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     数値を入れる表は、端の値までの位置を 10% 単位に四捨五入し (ちょうど半分は上へ) 、値の表から色を拾う。</p>
     <figure class="figure" style="max-width:720px">
       <div id="heat-a"></div>
-      <figcaption>A 単色 ･ 青 : 量や比率だけを見せる表。
+      <figcaption>A 単色・青 : 量や比率だけを見せる表。
       白から <code>#3F6BA9</code> まで。</figcaption>
     </figure>
     <figure class="figure" style="margin-top:28px; max-width:720px">
@@ -795,14 +795,14 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
         行の中の順位を読ませたいときは行ごと。
         列ごとは使わない</td></tr>
         <tr class="subhead"><td>端の値</td><td>基準からの差の最大を、上から2桁目で5刻みに切り上げる (26 → 30、0.46 → 0.50、3.2 → 3.5) 。
-        B ･ C は上と下で同じ値。
+        B・C は上と下で同じ値。
         凡例の両端に書く</td></tr>
         <tr class="subhead"><td>塗り方</td><td>位置を 10% 単位に四捨五入 (ちょうど半分は上へ) し、下の値の表から拾う。
         数値を入れず色だけで見せるのは例外で、そのときは5段</td></tr>
-        <tr><td>使い分け</td><td>A 量 ･ 比率 / B 基準より上を見せる / C 両端に意味がある。
-        3つとも「青 = 上 ･ 増」</td></tr>
+        <tr><td>使い分け</td><td>A 量・比率 / B 基準より上を見せる / C 両端に意味がある。
+        3つとも「青 = 上・増」</td></tr>
         <tr><td>基準と値のないセル</td><td>基準ちょうどは <code>#F0F0F0</code> 。
-        値のないセルは白地 ･ 点線 ･「―」。
+        値のないセルは白地・点線・「―」。
         基準の行は塗らない</td></tr>
         <tr><td>セルの文字</td><td>値の表の「白」の印は白、ほかは <code>#434343</code> 。
         表のセルの数値は 3.0 以上</td></tr>
@@ -840,7 +840,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       <strong>無彩色を段に分けるのは、残りに順序があるときだけ。</strong>横棒や散布図のように残りが並列なら1色でよい。
       ドーナツや積み上げ棒のように順序が残るなら段にする。<br>
       <strong>起点が濃すぎると、残りが「弱めた主役」ではなく「もうひとつの主役」に見える。</strong><code>#999999</code> から始めると、残りの段のうち上2段が主役級の重さになる。<br>
-      <strong>色以外も一段変える。</strong>面 (棒 ･ セル ･ 扇形) は色だけでよいが、線と点は面積が小さいので太さと大きさも一段変える。<br>
+      <strong>色以外も一段変える。</strong>面 (棒・セル・扇形) は色だけでよいが、線と点は面積が小さいので太さと大きさも一段変える。<br>
       グレーの値は図ごとに変えてよい (§1.3)。
       段として並べるときだけ、隣り合う段を ΔE 4 以上離す。
    </div>
@@ -858,14 +858,14 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
           <li>強調しない系列は Border に落とす</li>
           <li>白文字を乗せる面には、面色ではなくカテゴリの文字色を敷く</li>
           <li>外部から受け取ったグラフ画像は、貼らずに描き直す</li>
-          <li>軸の見出し ･ 目盛り ･ 値ラベルを付ける</li>
+          <li>軸の見出し・目盛り・値ラベルを付ける</li>
         </ul>
      </div>
       <div>
         <h4>DON'T</h4>
         <ul>
           <li>項目名が軸で読める棒を、1本ずつ別の色にしない (資料の対応表で色を決めているときを除く) </li>
-          <li>信号色 (赤 ･ 黄 ･ 緑) を系列の色に使わない</li>
+          <li>信号色 (赤・黄・緑) を系列の色に使わない</li>
           <li>順序のあるデータをカテゴリの色で塗り分けない</li>
           <li>順序尺度のカラースケールに赤系を使わない</li>
           <li>Point <code>#CD5151</code> をカテゴリの識別に使わない</li>
@@ -877,10 +877,10 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
    </div>
     <div class="rule-note">
       実測で確認できた既定値の流入 :
-      Googleスライド ･ スプレッドシート <code>#4285F4</code> <code>#EA4335</code> <code>#FBBC04</code> /
+      Googleスライド・スプレッドシート <code>#4285F4</code> <code>#EA4335</code> <code>#FBBC04</code> /
       スプレッドシートのカラースケール <code>#F3F3F3</code> → <code>#E67C73</code> /
       matplotlib の tab10 <code>#1F77B4</code> <code>#FF7F0E</code> /
-      Excel ･ Sheets の濃紺 <code>#305496</code>
+      Excel・Sheets の濃紺 <code>#305496</code>
    </div>
  </div>
 </section>
@@ -888,7 +888,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <!-- ============================================================ 3 ============================================================ -->
 <section class="chapter" id="s3">
   <h2>3. 見出しの階層</h2>
-  <p class="chapter-note">階層は線ではなく、面 ･ 余白 ･ 文字サイズ ･ 番号 で作る。
+  <p class="chapter-note">階層は線ではなく、面・余白・文字サイズ・番号 で作る。
   色帯を1本足しても段は増えない。</p>
 
   <div class="card">
@@ -902,7 +902,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
       1画面に1つか2つまでにする。</p>
 
       <div class="h2-rule">見出しの下に全幅の細罫を引く</div>
-      <p class="dummy">罫は <code>#E0E0E0</code> ･ 0.75pt。
+      <p class="dummy">罫は <code>#E0E0E0</code>・0.75pt。
       線を引くならこの形にする。
       見出しごとに色の違う線を引かない。</p>
 
@@ -933,7 +933,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
         <div class="rule-note" style="margin-top:0">
           カードごとに同じ左の色帯を付けない。<br>
           帯が情報を持っておらず、消しても意味が変わらない。
-          番号 ･ 大きさ ･ 太さ ･ 余白に続く5つ目の合図として重複する。
+          番号・大きさ・太さ・余白に続く5つ目の合図として重複する。
        </div>
      </div>
       <div>
@@ -1000,7 +1000,7 @@ const FIG = {
   base:{name:'基調 (Primary)', fill:'#6E87B6', bg:'#F3F7FC', mark:'#D6DDEB', text:'#5A74A3'}, /* design-check: allow NO_HARDCODED_PRIMARY */
   quadrant:{ area:'#E6EBF7', ground:'#F7FAFD' }
 };
-/* グラフで使う順番 (FIGURE.md §1.2) : 基調 → 青緑 → 紫 → 山吹 → ローズ ･ 面の値 */
+/* グラフで使う順番 (FIGURE.md §1.2) : 基調 → 青緑 → 紫 → 山吹 → ローズ・面の値 */
 FIG.order = [FIG.primaryDark, FIG.cat[1].fill, FIG.cat[0].fill, FIG.cat[3].fill, FIG.cat[4].fill];
 FIG.orderName = ['基調','青緑','紫','山吹','ローズ'];
 
@@ -1085,20 +1085,20 @@ const LAYER1 = [
   ['Primary','#6E87B6','表のヘッダ、帯、カードの見出し帯','3.62'], /* design-check: allow NO_HARDCODED_PRIMARY */
   ['Primary Dark','#5A74A3','グラフの主色、pill、グラデーションの起点','4.71'],
   ['Primary Light','#9BB0D0','濃淡の淡い側','2.21'],
-  ['Accent','#C4A55A','図解の面 ･ 装飾','2.37'],
-  ['Accent Light','#E0D5A8','図解の地 ･ 装飾 ･ 淡','1.44'],
+  ['Accent','#C4A55A','図解の面・装飾','2.37'],
+  ['Accent Light','#E0D5A8','図解の地・装飾・淡','1.44'],
   ['Accent Dark','#B0923E','アイブロウ、章番号、帯の終点','2.99'],
-  ['SUB (深いゴールド)','#A18E6C','白文字を乗せるゴールドの面 ･ pill','3.18'],
-  ['Border','#E0E0E0','非強調の系列 ･ ドーナツのトラック','―'],
+  ['SUB (深いゴールド)','#A18E6C','白文字を乗せるゴールドの面・pill','3.18'],
+  ['Border','#E0E0E0','非強調の系列・ドーナツのトラック','―'],
   ['Background','#F7F7F7','注釈帯の地色、グラデーション時のトラック','―'],
   ['Text Secondary','#666666','図解の比較対象','5.74']
 ];
 const GRAYS = [
   ['#434343','668','9.89','本文'],
-  ['#595959','131','7.00','補足 ･ 注記'],
+  ['#595959','131','7.00','補足・注記'],
   ['#666666','138','5.74','図解の比較対象'],
   ['#999999','178','2.85','図解の弱い群'],
-  ['#B7B7B7','59','2.01','非強調の面 ･ 罫線']
+  ['#B7B7B7','59','2.01','非強調の面・罫線']
 ];
 function swatch(chip,name,hex,use,ratio){
   return '<div class="sw"><div class="chip" style="background:'+chip+'"></div>'+
@@ -1119,7 +1119,7 @@ document.getElementById('sw-gray').innerHTML =
     '<div class="use">'+r[3]+'</div><div class="ratio">本体で '+r[1]+' 回</div></div></div>').join('');
 document.getElementById('sw-point').innerHTML =
   swatch('#CD5151','Point','#CD5151','「ここを見て」の意味のみ','') +
-  swatch('#D9534F','Danger (別の意味)','#D9534F','エラー ･ 削除 ･ 危険な操作','');
+  swatch('#D9534F','Danger (別の意味)','#D9534F','エラー・削除・危険な操作','');
 
 /* カテゴリ 4値のグリッド */
 (function(){
@@ -1161,7 +1161,7 @@ function usedColors(id, list){
 /* ============================================================
    §2 グラフ
    ============================================================ */
-const ITEMS = ['自分の好みに合った味','手軽に食べられる','価格が手頃','見た目がおいしそう','新しさ ･ 特別感'];
+const ITEMS = ['自分の好みに合った味','手軽に食べられる','価格が手頃','見た目がおいしそう','新しさ・特別感'];
 const V1 = [54.5,47.2,44.9,39.5,16.6];
 
 /* 2.1 片側だけを読ませたい (主役 + Border、突出値だけ Point) */
@@ -1312,7 +1312,7 @@ new Chart(document.getElementById('c-line'), {
     layout:{ padding:{ top:44, right:16 } },
     scales:{ x:axis({ title:'月' }),
              y:{ ...axis({ grid:true }), min:30, max:80 } },
-    plugins:{ legend:legendTop(true,'end'), yTitleTop:{ text:'購入件数 (千件) ･ 軸は 30 から' } } }
+    plugins:{ legend:legendTop(true,'end'), yTitleTop:{ text:'購入件数 (千件)・軸は 30 から' } } }
 });
 usedColors('uc-line', [[FIG.primaryDark,'主役'],[FIG.border,'比較対象'],[FIG.rule,'目盛り線']]);
 
@@ -1341,7 +1341,7 @@ function dumbbell(elId, min, max, ticks){
     s += '<text x="'+(W-valW+8)+'" y="'+(y+4)+'" font-size="11" font-weight="bold" fill="'+FIG.gray.text+'">+'+(d[2]-d[1]).toFixed(1)+'</text>';
   });
   s += '<line x1="'+x0+'" y1="'+(padT+DUM.length*rowH)+'" x2="'+x1+'" y2="'+(padT+DUM.length*rowH)+'" stroke="'+FIG.rule+'" stroke-width="1"/>';
-  s += '<text x="'+x1+'" y="'+(H-8)+'" font-size="10" fill="'+FIG.gray.cmp+'" text-anchor="end">好意度 TOP2 (%)'+(min>0?' ･ 軸は '+min+' から':'')+'</text>';
+  s += '<text x="'+x1+'" y="'+(H-8)+'" font-size="10" fill="'+FIG.gray.cmp+'" text-anchor="end">好意度 TOP2 (%)'+(min>0?'・軸は '+min+' から':'')+'</text>';
   s += '</svg>';
   document.getElementById(elId).innerHTML = s;
 }
@@ -1376,7 +1376,7 @@ dumbbell('dumbbell-55', 55, 90, [55,65,75,85]);
   usedColors('uc-quad',[[FIG.primaryDark,'注目する群'],[FIG.gray.cmp,'比較対象'],[FIG.gray.weak,'弱い群'],[FIG.quadrant.area,'領域の円'],[FIG.quadrant.ground,'象限の地']]);
 })();
 
-/* ---------- コレスポンデンス分析 (素の SVG ･ 縦横 1:1 で固定) ---------- */
+/* ---------- コレスポンデンス分析 (素の SVG・縦横 1:1 で固定) ---------- */
 (function(){
   const S=520, pad=44;
   const B=[{x:.68,y:.72,t:'A社'},{x:.34,y:.62,t:'B社'},{x:.56,y:.30,t:'C社'},{x:.24,y:.36,t:'D社'}];
@@ -1395,16 +1395,16 @@ dumbbell('dumbbell-55', 55, 90, [55,65,75,85]);
     s+='<circle cx="'+sx(p.x)+'" cy="'+sy(p.y)+'" r="6" fill="'+FIG.primaryDark+'"/>';
     s+='<text x="'+(sx(p.x)+10)+'" y="'+(sy(p.y)+4)+'" font-size="12" font-weight="bold" fill="'+FIG.primaryDark+'">'+p.t+'</text>';
   });
-  /* 凡例 : 枠なし ･ 横並び */
+  /* 凡例 : 枠なし・横並び */
   s+='<circle cx="'+pad+'" cy="'+(pad-16)+'" r="5" fill="'+FIG.primaryDark+'"/>';
   s+='<text x="'+(pad+12)+'" y="'+(pad-12)+'" font-size="11" fill="'+FIG.gray.cmp+'">ブランド</text>';
   s+='<polygon points="'+(pad+82)+','+(pad-21)+' '+(pad+87)+','+(pad-16)+' '+(pad+82)+','+(pad-11)+' '+(pad+77)+','+(pad-16)+'" fill="'+FIG.cat[1].text+'"/>';
   s+='<text x="'+(pad+94)+'" y="'+(pad-12)+'" font-size="11" fill="'+FIG.gray.cmp+'">項目</text>';
   s+='<text x="'+(S-pad)+'" y="'+(S-pad+18)+'" font-size="10" fill="'+FIG.gray.cmp+'" text-anchor="end">第1軸 (寄与率 62.4%)</text>';
-  s+='<text x="'+pad+'" y="'+(pad-30)+'" font-size="10" fill="'+FIG.gray.cmp+'">第2軸 (寄与率 21.8%) ･ 縦横 1 : 1 で固定</text>';
+  s+='<text x="'+pad+'" y="'+(pad-30)+'" font-size="10" fill="'+FIG.gray.cmp+'">第2軸 (寄与率 21.8%)・縦横 1 : 1 で固定</text>';
   s+='</svg>';
   document.getElementById('ca').innerHTML=s;
-  usedColors('uc-ca',[[FIG.primaryDark,'ブランド ･ 丸'],[FIG.cat[1].text,'項目 ･ 菱形'],[FIG.gray.cmp,'項目のラベル'],[FIG.rule,'原点の線']]);
+  usedColors('uc-ca',[[FIG.primaryDark,'ブランド・丸'],[FIG.cat[1].text,'項目・菱形'],[FIG.gray.cmp,'項目のラベル'],[FIG.rule,'原点の線']]);
 })();
 
 /* ---------- ドーナツ (円錐グラデーション) ---------- */
@@ -1421,7 +1421,7 @@ function donut(id, pct, label, ratio){
   /* トラック : グラデーション時は #F7F7F7 (#E0E0E0 だと淡端との比が 1.67 で溶ける) */
   g.beginPath(); g.arc(cx,cy,r,0,Math.PI*2);
   g.lineWidth=lw; g.strokeStyle=FIG.background; g.stroke();
-  /* 弧に沿わせる (円錐) ･ 淡 → 濃 ･ 12時から時計回り */
+  /* 弧に沿わせる (円錐)・淡 → 濃・12時から時計回り */
   const start = -Math.PI/2;
   const cg = g.createConicGradient ? g.createConicGradient(start, cx, cy) : null;
   if (cg){ cg.addColorStop(0, FIG.primaryLight); cg.addColorStop(Math.max(pct,0.001), FIG.primaryDark); g.strokeStyle = cg; }
@@ -1533,7 +1533,7 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
   /* 端までの割合を 10% 単位に四捨五入して (ちょうど半分は上へ) 0 〜 10 の位置にする */
   function pos(t){ return Math.round(Math.max(0, Math.min(1, t)) * 10); }
 
-  /* A : 量 ･ 比率 (時間帯別の金額構成比) */
+  /* A : 量・比率 (時間帯別の金額構成比) */
   render('heat-a', {
     cols:['朝','昼','夕','夜'],
     rows:['おにぎり','サンドイッチ','サラダ','麺類','お弁当','和惣菜','お寿司','スープ'],
@@ -1541,7 +1541,7 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
     color:function(v){ return ['a', pos(v/50)]; },   /* 端の値 50 (最大 46 を切り上げ) */
     fmt:function(v){ return v+'%'; }, steps:S.a.v, lo:'0%', hi:'50% 〜' });
 
-  /* B : 基準より上を見せる (指数 ･ 全体 = 100) */
+  /* B : 基準より上を見せる (指数・全体 = 100) */
   render('heat-b', {
     cols:['手軽さ','ご褒美','健康','量','価格','新しさ','季節感'],
     rows:['全体','男性 20代','男性 40代','男性 60代以上','女性 20代','女性 40代','女性 60代以上','単身世帯'],
@@ -1568,7 +1568,7 @@ donutSeg('c-dseg-multi', [46,31,23], ['コンビニ','スーパー','ドラッ�
   const box = document.getElementById('heat-stops');
   if (!box) return;
   const S = FIG.heatStops;
-  const cols = [['a','A 青 (白から)'],['up','B ･ C 青 (基準から)'],['gray','B グレー (下回る側)'],['down','C ローズ (減った側)']];
+  const cols = [['a','A 青 (白から)'],['up','B・C 青 (基準から)'],['gray','B グレー (下回る側)'],['down','C ローズ (減った側)']];
   let h = '<table class="heat"><thead><tr><th class="rh">位置</th>';
   cols.forEach(function(c){ h += '<th>'+c[1]+'</th>'; });
   h += '</tr></thead><tbody>';
@@ -1626,8 +1626,8 @@ colors = ['#5A74A3', '#8496BE', '#AEBBD6', '#D8DEEA']`;
 document.getElementById('snip-base').textContent =
 `// Chart.js の共通設定 (FIGURE.md §2.10)
 Chart.defaults.font.family = '"Plus Jakarta Sans", "Noto Sans JP", sans-serif';
-Chart.defaults.color = '#666666';               // 目盛り ･ 軸の見出し
-Chart.defaults.plugins.tooltip.enabled = false; // 印刷 ･ 画像化が前提
+Chart.defaults.color = '#666666';               // 目盛り・軸の見出し
+Chart.defaults.plugins.tooltip.enabled = false; // 印刷・画像化が前提
 
 const options = {
   scales: {
@@ -1638,7 +1638,7 @@ const options = {
       title:  { display: true, text: '年代', align: 'end', color: '#666666' }
     },
     y: {
-      beginAtZero: true,                          // 棒 ･ 面 ･ 積み上げのみ
+      beginAtZero: true,                          // 棒・面・積み上げのみ
       border: { color: '#D9D9D9', width: 1 },
       grid:   { color: '#D9D9D9', drawTicks: false },
       ticks:  { color: '#666666', font: { size: 11 } },
@@ -1646,7 +1646,7 @@ const options = {
     }
   },
   plugins: {
-    legend: {                                     // 2系列以上で付ける ･ 枠なし ･ 横並び
+    legend: {                                     // 2系列以上で付ける・枠なし・横並び
       display: true, position: 'top', align: 'start',
       labels: { boxWidth: 10, usePointStyle: true, pointStyle: 'rect', color: '#666666' }
     },

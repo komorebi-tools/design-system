@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// hooks/design-check.sh の受け入れテスト (Node 標準のみ ･ 依存追加なし)
+// hooks/design-check.sh の受け入れテスト (Node 標準のみ・依存追加なし)
 //
 // 使い方 : node scripts/check-hook.mjs
 //
@@ -69,7 +69,7 @@ console.log("=== 1. 静的チェック ===");
 }
 
 // ---------------------------------------------------------------------------
-console.log("\n=== 2. 9件すべての挙動 (違反する入力 / 違反しない入力) ===");
+console.log("\n=== 2. 10件すべての挙動 (違反する入力 / 違反しない入力) ===");
 const rules = JSON.parse(readFileSync(RULES_MAIN, "utf8"));
 // 各規則につき、違反する入力と違反しない入力を1つずつ
 const CASES = {
@@ -79,11 +79,12 @@ const CASES = {
   NO_FULLWIDTH_PAREN: { bad: "これは（補足）です", good: "これは (補足) です" },
   NO_PAREN_INNER_SPACE: { bad: "これは ( 補足 ) です", good: "これは (補足) です" },
   NO_FULLWIDTH_COLON: { bad: "仮説：結論", good: "仮説 : 結論" },
-  NO_FULLWIDTH_NAKAGURO: { bad: "Notion・Slack", good: "Notion ･ Slack" },
+  NO_HALFWIDTH_NAKAGURO: { bad: "Notion･Slack", good: "Notion・Slack" },
+  NO_NAKAGURO_SPACE: { bad: "Notion ・ Slack", good: "Notion・Slack" },
   NO_BORDER_RADIUS_50: { bad: "border-radius: 50%;", good: "border-radius: 8px;" },
   NO_HARDCODED_PRIMARY: { bad: "color: #6E87B6;", good: "color: var(--primary);" },
 };
-check(`規則が ${rules.length} 件 ･ 全件にテストケースがある`, rules.every((r) => CASES[r.id]), rules.map((r) => r.id).filter((id) => !CASES[id]).join(" "));
+check(`規則が ${rules.length} 件・全件にテストケースがある`, rules.every((r) => CASES[r.id]), rules.map((r) => r.id).filter((id) => !CASES[id]).join(" "));
 
 const rows2 = [];
 for (const rule of rules) {
@@ -120,7 +121,7 @@ for (const [label, f] of [["rules-before.json", RULES_BEFORE], ["rules-after.jso
     failed++;
   }
 }
-if (fixturesOk) console.log(`  比較元 : tests/fixtures/rules-before.json ･ rules-after.json`);
+if (fixturesOk) console.log(`  比較元 : tests/fixtures/rules-before.json・rules-after.json`);
 
 const EMOJI_CASES = [
   { input: "\u{1F600}", expectBefore: true, expectAfter: true, note: "もともと検出できていた絵文字" },
