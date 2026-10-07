@@ -67,6 +67,15 @@
     flex-shrink: 0;
   }
   .nav-link:hover { color: var(--primary); border-bottom-color: var(--primary); }
+  .nav-link.current { color: var(--primary-dark); border-bottom-color: var(--primary-dark); }
+
+  /* 目次 ( このページの中の移動 ) */
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; margin-top: 40px; }
+  .toc h2 { font-size: 13px; letter-spacing: .08em; color: var(--text-secondary); margin: 0 0 12px; font-weight: 700; }
+  .toc ol { margin: 0; padding-left: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 6px 24px; }
+  .toc a { color: var(--primary-dark); text-decoration: none; font-size: 14px; }
+  .toc a:hover { text-decoration: underline; }
+  .toc .num { font-family: ui-monospace, "Roboto Mono", Menlo, Consolas, monospace; color: var(--text-secondary); margin-right: 8px; font-size: 12px; }
 
   /* Section */
   .section { padding: 64px 0; }
@@ -290,18 +299,7 @@
 <!-- Nav -->
 <nav class="nav-bar">
   <div class="nav-inner">
-    <a class="nav-link" href="#logo">Logo</a>
-    <a class="nav-link" href="#color">Color</a>
-    <a class="nav-link" href="#typography">Typography</a>
-    <a class="nav-link" href="#components">Components</a>
-    <a class="nav-link" href="#icons">Icons</a>
-    <a class="nav-link" href="#motion">Motion</a>
-    <a class="nav-link" href="#spacing">Spacing</a>
-    <a class="nav-link" href="#elevation">Elevation</a>
-    <a class="nav-link" href="#responsive">Responsive</a>
-    <a class="nav-link" href="#dark">Dark Mode</a>
-    <a class="nav-link" href="#guidelines">Guidelines</a>
-    <a class="nav-link" href="#formatting">JP Formatting</a>
+    <a class="nav-link current" href="index.html" aria-current="page">General</a>
     <a class="nav-link" href="figure.html">Figure</a>
     <a class="nav-link" href="diagram.html">Diagram</a>
   </div>
@@ -311,6 +309,24 @@
 <div class="copy-toast" id="copyToast">Copied!</div>
 
 <div class="container">
+
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#logo"><span class="num">00</span>Logo</a></li>
+    <li><a href="#color"><span class="num">01</span>Color</a></li>
+    <li><a href="#typography"><span class="num">02</span>Typography</a></li>
+    <li><a href="#components"><span class="num">03</span>Components</a></li>
+    <li><a href="#icons"><span class="num">04</span>Icons</a></li>
+    <li><a href="#motion"><span class="num">05</span>Motion</a></li>
+    <li><a href="#spacing"><span class="num">06</span>Spacing</a></li>
+    <li><a href="#elevation"><span class="num">07</span>Elevation</a></li>
+    <li><a href="#responsive"><span class="num">08</span>Responsive</a></li>
+    <li><a href="#dark"><span class="num">09</span>Dark Mode</a></li>
+    <li><a href="#guidelines"><span class="num">10</span>Guidelines</a></li>
+    <li><a href="#formatting"><span class="num">11</span>JP Formatting</a></li>
+  </ol>
+</nav>
 
   <!-- 0. Logo Assets -->
   <div class="section" id="logo">
