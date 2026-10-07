@@ -16,7 +16,7 @@ https://komorebi-tools.github.io/design-system/
 
 https://komorebi-tools.github.io/design-system/figure.html
 
-整理の図 ( 図解 ) の構図にも、実物で確認できるページがあります。
+整理の図 (図解) の構図にも、実物で確認できるページがあります。
 
 https://komorebi-tools.github.io/design-system/diagram.html
 
@@ -66,14 +66,14 @@ design-system/
 | [SKILL.md](.claude/skills/komorebi-design-system/SKILL.md) | デザイントークン、情報ソース (コーポレートサイト、会社説明スライド)、品質 3 層定義 (L1/L2/L3)、アンチパターン、チェックリストを定義。Claude Code が UI を作る際の判断基準になる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [rules.json](contracts/rules.json) | 絵文字禁止、`#000000` 禁止、全角括弧禁止など 8 件の禁止ルール。ファイル編集のたびに hook が自動チェックし、違反があれば警告する <!-- design-check: allow NO_TEXT_BLACK,NO_PERIOD_LINEBREAK --> |
 | [FIGURE.md](FIGURE.md) | グラフ、表、見出しの階層。図解は2軸4象限だけを扱う。色の一次情報源は DESIGN.md だが、カテゴリ配色 ･ グレーの段など DESIGN.md に対応がない値はここで定義する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
-| [DIAGRAM.md](DIAGRAM.md) | 整理の図 ( 図解 ) の規約。関係を構図で見せるときの構図カタログ17型と選び方、図解の中での色 ･ 文字の使い方。色の値は持たず、DESIGN.md と FIGURE.md を参照する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| [DIAGRAM.md](DIAGRAM.md) | 整理の図 (図解) の規約。関係を構図で見せるときの構図カタログ17型と選び方、図解の中での色 ･ 文字の使い方。色の値は持たず、DESIGN.md と FIGURE.md を参照する <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [SLIDE.md](SLIDE.md) | スライド固有の規約。フォント、サイズの段階、配置、pill ･ マーカー、スライド/スプレッドシートのテーマ配色。スライドを作るときは FIGURE.md と合わせて読む <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [RATIONALE.md](RATIONALE.md) | FIGURE.md ･ SLIDE.md の規約をそう決めた根拠 (測定値、近似色の検査、選定の経緯)。既定では読まず、判断に迷ったときに開く <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [index.html](index.html) | DESIGN.md をビジュアルで確認できるページ。チーム全員が同じトークンを見られる <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [figure.html](figure.html) | FIGURE.md の §1 〜 §3 を実物のグラフで確認できるページ。規約の本文は FIGURE.md で、ここは見本。Chart.js で描いている <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | [diagram.html](diagram.html) | DIAGRAM.md の §1 〜 §3 を実物の図解で確認できるページ。規約の本文は DIAGRAM.md で、ここは見本。題材と数値は架空のもの <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 
-> 約物 ･ 記号の表記ルール ( 中黒 ･ スラッシュ ･ 引用符 ･ 括弧 ･ コロン ･ カンマ等の 11 項目 + 句点後改行ルール ) は [DESIGN.md §3.6](DESIGN.md) を一次情報源として参照してください。
+> 約物 ･ 記号の表記ルール (中黒 ･ スラッシュ ･ 引用符 ･ 括弧 ･ コロン ･ カンマ等の 11 項目 + 句点後改行ルール) は [DESIGN.md §3.6](DESIGN.md) を一次情報源として参照してください。
 
 #### 2026/9/1 の `NO_EMOJI` の変更について
 

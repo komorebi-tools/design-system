@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DIAGRAM.md プレビュー - 整理の図 ( 図解 ) の規約</title>
+<title>DIAGRAM.md プレビュー - 整理の図 (図解) の規約</title>
 <link rel="icon" type="image/png" href="assets/logo/logo-clear-symbol.png">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -50,7 +50,7 @@ body{
 h1,h2,h3{font-weight:700; font-feature-settings:"palt" 1,"kern" 1; letter-spacing:0.05em}
 .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px 96px}
 
-/* ---- サイト共通ヘッダ ( index.html ･ figure.html と同じ形 ) ---- */
+/* ---- サイト共通ヘッダ (index.html ･ figure.html と同じ形) ---- */
 .hero{
   background:linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--primary-light) 100%);
   color:#FFFFFF; padding:80px 40px; text-align:center;
@@ -115,12 +115,12 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 }
 
 /* ============================================================
-   図解 ( DIAGRAM.md §1 の共通の視覚言語 )
+   図解 (DIAGRAM.md §1 の共通の視覚言語)
    図は幅 1080px で組み、狭い画面では .scroll-x の中で横に流す
    ============================================================ */
 .dg{width:1080px; letter-spacing:0; line-height:1.6; word-break:auto-phrase; line-break:strict; color:var(--g-text)}
 .dg b{font-weight:700}
-/* 円は図解のノード ･ 番号 ･ 中心にだけ使う ( UI 部品の角丸 6-8px とは別 ) */
+/* 円は図解のノード ･ 番号 ･ 中心にだけ使う (UI 部品の角丸 6-8px とは別) */
 .dg-round{border-radius:50%} /* design-check: allow NO_BORDER_RADIUS_50 */
 .dg-title{display:flex; align-items:center; gap:14px; padding-bottom:14px; border-bottom:1px solid var(--hairline); margin-bottom:22px}
 .dg-badge{background:var(--primary-dark); color:#fff; font-weight:700; font-size:14px; padding:4px 14px; border-radius:999px; flex:none}
@@ -137,7 +137,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-sl{font-size:12px; font-weight:700; color:var(--g-cmp); margin-bottom:4px}
 .dg-conn{display:flex; align-items:center; justify-content:center}
 
-/* 1 導入 ･ 定義表 ( 3つのバリエーション ) */
+/* 1 導入 ･ 定義表 (3つのバリエーション) */
 .dg-intro{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
 .dg-intro .cd{background:var(--base-bg); padding:22px 22px 24px}
 .dg-intro .hd{display:flex; align-items:baseline; gap:10px; color:var(--primary-dark); font-weight:700}
@@ -156,7 +156,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-cls.one{grid-template-columns:200px 1fr 1.2fr; margin-bottom:6px}
 .dg-cls.one .l b{font-size:22px; line-height:1; margin-right:12px}
 
-/* 2 分類表 ( 3つのバリエーション ) : 区分の色を子に引き継ぐ。--k20 は面の20% ( FIGURE.md §1.2 のマーカー ) */
+/* 2 分類表 (3つのバリエーション) : 区分の色を子に引き継ぐ。--k20 は面の20% (FIGURE.md §1.2 のマーカー) */
 .dg-k0{--k:var(--primary-dark); --k20:#D6DDEB; --kbg:var(--base-bg)}
 .dg-k1{--k:var(--cat2-text); --k20:#DDEBE9; --kbg:var(--cat2-bg)}
 .dg-k2{--k:var(--cat1-text); --k20:#E6E6F2; --kbg:var(--cat1-bg)}
@@ -175,7 +175,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-kv .t1 span{background:linear-gradient(transparent 55%, var(--k20) 55%)}
 .dg-kv .t2{font-size:14px; color:var(--g-cmp); line-height:1.7; margin-top:2px}
 
-/* 3 ステップ ( 帯＋カード ) */
+/* 3 ステップ (帯＋カード) */
 .dg-steps{display:grid; grid-template-columns:1fr 16px 1fr 16px 1fr 16px 1fr; align-items:stretch}
 .dg-steps .dg-conn{position:relative; z-index:1; overflow:visible}
 .dg-steps .dg-conn svg{flex:none}
@@ -184,7 +184,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-step .band.goal{background:linear-gradient(in oklab 90deg, var(--primary-dark) 30%, var(--cat2-fill) 100%)}
 .dg-step .body{padding:20px 26px 22px; font-size:13px; line-height:1.75; flex:1}
 
-/* 4 ステップ ( 箱と山形 ) */
+/* 4 ステップ (箱と山形) */
 .dg-flow{display:grid; grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr; align-items:stretch}
 .dg-box{background:var(--base-bg); border-radius:8px; padding:20px 16px; text-align:center}
 .dg-box .n{font-size:21px; font-weight:700; color:var(--primary-dark); line-height:1.35}
@@ -237,7 +237,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-mid .link{position:absolute; left:0; right:0; top:50%; height:6px; margin-top:-3px; background:var(--g-mute)}
 .dg-mid .ctr{position:relative; width:180px; height:180px; background:linear-gradient(in oklab 135deg, var(--primary-dark) 40%, var(--cat2-fill) 100%); color:#fff; display:flex; align-items:center; justify-content:center; text-align:center; font-size:27px; font-weight:700; line-height:1.3; padding-top:12px} /* 6px 下げる */
 
-/* 9 中心放射 ( ハブ ) */
+/* 9 中心放射 (ハブ) */
 .dg-hub{position:relative; width:1080px; height:700px}
 .dg-hub svg{position:absolute; left:0; top:0}
 .dg-node{position:absolute; width:212px; height:212px; background:var(--base-bg); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:14px 14px 0} /* 7px 下げる */
@@ -342,7 +342,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 
 <header class="masthead">
   <h1>DIAGRAM.md プレビュー</h1>
-  <p class="lede">整理の図 ( 図解 ) の規約のうち、§1 共通の視覚言語 / §2 構図カタログ / §3 構図の選び方 を実物で確認するページ。
+  <p class="lede">整理の図 (図解) の規約のうち、§1 共通の視覚言語 / §2 構図カタログ / §3 構図の選び方 を実物で確認するページ。
 </p>
   <p class="meta">
     規約の本文は <code>DIAGRAM.md</code>、色の値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
@@ -350,7 +350,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
     このページは図の内側 1080px を表示する。
     PNG 書き出し時の外幅 1160px と上下左右の余白は含めない。
 <br>
-    見本の題材 ( コンビニのスイーツの調査 ) と数値は、すべてこのページのために作った架空のもの。
+    見本の題材 (コンビニのスイーツの調査) と数値は、すべてこのページのために作った架空のもの。
 <br>
     2026/10/6 時点の検討版 v2。
   </p>
@@ -361,13 +361,13 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <li><a href="#s18"><span class="num">1.8</span>つなぎ</a></li>
 <li><a href="#c1"><span class="num">2.1</span>導入 ･ 定義表</a></li>
 <li><a href="#c2"><span class="num">2.2</span>分類表</a></li>
-<li><a href="#c3"><span class="num">2.3</span>ステップ ( 帯＋カード )</a></li>
-<li><a href="#c4"><span class="num">2.4</span>ステップ ( 箱と山形 )</a></li>
+<li><a href="#c3"><span class="num">2.3</span>ステップ (帯＋カード)</a></li>
+<li><a href="#c4"><span class="num">2.4</span>ステップ (箱と山形)</a></li>
 <li><a href="#c5"><span class="num">2.5</span>番号ステップ</a></li>
 <li><a href="#c6"><span class="num">2.6</span>ビフォーアフター</a></li>
 <li><a href="#c7"><span class="num">2.7</span>柱カード</a></li>
 <li><a href="#c8"><span class="num">2.8</span>バタフライ</a></li>
-<li><a href="#c9"><span class="num">2.9</span>中心放射 ( ハブ )</a></li>
+<li><a href="#c9"><span class="num">2.9</span>中心放射 (ハブ)</a></li>
 <li><a href="#c10"><span class="num">2.10</span>年間ロードマップ</a></li>
 <li><a href="#c11"><span class="num">2.11</span>階段ロードマップ</a></li>
 <li><a href="#c12"><span class="num">2.12</span>中心軸タイムライン</a></li>
@@ -385,10 +385,10 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <table class="t"><tr><th>要素</th><th>大きさ</th><th>見本</th></tr>
 <tr><td>タイトル</td><td>24px 太字</td><td><span style="font-size:24px;font-weight:700;color:var(--primary-dark)">食べきれる大きさが、最初の1個を決める</span></td></tr>
 <tr><td>円 ･ ラベルの見出し語</td><td>15 〜 21px 太字</td><td><span style="font-size:19px;font-weight:700;color:var(--primary-dark)">自分へのご褒美</span></td></tr>
-<tr><td>数値</td><td>15 〜 18px 太字 ( 強調は上限なし )</td><td><span style="font-size:32px;font-weight:700;color:var(--primary-dark)">62%</span></td></tr>
+<tr><td>数値</td><td>15 〜 18px 太字 (強調は上限なし)</td><td><span style="font-size:32px;font-weight:700;color:var(--primary-dark)">62%</span></td></tr>
 <tr><td>本文</td><td>13px</td><td><span style="font-size:13px">ひとりで食べきれる大きさの品から選ばれている。
 </span></td></tr>
-<tr><td>キャプション</td><td>11.5px ･ <code>#999999</code></td><td><span style="font-size:11.5px;color:var(--g-weak)">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 買う場面</span></td></tr>
+<tr><td>キャプション</td><td>11.5px ･ <code>#999999</code></td><td><span style="font-size:11.5px;color:var(--g-weak)">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 色 = 買う場面</span></td></tr>
 </table><div class="rule-note">強調したい語 ･ 数字は、文字サイズの上限なしで大きく見せてよい。
 <strong>ただし余白を潰さない。
 </strong> はみ出しは禁止で、入らないときは文を短くするか、図を分ける。
@@ -424,17 +424,17 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="card" id="s17"><h3>1.7 図解の中のグラフ表現</h3><p class="sub">長さの比較が意味を持つときは、数値を小さな棒で見せる。
 伝わらないときは、数字そのものを大きく見せる。
 </p>
-<div class="scroll-x"><div class="dg" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px"><div><div class="dg-sl">ミニ棒 ( 長さの比較が意味を持つとき )</div>
+<div class="scroll-x"><div class="dg" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px"><div><div class="dg-sl">ミニ棒 (長さの比較が意味を持つとき)</div>
 <div class="dg-row"><span class="l">濃厚さ</span><span class="dg-bar"><b style="left:0;width:62%;background:var(--primary-dark)"></b></span><span class="v" style="color:var(--primary-dark)">62%</span></div>
 <div class="dg-row"><span class="l">見た目</span><span class="dg-bar"><b style="left:0;width:41%;background:var(--primary-dark)"></b></span><span class="v" style="color:var(--primary-dark)">41%</span></div>
 <div class="dg-row"><span class="l">価格</span><span class="dg-bar"><b style="left:0;width:28%;background:var(--primary-dark)"></b></span><span class="v" style="color:var(--primary-dark)">28%</span></div>
 </div>
-<div><div class="dg-sl">基準のある指数 ( 中央の線 = 100 ･ 端は 70 〜 130 )</div>
+<div><div class="dg-sl">基準のある指数 (中央の線 = 100 ･ 端は 70 〜 130)</div>
 <div class="dg-row"><span class="l">プリン</span><span class="dg-dev"><i></i><b style="left:50%;width:30%;background:var(--primary-dark);border-radius:0 2px 2px 0"></b></span><span class="v" style="color:var(--primary-dark)">118</span></div>
 <div class="dg-row"><span class="l">シュークリーム</span><span class="dg-dev"><i></i><b style="left:50%;width:7%;background:var(--primary-dark);border-radius:0 2px 2px 0"></b></span><span class="v" style="color:var(--primary-dark)">104</span></div>
 <div class="dg-row"><span class="l">ロールケーキ</span><span class="dg-dev"><i></i><b style="right:50%;width:23%;background:var(--g-mute);border-radius:2px 0 0 2px"></b></span><span class="v" style="color:var(--g-cmp)">86</span></div>
 </div>
-<div><div class="dg-sl">棒にしない数値 ( 比較の土俵がないとき )</div>
+<div><div class="dg-sl">棒にしない数値 (比較の土俵がないとき)</div>
 <div style="font-size:13px;line-height:1.9">回答者<b style="font-size:18px;margin-left:14px">n=1,200</b><br>相関係数<b style="font-size:18px;margin-left:14px">0.42</b></div>
 </div>
 </div>
@@ -445,14 +445,14 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 軸と目盛りが要る本式のグラフは <a href="figure.html">figure.html</a> の描き方に従う。
 </div>
 </div>
-<div class="card" id="s18"><h3>1.8 つなぎ ( ＋ ･ 矢印 ･ 山形 )</h3><p class="sub">少し太めにして、色はやや薄いグレーか山吹を使う。
+<div class="card" id="s18"><h3>1.8 つなぎ (＋ ･ 矢印 ･ 山形)</h3><p class="sub">少し太めにして、色はやや薄いグレーか山吹を使う。
 </p>
 <div class="scroll-x"><div class="dg" style="display:flex;flex-wrap:wrap;gap:22px 44px;align-items:center"><div style="display:flex;align-items:center;gap:10px"><span class="dg-conn"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 3 V23 M3 13 H23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round"/></svg></span><span style="font-size:13px">足す</span></div>
 <div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
-<span style="font-size:13px">記号の矢印 ( 対になる ･ 意味を示す ･ 次の段へ )</span></div>
+<span style="font-size:13px">記号の矢印 (対になる ･ 意味を示す ･ 次の段へ)</span></div>
 <div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="56" height="22" viewBox="0 0 56 22" aria-hidden="true"><path d="M2 11 H40" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M38 3 L54 11 L38 19 Z" fill="var(--g-mute)"/></svg></div>
 <div class="dg-conn"><svg width="56" height="40" viewBox="0 0 56 40" aria-hidden="true"><path d="M4 36 Q6 10 38 10" fill="none" stroke="var(--g-mute)" stroke-width="3.5" stroke-linecap="round"/><path d="M36 2 L52 10 L36 18 Z" fill="var(--g-mute)"/></svg></div>
-<span style="font-size:13px">線の矢印 ( 関係のつなぎ ･ 流れ ･ サイクル ･ フロー図 )</span></div>
+<span style="font-size:13px">線の矢印 (関係のつなぎ ･ 流れ ･ サイクル ･ フロー図)</span></div>
 <div style="display:flex;align-items:center;gap:10px"><div class="dg-conn"><svg width="15" height="26" viewBox="0 0 15 26" aria-hidden="true"><path d="M3 3 L12 13 L3 23" fill="none" stroke="var(--g-mute)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <span style="font-size:13px">次の段へ</span></div>
 <div style="display:flex;align-items:center;gap:10px"><svg width="15" height="26" viewBox="0 0 15 26" aria-hidden="true"><path d="M3 3 L12 13 L3 23" fill="none" stroke="var(--cat4-fill)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="font-size:13px">山吹でもよい</span></div>
@@ -474,17 +474,17 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </p>
 <div class="card" id="c1"><h3>1. 導入 ･ 定義表</h3><p class="sub">資料の構成 ･ 用語を最初に示すとき。
 </p>
-<p class="sub" style="margin:0 0 12px"><strong>番号つきのカード ( 基本 )</strong> … 数と全体像を先に見せたいとき。
+<p class="sub" style="margin:0 0 12px"><strong>番号つきのカード (基本)</strong> … 数と全体像を先に見せたいとき。
 項目が増えて文字が窮屈になるときは、表として見せる。
 </p>
 <div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図1</span><span class="dg-h">4つのデータを重ねて、売り場の仮説をつくる</span></div>
 <div class="dg-intro"><div class="cd"><div class="hd"><span class="no">1</span><span class="nm">定量</span></div>
-<div class="da">購入者アンケート ( n=1,200 )</div>
+<div class="da">購入者アンケート (n=1,200)</div>
 <div class="lb">確認すること</div>
 <div class="tx">選ぶ基準、食べる場面、買う目的</div>
 </div>
 <div class="cd"><div class="hd"><span class="no">2</span><span class="nm">定性</span></div>
-<div class="da">購入者インタビュー ( 12人 )</div>
+<div class="da">購入者インタビュー (12人)</div>
 <div class="lb">確認すること</div>
 <div class="tx">買うきっかけ、くり返す理由、やめた理由</div>
 </div>
@@ -499,7 +499,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="tx">語られる魅力、食べ方の工夫</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用)</div>
 </div>
 </div>
 <p class="sub" style="margin:28px 0 0"><strong>表として見せる</strong> … 項目を横に読み比べたいとき。
@@ -507,11 +507,11 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </p>
 <div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図1</span><span class="dg-h">4つのデータを重ねて、売り場の仮説をつくる</span></div>
 <div class="dg-tb h"><div></div><div>使用データ</div><div>確認すること</div></div>
-<div class="dg-tb"><div class="k"><b>1</b>定量</div><div class="a">購入者アンケート ( n=1,200 )</div><div class="b">選ぶ基準、食べる場面、買う目的</div></div>
-<div class="dg-tb"><div class="k"><b>2</b>定性</div><div class="a">購入者インタビュー ( 12人 )</div><div class="b">買うきっかけ、くり返す理由、やめた理由</div></div>
+<div class="dg-tb"><div class="k"><b>1</b>定量</div><div class="a">購入者アンケート (n=1,200)</div><div class="b">選ぶ基準、食べる場面、買う目的</div></div>
+<div class="dg-tb"><div class="k"><b>2</b>定性</div><div class="a">購入者インタビュー (12人)</div><div class="b">買うきっかけ、くり返す理由、やめた理由</div></div>
 <div class="dg-tb"><div class="k"><b>3</b>購買データ</div><div class="a">店頭の販売データ 24か月分</div><div class="b">季節ごとの販売傾向、一緒に買われる品</div></div>
 <div class="dg-tb"><div class="k"><b>4</b>投稿</div><div class="a">コンビニのスイーツに関する投稿</div><div class="b">語られる魅力、食べ方の工夫</div></div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用)</div>
 </div>
 </div>
 <p class="sub" style="margin:28px 0 0"><strong>面で組む</strong> … 分類表と並べて、同じ作りで見せたいとき。
@@ -519,11 +519,11 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </p>
 <div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図1</span><span class="dg-h">4つのデータを重ねて、売り場の仮説をつくる</span></div>
 <div class="dg-cls-head" style="grid-template-columns:200px 1fr 1.2fr"><div></div><div>使用データ</div><div>確認すること</div></div>
-<div class="dg-cls one dg-k0"><div class="l"><b>1</b>定量</div><div class="a">購入者アンケート ( n=1,200 )</div><div class="b">選ぶ基準、食べる場面、買う目的</div></div>
-<div class="dg-cls one dg-k0"><div class="l"><b>2</b>定性</div><div class="a">購入者インタビュー ( 12人 )</div><div class="b">買うきっかけ、くり返す理由、やめた理由</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>1</b>定量</div><div class="a">購入者アンケート (n=1,200)</div><div class="b">選ぶ基準、食べる場面、買う目的</div></div>
+<div class="dg-cls one dg-k0"><div class="l"><b>2</b>定性</div><div class="a">購入者インタビュー (12人)</div><div class="b">買うきっかけ、くり返す理由、やめた理由</div></div>
 <div class="dg-cls one dg-k0"><div class="l"><b>3</b>購買データ</div><div class="a">店頭の販売データ 24か月分</div><div class="b">季節ごとの販売傾向、一緒に買われる品</div></div>
 <div class="dg-cls one dg-k0"><div class="l"><b>4</b>投稿</div><div class="a">コンビニのスイーツに関する投稿</div><div class="b">語られる魅力、食べ方の工夫</div></div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用)</div>
 </div>
 </div>
 <div class="rule-note">番号つきのカードを基本にする。
@@ -542,7 +542,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-cls dg-k0"><div class="l">自分へのご褒美</div><div class="a">濃厚さ、食べきれる大きさ</div><div class="b">プリン ･ 濃厚なチーズケーキ</div></div>
 <div class="dg-cls dg-k1"><div class="l">家族と分ける</div><div class="a">個数、好みが分かれにくい味</div><div class="b">複数入りのシュークリーム ･ ロールケーキ</div></div>
 <div class="dg-cls dg-k2"><div class="l">手みやげ</div><div class="a">見た目の華やかさ、持ち運びやすさ</div><div class="b">箱入りの焼き菓子 ･ 季節の限定品</div></div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 買う場面 ( ラベルに区分名を書いたので凡例は省略 )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 色 = 買う場面 (ラベルに区分名を書いたので凡例は省略)</div>
 </div>
 </div>
 <div class="scroll-x" style="margin-top:28px"><div class="dg"><div class="dg-title"><span class="dg-badge">図2</span><span class="dg-h">8つの価値は、3つの群に分けられる</span></div>
@@ -550,7 +550,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-cls dg-k0"><div class="l" style="grid-row:span 3">気分</div><div class="a">気分が切り替わる</div><div class="b">食べると一息つける</div><div class="a">季節を感じられる</div><div class="b">いちご ･ 栗 ･ さつまいも</div><div class="a">自分をねぎらえる</div><div class="b">がんばった日の1個</div></div>
 <div class="dg-cls dg-k1"><div class="l" style="grid-row:span 3">ふだん使い</div><div class="a">すぐに買える</div><div class="b">帰り道に1個だけ</div><div class="a">いつも同じ味</div><div class="b">定番は外れがない</div><div class="a">選ぶ楽しみがある</div><div class="b">新商品 ･ 季節の限定</div></div>
 <div class="dg-cls dg-k2"><div class="l" style="grid-row:span 2">広がり</div><div class="a">手みやげにしやすい</div><div class="b">好みが分かれにくい</div><div class="a">少しずつ試せる</div><div class="b">小さい量 ･ 手頃な値段</div></div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 価値の群 ( ラベルに群の名前を書いたので凡例は省略 ) ･ 1つの区分に複数の行があるとき</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 色 = 価値の群 (ラベルに群の名前を書いたので凡例は省略) ･ 1つの区分に複数の行があるとき</div>
 </div>
 </div>
 <p class="sub" style="margin:28px 0 0"><strong>ピルの見出し → 要素</strong> … 区分ごとに一言で言い切れるとき。
@@ -559,7 +559,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-kv dg-k0"><div class="pill">自分へのご褒美</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>濃厚さ、食べきれる大きさ</span></div><div class="t2">プリン ･ 濃厚なチーズケーキ</div></div></div>
 <div class="dg-kv dg-k1"><div class="pill">家族と分ける</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>個数、好みが分かれにくい味</span></div><div class="t2">複数入りのシュークリーム ･ ロールケーキ</div></div></div>
 <div class="dg-kv dg-k2"><div class="pill">手みやげ</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>見た目の華やかさ、持ち運びやすさ</span></div><div class="t2">箱入りの焼き菓子 ･ 季節の限定品</div></div></div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 買う場面 ( ラベルに区分名を書いたので凡例は省略 )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 色 = 買う場面 (ラベルに区分名を書いたので凡例は省略)</div>
 </div>
 </div>
 <p class="sub" style="margin:28px 0 0"><strong>円の見出し → 要素</strong> … 区分名が短く、区分そのものを強く見せたいとき。
@@ -568,19 +568,19 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-kv dg-k0"><div class="circ ml dg-round">自分への<br>ご褒美</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>濃厚さ、食べきれる大きさ</span></div><div class="t2">プリン ･ 濃厚なチーズケーキ</div></div></div>
 <div class="dg-kv dg-k1"><div class="circ ml dg-round">家族と<br>分ける</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>個数、好みが分かれにくい味</span></div><div class="t2">複数入りのシュークリーム ･ ロールケーキ</div></div></div>
 <div class="dg-kv dg-k2"><div class="circ dg-round">手みやげ</div><svg width="36" height="20" viewBox="0 0 36 20" aria-hidden="true"><path d="M0 7.5H20V2l16 8-16 8v-5.5H0z" fill="var(--g-mute)"/></svg><div><div class="t1"><span>見た目の華やかさ、持ち運びやすさ</span></div><div class="t2">箱入りの焼き菓子 ･ 季節の限定品</div></div></div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 色 = 買う場面 ( ラベルに区分名を書いたので凡例は省略 )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 色 = 買う場面 (ラベルに区分名を書いたので凡例は省略)</div>
 </div>
 </div>
 <div class="rule-note">区分の色を、子の要素に薄く引き継ぐ。
 面で組むときは、1列目に面の 20%、2列目に地色を敷く。
 ピル ･ 円のときは、要素の太字の下に面の 20% をマーカーとして敷く。
 セルを枠線で囲まない。
-面で組むときは白のすき間で区切り、区分ごとに1つの塊にする ( 角は丸めない ) 。
+面で組むときは白のすき間で区切り、区分ごとに1つの塊にする (角は丸めない) 。
 矢印は区分ごとに1本で、2本以上を重ねない。
 3つの型は、1つの資料の中で混ぜてよい。
 </div>
 </div>
-<div class="card" id="c3"><h3>3. ステップ ( 帯＋カード )</h3><p class="sub">各段の説明をしっかり読ませるとき。
+<div class="card" id="c3"><h3>3. ステップ (帯＋カード)</h3><p class="sub">各段の説明をしっかり読ませるとき。
 </p>
 <div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図3</span><span class="dg-h">お弁当を買うまでの4段階で、確かめることが変わる</span></div>
 <div class="dg-steps"><div class="dg-step"><div class="band">昼前に思い出す</div>
@@ -599,16 +599,16 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="body">温めたあとの持ちやすさが、最後の決め手になる</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのお弁当 ･ 見本用 )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのお弁当 ･ 見本用)</div>
 </div>
 </div>
 <div class="rule-note">帯はカードの上辺として一体にする。
 矢印は太く、図の高さの中央に置く。
 文字とかぶりそうなときだけ、ずらす。
-強調したい段やゴールの段は、帯をグラデーションにしてよい ( 横 ･ 青の側を 30% まで取る ) 。
+強調したい段やゴールの段は、帯をグラデーションにしてよい (横 ･ 青の側を 30% まで取る) 。
 </div>
 </div>
-<div class="card" id="c4"><h3>4. ステップ ( 箱と山形 )</h3><p class="sub">段の名前が主役で、説明が短いとき。
+<div class="card" id="c4"><h3>4. ステップ (箱と山形)</h3><p class="sub">段の名前が主役で、説明が短いとき。
 </p>
 <div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図4</span><span class="dg-h">AIに分析を頼むときは、4つの段を踏む</span></div>
 <div class="dg-flow"><div class="dg-box"><div class="n">データを<br>渡す</div>
@@ -627,7 +627,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="d">確認した計画で進める</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の例 ( AIでの分析 ･ 見本用 )</div>
+<div class="dg-cap">出典 : 架空の例 (AIでの分析 ･ 見本用)</div>
 </div>
 </div>
 <div class="rule-note">薄青の箱と山形のつなぎ。
@@ -653,7 +653,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのパン ･ 見本用 )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのパン ･ 見本用)</div>
 </div>
 </div>
 <div class="rule-note">円そのものに素の数字を置く。
@@ -667,7 +667,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-ba"><div class="bf">自分用は、<br>濃厚さで選ぶ</div>
 <div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <div class="af"><div class="m"><span>濃厚さに加えて、<br><b>食べきれる大きさ</b>も決め手になる</span></div>
-<div class="s"><div class="k">売り場への示唆 ( 仮説 )</div>
+<div class="s"><div class="k">売り場への示唆 (仮説)</div>
 <div class="v">小さい量の品を、定番の隣に置く</div>
 </div>
 </div>
@@ -675,7 +675,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-ba"><div class="bf">家族用は、<br>個数で選ぶ</div>
 <div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <div class="af"><div class="m"><span>個数に加えて、<br><b>味の違い</b>も意識している</span></div>
-<div class="s"><div class="k">売り場への示唆 ( 仮説 )</div>
+<div class="s"><div class="k">売り場への示唆 (仮説)</div>
 <div class="v">味の違う品を、組み合わせで見せる</div>
 </div>
 </div>
@@ -683,12 +683,12 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dg-ba"><div class="bf">手みやげは、見た目の<br>華やかさで選ぶ</div>
 <div class="dg-conn"><svg width="28" height="26" viewBox="0 0 28 26" aria-hidden="true"><path d="M0 8 h14 v-8 l14 13 -14 13 v-8 h-14 z" fill="var(--g-mute)"/></svg></div>
 <div class="af"><div class="m"><span>華やかさに加えて、<br><b>持ち運びやすさ</b>も気にしている</span></div>
-<div class="s"><div class="k">売り場への示唆 ( 仮説 )</div>
+<div class="s"><div class="k">売り場への示唆 (仮説)</div>
 <div class="v">崩れにくい箱を、手みやげ用に用意する</div>
 </div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ グレー = これまで ･ 青 = これから</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ グレー = これまで ･ 青 = これから</div>
 </div>
 </div>
 <div class="rule-note">ぱっと見て、良くなったことが先に分かるようにする。
@@ -723,7 +723,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="want"><div class="dg-sl">求められていること</div>行くたびに、新しい品があること</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのパン ･ 見本用 ) ･ 青の地 = 求められていること</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのパン ･ 見本用) ･ 青の地 = 求められていること</div>
 </div>
 </div>
 <div class="rule-note">上に濃い面の見出し。
@@ -753,17 +753,17 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのお弁当 ･ 見本用 ) ･ 数値は各群の中で選ぶ基準に挙げた人の割合 ･ 棒の目盛りは左右とも 0 〜 80% ･ 色 = 買う場面 ( 青 = 平日の昼 / 青緑 = 休日の昼 ･ 中心のグラデーション = 両方を含む )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのお弁当 ･ 見本用) ･ 数値は各群の中で選ぶ基準に挙げた人の割合 ･ 棒の目盛りは左右とも 0 〜 80% ･ 色 = 買う場面 (青 = 平日の昼 / 青緑 = 休日の昼 ･ 中心のグラデーション = 両方を含む)</div>
 </div>
 </div>
 <div class="rule-note">中心は円で、Primary Dark か紫。
-2群の色に挟まれた中心は、2色を結ぶグラデーションを積極的に使う ( 斜め 45度 ･ 青の側を 40% まで取る ) 。
+2群の色に挟まれた中心は、2色を結ぶグラデーションを積極的に使う (斜め 45度 ･ 青の側を 40% まで取る) 。
 枠だけ ･ 白い地でもよい。
 翼は2群の2色のカードかミニ棒。
 左右の目盛りは必ずそろえる。
 </div>
 </div>
-<div class="card" id="c9"><h3>9. 中心放射 ( ハブ )</h3><p class="sub">1つの土台と、その周りの要素のとき。
+<div class="card" id="c9"><h3>9. 中心放射 (ハブ)</h3><p class="sub">1つの土台と、その周りの要素のとき。
 </p>
 <div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図9</span><span class="dg-h">6つの価値の土台は「いつもの小さなご褒美」</span></div>
 <div class="dg-hub"><svg width="1080" height="700" aria-hidden="true"><line x1="540" y1="350" x2="330" y2="125" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="750" y2="125" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="130" y2="350" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="950" y2="350" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="330" y2="575" stroke="var(--g-mute)" stroke-width="5"/><line x1="540" y1="350" x2="750" y2="575" stroke="var(--g-mute)" stroke-width="5"/></svg><div class="dg-node dg-round" style="left:224px;top:19px"><div class="t">気分が<br>切り替わる</div>
@@ -789,7 +789,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="s">無理なく、毎週</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 中央の濃い円 = 土台 ･ 6個は上2 ･ 横2 ･ 下2</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 中央の濃い円 = 土台 ･ 6個は上2 ･ 横2 ･ 下2</div>
 </div>
 </div>
 <div class="scroll-x" style="margin-top:28px"><div class="dg"><div class="dg-title"><span class="dg-badge">図9</span><span class="dg-h">5つの価値の土台は「いつもの小さなご褒美」</span></div>
@@ -813,7 +813,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="s">無理なく、毎週</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 中央の濃い円 = 土台 ･ 5個は上2 ･ 下3</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 中央の濃い円 = 土台 ･ 5個は上2 ･ 下3</div>
 </div>
 </div>
 <div class="scroll-x" style="margin-top:28px"><div class="dg"><div class="dg-title"><span class="dg-badge">図9</span><span class="dg-h">4つの価値の土台は「いつもの小さなご褒美」</span></div>
@@ -834,7 +834,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="s">無理なく、毎週</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 中央の濃い円 = 土台 ･ 4個は四隅</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 中央の濃い円 = 土台 ･ 4個は四隅</div>
 </div>
 </div>
 <div class="scroll-x" style="margin-top:28px"><div class="dg"><div class="dg-title"><span class="dg-badge">図9</span><span class="dg-h">3つの価値の土台は「いつもの小さなご褒美」</span></div>
@@ -852,7 +852,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="s">無理なく、毎週</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 中央の濃い円 = 土台 ･ 3個は下3</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 中央の濃い円 = 土台 ･ 3個は下3</div>
 </div>
 </div>
 <div class="rule-note">ノード数で並べ方を決める。
@@ -884,7 +884,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="c dg-round" style="width:120px;height:120px;background:var(--sc1);color:#fff;font-size:17px">年末の<br>手みやげ</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 円の大きさと濃さ = 重点の度合い ( 3段 )</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 円の大きさと濃さ = 重点の度合い (3段)</div>
 </div>
 </div>
 <div class="rule-note">月のルーラーと吊り下げ円。
@@ -907,7 +907,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="d">食べる場面ごとの組み合わせを、売り場全体で見せる</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニの売り場 ･ 見本用 ) ･ 段の高さと濃さ = 広がり</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニの売り場 ･ 見本用) ･ 段の高さと濃さ = 広がり</div>
 </div>
 </div>
 <div class="rule-note">高さと濃さで広がりを表す。
@@ -933,7 +933,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="dn"><b>ゼリー</b><br>夏の需要が一段落</div>
 <div class="dn"><b>栗と芋のスイーツ</b><br>秋の限定が終わる</div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 軸の上 = 伸びる品 / 軸の下 = 落ち着く品</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 軸の上 = 伸びる品 / 軸の下 = 落ち着く品</div>
 </div>
 </div>
 <div class="rule-note">軸の上下に意味を分ける。
@@ -942,7 +942,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="card" id="c13"><h3>13. 象限</h3><p class="sub">2軸で位置を読ませるとき。
 </p>
 <p style="font-size:14px;margin:0">描き方は <code>FIGURE.md</code> §2.5 に従う。
-見本は <a href="figure.html#s25">figure.html</a> の「2.5 図解 ( 2軸4象限など )」にある。
+見本は <a href="figure.html#s25">figure.html</a> の「2.5 図解 (2軸4象限など)」にある。
 </p>
 </div>
 <div class="card" id="c14"><h3>14. マトリクス</h3><p class="sub">場面 × 区分の対応を示すとき。
@@ -969,7 +969,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="c">温めて、軽い夕食にする</div>
 <div class="c na">―</div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのパン ･ 見本用 ) ･ 「―」は該当する回答がなかった組み合わせ</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのパン ･ 見本用) ･ 「―」は該当する回答がなかった組み合わせ</div>
 </div>
 </div>
 <div class="rule-note">列見出しは太字と下罫線で、帯は敷かない。
@@ -998,7 +998,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="it"><b>少しずつ試せる</b><span>小さい量 ･ 手頃な値段</span></div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 濃い箱 = 土台 ･ 群の分け方は見本用</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 濃い箱 = 土台 ･ 群の分け方は見本用</div>
 </div>
 </div>
 <div class="rule-note">土台は塗りの角丸、群は白地に細い枠の四角を1つずつ。
@@ -1019,7 +1019,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="t">知りたい<br>こと</div>
 </div>
 </div>
-<div class="dg-cap">出典 : 架空の例 ( AIでの分析 ･ 見本用 ) ･ 中央 = 回りつづける中心</div>
+<div class="dg-cap">出典 : 架空の例 (AIでの分析 ･ 見本用) ･ 中央 = 回りつづける中心</div>
 </div>
 </div>
 <div class="rule-note">段はピルにして、曲線の線の矢印でつなぐ。
@@ -1044,14 +1044,14 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <div class="lb" style="left:694px;width:96px">その結果</div>
 <div class="back"><span>外れると、定番に戻る</span></div>
 </div>
-<div class="dg-cap">出典 : 架空の調査 ( コンビニのスイーツ ･ 見本用 ) ･ 点線 = 戻り</div>
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ ･ 見本用) ･ 点線 = 戻り</div>
 </div>
 </div>
-<div class="rule-note">箱を線の矢印でつなぎ、矢印の上に関係を表す言葉 ( だから ･ その結果 ) をピルで添える。
+<div class="rule-note">箱を線の矢印でつなぎ、矢印の上に関係を表す言葉 (だから ･ その結果) をピルで添える。
 行き着く先の箱だけ強く見せる。
 戻りがあるときは、点線の矢印で描き、理由を点線の途中に書く。
 戻りがないときは、点線を省く。
-順番に進むだけの手順は、ステップ ( 3 ･ 4 ･ 5 ) を使う。
+順番に進むだけの手順は、ステップ (3 ･ 4 ･ 5) を使う。
 </div>
 </div>
 </section>
