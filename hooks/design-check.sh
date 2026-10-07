@@ -292,7 +292,7 @@ for (let i = 0; i < lines.length; i++) {
   // この検査も allow NO_PERIOD_LINEBREAK で黙らせられる
   if (silence(i, PERIOD_RULE_ID)) continue;
   periodTotal++;
-  // 表示は先頭5行で打ち切るが、総数は最後まで数える ( 上の規則違反側と同じ理由 )
+  // 表示は先頭5行で打ち切るが、総数は最後まで数える (上の規則違反側と同じ理由)
   if (periodHits.length < 5) periodHits.push(`${i + 1}:${lines[i]}`);
 }
 if (periodHits.length > 0) {
