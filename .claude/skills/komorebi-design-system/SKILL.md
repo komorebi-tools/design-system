@@ -91,6 +91,8 @@ Accent :
 --accent: #C4A55A;
 --accent-dark: #B0923E;
 --accent-light: #E0D5A8;
+--accent-deep: #A18E6C;
+--accent-deep-dark: #8B7959;
 ```
 
 Semantic :

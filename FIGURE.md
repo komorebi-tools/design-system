@@ -87,15 +87,15 @@ HTMLレポートのページ設計 (ページ全体の見出し設計・ナビ�
 | Accent | `#C4A55A` | 図解の面・装飾 | 2.37 |
 | Accent Light | `#E0D5A8` | 図解の地・装飾・淡 | 1.44 |
 | Accent Dark | `#B0923E` | アイブロウ、章番号、白文字を乗せる帯の終点 | 2.99 |
-| SUB (深いゴールド) | `#A18E6C` | 白文字を乗せるゴールドの面・pill | 3.18 |
+| Accent Deep (SUB) | `#A18E6C` | 白文字を乗せるゴールドの面・pill | 3.18 |
 | Border | `#E0E0E0` | 非強調の系列・ドーナツのトラック (面として使う) | ― |
 | Background | `#F7F7F7` | 注釈帯の地色、グラデーション時のトラック | ― |
 | Text Secondary | `#666666` | 図解の比較対象 | 5.74 |
 | Text Disabled | `#AAAAAA` | スライドでは使わない (§1.3) | ― |
 
-#### SUB (深いゴールド) だけは独自の値
+#### SUB (深いゴールド) は Accent Deep
 
-`#A18E6C` は `DESIGN.md` に対応するトークンがない。
+SUB `#A18E6C` は `DESIGN.md` の Accent Deep と同じ値。
 
 ゴールド系で白文字を乗せたいときに、この色だけが条件を満たす (比の比較は `RATIONALE.md` §1.1)。
 
@@ -133,7 +133,7 @@ Primary に乗せるのは太字に限る (比の比較は `RATIONALE.md` §1.1)
 |---|---|---|
 | KEY | Primary Dark | ΔE 2.1 |
 | KEY-light | Primary Light | ΔE 0.7 |
-| SUB | 独自の値 `#A18E6C` | ― |
+| SUB | Accent Deep | ― |
 | SUB-light | Accent Light | ΔE 4.9 |
 | SUB-dark | Accent Dark | ― |
 | MUTED | Border | ΔE 4.1 |

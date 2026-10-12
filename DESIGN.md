@@ -63,9 +63,12 @@
 ### Secondary / Accent (セカンダリカラー)
 
 - **Accent** (`#C4A55A`): ゴールド。
-  注目させたいCTA、バッジ、ハイライトに使用
-- **Accent Dark** (`#B0923E`): ホバー・プレス時のアクセント色
+  バッジ、ハイライトに使用 (白文字は乗せない・白文字との比 2.37)
+- **Accent Dark** (`#B0923E`): アイブロウ・章番号などの装飾
 - **Accent Light** (`#E0D5A8`): 背景のアクセント、バッジ背景
+- **Accent Deep** (`#A18E6C`): 深いゴールド。
+  白文字を乗せるゴールドの面に使用 (ゴールドのボタンの地・pill・白文字との比 3.18)
+- **Accent Deep Dark** (`#8B7959`): ゴールドのボタンのホバー・プレス時の色 (白文字との比 4.22)
 
 ### Semantic (意味的な色)
 
@@ -215,6 +218,12 @@ font-feature-settings: "kern" 1;
 - Font Weight: 700
 - Transition: `0.3s cubic-bezier(0.4, 0.4, 0, 1)`
 
+**Accent**
+- Background: `#A18E6C` (Accent Deep)
+- Background (hover): `#8B7959` (Accent Deep Dark)
+- Text: `#FFFFFF`
+- 大きさ・角丸・文字は Primary と同じ
+
 **Secondary**
 - Background: `transparent`
 - Text: `#6E87B6` <!-- design-check: allow NO_HARDCODED_PRIMARY -->
@@ -334,7 +343,7 @@ Spacing Scale に無い値を使うときも偶数にそろえる (16px の文�
 
 - フォントは必ず `"Plus Jakarta Sans", "Noto Sans JP", sans-serif` のフォールバックチェーンを指定する
 - 日本語本文の line-height は 1.6、letter-spacing は 0.05em を基本とする
-- 色のコントラスト比は WCAG AA 以上を確保する
+- 文字のコントラスト比は、本文 4.5 以上、ボタンやラベルの短い太字 3.0 以上を確保する (図表の中の文字は `FIGURE.md` §1.2 の「文字の比の下限」)
 - コンポーネントの余白は Spacing Scale に従う
 - ブランドカラーは水彩ブルー `#6E87B6` を基調とする <!-- design-check: allow NO_HARDCODED_PRIMARY -->
 - ボタンや操作要素には十分なパディングを取り、クリックしやすくする
@@ -383,6 +392,8 @@ Primary Light: #9BB0D0
 Accent:        #C4A55A
 Accent Dark:   #B0923E
 Accent Light:  #E0D5A8
+Accent Deep:   #A18E6C
+Accent Deep Dark: #8B7959
 Text Color:    #333333
 Background:    #F7F7F7
 Surface:       #FFFFFF

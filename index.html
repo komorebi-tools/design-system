@@ -15,6 +15,8 @@
     --accent: #C4A55A;
     --accent-dark: #B0923E;
     --accent-light: #E0D5A8;
+    --accent-deep: #A18E6C;
+    --accent-deep-dark: #8B7959;
     --danger: #D9534F;
     --warning: #F0AD4E;
     --success: #5CB85C;
@@ -139,8 +141,8 @@
   }
   .btn-primary { background: var(--primary); color: white; }
   .btn-primary:hover { background: var(--primary-dark); }
-  .btn-accent { background: var(--accent); color: white; }
-  .btn-accent:hover { background: var(--accent-dark); }
+  .btn-accent { background: var(--accent-deep); color: white; }
+  .btn-accent:hover { background: var(--accent-deep-dark); }
   .btn-secondary { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
   .btn-secondary:hover { background: rgba(110, 135, 182, 0.08); }
   .btn-danger { background: var(--danger); color: white; }
@@ -407,7 +409,7 @@
         <div class="color-info">
           <div class="color-name">Accent</div>
           <div class="color-hex" onclick="copyColor(this)">#C4A55A</div>
-          <div class="color-role">CTA・バッジ・ハイライト</div>
+          <div class="color-role">バッジ・ハイライト (白文字は乗せない)</div>
         </div>
       </div>
       <div class="color-card">
@@ -415,7 +417,7 @@
         <div class="color-info">
           <div class="color-name">Accent Dark</div>
           <div class="color-hex" onclick="copyColor(this)">#B0923E</div>
-          <div class="color-role">ホバー・プレス</div>
+          <div class="color-role">アイブロウ・章番号などの装飾</div>
         </div>
       </div>
       <div class="color-card">
@@ -424,6 +426,22 @@
           <div class="color-name">Accent Light</div>
           <div class="color-hex" onclick="copyColor(this)">#E0D5A8</div>
           <div class="color-role">背景アクセント・バッジ背景</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#A18E6C"></div>
+        <div class="color-info">
+          <div class="color-name">Accent Deep</div>
+          <div class="color-hex" onclick="copyColor(this)">#A18E6C</div>
+          <div class="color-role">白文字を乗せるゴールドの面・ボタン</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#8B7959"></div>
+        <div class="color-info">
+          <div class="color-name">Accent Deep Dark</div>
+          <div class="color-hex" onclick="copyColor(this)">#8B7959</div>
+          <div class="color-role">ゴールドのボタンのホバー・プレス</div>
         </div>
       </div>
       <div class="color-card">
@@ -1148,7 +1166,7 @@
         <ul>
           <li>フォントは "Plus Jakarta Sans", "Noto Sans JP", sans-serif のフォールバックチェーンを指定</li>
           <li>本文の line-height / letter-spacing は Typography 規定に従う</li>
-          <li>色のコントラスト比は WCAG AA 以上</li>
+          <li>文字のコントラスト比は、本文 4.5 以上、ボタンやラベルの短い太字 3.0 以上</li>
           <li>角丸は 6~8px で統一</li>
           <li>ブランドカラーは水彩ブルー #6E87B6 を基調に</li> <!-- design-check: allow NO_HARDCODED_PRIMARY -->
           <li>アイコンは Material Icons を使用する</li>
