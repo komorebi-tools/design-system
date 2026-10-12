@@ -285,10 +285,25 @@ if (count > 0) {
 // invalid option になるため、macOS ではこの検査は一度も動いていなかった。
 const PERIOD = /。[^<\n"')\]}>）」』】\s]/u;
 const SKIP_LINE = /<script|<style|\/\/|\/\*|\*\//;
+// 「。」の手前の文 (前の「。」か行頭から) が10文字未満なら出さない (2026/10/7 決定)
+// 文字数は codepoint で数える。行の中のどれか1か所でも10文字以上なら、その行を出す
+const PERIOD_MIN_SENTENCE = 10;
+function hasLongSentenceBeforePeriod(line) {
+  const re = new RegExp(PERIOD.source, "gu");
+  let m;
+  while ((m = re.exec(line)) !== null) {
+    const before = line.slice(0, m.index);
+    const sentence = before.slice(before.lastIndexOf("。") + 1);
+    if ([...sentence].length >= PERIOD_MIN_SENTENCE) return true;
+    re.lastIndex = m.index + 1;
+  }
+  return false;
+}
 const periodHits = [];
 let periodTotal = 0;
 for (let i = 0; i < lines.length; i++) {
   if (!PERIOD.test(lines[i]) || SKIP_LINE.test(lines[i])) continue;
+  if (!hasLongSentenceBeforePeriod(lines[i])) continue;
   // この検査も allow NO_PERIOD_LINEBREAK で黙らせられる
   if (silence(i, PERIOD_RULE_ID)) continue;
   periodTotal++;
