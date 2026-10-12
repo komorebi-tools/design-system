@@ -180,18 +180,36 @@ console.log("\n=== 4. RULES_FILE の解決経路 ===");
 console.log("\n=== 5. node が見つからない場合のフェイルラウド ===");
 {
   const target = write("nonode.md", "見出し 😀 です");
-  // PATH から node を外し、nvm も homebrew も見えない HOME にする
+  // node をどこからも見つけられない状態を作る。hook 本体は変えず、テストの中だけで次の3つを外す。
+  // (1) PATH : node を入れない shim (6b と同じ作り) 。/usr/bin にも node がある環境があるため
+  //     jq は検査の前に要るので、いまの環境で見つかる場所から入れる
+  // (2) nvm : 空の HOME にする
+  // (3) /opt/homebrew/bin と /usr/local/bin : hook のコピーで、存在しないパスに置き換える
   const emptyHome = join(tmp, "home4");
   mkdirSync(emptyHome, { recursive: true });
-  const r = spawnSync("bash", [HOOK], {
+  const shimBin = makeShimBin("bin-nonode", ["node"]);
+  const jqPath = spawnSync("bash", ["-c", "command -v jq"], { encoding: "utf8" }).stdout.trim();
+  if (jqPath) { try { symlinkSync(jqPath, join(shimBin, "jq")); } catch {} }
+  const src = readFileSync(HOOK, "utf8");
+  const NODE_CANDIDATES = "/opt/homebrew/bin/node /usr/local/bin/node";
+  const noNodeHook = write("hook-no-node.sh",
+    src.replace(NODE_CANDIDATES, "/nonexistent-komorebi-a/node /nonexistent-komorebi-b/node"));
+  const env = {
+    PATH: shimBin,
+    HOME: emptyHome,
+    KOMOREBI_RULES_FILE: RULES_MAIN,
+    KOMOREBI_NODE: "",
+  };
+  // 前提が崩れたテストは意味がないので、先に確かめる
+  check("前提 : hook のコピーで node の探し先を置き換えられている", src.includes(NODE_CANDIDATES));
+  const probeNode = spawnSync("/bin/bash", ["-c", "command -v node"], { encoding: "utf8", env });
+  check("前提 : shim の PATH に node が無い", probeNode.status !== 0, probeNode.stdout.trim());
+  const probeJq = spawnSync("/bin/bash", ["-c", "command -v jq"], { encoding: "utf8", env });
+  check("前提 : shim の PATH に jq がある", probeJq.status === 0, `いまの環境の jq : ${jqPath || "見つからない"}`);
+  const r = spawnSync("/bin/bash", [noNodeHook], {
     input: JSON.stringify({ tool_input: { file_path: target } }),
     encoding: "utf8",
-    env: {
-      PATH: "/usr/bin:/bin:/usr/sbin:/sbin",
-      HOME: emptyHome,
-      KOMOREBI_RULES_FILE: RULES_MAIN,
-      KOMOREBI_NODE: "",
-    },
+    env,
   });
   const out = (r.stdout || "") + (r.stderr || "");
   const loud = out.includes("スキップ") && out.includes("node が見つからない");
