@@ -180,18 +180,36 @@ console.log("\n=== 4. RULES_FILE の解決経路 ===");
 console.log("\n=== 5. node が見つからない場合のフェイルラウド ===");
 {
   const target = write("nonode.md", "見出し 😀 です");
-  // PATH から node を外し、nvm も homebrew も見えない HOME にする
+  // node をどこからも見つけられない状態を作る。hook 本体は変えず、テストの中だけで次の3つを外す。
+  // (1) PATH : node を入れない shim (6b と同じ作り) 。/usr/bin にも node がある環境があるため
+  //     jq は検査の前に要るので、いまの環境で見つかる場所から入れる
+  // (2) nvm : 空の HOME にする
+  // (3) /opt/homebrew/bin と /usr/local/bin : hook のコピーで、存在しないパスに置き換える
   const emptyHome = join(tmp, "home4");
   mkdirSync(emptyHome, { recursive: true });
-  const r = spawnSync("bash", [HOOK], {
+  const shimBin = makeShimBin("bin-nonode", ["node"]);
+  const jqPath = spawnSync("bash", ["-c", "command -v jq"], { encoding: "utf8" }).stdout.trim();
+  if (jqPath) { try { symlinkSync(jqPath, join(shimBin, "jq")); } catch {} }
+  const src = readFileSync(HOOK, "utf8");
+  const NODE_CANDIDATES = "/opt/homebrew/bin/node /usr/local/bin/node";
+  const noNodeHook = write("hook-no-node.sh",
+    src.replace(NODE_CANDIDATES, "/nonexistent-komorebi-a/node /nonexistent-komorebi-b/node"));
+  const env = {
+    PATH: shimBin,
+    HOME: emptyHome,
+    KOMOREBI_RULES_FILE: RULES_MAIN,
+    KOMOREBI_NODE: "",
+  };
+  // 前提が崩れたテストは意味がないので、先に確かめる
+  check("前提 : hook のコピーで node の探し先を置き換えられている", src.includes(NODE_CANDIDATES));
+  const probeNode = spawnSync("/bin/bash", ["-c", "command -v node"], { encoding: "utf8", env });
+  check("前提 : shim の PATH に node が無い", probeNode.status !== 0, probeNode.stdout.trim());
+  const probeJq = spawnSync("/bin/bash", ["-c", "command -v jq"], { encoding: "utf8", env });
+  check("前提 : shim の PATH に jq がある", probeJq.status === 0, `いまの環境の jq : ${jqPath || "見つからない"}`);
+  const r = spawnSync("/bin/bash", [noNodeHook], {
     input: JSON.stringify({ tool_input: { file_path: target } }),
     encoding: "utf8",
-    env: {
-      PATH: "/usr/bin:/bin:/usr/sbin:/sbin",
-      HOME: emptyHome,
-      KOMOREBI_RULES_FILE: RULES_MAIN,
-      KOMOREBI_NODE: "",
-    },
+    env,
   });
   const out = (r.stdout || "") + (r.stderr || "");
   const loud = out.includes("スキップ") && out.includes("node が見つからない");
@@ -204,8 +222,8 @@ console.log("\n=== 5. node が見つからない場合のフェイルラウド =
 // ---------------------------------------------------------------------------
 console.log("\n=== 6. 「。」改行チェック ===");
 {
-  const bad = write("period-bad.md", "これは一文目です。これは二文目です。\n");
-  const good = write("period-good.md", "これは一文目です。\nこれは二文目です。\n");
+  const bad = write("period-bad.md", "これはテスト用の一文目です。これは二文目です。\n");
+  const good = write("period-good.md", "これはテスト用の一文目です。\nこれは二文目です。\n");
   const skip = write("period-skip.md", '<script>const s = "一文目です。二文目です。";</script>\n');
   const rb = runHook(bad, { KOMOREBI_RULES_FILE: RULES_MAIN });
   const rg = runHook(good, { KOMOREBI_RULES_FILE: RULES_MAIN });
@@ -218,6 +236,30 @@ console.log("\n=== 6. 「。」改行チェック ===");
   const url = write("period-url.md", "詳しくは https://example.com を見てください。これは二文目です。\n");
   const ru = runHook(url, { KOMOREBI_RULES_FILE: RULES_MAIN });
   check("URL (// を含む) の行は除外される", !ru.out.includes("「。」改行チェック"));
+
+  // 「。」の手前の文が10文字未満なら出さない。境目は9文字と10文字
+  const nine = write("period-9.md", "あいうえおかきくけ。次の文です。\n");
+  const ten = write("period-10.md", "あいうえおかきくけこ。次の文です。\n");
+  const r9 = runHook(nine, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  const r10 = runHook(ten, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("手前の文が9文字なら検出されない", !r9.out.includes("「。」改行チェック"));
+  check("手前の文が10文字なら検出される", r10.out.includes("「。」改行チェック"));
+
+  // 手前の文は前の「。」から数える。1つ目が短くても、2つ目が10文字以上なら出す
+  const second = write("period-second.md", "短い文。これは十文字を超える二つ目の文です。次の文。\n");
+  const rsec = runHook(second, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("2つ目の「。」の手前が10文字以上なら検出される", rsec.out.includes("「。」改行チェック"));
+
+  // 行頭からではなく前の「。」から数える。短い文が続く行は検出されない
+  // 行頭から数えると、3つ目の「。」の手前が「了解。はい。そうです」の10文字になって検出される
+  const shorts = write("period-shorts.md", "了解。はい。そうです。次に進みます。\n");
+  const rsh = runHook(shorts, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("短い文が続く行は検出されない (手前の文は行頭でなく前の「。」から数える)", !rsh.out.includes("「。」改行チェック"));
+
+  // codepoint で数える。𠮷 は UTF-16 では2単位だが1文字 (9文字 = UTF-16 で14単位)
+  const cp = write("period-codepoint.md", "𠮷𠮷𠮷𠮷𠮷あいうえ。次の文です。\n");
+  const rcp = runHook(cp, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("文字数は codepoint で数える (サロゲートペア9文字は検出されない)", !rcp.out.includes("「。」改行チェック"));
 }
 
 // ---------------------------------------------------------------------------
@@ -392,7 +434,7 @@ console.log("\n=== 8. 打ち切りと総数 ===");
 
   // (2) 「。」改行が18行
   const eighteen = write("trunc-period.md",
-    Array.from({ length: 18 }, (_, i) => `これは一文目です${i + 1}。これは二文目です。`).join("\n") + "\n");
+    Array.from({ length: 18 }, (_, i) => `これはテスト用の一文目です${i + 1}。これは二文目です。`).join("\n") + "\n");
   const r2 = runHook(eighteen, { KOMOREBI_RULES_FILE: RULES_MAIN });
   const shown2 = (r2.out.match(/^\d+:/gm) || []).length;
   check("(2) 表示される「。」改行は5行", shown2 === 5, `実際 : ${shown2} 行`);
@@ -403,7 +445,7 @@ console.log("\n=== 8. 打ち切りと総数 ===");
   // (3) 打ち切りが起きない入力では「他 」を出さない
   const few = write("trunc-none.md",
     "これは（全角括弧1）を含みます\nこれは（全角括弧2）を含みます\n" +
-    "これは一文目ですA。これは二文目です。\nこれは一文目ですB。これは二文目です。\nこれは一文目ですC。これは二文目です。\n");
+    "これはテスト用の一文目ですA。これは二文目です。\nこれはテスト用の一文目ですB。これは二文目です。\nこれはテスト用の一文目ですC。これは二文目です。\n");
   const r3 = runHook(few, { KOMOREBI_RULES_FILE: RULES_MAIN });
   check("(3) 打ち切りが無いときは「他 」を出さない", !r3.out.includes("他 "),
     r3.out.split("\n").find((l) => l.includes("他 ")) || "");
