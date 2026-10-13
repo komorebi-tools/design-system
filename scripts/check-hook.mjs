@@ -250,6 +250,12 @@ console.log("\n=== 6. 「。」改行チェック ===");
   const rsec = runHook(second, { KOMOREBI_RULES_FILE: RULES_MAIN });
   check("2つ目の「。」の手前が10文字以上なら検出される", rsec.out.includes("「。」改行チェック"));
 
+  // 行頭からではなく前の「。」から数える。短い文が続く行は検出されない
+  // 行頭から数えると、3つ目の「。」の手前が「了解。はい。そうです」の10文字になって検出される
+  const shorts = write("period-shorts.md", "了解。はい。そうです。次に進みます。\n");
+  const rsh = runHook(shorts, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("短い文が続く行は検出されない (手前の文は行頭でなく前の「。」から数える)", !rsh.out.includes("「。」改行チェック"));
+
   // codepoint で数える。𠮷 は UTF-16 では2単位だが1文字 (9文字 = UTF-16 で14単位)
   const cp = write("period-codepoint.md", "𠮷𠮷𠮷𠮷𠮷あいうえ。次の文です。\n");
   const rcp = runHook(cp, { KOMOREBI_RULES_FILE: RULES_MAIN });
