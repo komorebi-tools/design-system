@@ -267,8 +267,15 @@ AI は指示がないと統計的に最も無難なデザインに収束する�
      alt="株式会社コモレビ" style="height: 32px; width: auto;">
 ```
 
-暗い背景にはロゴを置かない。
-`filter` で白くするのは、DESIGN.md §0「ロゴの色やテクスチャを改変しない」に反する。
+フッター用 (暗い背景、白抜き版) :
+
+```html
+<img src="https://komorebi-tools.github.io/design-system/assets/logo/logo-clear-white-wide.png"
+     alt="株式会社コモレビ" style="height: 28px; width: auto;">
+```
+
+通常のロゴを `filter` で白くしない。
+DESIGN.md §0「ロゴの色やテクスチャを改変しない」に反する。
 
 ロゴの周囲には十分な余白を確保する。
 
