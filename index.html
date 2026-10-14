@@ -131,6 +131,11 @@
     background: white; border: 1px solid var(--border); border-radius: 8px; padding: 32px;
   }
   .component-label { font-size: 12px; font-weight: 700; color: var(--primary-dark); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 24px; }
+  /* 白抜きロゴの見本 : 実際に使う大きさに近づけ、上の青いロゴの見本より小さくする */
+  .logo-white-sample img { max-width: 100%; width: auto; object-fit: contain; }
+  .logo-white-sample .wide { height: 56px; }
+  .logo-white-sample .short { height: 112px; }
+  .logo-white-sample .symbol { height: 48px; }
 
   /* Buttons */
   .btn {
@@ -289,6 +294,9 @@
     .type-meta { width: auto; }
     .elevation-grid { grid-template-columns: repeat(2, 1fr); }
     .dark-preview { grid-template-columns: 1fr; }
+    .logo-white-sample .wide { height: 40px; }
+    .logo-white-sample .short { height: 80px; }
+    .logo-white-sample .symbol { height: 40px; }
   }
 </style>
 </head>
@@ -348,7 +356,7 @@
       <!-- Short -->
       <div class="component-box" style="text-align:center">
         <div class="component-label">Short (縦型)</div>
-        <img src="assets/logo/logo-short.png" alt="logo-short" style="max-width:100%;height:auto;max-height:160px">
+        <img src="assets/logo/logo-clear-short.png" alt="logo-clear-short" style="max-width:100%;height:auto;max-height:160px">
         <div style="margin-top:12px;font-size:12px;color:var(--text-disabled)">正方形に近いスペース、OGP、名刺など</div>
       </div>
 
@@ -365,12 +373,23 @@
         <ul style="font-size:14px;color:var(--text-secondary);line-height:2;margin-left:16px">
           <li>シンボルとロゴタイプの比率・配置はオリジナルを維持</li>
           <li>最小サイズ: Symbol 24px / Short 48px / Wide 120px (幅)</li>
-          <li>明るい背景に置く (暗い背景には置かない)</li>
+          <li>明るい背景には通常版、暗い背景には白抜き版を置く</li>
           <li>色やテクスチャを改変しない</li>
         </ul>
         <div style="margin-top:16px;font-size:12px;color:var(--text-disabled)">
-          フォーマット: PNG (透過) / JPG (白背景) / AI (ベクター)
+          フォーマット: PNG (透過) / PNG (透過・白抜き) / JPG (白背景) / AI (ベクター)
         </div>
+      </div>
+
+      <!-- White (dark background) -->
+      <div class="component-box" style="grid-column:1 / -1">
+        <div class="component-label">白抜き版 (暗い背景)</div>
+        <div class="logo-white-sample" style="background:var(--primary-dark);border-radius:8px;padding:40px 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-around;gap:40px">
+          <img class="wide" src="assets/logo/logo-clear-white-wide.png" alt="logo-clear-white-wide">
+          <img class="short" src="assets/logo/logo-clear-white-short.png" alt="logo-clear-white-short">
+          <img class="symbol" src="assets/logo/logo-clear-white-symbol.png" alt="logo-clear-white-symbol">
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--text-disabled)">背景は Primary Dark (#5A74A3)<br>通常のロゴを filter で白くせず、この白抜き版を使う</div>
       </div>
     </div>
   </div>
