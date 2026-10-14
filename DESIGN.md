@@ -16,7 +16,7 @@
 | 名称 | 用途 | ファイル | 白抜き (暗い背景用) |
 |---|---|---|---|
 | Wide (横長) | ヘッダー、メール署名など横幅が取れる場所 | `png_bg-clear/logo-clear-wide.png` / `jpg_bg-white/logo-white-wide.jpg` | `png_bg-clear-white/logo-clear-white-wide.png` |
-| Short (縦型) | 正方形に近いスペース、OGP、名刺など | `png_bg-clear/logo-short.png` / `jpg_bg-white/logo-white-short.jpg` | `png_bg-clear-white/logo-clear-white-short.png` |
+| Short (縦型) | 正方形に近いスペース、OGP、名刺など | `png_bg-clear/logo-clear-short.png` / `jpg_bg-white/logo-white-short.jpg` | `png_bg-clear-white/logo-clear-white-short.png` |
 | Symbol (シンボルマーク) | favicon、アイコン、小スペース | `png_bg-clear/logo-clear-symbol.png` / `jpg_bg-white/logo-white-symbol.jpg` | `png_bg-clear-white/logo-clear-white-symbol.png` |
 
 ファイル名の `logo-` の次は背景を表す (`clear` = 透過、`white` = 白背景)。
