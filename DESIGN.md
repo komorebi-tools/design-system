@@ -8,22 +8,26 @@
 
 ## 0. Logo Assets
 
-ロゴ原本 (下の表の3つのフォルダ) は社内の共有フォルダにある。
+ロゴ原本 (下の表の4つのフォルダ) は社内の共有フォルダにある。
 このリポジトリには Web 用の書き出しを `assets/logo/` に置いている。
 
 ### バリエーション
 
-| 名称 | 用途 | ファイル |
-|---|---|---|
-| Wide (横長) | ヘッダー、メール署名など横幅が取れる場所 | `png_bg-clear/logo-clear-wide.png` / `jpg_bg-white/logo-white-wide.jpg` |
-| Short (縦型) | 正方形に近いスペース、OGP、名刺など | `png_bg-clear/logo-short.png` / `jpg_bg-white/logo-white-short.jpg` |
-| Symbol (シンボルマーク) | favicon、アイコン、小スペース | `png_bg-clear/logo-clear-symbol.png` / `jpg_bg-white/logo-white-symbol.jpg` |
+| 名称 | 用途 | ファイル | 白抜き (暗い背景用) |
+|---|---|---|---|
+| Wide (横長) | ヘッダー、メール署名など横幅が取れる場所 | `png_bg-clear/logo-clear-wide.png` / `jpg_bg-white/logo-white-wide.jpg` | `png_bg-clear-white/logo-clear-white-wide.png` |
+| Short (縦型) | 正方形に近いスペース、OGP、名刺など | `png_bg-clear/logo-short.png` / `jpg_bg-white/logo-white-short.jpg` | `png_bg-clear-white/logo-clear-white-short.png` |
+| Symbol (シンボルマーク) | favicon、アイコン、小スペース | `png_bg-clear/logo-clear-symbol.png` / `jpg_bg-white/logo-white-symbol.jpg` | `png_bg-clear-white/logo-clear-white-symbol.png` |
+
+ファイル名の `logo-` の次は背景を表す (`clear` = 透過、`white` = 白背景)。
+白抜き版は、背景の `clear` のあとにロゴの色 `white` を足した名前にしている。
 
 ### フォーマット
 
 | フォーマット | ディレクトリ | 備考 |
 |---|---|---|
 | PNG (透過) | `png_bg-clear/` | Web、アプリUI向け。背景透過 <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| PNG (透過・白抜き) | `png_bg-clear-white/` | 暗い背景向け (ロゴが白、背景透過) |
 | JPG (白背景) | `jpg_bg-white/` | 印刷物、白背景前提の用途 |
 | AI (ベクター) | `ai_vector/` | 編集・高解像度出力用。`komorebi_logo.ai` <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 
@@ -37,8 +41,7 @@
 
 - シンボルマークとロゴタイプの比率・配置はオリジナルを維持すること
 - 最小表示サイズ: Symbol 24px、Short 48px、Wide 120px (幅基準)
-- ロゴは明るい背景に置く。
-  暗い背景には置かない (白抜きのロゴはまだない)
+- 明るい背景には通常のロゴを、暗い背景には白抜き版 (`logo-clear-white-*.png`) を置く
 - 白以外の明るい背景には PNG 透過版、白背景には JPG 版でもよい
 - ロゴの色やテクスチャを改変しないこと
 
