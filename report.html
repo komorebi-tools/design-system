@@ -568,7 +568,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 
 <header class="masthead">
   <h1>REPORT.md プレビュー</h1>
-  <p class="lede">HTML レポートの部品の規約のうち、§1 画面の骨格 / §2 ナビゲーション / §3 HERO / §4 セクション / §5 文字 / §6 ボタン / §7 テーマ差し替え / §8 図と表の枠 / §9 重ねて出すもの / §10 挿絵 を実物で確認するページ。
+  <p class="lede">HTML レポートの部品の規約のうち、§1 画面の骨格 / §2 ナビゲーション / §3 HERO / §4 セクション / §5 文字 / §6 ボタン / §7 テーマ差し替え / §8 図と表の枠 / §9 重ねて出すもの / §10 挿絵 / §11 骨子からの組み立て を実物で確認するページ。
 </p>
   <p class="meta">
     規約の本文は <code>REPORT.md</code>、色・文字の値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
@@ -602,7 +602,8 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 <li><a href="#s91"><span class="num">9.1</span>モーダル</a></li>
 <li><a href="#s92"><span class="num">9.2</span>用語ツールチップ</a></li>
 <li><a href="#s10"><span class="num">10</span>挿絵</a></li>
-<li><a href="#s11"><span class="num">11</span>印刷</a></li>
+<li><a href="#s11"><span class="num">11</span>骨子からの組み立て</a></li>
+<li><a href="#s12"><span class="num">12</span>印刷</a></li>
 </ol></nav>
 
 <!-- ================= 1 画面の骨格 ================= -->
@@ -1231,7 +1232,8 @@ REPORT.md には足さない。
 </div></div>
 <div class="rule-note"><strong>枠 :</strong> Surface・Border 1px・角丸 8px・影 Level 1、内側の余白 22px 24px。
 図番号は「図 2-1」のように章番号つきで 12px・太字・Primary Dark、題は h4 タグで 16px・太字、補足は 12px・Text Secondary、注記は 12px・Text Secondary。
-画像で渡された図版 (題や出典が焼き込まれているもの) は、枠の題を付けず注記に出典だけを置き、高さは画像の比率に従い、2列にしない。
+画像で渡された図版は、既定では FIGURE.md に従って Chart.js か SVG で描き直す (数値は骨子の表か値ラベルから、推定しない)。
+描き直せないものだけ画像のまま載せ、枠の題を付けず注記に出典だけを置き、高さは画像の比率に従い、2列にしない。
 カードの中に入れ子で置くときは影を付けない。
 <strong>操作 :</strong> ピル形のチップ。
 押した状態は Primary Dark の塗り、系列チップは押すと基調の地、外すと 55% の薄さと取り消し線。
@@ -1372,8 +1374,38 @@ hover で白面の吹き出し (最大 340px)。
 </div>
 </section>
 
-<!-- ================= 11 印刷 ================= -->
-<section class="chapter" id="s11"><h2>11. 印刷</h2><p class="chapter-note">このページを印刷プレビューにすると、レール・移動チップ・章末バー・道具が消え、HERO が通常の色に戻る。
+<!-- ================= 11 骨子からの組み立て ================= -->
+<section class="chapter" id="s11"><h2>11. 骨子からの組み立て</h2><p class="chapter-note">骨子の段落をどの部品に割り当てるか。
+文章は足さない・言い換えない、見せ方だけを変える。
+本文は REPORT.md §11、ここは早見。
+</p>
+<div class="card">
+<h3>段落の割り当て</h3>
+<div class="scroll-x"><table class="t">
+<tr><th>骨子の形</th><th>部品</th><th>見本</th></tr>
+<tr><td>太字だけの段落 (節の結論)</td><td>強調段落</td><td><a href="#s54">§5.4</a></td></tr>
+<tr><td>数値を含む短い文が 2〜3 つ</td><td>要点</td><td><a href="#s54">§5.4</a></td></tr>
+<tr><td>指標名と数値の組が 3〜4 つ</td><td>KPI カード</td><td><a href="#s42">§4.2</a></td></tr>
+<tr><td>箇条書き 3〜6 項目、順番がある</td><td>番号つきの一覧</td><td><a href="#s4">§4</a></td></tr>
+<tr><td>箇条書き 3〜6 項目、順番がない</td><td>タイル・分類表</td><td>DIAGRAM.md §2.2</td></tr>
+<tr><td>各項目が「見出し : 説明」</td><td>リンクのカード・導入定義表</td><td><a href="#s6b">§6</a></td></tr>
+<tr><td>2つの対比</td><td>ビフォーアフター・バタフライ</td><td>DIAGRAM.md §2.6・§2.8</td></tr>
+<tr><td>手順・時系列</td><td>ステップ・ロードマップ</td><td>DIAGRAM.md §2.3〜§2.5</td></tr>
+<tr><td>表</td><td>表</td><td><a href="#s83">§8.3</a></td></tr>
+<tr><td>引用 1〜2 件で長い / 3 件以上で短い / 1人の深掘り</td><td>長い声 / 短い声の束 / 回答者カード</td><td><a href="#s55">§5.5</a></td></tr>
+<tr><td>画像 (グラフ・図解)</td><td>Chart.js・SVG・DIAGRAM の構図で描き直す (既定)</td><td><a href="#s81">§8.1</a></td></tr>
+<tr><td>用語の定義</td><td>モーダルとツールチップ</td><td><a href="#s91">§9</a></td></tr>
+</table></div>
+<div class="rule-note"><strong>文字量の上限 :</strong> 1カードの本文は段落 3 つ・12 行まで。
+段落を続けてよいのは 2 つまで、3 つ目からは要点・箇条書き・図解に。
+文字だけのカードが 3 つ続いたら挿絵か図を挟む。
+1画面の高さは窓の 6 画面分まで、超えたら画面を分ける。
+</div>
+</div>
+</section>
+
+<!-- ================= 12 印刷 ================= -->
+<section class="chapter" id="s12"><h2>12. 印刷</h2><p class="chapter-note">このページを印刷プレビューにすると、レール・移動チップ・章末バー・道具が消え、HERO が通常の色に戻る。
 </p>
 <div class="card">
 <h3>印刷での扱い</h3>
