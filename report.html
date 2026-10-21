@@ -17,7 +17,7 @@
   --primary-dark:#5A74A3;
   --primary-light:#9BB0D0;
   --sub:#A18E6C;
-  --navy:#3E5A86;        /* 要確認 : DESIGN.md に無い色。ヘッダの帯の終点に仮置き (REPORT.md §7) */
+  --navy:#3E5A86;        /* 要確認 : DESIGN.md に無い色、ヘッダの帯の終点に仮置き (REPORT.md §7) */
   --border:#E0E0E0;
   --background:#F7F7F7;
   --surface:#FFFFFF;
@@ -191,8 +191,8 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
   display:inline-block; background:var(--primary-dark); color:var(--surface); font-size:var(--fs-12); line-height:1.5;
   padding:6px 10px; border-radius:var(--radius); box-shadow:var(--shadow-2); white-space:nowrap;
 }
-/* 切り替えは画面幅ではなく見本 (.rp) の幅で行う。レポート本体では :root に同じ値の @media を置く。
-   タブの2行目は規約では窓の幅 1280px 未満で消す。見本の枠は最大 1176px なので、§2.1 の見本だけ .show-sub で2行目を出す */
+/* 切り替えは画面幅ではなく見本 (.rp) の幅で行う、レポート本体では :root に同じ値の @media を置く。
+   タブの2行目は規約では窓の幅 1280px 未満で消す、見本の枠は最大 1176px なので、§2.1 の見本だけ .show-sub で2行目を出す */
 @container (max-width:1280px){
   .rp:not(.show-sub) .nav button i{display:none}
   .rp .nav button{justify-content:center}
@@ -301,7 +301,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .rail-pos{display:flex; align-items:center; gap:10px; margin-top:10px; padding:12px 10px 2px; border-top:1px solid var(--border)}
 .rp .rail-bar{flex:1; height:3px; border-radius:2px; background:var(--border); overflow:hidden}
 .rp .rail-bar i{display:block; height:100%; background:var(--primary-dark)}
-/* 規約は窓の幅 960px (REPORT.md §2.2)。見本の枠の幅で判定する */
+/* 規約は窓の幅 960px (REPORT.md §2.2)、見本の枠の幅で判定する */
 @container (max-width:960px){
   .rp .rail-layout{grid-template-columns:minmax(0,1fr)}
   .rp .rail{position:static; max-height:none; margin-bottom:16px}
@@ -359,6 +359,49 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp :focus-visible{outline:2px solid var(--primary); outline-offset:2px}
 .rp .row{display:flex; flex-wrap:wrap; align-items:center; gap:12px}
 .rp .hdbar{background:var(--primary-dark); background-image:linear-gradient(180deg, var(--primary-dark) 0%, var(--navy) 100%); border-radius:var(--radius); padding:12px 16px; display:flex; gap:6px; align-items:center}
+/* ---- §8 図と表の枠 ---- */
+.rp .figs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px}
+.rp .fig{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); box-shadow:var(--shadow-1); padding:22px 24px 18px; min-width:0}
+.rp .fig.w2{grid-column:span 2}
+.rp .fig-h{display:flex; align-items:flex-start; justify-content:space-between; gap:16px}
+.rp .fig-t{font-size:var(--fs-16); font-weight:700; color:var(--text); margin:0 0 2px; line-height:var(--lh-head)}
+.rp .fig-s{font-size:var(--fs-12); color:var(--text-2); margin:0 0 12px; line-height:var(--lh-tight)}
+.rp .fig-c{position:relative; height:400px; background:repeating-linear-gradient(0deg, transparent 0 39px, var(--border) 39px 40px); border-bottom:1px solid var(--text-3); display:flex; align-items:center; justify-content:center; color:var(--text-3); font-size:var(--fs-12)}
+.rp .fig.w2 .fig-c{height:460px}
+.rp .fig .fig-c.short{height:200px} /* 見本だけ低くする */
+.rp .fig-n{font-size:var(--fs-12); color:var(--text-3); margin:10px 0 0; line-height:var(--lh-tight)}
+.rp .fig-opts{display:flex; flex-wrap:wrap; gap:6px; align-items:center; flex:none}
+.rp .fopt{appearance:none; cursor:pointer; border:1px solid var(--border); background:var(--surface); color:var(--text-2); border-radius:999px; padding:4px 12px; font-size:var(--fs-12); line-height:1.6; font-family:inherit}
+.rp .fopt:hover{border-color:var(--primary); color:var(--primary-dark)}
+.rp .fopt[aria-pressed="true"]{background:var(--primary-dark); border-color:var(--primary-dark); color:var(--surface); font-weight:700}
+.rp .fopt.fchip[aria-pressed="true"]{background:var(--tint); border-color:var(--primary-light); color:var(--primary-dark)}
+.rp .fopt.fchip[aria-pressed="false"]{opacity:0.55; text-decoration:line-through}
+.rp .tbl{margin:6px 0 18px}
+.rp .tbar{display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:6px}
+.rp .tcap{font-size:var(--fs-12); color:var(--text-2)}
+.rp .ttools{display:flex; align-items:center; gap:8px}
+.rp .tsearch{appearance:none; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:4px 10px; font:inherit; font-size:var(--fs-12); width:150px; color:var(--text)}
+.rp .tsearch:focus{outline:none; border-color:var(--primary)}
+.rp .btn.sm{height:28px; font-weight:400}
+.rp .tw{overflow-x:auto; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface)}
+.rp table.dt{border-collapse:collapse; width:100%; font-size:var(--fs-14); line-height:var(--lh-tight)}
+.rp table.dt th,.rp table.dt td{border:0; border-bottom:1px solid var(--border); padding:12px 14px; text-align:left; vertical-align:top}
+.rp table.dt th{background:var(--primary); color:var(--surface); font-weight:700; white-space:nowrap; border-bottom:0}
+.rp table.dt tbody tr:last-child td{border-bottom:0}
+.rp table.dt tbody tr.hl{background:var(--tint)}
+.rp table.dt tbody tr:hover{background:var(--base-marker)}
+.rp table.dt th.num,.rp table.dt td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+.rp table.dt th i.sort{display:inline-block; position:relative; width:8px; height:12px; margin-left:6px; vertical-align:middle; opacity:0.5}
+.rp table.dt th i.sort::before,.rp table.dt th i.sort::after{content:''; position:absolute; left:0; border-left:4px solid transparent; border-right:4px solid transparent}
+.rp table.dt th i.sort::before{top:0; border-bottom:4px solid currentColor}
+.rp table.dt th i.sort::after{bottom:0; border-top:4px solid currentColor}
+.rp table.dt th[data-sort] i.sort{opacity:1}
+.rp table.dt td.bar{position:relative; padding-bottom:16px; z-index:0}
+.rp table.dt td.bar > span{position:relative; z-index:1}
+.rp table.dt td.bar i.b{position:absolute; left:8px; bottom:6px; height:4px; max-width:calc(100% - 16px); background:var(--primary-light); opacity:0.42; border-radius:0 2px 2px 0; pointer-events:none}
+.rp table.dt td.bar i.b.neg{background:var(--text-3); opacity:0.3}
+.rp table.dt tr.hl td.bar i.b{background:var(--primary-dark); opacity:0.5}
+@container (max-width:800px){ .rp .figs{grid-template-columns:minmax(0,1fr)} .rp .fig.w2{grid-column:auto} }
 /* ---- 下の帯 ---- */
 .rp .app-ft{border-top:1px solid var(--border); background:var(--surface)}
 .rp .app-ft-in{max-width:1280px; margin:0 auto; padding:16px 24px; display:flex; flex-wrap:wrap; gap:4px 22px; font-size:var(--fs-12); color:var(--text-3)}
@@ -378,7 +421,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .page-hero.demo-img{--hero-img:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.35) 0 12%, transparent 13%), radial-gradient(circle at 70% 70%, rgba(255,255,255,0.25) 0 18%, transparent 19%), linear-gradient(135deg, #7A94C2 0%, #4E6690 60%, #3C4F70 100%)}
 @media print{
   @page{size:A4 portrait; margin:14mm}
-  .rp .rail,.rp .jump,.rp .chap-next,.rp .app-tools,.rp .tiptool,.rp .nav,.rp .app-scope{display:none !important}
+  .rp .rail,.rp .jump,.rp .chap-next,.rp .app-tools,.rp .tiptool,.rp .nav,.rp .app-scope,.rp .fig-opts,.rp .ttools{display:none !important}
   .rp .app-hd{background:none; color:var(--text); min-height:0}
   .rp .app-mark{display:none}
   .rp .rail-layout{display:block}
@@ -408,7 +451,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 
 <header class="masthead">
   <h1>REPORT.md プレビュー</h1>
-  <p class="lede">HTML レポートの部品の規約のうち、§1 画面の骨格 / §2 ナビゲーション / §3 HERO / §4 セクション / §5 文字 / §6 ボタン / §7 テーマ差し替え を実物で確認するページ。
+  <p class="lede">HTML レポートの部品の規約のうち、§1 画面の骨格 / §2 ナビゲーション / §3 HERO / §4 セクション / §5 文字 / §6 ボタン / §7 テーマ差し替え / §8 図と表の枠 を実物で確認するページ。
 </p>
   <p class="meta">
     規約の本文は <code>REPORT.md</code>、色・文字の値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
@@ -431,7 +474,9 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 <li><a href="#s52"><span class="num">5.2</span>文字サイズの段</a></li>
 <li><a href="#s6"><span class="num">6</span>ボタン・押せるもの</a></li>
 <li><a href="#s7"><span class="num">7</span>テーマ差し替え</a></li>
-<li><a href="#s8"><span class="num">8</span>印刷</a></li>
+<li><a href="#s81"><span class="num">8.1</span>図の枠と操作</a></li>
+<li><a href="#s83"><span class="num">8.3</span>表の枠と道具</a></li>
+<li><a href="#s10"><span class="num">10</span>印刷</a></li>
 </ol></nav>
 
 <!-- ================= 1 画面の骨格 ================= -->
@@ -843,15 +888,86 @@ REPORT.md には足さない。
 </div>
 </section>
 
-<!-- ================= 8 印刷 ================= -->
-<section class="chapter" id="s8"><h2>8. 印刷</h2><p class="chapter-note">このページを印刷プレビューにすると、レール・移動チップ・章末バー・道具が消え、HERO が通常の色に戻る。
+<!-- ================= 8 図と表の枠 ================= -->
+<section class="chapter" id="s8"><h2>8. 図と表の枠</h2><p class="chapter-note">グラフ・表そのものは FIGURE.md が正。
+ここでは、それを載せる枠と、枠に付く道具だけを決める。
+</p>
+<div class="card" id="s81">
+<h3>8.1 図の枠 / 8.2 図の操作</h3>
+<p class="sub">題・補足・描画領域・注記の4段。
+2列のグリッドに並べ、1枚だけ横に広げるときは2列ぶち抜き。
+系列の切り替えチップは枠の右上に置く。
+この見本では描画領域にグラフを入れず、高さだけを示す。
+</p>
+<div class="rp"><div class="pad">
+  <div class="figs">
+    <div class="fig">
+      <div class="fig-h"><div><h4 class="fig-t">週2回以上の購買者の割合</h4><p class="fig-s">2024年 → 2026年、平日と休日</p></div>
+        <div class="fig-opts"><button class="fopt" type="button" aria-pressed="true">割合</button><button class="fopt" type="button" aria-pressed="false">人数</button></div></div>
+      <div class="fig-c short">描画領域 (高さ 400px)</div>
+      <p class="fig-n">出典 : 購買パネル (n=4,800)。
+</p>
+    </div>
+    <div class="fig">
+      <div class="fig-h"><div><h4 class="fig-t">時間帯別の購買の分布</h4><p class="fig-s">1時間ごと、平日</p></div>
+        <div class="fig-opts"><button class="fopt fchip" type="button" aria-pressed="true">2024年</button><button class="fopt fchip" type="button" aria-pressed="false">2025年</button><button class="fopt fchip" type="button" aria-pressed="true">2026年</button></div></div>
+      <div class="fig-c short">描画領域 (高さ 400px)</div>
+      <p class="fig-n">出典 : 購買パネル (n=4,800)。
+</p>
+    </div>
+    <div class="fig w2">
+      <div class="fig-h"><div><h4 class="fig-t">2列ぶち抜きの枠</h4><p class="fig-s">横に長い時系列など</p></div></div>
+      <div class="fig-c short">描画領域 (高さ 460px)</div>
+    </div>
+  </div>
+</div></div>
+<div class="rule-note"><strong>枠 :</strong> Surface・Border 1px・角丸 8px・影 Level 1、内側の余白 22px 24px。
+題は 16px・太字、補足は 12px・Text Secondary、注記は 12px・弱い群グレー。
+<strong>操作 :</strong> ピル形のチップ。
+押した状態は Primary Dark の塗り、系列チップは押すと基調の地、外すと 55% の薄さと取り消し線。
+印刷では出さない。
+</div>
+</div>
+<div class="card" id="s83">
+<h3>8.3 表の枠と道具 / 8.4 表の見た目</h3>
+<p class="sub">上のバーに注記と道具 (CSV・絞り込み)。
+見出し行は Primary の面、縦罫なし、数値は右寄せ、強調行は基調の地、数値の下にデータバー。
+</p>
+<div class="rp"><div class="pad">
+  <div class="tbl">
+    <div class="tbar"><span class="tcap">週2回以上の購買者の割合 (%)。
+並べ替えは見出しを押す。
+</span>
+      <div class="ttools"><input class="tsearch" type="search" id="tsearch-demo" placeholder="絞り込み" aria-label="表を絞り込む"><button class="btn sm" type="button">CSV で保存</button></div></div>
+    <div class="tw"><table class="dt">
+      <thead><tr><th>時間帯</th><th class="num" data-sort="desc">2026年<i class="sort"></i></th><th class="num">2024年<i class="sort"></i></th><th class="num">差 (pt)<i class="sort"></i></th><th>読み</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>平日 7〜9時</td><td class="num bar"><span>46.2</span><i class="b" style="width:92%"></i></td><td class="num bar"><span>38.1</span><i class="b" style="width:76%"></i></td><td class="num">+8.1</td><td>増加のほとんどがここ</td></tr>
+        <tr><td>平日 12〜14時</td><td class="num bar"><span>21.4</span><i class="b" style="width:43%"></i></td><td class="num bar"><span>20.9</span><i class="b" style="width:42%"></i></td><td class="num">+0.5</td><td>横ばい</td></tr>
+        <tr><td>平日 17〜20時</td><td class="num bar"><span>17.8</span><i class="b" style="width:36%"></i></td><td class="num bar"><span>19.0</span><i class="b" style="width:38%"></i></td><td class="num bar"><span>-1.2</span><i class="b neg" style="width:12%"></i></td><td>わずかに減</td></tr>
+        <tr><td>休日</td><td class="num bar"><span>30.5</span><i class="b" style="width:61%"></i></td><td class="num bar"><span>30.2</span><i class="b" style="width:60%"></i></td><td class="num">+0.3</td><td>変化なし</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div></div>
+<div class="rule-note"><strong>枠 :</strong> 横スクロール・Border 1px・角丸 6px。
+<strong>表 :</strong> 見出し行は Primary の面・白文字・14px、横罫だけ Border 1px、文字 14px・行間 1.6・余白 12px 14px。
+数値の列は右寄せで桁をそろえ、強調行は基調の地、hover は基調のマーカー。
+データバーは数値の下に左から 4px、Primary Light の 42% (強調行は Primary Dark、負の値は弱い群グレー)。
+表の色の役割と列幅は FIGURE.md §2 の表を参照する。
+</div>
+</div>
+</section>
+
+<!-- ================= 10 印刷 ================= -->
+<section class="chapter" id="s10"><h2>10. 印刷</h2><p class="chapter-note">このページを印刷プレビューにすると、レール・移動チップ・章末バー・道具が消え、HERO が通常の色に戻る。
 </p>
 <div class="card">
 <h3>印刷での扱い</h3>
 <div class="scroll-x"><table class="t">
 <tr><th>部品</th><th>印刷での扱い</th></tr>
 <tr><td>ヘッダの帯</td><td>背景を消し、レポート名だけ残す</td></tr>
-<tr><td>左レール・移動チップ・章末バー・道具のアイコン</td><td>出さない</td></tr>
+<tr><td>左レール・移動チップ・章末バー・道具のアイコン・図の操作・表の道具</td><td>出さない</td></tr>
 <tr><td>HERO</td><td>帯をやめ、見出しを Primary Dark の文字に戻す</td></tr>
 <tr><td>カード</td><td>面の色と Border は残す (<code>print-color-adjust: exact</code>)</td></tr>
 <tr><td>用紙</td><td>A4・余白 14mm、カードの途中で改ページしない</td></tr>
