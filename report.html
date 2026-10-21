@@ -377,7 +377,10 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 /* 画像ありの見本 : 外部参照を足さないので、写真の代わりに CSS で作った模様を画像の位置に置く */
 .rp .page-hero.demo-img{--hero-img:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.35) 0 12%, transparent 13%), radial-gradient(circle at 70% 70%, rgba(255,255,255,0.25) 0 18%, transparent 19%), linear-gradient(135deg, #7A94C2 0%, #4E6690 60%, #3C4F70 100%)}
 @media print{
-  .rp .rail,.rp .jump,.rp .chap-next,.rp .app-tools,.rp .tiptool{display:none !important}
+  @page{size:A4 portrait; margin:14mm}
+  .rp .rail,.rp .jump,.rp .chap-next,.rp .app-tools,.rp .tiptool,.rp .nav,.rp .app-scope{display:none !important}
+  .rp .app-hd{background:none; color:var(--text); min-height:0}
+  .rp .app-mark{display:none}
   .rp .rail-layout{display:block}
   .rp .page-hero{background:none; color:inherit}
   .rp .page-hero::after{display:none}
@@ -760,7 +763,7 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
 </div></div></div>
 <div class="rule-note"><strong>行間 :</strong> 本文 1.7 / 表・注記 1.6 / 見出し 1.4。
 <strong>字間 :</strong> 0.05em。
-要確認 : 元の実物は本文 1.85・字間 0.06em だった (REPORT.md §5.3)。
+元の実物は本文 1.85・字間 0.06em だったが、2026/10/21 に見比べて DESIGN.md の値にそろえた (REPORT.md §5.3)。
 </div>
 </div>
 </section>
