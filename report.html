@@ -486,6 +486,33 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .lcard:hover .lcard-t::after{color:var(--primary-dark)}
 .rp .lcard p{margin:0; font-size:var(--fs-14); line-height:var(--lh-body); color:var(--text-2)}
 @container (max-width:900px){ .rp .lcards{grid-template-columns:minmax(0,1fr)} }
+/* ---- §5.1 h5・h6 ---- */
+.rp .h5{font-size:var(--fs-16); font-weight:700; color:var(--text); margin:24px 0 8px; line-height:var(--lh-head)}
+.rp .h6{font-size:var(--fs-14); font-weight:700; color:var(--text-2); letter-spacing:0.08em; margin:16px 0 4px; line-height:var(--lh-head)}
+/* ---- §5.5 短い声の束・回答者カード ---- */
+.rp .vqs{background:var(--tint); border-radius:var(--radius-l); padding:16px 20px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:14px 0 16px}
+.rp .vqs.gold{background:var(--gold-pale)}
+.rp .vq{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:12px 16px 12px 36px; position:relative; font-size:var(--fs-14); line-height:var(--lh-body); min-width:0}
+.rp .vq::before{content:'\201C'; position:absolute; left:14px; top:10px; font-family:Georgia,serif; font-size:var(--fs-16); line-height:1; color:var(--accent)}
+.rp .person{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); padding:20px 24px; margin:14px 0 16px}
+.rp .person-meta{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:var(--fs-12); color:var(--text-2); margin-bottom:8px}
+.rp .person-meta .badge{margin-right:2px}
+.rp .person-q{font-size:var(--fs-16); font-weight:700; color:var(--primary-dark); line-height:1.6; margin:0 0 12px}
+.rp .person-q::before{content:'\201C'; font-family:Georgia,serif; color:var(--accent); margin-right:4px}
+.rp .person-q::after{content:'\201D'; font-family:Georgia,serif; color:var(--accent); margin-left:4px}
+.rp .person .h6{margin-top:12px}
+.rp .person p{margin:0; font-size:var(--fs-14); line-height:var(--lh-body)}
+.rp .kv{display:grid; grid-template-columns:120px minmax(0,1fr); gap:0; border-top:1px solid var(--border); margin-top:12px}
+.rp .kv > div{padding:10px 12px; border-bottom:1px solid var(--border); font-size:var(--fs-14); line-height:var(--lh-tight)}
+.rp .kv > div:nth-child(odd){font-weight:700; color:var(--text-2); font-size:var(--fs-12); letter-spacing:0.08em}
+/* ---- §8.1 図番号 ---- */
+.rp .fig-k{font-size:var(--fs-12); font-weight:700; color:var(--primary-dark); letter-spacing:0.08em; margin:0 0 2px; font-variant-numeric:tabular-nums}
+/* ---- §10 挿絵 ---- */
+.rp .illust{float:right; width:200px; max-width:25%; margin:0 0 12px 24px}
+.rp .illust img, .rp .illust svg{display:block; width:100%; height:auto}
+.rp .illust-ph{aspect-ratio:1; border:1px dashed var(--primary-light); border-radius:var(--radius); display:grid; place-items:center; color:var(--text-3); font-size:var(--fs-12); text-align:center; line-height:1.6}
+.rp .rcard::after{content:''; display:block; clear:both}
+@container (max-width:700px){ .rp .vqs{grid-template-columns:minmax(0,1fr)} .rp .kv{grid-template-columns:minmax(0,1fr)} .rp .kv > div:nth-child(odd){border-bottom:0; padding-bottom:0} .rp .illust{float:none; width:160px; max-width:none; margin:0 0 12px} }
 /* ---- 下の帯 ---- */
 .rp .app-ft{border-top:1px solid var(--border); background:var(--surface)}
 .rp .app-ft-in{max-width:1280px; margin:0 auto; padding:16px 24px; display:flex; flex-wrap:wrap; gap:4px 22px; font-size:var(--fs-12); color:var(--text-3)}
@@ -535,7 +562,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 
 <header class="masthead">
   <h1>REPORT.md プレビュー</h1>
-  <p class="lede">HTML レポートの部品の規約のうち、§1 画面の骨格 / §2 ナビゲーション / §3 HERO / §4 セクション / §5 文字 / §6 ボタン / §7 テーマ差し替え / §8 図と表の枠 / §9 重ねて出すもの を実物で確認するページ。
+  <p class="lede">HTML レポートの部品の規約のうち、§1 画面の骨格 / §2 ナビゲーション / §3 HERO / §4 セクション / §5 文字 / §6 ボタン / §7 テーマ差し替え / §8 図と表の枠 / §9 重ねて出すもの / §10 挿絵 を実物で確認するページ。
 </p>
   <p class="meta">
     規約の本文は <code>REPORT.md</code>、色・文字の値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
@@ -568,7 +595,8 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 <li><a href="#s83"><span class="num">8.3</span>表の枠と道具</a></li>
 <li><a href="#s91"><span class="num">9.1</span>モーダル</a></li>
 <li><a href="#s92"><span class="num">9.2</span>用語ツールチップ</a></li>
-<li><a href="#s10"><span class="num">10</span>印刷</a></li>
+<li><a href="#s10"><span class="num">10</span>挿絵</a></li>
+<li><a href="#s11"><span class="num">11</span>印刷</a></li>
 </ol></nav>
 
 <!-- ================= 1 画面の骨格 ================= -->
@@ -942,12 +970,18 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
   <div class="h4n" style="margin:0"><span class="num">1</span><h4 class="ttl">平日の朝に集中している</h4></div>
   <div class="lab">h4 カテゴリ色の見出し (文字色だけ替え、マーカーの濃さは同じ)</div>
   <div class="h4n cat cat-c" style="margin:0"><span class="num">2</span><h4 class="ttl">青緑のカテゴリの小見出し</h4></div>
+  <div class="lab">h5 小見出しの中の項目 (16px・太字・Text Primary、飾りなし)</div>
+  <h5 class="h5" style="margin:0">共働き世帯では平日の朝に集中する</h5>
+  <div class="lab">h6 行の見出し (14px・太字・Text Secondary・字間 0.08em)</div>
+  <h6 class="h6" style="margin:0">得られたもの</h6>
   <div class="lab">本文 (16px・行間 1.7)</div>
   <div class="prose" style="margin:0"><p style="margin:0">週に2回以上パンを買う人は <strong>38% → 46%</strong> に増えた。
 数値の強調は本文と同じ大きさにして、色と太さだけで示す <span class="paren">(かっこの中は補足なので小さく薄く)</span>。
 </p></div>
 </div></div>
-<div class="rule-note">マーカーは見出しの文字色を 20% に薄めたもので共通にする。
+<div class="rule-note">5段目 (h5)・6段目 (h6) は、4段で足りない長いレポートだけで使う。
+h5・h6 でも左の色線は使わない。
+マーカーは見出しの文字色を 20% に薄めたもので共通にする。
 <code>color-mix()</code> が使えるブラウザでは <code>currentColor</code> から作り、使えないブラウザでは基調のマーカー (FIGURE.md §1.2) に落とす。
 見出しを足すときは div ではなく見出しタグを使う。
 </div>
@@ -1001,8 +1035,10 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
 <div class="card" id="s55">
 <h3>5.5 引用</h3>
 <p class="sub">生活者の声など、原文のまま載せるもの。
-いちばん大事な1件は基調の地にして先頭に置く。
+長い声 / 短い声の束 / 回答者カード の3型。
+SLIDE.md §5.3 のパターン C (引用は白のボックスで抜く) を HTML に写したもの。
 </p>
+<div class="lab">長い声 (1件をじっくり読ませる、いちばん大事な1件は基調の地にして先頭)</div>
 <div class="rp"><div class="pad">
   <div class="voice first"><span class="voice-q">“</span><p>朝は会社の近くで1個だけ買う。
 家で買いだめすると結局食べない。
@@ -1013,7 +1049,40 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
   <div class="voice" style="margin-bottom:0"><span class="voice-q">“</span><p>休日は家族の分をまとめて買うので、朝とは別の店。
 <span class="voice-s">30代・主婦・週1回購入</span></p></div>
 </div></div>
-<div class="rule-note">ゴールドの淡い面・角丸 8px・内側 20px 24px (左は引用符の分を足して 56px)、引用符は 34px・Accent。
+<div class="lab" style="margin-top:20px">短い声の束 (同じ趣旨の短い声を 3〜6 件)</div>
+<div class="rp"><div class="pad">
+  <div class="vqs" style="margin:0">
+    <div class="vq">朝は会社の近くで1個だけ買う</div>
+    <div class="vq">家で買いだめすると結局食べない</div>
+    <div class="vq">曜日で決まった棚に行く</div>
+    <div class="vq">無いと別の店に行くより、その日はあきらめる</div>
+    <div class="vq">休日は家族の分をまとめて買うので別の店</div>
+  </div>
+</div></div>
+<div class="lab" style="margin-top:20px">回答者カード (1人を深掘りする)</div>
+<div class="rp"><div class="pad">
+  <div class="person" style="margin:0">
+    <div class="person-meta"><span class="badge c3">平日の朝</span>30代・会社員・未婚・週3回購入</div>
+    <p class="person-q">朝は会社の近くで1個だけ買う。
+家で買いだめすると結局食べない</p>
+    <h6 class="h6">場面</h6>
+    <p>出社前、駅から会社までの道にあるコンビニ。
+7時台。
+</p>
+    <h6 class="h6">行動</h6>
+    <p>棚にある中から1個だけ選ぶ。
+無い日は買わずに出社する。
+</p>
+    <h6 class="h6">得られたもの</h6>
+    <p>その日の分だけ買うことで、食べ残しの罪悪感がない。
+買う行為そのものが朝の区切りになっている。
+</p>
+  </div>
+</div></div>
+<div class="rule-note">長い声 : ゴールドの淡い面・角丸 8px・内側 20px 24px (左は引用符の分を足して 56px)、引用符は 34px・Accent。
+短い声の束 : 基調の地の面に白の箱 (Border 1px・角丸 6px・内側 12px 16px・14px) を2列、各箱の頭に引用符 (Accent・16px)。
+回答者カード : Surface・Border 1px・角丸 8px・内側 20px 24px、属性メタ (12px・場面はピル)、見出しの声 (16px・太字・Primary Dark)、h6 のラベルと本文の組。
+1つの節に束は1つまで、声の総数は 10 件を目安にする。
 本文は 16px・weight 500・行間 1.85 (引用だけ本文より広くてよい)。
 出所は引用の下に 12px・Text Secondary。
 </div>
@@ -1127,7 +1196,7 @@ REPORT.md には足さない。
 </p>
 <div class="card" id="s81">
 <h3>8.1 図の枠 / 8.2 図の操作</h3>
-<p class="sub">題・補足・描画領域・注記の4段。
+<p class="sub">図番号 (章番号つき)・題・補足・描画領域・注記の5段。
 2列のグリッドに並べ、1枚だけ横に広げるときは2列ぶち抜き。
 系列の切り替えチップは枠の右上に置く。
 この見本では描画領域にグラフを入れず、高さだけを示す。
@@ -1135,27 +1204,27 @@ REPORT.md には足さない。
 <div class="rp"><div class="pad">
   <div class="figs">
     <div class="fig">
-      <div class="fig-h"><div><h4 class="fig-t">週2回以上の購買者の割合</h4><p class="fig-s">2024年 → 2026年、平日と休日</p></div>
+      <div class="fig-h"><div><div class="fig-k">図 2-1</div><h4 class="fig-t">週2回以上の購買者の割合</h4><p class="fig-s">2024年 → 2026年、平日と休日</p></div>
         <div class="fig-opts"><button class="fopt" type="button" aria-pressed="true">割合</button><button class="fopt" type="button" aria-pressed="false">人数</button></div></div>
       <div class="fig-c short">描画領域 (高さ 400px)</div>
       <p class="fig-n">出典 : 購買パネル (n=4,800)。
 </p>
     </div>
     <div class="fig">
-      <div class="fig-h"><div><h4 class="fig-t">時間帯別の購買の分布</h4><p class="fig-s">1時間ごと、平日</p></div>
+      <div class="fig-h"><div><div class="fig-k">図 2-2</div><h4 class="fig-t">時間帯別の購買の分布</h4><p class="fig-s">1時間ごと、平日</p></div>
         <div class="fig-opts"><button class="fopt fchip" type="button" aria-pressed="true">2024年</button><button class="fopt fchip" type="button" aria-pressed="false">2025年</button><button class="fopt fchip" type="button" aria-pressed="true">2026年</button></div></div>
       <div class="fig-c short">描画領域 (高さ 400px)</div>
       <p class="fig-n">出典 : 購買パネル (n=4,800)。
 </p>
     </div>
     <div class="fig w2">
-      <div class="fig-h"><div><h4 class="fig-t">2列ぶち抜きの枠</h4><p class="fig-s">横に長い時系列など</p></div></div>
+      <div class="fig-h"><div><div class="fig-k">図 2-3</div><h4 class="fig-t">2列ぶち抜きの枠</h4><p class="fig-s">横に長い時系列など</p></div></div>
       <div class="fig-c short">描画領域 (高さ 460px)</div>
     </div>
   </div>
 </div></div>
 <div class="rule-note"><strong>枠 :</strong> Surface・Border 1px・角丸 8px・影 Level 1、内側の余白 22px 24px。
-題は 16px・太字、補足は 12px・Text Secondary、注記は 12px・弱い群グレー。
+図番号は「図 2-1」のように章番号つきで 12px・太字・Primary Dark、題は h4 タグで 16px・太字、補足は 12px・Text Secondary、注記は 12px・弱い群グレー。
 <strong>操作 :</strong> ピル形のチップ。
 押した状態は Primary Dark の塗り、系列チップは押すと基調の地、外すと 55% の薄さと取り消し線。
 印刷では出さない。
@@ -1260,8 +1329,43 @@ hover で白面の吹き出し (最大 340px)。
 </div>
 </section>
 
-<!-- ================= 10 印刷 ================= -->
-<section class="chapter" id="s10"><h2>10. 印刷</h2><p class="chapter-note">このページを印刷プレビューにすると、レール・移動チップ・章末バー・道具が消え、HERO が通常の色に戻る。
+<!-- ================= 10 挿絵 ================= -->
+<section class="chapter" id="s10"><h2>10. 挿絵</h2><p class="chapter-note">文字だけのカードや節が続くところに、題材に合う挿絵を置く。
+作り方は SLIDE.md §5.3 (社内の挿絵ツールで案件ごとに用意)、ここでは置き方だけ。
+検討版。
+</p>
+<div class="card">
+<h3>カードの右上に置く</h3>
+<p class="sub">幅 160〜240px、カードの幅の 1/4 まで。
+本文を回り込ませ、流れを切らない。
+この見本では挿絵の代わりに枠だけを置いている。
+</p>
+<div class="rp"><div class="pad">
+  <div class="rcard" style="margin:0">
+    <div class="card-h"><h3 class="card-t"><span class="tag">FINDINGS</span><span class="idbox no">1-1</span>買う回数が増えている</h3></div>
+    <div class="illust"><div class="illust-ph">挿絵<br>(朝のパン売場)</div></div>
+    <div class="prose">
+      <p>週に2回以上パンを買う人は、2024年の <strong>38%</strong> から2026年の <strong>46%</strong> に増えた。
+増えたのは平日の朝で、休日はほぼ変わらない。
+</p>
+      <p>増加分の 8 ポイントのうち 7 ポイントが平日の 7〜9 時に入る。
+まとめ買いから、その日の分だけ買う行動に移っている。
+</p>
+      <p>品ぞろえは「種類を増やす」より「朝に切らさない」に寄せたい。
+</p>
+    </div>
+  </div>
+</div></div>
+<div class="rule-note">1画面に 1〜2 点、同じ絵を同じレポートで2回使わない。
+骨子のキーワードに合う絵を案件の挿絵フォルダから選び、合うものが無ければ置かない。
+透過 PNG か WebP を img で置く (印刷でも残る)。
+挿絵の色味が基調とぶつかるときは置かない。
+</div>
+</div>
+</section>
+
+<!-- ================= 11 印刷 ================= -->
+<section class="chapter" id="s11"><h2>11. 印刷</h2><p class="chapter-note">このページを印刷プレビューにすると、レール・移動チップ・章末バー・道具が消え、HERO が通常の色に戻る。
 </p>
 <div class="card">
 <h3>印刷での扱い</h3>
