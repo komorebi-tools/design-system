@@ -374,7 +374,8 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .fig-c{position:relative; height:400px; background:repeating-linear-gradient(0deg, transparent 0 39px, var(--border) 39px 40px); border-bottom:1px solid var(--text-3); display:flex; align-items:center; justify-content:center; color:var(--text-3); font-size:var(--fs-12)}
 .rp .fig.w2 .fig-c{height:460px}
 .rp .fig .fig-c.short{height:200px} /* 見本だけ低くする */
-.rp .fig-n{font-size:var(--fs-12); color:var(--text-3); margin:10px 0 0; line-height:var(--lh-tight)}
+.rp .fig-n{font-size:var(--fs-12); color:var(--text-2); margin:10px 0 0; line-height:var(--lh-tight)}
+.rp .rcard .fig{box-shadow:none} /* カードの中の図の枠は影を重ねない */
 .rp .fig-opts{display:flex; flex-wrap:wrap; gap:6px; align-items:center; flex:none}
 .rp .fopt{appearance:none; cursor:pointer; border:1px solid var(--border); background:var(--surface); color:var(--text-2); border-radius:999px; padding:4px 12px; font-size:var(--fs-12); line-height:1.6; font-family:inherit}
 .rp .fopt:hover{border-color:var(--primary); color:var(--primary-dark)}
@@ -391,6 +392,11 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .tw{overflow-x:auto; border:1px solid var(--rule); border-radius:var(--radius); background:var(--surface)}
 .rp table.dt{border-collapse:collapse; width:100%; font-size:var(--fs-14); line-height:var(--lh-tight)}
 .rp table.dt th,.rp table.dt td{border:1px solid var(--rule); padding:12px 14px; text-align:left; vertical-align:top}
+.rp table.dt tr > :first-child{border-left:0}
+.rp table.dt tr > :last-child{border-right:0}
+.rp table.dt thead th{border-top:0}
+.rp table.dt tbody tr:last-child td{border-bottom:0}
+.rp table.dt tbody tr.hl td{font-weight:700}
 .rp table.dt th{background:var(--primary); color:var(--surface); font-weight:700; white-space:nowrap}
 .rp table.dt tbody tr.hl{background:var(--tint)}
 .rp table.dt tbody tr:hover{background:var(--base-marker)}
@@ -1224,7 +1230,9 @@ REPORT.md には足さない。
   </div>
 </div></div>
 <div class="rule-note"><strong>枠 :</strong> Surface・Border 1px・角丸 8px・影 Level 1、内側の余白 22px 24px。
-図番号は「図 2-1」のように章番号つきで 12px・太字・Primary Dark、題は h4 タグで 16px・太字、補足は 12px・Text Secondary、注記は 12px・弱い群グレー。
+図番号は「図 2-1」のように章番号つきで 12px・太字・Primary Dark、題は h4 タグで 16px・太字、補足は 12px・Text Secondary、注記は 12px・Text Secondary。
+画像で渡された図版 (題や出典が焼き込まれているもの) は、枠の題を付けず注記に出典だけを置き、高さは画像の比率に従い、2列にしない。
+カードの中に入れ子で置くときは影を付けない。
 <strong>操作 :</strong> ピル形のチップ。
 押した状態は Primary Dark の塗り、系列チップは押すと基調の地、外すと 55% の薄さと取り消し線。
 印刷では出さない。
@@ -1252,9 +1260,9 @@ REPORT.md には足さない。
     </table></div>
   </div>
 </div></div>
-<div class="rule-note"><strong>枠 :</strong> 横スクロール・Border 1px・角丸 6px。
+<div class="rule-note"><strong>枠 :</strong> 横スクロール・表の罫線 1px・角丸 6px (外周の線はこの枠だけ)。
 <strong>表 :</strong> 見出し行は Primary の面・白文字・14px、縦罫・横罫・外枠とも表の罫線 (FIGURE.md §1.3) 1px、文字 14px・行間 1.6・余白 12px 14px。
-数値の列は右寄せで桁をそろえ、強調行は基調の地、hover は基調のマーカー。
+数値の列は右寄せで桁をそろえ、強調行は基調の地と太字、見出し列は塗らない、hover は基調のマーカー。
 データバーは数値の下に左から 4px、Primary Light の 42% (強調行は Primary Dark、負の値は弱い群グレー)。
 表の色の役割は FIGURE.md §2.6 に合わせてあり、列幅も FIGURE.md §2 を参照する。
 </div>
