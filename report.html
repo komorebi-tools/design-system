@@ -402,6 +402,30 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp table.dt td.bar i.b.neg{background:var(--text-3); opacity:0.3}
 .rp table.dt tr.hl td.bar i.b{background:var(--primary-dark); opacity:0.5}
 @container (max-width:800px){ .rp .figs{grid-template-columns:minmax(0,1fr)} .rp .fig.w2{grid-column:auto} }
+/* ---- §9 重ねて出すもの ---- */
+.rp .modal-back{position:relative; background:rgba(67,67,67,0.4); display:grid; place-items:center; padding:24px; min-height:380px} /* 見本では画面に固定しない */
+.rp .modal{position:relative; background:var(--surface); border-radius:var(--radius-l); box-shadow:var(--shadow-2); padding:34px 32px 24px; width:min(680px,100%); max-height:84vh; overflow:auto}
+.rp .modal.wide{width:min(880px,100%)}
+.rp .modal-t{font-size:var(--fs-20); font-weight:700; color:var(--primary-dark); margin:0 0 6px; line-height:var(--lh-head)}
+.rp .modal-d{font-size:var(--fs-14); color:var(--text-2); margin:0 0 14px; line-height:var(--lh-tight)}
+.rp .modal-x{position:absolute; right:14px; top:10px; appearance:none; border:0; background:none; font-size:var(--fs-24); line-height:1; color:var(--text-3); cursor:pointer; padding:4px 8px; font-family:inherit}
+.rp .modal-x:hover{color:var(--text)}
+.rp .gl-search{appearance:none; width:100%; border:1px solid var(--border); border-radius:var(--radius); padding:10px 14px; font:inherit; font-size:var(--fs-14); color:var(--text); margin-bottom:6px}
+.rp .gl-search:focus{outline:none; border-color:var(--primary)}
+.rp .gl-sec-t{font-size:var(--fs-12); font-weight:700; letter-spacing:0.12em; color:var(--primary-dark); padding:14px 0 6px; border-bottom:1px solid var(--border)}
+.rp .gl-i{display:grid; grid-template-columns:200px minmax(0,1fr); gap:16px; padding:12px 10px; border-bottom:1px solid var(--border)}
+.rp .gl-i:last-child{border-bottom:0}
+.rp .gl-i.on{background:var(--tint); border-radius:var(--radius)}
+.rp .gl-k{margin:0; font-size:var(--fs-14); font-weight:700; color:var(--text)}
+.rp .gl-v{margin:0; font-size:var(--fs-14); line-height:var(--lh-body); color:var(--text-2)}
+.rp .dl-row{display:flex; align-items:center; justify-content:space-between; gap:24px; padding:18px 0; border-top:1px solid var(--border)}
+.rp .dl-row:first-of-type{border-top:0}
+.rp .dl-i b{display:block; font-size:var(--fs-16); margin-bottom:2px}
+.rp .dl-i span{font-size:var(--fs-14); color:var(--text-2); line-height:var(--lh-tight)}
+.rp .term{border-bottom:1px dotted var(--primary); cursor:help}
+.rp .tip{display:inline-block; max-width:340px; background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-2); padding:12px 16px; font-size:var(--fs-12); line-height:1.7}
+.rp .tip b{display:block; margin-bottom:4px; color:var(--primary-dark)}
+@container (max-width:700px){ .rp .gl-i{grid-template-columns:minmax(0,1fr); gap:4px} }
 /* ---- 下の帯 ---- */
 .rp .app-ft{border-top:1px solid var(--border); background:var(--surface)}
 .rp .app-ft-in{max-width:1280px; margin:0 auto; padding:16px 24px; display:flex; flex-wrap:wrap; gap:4px 22px; font-size:var(--fs-12); color:var(--text-3)}
@@ -421,7 +445,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .page-hero.demo-img{--hero-img:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.35) 0 12%, transparent 13%), radial-gradient(circle at 70% 70%, rgba(255,255,255,0.25) 0 18%, transparent 19%), linear-gradient(135deg, #7A94C2 0%, #4E6690 60%, #3C4F70 100%)}
 @media print{
   @page{size:A4 portrait; margin:14mm}
-  .rp .rail,.rp .jump,.rp .chap-next,.rp .app-tools,.rp .tiptool,.rp .nav,.rp .app-scope,.rp .fig-opts,.rp .ttools{display:none !important}
+  .rp .rail,.rp .jump,.rp .chap-next,.rp .app-tools,.rp .tiptool,.rp .nav,.rp .app-scope,.rp .fig-opts,.rp .ttools,.rp .modal-back,.rp .tip{display:none !important}
   .rp .app-hd{background:none; color:var(--text); min-height:0}
   .rp .app-mark{display:none}
   .rp .rail-layout{display:block}
@@ -451,7 +475,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 
 <header class="masthead">
   <h1>REPORT.md プレビュー</h1>
-  <p class="lede">HTML レポートの部品の規約のうち、§1 画面の骨格 / §2 ナビゲーション / §3 HERO / §4 セクション / §5 文字 / §6 ボタン / §7 テーマ差し替え / §8 図と表の枠 を実物で確認するページ。
+  <p class="lede">HTML レポートの部品の規約のうち、§1 画面の骨格 / §2 ナビゲーション / §3 HERO / §4 セクション / §5 文字 / §6 ボタン / §7 テーマ差し替え / §8 図と表の枠 / §9 重ねて出すもの を実物で確認するページ。
 </p>
   <p class="meta">
     規約の本文は <code>REPORT.md</code>、色・文字の値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
@@ -476,6 +500,8 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 <li><a href="#s7"><span class="num">7</span>テーマ差し替え</a></li>
 <li><a href="#s81"><span class="num">8.1</span>図の枠と操作</a></li>
 <li><a href="#s83"><span class="num">8.3</span>表の枠と道具</a></li>
+<li><a href="#s91"><span class="num">9.1</span>モーダル</a></li>
+<li><a href="#s92"><span class="num">9.2</span>用語ツールチップ</a></li>
 <li><a href="#s10"><span class="num">10</span>印刷</a></li>
 </ol></nav>
 
@@ -959,6 +985,73 @@ REPORT.md には足さない。
 </div>
 </section>
 
+<!-- ================= 9 重ねて出すもの ================= -->
+<section class="chapter" id="s9"><h2>9. 重ねて出すもの</h2><p class="chapter-note">モーダル (白面・暗幕つき) / 用語ツールチップ (白面・Border) / 道具の説明 (濃い面、§6) の3種類。
+同じ画面に同時に2つ以上は出さない。
+</p>
+<div class="card" id="s91">
+<h3>9.1 モーダル</h3>
+<p class="sub">暗幕は Text Primary の 40%。
+白面・角丸 8px・影 Level 2、右上に閉じる。
+この見本では画面に固定せず、枠の中に置いている。
+</p>
+<div class="lab">用語の一覧 (広い版・検索つき)</div>
+<div class="rp"><div class="modal-back">
+  <div class="modal wide" role="dialog" aria-label="用語と指標の定義">
+    <button class="modal-x" type="button" aria-label="閉じる">×</button>
+    <h3 class="modal-t">用語と指標の定義</h3>
+    <p class="modal-d">このレポートで使う指標の計算方法。
+</p>
+    <input class="gl-search" type="search" id="gl-search-demo" placeholder="用語を探す" aria-label="用語を探す">
+    <div class="gl-sec-t">購買</div>
+    <div class="gl-i on"><p class="gl-k">購買頻度</p><p class="gl-v">対象期間に、同じ人がパンを買った回数。
+週あたりに直して示す。
+</p></div>
+    <div class="gl-i"><p class="gl-k">1回あたり点数</p><p class="gl-v">1回の会計で買ったパンの個数の平均。
+</p></div>
+    <div class="gl-sec-t">調査</div>
+    <div class="gl-i"><p class="gl-k">意識調査</p><p class="gl-v">2026年9月、20〜60代の 1,200人にウェブで実施。
+</p></div>
+  </div>
+</div></div>
+<div class="lab">保存と印刷 (標準の幅)</div>
+<div class="rp"><div class="modal-back">
+  <div class="modal" role="dialog" aria-label="ダウンロードと印刷">
+    <button class="modal-x" type="button" aria-label="閉じる">×</button>
+    <h3 class="modal-t">ダウンロードと印刷</h3>
+    <div class="dl-row"><div class="dl-i"><b>集計データ (xlsx)</b><span>すべての表を1冊にまとめたもの。
+</span></div><button class="btn" type="button">保存</button></div>
+    <div class="dl-row"><div class="dl-i"><b>このレポートを印刷</b><span>A4 縦。
+レールと移動のボタンは出ない。
+</span></div><button class="btn fill" type="button">印刷する</button></div>
+  </div>
+</div></div>
+<div class="rule-note">幅は min(680px, 100%)、一覧を出す広い版は 880px。
+高さは最大 84vh で、超える分は中でスクロール。
+題は 20px・Primary Dark、閉じるは右上の × (24px・弱い群グレー)。
+暗幕を押しても Esc でも閉じる。
+印刷では出さない。
+</div>
+</div>
+<div class="card" id="s92">
+<h3>9.2 用語ツールチップ</h3>
+<p class="sub">本文の用語に Primary の点線の下線。
+hover で白面の吹き出し (最大 340px)。
+</p>
+<div class="rp"><div class="pad">
+  <div class="prose" style="margin:0 0 14px"><p style="margin:0">週に2回以上パンを買う人の <span class="term">購買頻度</span> は、2024年から2026年で 8 ポイント上がった。
+</p></div>
+  <span class="tip"><b>購買頻度</b>対象期間に、同じ人がパンを買った回数。
+週あたりに直して示す。
+</span>
+</div></div>
+<div class="rule-note">吹き出しは Surface・Border 1px・角丸 6px・影 Level 2、内側 12px 16px。
+文字は 12px・行間 1.7、用語名は太字・Primary Dark で1行目。
+説明が長いときは吹き出しに収めず、§9.1 の一覧へ誘導する。
+</div>
+</div>
+</section>
+
 <!-- ================= 10 印刷 ================= -->
 <section class="chapter" id="s10"><h2>10. 印刷</h2><p class="chapter-note">このページを印刷プレビューにすると、レール・移動チップ・章末バー・道具が消え、HERO が通常の色に戻る。
 </p>
@@ -967,7 +1060,7 @@ REPORT.md には足さない。
 <div class="scroll-x"><table class="t">
 <tr><th>部品</th><th>印刷での扱い</th></tr>
 <tr><td>ヘッダの帯</td><td>背景を消し、レポート名だけ残す</td></tr>
-<tr><td>左レール・移動チップ・章末バー・道具のアイコン・図の操作・表の道具</td><td>出さない</td></tr>
+<tr><td>左レール・移動チップ・章末バー・道具のアイコン・図の操作・表の道具・モーダル・ツールチップ</td><td>出さない</td></tr>
 <tr><td>HERO</td><td>帯をやめ、見出しを Primary Dark の文字に戻す</td></tr>
 <tr><td>カード</td><td>面の色と Border は残す (<code>print-color-adjust: exact</code>)</td></tr>
 <tr><td>用紙</td><td>A4・余白 14mm、カードの途中で改ページしない</td></tr>
