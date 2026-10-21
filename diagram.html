@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DIAGRAM.md プレビュー - 整理の図 (図解) の規約</title>
 <link rel="icon" type="image/png" href="assets/logo/logo-clear-symbol.png">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    トークン
@@ -118,7 +118,18 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
    図解 (DIAGRAM.md §1 の共通の視覚言語)
    図は幅 1080px で組み、狭い画面では .scroll-x の中で横に流す
    ============================================================ */
-.dg{width:1080px; letter-spacing:0; line-height:1.6; word-break:auto-phrase; line-break:strict; color:var(--g-text)}
+/* 図解のフォント (DIAGRAM.md §1.1) : 和文は Zen Kaku Gothic New、数字と記号だけ Noto Sans JP。
+   ページの外枠も Noto Sans JP を読むので、同じ名前のままでは図の和文まで Noto になる。
+   Google Fonts が配る Noto Sans JP の英数字の分 (可変フォント・500 と 700 で同じファイル) を
+   別の名前で読み、unicode-range で数字と % + , - . だけに割り当てる。
+   URL は Google 側の版 (v57) で変わることがある。数字が Zen Kaku に戻っていたら URL を取り直す */
+@font-face{
+  font-family:"Komorebi Num";
+  font-style:normal; font-weight:100 900; font-display:swap;
+  src:url(https://fonts.gstatic.com/s/notosansjp/v57/-F62fjtqLzI2JPCgQBnw7HFYwQgP-FVthw.woff2) format("woff2");
+  unicode-range:U+0025, U+002B-002E, U+0030-0039;
+}
+.dg{width:1080px; font-family:"Komorebi Num","Zen Kaku Gothic New","Noto Sans JP",sans-serif; font-weight:500; letter-spacing:0; line-height:1.6; word-break:auto-phrase; line-break:strict; color:var(--g-text)}
 .dg b{font-weight:700}
 /* 円は図解のノード・番号・中心にだけ使う (UI 部品の角丸 6-8px とは別) */
 .dg-round{border-radius:50%} /* design-check: allow NO_BORDER_RADIUS_50 */
@@ -318,6 +329,14 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-demo .sw{width:96px; height:96px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700}
 .dg-demo .nm{font-size:14px; font-weight:700}
 .dg-demo .ds{font-size:12.5px; color:var(--g-cmp); line-height:1.6; margin-top:4px}
+/* 範囲のミニ棒 (DIAGRAM.md §1.7 幅のある数値) : 最小から最大までの区間だけを塗る。端に丸を付けない。
+   端の上に値、下に場面名。0% と 100% の目盛りは棒のすぐ下に寄せる */
+.dg-rng{position:relative; margin:30px 0 40px}
+.dg-rng .dg-bar{display:block}
+.dg-rng .tk{position:absolute; top:11px; font-size:10.5px; color:var(--g-weak); line-height:1.2}
+.dg-rng .tk.r{right:0}
+.dg-rng .lab{position:absolute; top:-25px; transform:translateX(-50%); font-size:16px; font-weight:700; white-space:nowrap}
+.dg-rng .scn{position:absolute; top:27px; transform:translateX(-50%); font-size:12px; color:var(--g-cmp); white-space:nowrap}
 .dg-dev{position:relative; height:9px; background:var(--track); border-radius:2px; flex:1}
 .dg-dev i{position:absolute; left:50%; top:-3px; bottom:-3px; width:2px; background:var(--g-mute)}
 .dg-dev b{position:absolute; top:0; height:9px}
@@ -439,9 +458,23 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </div>
 </div>
 </div>
+<div class="scroll-x" style="margin-top:28px"><div class="dg" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px"><div style="grid-column:span 2"><div class="dg-sl">範囲のミニ棒 (場面ごとにばらつく幅)</div>
+<div style="font-size:13px">レンジでそのまま食べる</div>
+<div class="dg-rng"><span class="dg-bar"><b style="left:28%;width:30%;background:var(--primary-dark)"></b></span>
+<span class="tk">0%</span><span class="tk r">100%</span>
+<span class="lab" style="left:28%;color:var(--primary-dark)">28%</span><span class="lab" style="left:58%;color:var(--primary-dark)">58%</span>
+<span class="scn" style="left:28%">ストック</span><span class="scn" style="left:58%">気力がない</span></div>
+<div class="dg-cap" style="margin-top:0">架空の例・4場面の最小〜最大</div>
+</div>
+</div>
+</div>
 <div class="rule-note">ミニ棒は高さ 8 〜 10px・トラック <code>#F0F0F0</code>・軸と目盛りは付けない。
+棒が 0 から始まり、値を文字で読めるので、トラックが軸の代わりになる。
 地色を敷いた箱の中ではトラックが沈むので、白い箱の中で使う。
 基準のある指数は 0 起点にせず、基準線からの差を出す。
+場面ごとにばらつく幅は範囲のミニ棒にし、区間だけを塗って端に丸を付けない。
+範囲のミニ棒は位置で読ませるので、0% と 100% の目盛りを棒のすぐ下に置く。
+範囲と1つの値を1つの図に混ぜない。
 軸と目盛りが要る本式のグラフは <a href="figure.html">figure.html</a> の描き方に従う。
 </div>
 </div>
