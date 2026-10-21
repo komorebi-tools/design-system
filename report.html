@@ -242,6 +242,8 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .card-d{font-size:var(--fs-14); color:var(--text-2); margin:-6px 0 16px; line-height:var(--lh-tight)}
 .rp .prose p{margin:0 0 18px; line-height:var(--lh-body)}
 .rp .prose{margin-bottom:var(--sp-paragraph)}
+.rp .prose:last-child{margin-bottom:0}
+.rp .prose p:last-child{margin-bottom:0}
 .rp .prose p.note{font-size:var(--fs-12); color:var(--text-2); line-height:var(--lh-tight); margin:-4px 0 14px}
 .rp .prose p.key strong{font-size:var(--fs-20)}
 .rp ol.list,.rp ul.list{margin:0 0 12px; padding-left:1.5em}
@@ -263,7 +265,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .h4n.cat .ttl,.rp .h4n.cat .num{color:var(--cat-c)}
 .rp .idbox{display:inline-grid; place-items:center; border:1.5px solid var(--primary-light); color:var(--primary-dark); border-radius:7px; font-weight:700; font-variant-numeric:tabular-nums}
 .rp .h3n{display:flex; align-items:baseline; gap:12px; margin:var(--sp-subsection) 0 10px}
-.rp .h3n .idbox{width:26px; height:26px; font-size:var(--fs-12); align-self:center}
+.rp .h3n .idbox{min-width:26px; height:26px; padding:0 7px; font-size:var(--fs-12); white-space:nowrap; align-self:center}
 .rp .h3n .ttl{font-size:var(--fs-24); font-weight:700; color:var(--text); line-height:var(--lh-head)}
 .rp .numlist{list-style:none; margin:0; padding:0}
 .rp .numlist li{display:flex; gap:14px; padding:18px 0; border-top:1px solid var(--border)}
@@ -362,7 +364,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .app-ft-in{max-width:1280px; margin:0 auto; padding:16px 24px; display:flex; flex-wrap:wrap; gap:4px 22px; font-size:var(--fs-12); color:var(--text-3)}
 .rp .app-ft-in span:first-child{color:var(--text-2); font-weight:700}
 /* ---- 見本の補助 ---- */
-.rp.inner{border:0; border-radius:0}
+.rp.inner{border:0; border-radius:0; container-type:normal} /* 部品だけの小さい見本では、幅での切り替えを効かせない */
 .rp .pad{padding:24px}
 .rp .pad.tight{padding:16px 24px}
 .theme-sw{display:flex; gap:8px; margin-bottom:12px}
@@ -666,7 +668,7 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
 <h3>画面の中の並び</h3>
 <p class="sub">2つ目以降の画面見出しは、上に Border の罫と余白を置いて区切る。
 </p>
-<div class="rp"><div class="page" style="padding-top:8px">
+<div class="rp"><div class="page" style="padding-top:8px; padding-bottom:24px">
   <h2 class="page-t">主要な論点</h2>
   <p class="page-t2">何が増えて、何が減ったか</p>
   <div class="lead"><p>この章では、購買パネルの3年分から「回数」と「点数」の動きを分けて見る。
