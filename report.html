@@ -18,6 +18,9 @@
   --primary-light:#9BB0D0;
   --sub:#A18E6C;
   --navy:#3E5A86;        /* 要確認 : DESIGN.md に無い色、ヘッダの帯の終点に仮置き (REPORT.md §7) */
+  --accent:#C4A55A;
+  --accent-light:#E0D5A8;
+  --gold-pale:color-mix(in srgb, var(--accent-light) 40%, white); /* 要確認 : ゴールドの淡い面 (実物 #F5F0E6 相当)、DESIGN.md に無いので Accent Light から作る (REPORT.md §4.1) */
   --border:#E0E0E0;
   --background:#F7F7F7;
   --surface:#FFFFFF;
@@ -426,6 +429,62 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .tip{display:inline-block; max-width:340px; background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-2); padding:12px 16px; font-size:var(--fs-12); line-height:1.7}
 .rp .tip b{display:block; margin-bottom:4px; color:var(--primary-dark)}
 @container (max-width:700px){ .rp .gl-i{grid-template-columns:minmax(0,1fr); gap:4px} }
+/* ---- §2.6 読み進め方のカード ---- */
+.rp .map-path{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px}
+.rp .map-step{display:flex; gap:12px; align-items:flex-start; text-decoration:none; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:14px 16px; transition:border-color 0.12s ease, background 0.12s ease, transform 0.12s ease; min-width:0}
+.rp .map-step:hover{border-color:var(--primary-light); background:var(--tint); transform:translateY(-1px)}
+.rp .map-step.now{background:var(--tint); border-color:var(--primary-light)}
+.rp .map-step-n{flex:none; width:22px; height:22px; border-radius:11px; margin-top:1px; background:var(--primary-dark); color:var(--surface); font-size:var(--fs-12); font-weight:700; display:grid; place-items:center}
+.rp .map-step-t{font-size:var(--fs-14); font-weight:700; color:var(--primary-dark); line-height:var(--lh-head)}
+.rp .map-step p{margin:4px 0 0; font-size:var(--fs-12); line-height:var(--lh-body); color:var(--text-2)}
+@container (max-width:1100px){ .rp .map-path{grid-template-columns:minmax(0,1fr); gap:10px} }
+/* ---- §4.1 面のボックス / §4.2 KPI ---- */
+.rp .box{border-radius:var(--radius-l); padding:18px 22px; margin:14px 0 16px}
+.rp .box.blue{background:var(--tint)}
+.rp .box.gold{background:var(--gold-pale)}
+.rp .box.line{background:var(--surface); border:1px solid var(--border)}
+.rp .box-l{font-size:var(--fs-12); font-weight:700; letter-spacing:0.1em; margin-bottom:8px}
+.rp .box.blue .box-l{color:var(--primary-dark)}
+.rp .box.gold .box-l{color:var(--sub)}
+.rp .box.line .box-l{color:var(--text-3)}
+.rp .box p{margin:0 0 8px; font-size:var(--fs-14); line-height:var(--lh-body)}
+.rp .box p:last-child{margin-bottom:0}
+.rp .kpis{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px}
+.rp .kpi{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); padding:20px 22px; box-shadow:var(--shadow-1); min-width:0}
+.rp .kpi-l{font-size:var(--fs-14); color:var(--text); font-weight:700; line-height:var(--lh-tight)}
+.rp .kpi-v{font-size:var(--fs-34); font-weight:700; line-height:1.25; margin:6px 0 4px; font-variant-numeric:tabular-nums; color:var(--primary-dark)}
+.rp .kpi-v small{font-size:var(--fs-16); font-weight:700; margin-left:2px}
+.rp .kpi-v.none{color:var(--text-3); font-weight:400}
+.rp .kpi-c{font-size:var(--fs-12); color:var(--text); line-height:var(--lh-body)}
+.rp .kpi-s{font-size:var(--fs-12); color:var(--text-3); margin-top:8px}
+@container (max-width:1180px){ .rp .kpis{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))} }
+/* ---- §5.4 強調段落と要点 / §5.5 引用 ---- */
+.rp .prose p.key{background:var(--tint); border-radius:var(--radius-l); padding:12px 18px; margin:14px 0 16px}
+.rp .kp{background:var(--tint); border-radius:var(--radius-l); padding:16px 20px 6px; margin:4px 0 20px}
+.rp .kp-t{font-size:var(--fs-12); font-weight:700; color:var(--primary-dark); letter-spacing:0.14em; margin-bottom:8px}
+.rp .kp-g{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:10px; margin-bottom:10px}
+.rp .kp-i{display:flex; gap:14px; align-items:center; padding:12px 16px; background:var(--surface); border-radius:var(--radius-l); border:1px solid var(--border)}
+.rp .kp-n{flex:none; min-width:84px; font-size:var(--fs-24); font-weight:700; color:var(--primary-dark); line-height:1.2; font-variant-numeric:tabular-nums}
+.rp .kp-x{font-size:var(--fs-14); font-weight:700; line-height:var(--lh-body); color:var(--text)}
+.rp .voice{position:relative; padding:14px 16px 14px 44px; background:var(--gold-pale); border-radius:var(--radius-l); margin-bottom:10px}
+.rp .voice.first{background:var(--tint)}
+.rp .voice-q{position:absolute; left:14px; top:6px; font-family:Georgia,serif; font-size:var(--fs-34); line-height:1; color:var(--accent)}
+.rp .voice p{margin:0; font-size:var(--fs-16); line-height:1.85; font-weight:500}
+.rp .voice-s{display:block; margin-top:6px; font-size:var(--fs-12); color:var(--text-2); font-weight:400}
+/* ---- §6 バッジ・リンクのカード ---- */
+.rp .badge{display:inline-block; font-size:var(--fs-12); line-height:1.5; padding:2px 10px; border-radius:var(--radius); white-space:nowrap}
+.rp .badge.src{background:var(--bg); color:var(--text-2); border:1px solid var(--border)}
+.rp .badge.c1{background:var(--primary-dark); color:var(--surface)}
+.rp .badge.c2{background:var(--primary-light); color:var(--text)}
+.rp .badge.c3{background:var(--base-marker); color:var(--text-2)}
+.rp .lcards{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px}
+.rp .lcard{display:block; text-decoration:none; border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px; background:var(--surface); cursor:pointer; transition:border-color 0.12s ease, background 0.12s ease, transform 0.12s ease; min-width:0}
+.rp .lcard:hover{border-color:var(--primary-light); background:var(--tint); transform:translateY(-1px)}
+.rp .lcard-t{font-size:var(--fs-16); font-weight:700; color:var(--primary-dark); margin:0 0 4px; line-height:1.5}
+.rp .lcard-t::after{content:' →'; color:var(--primary-light)}
+.rp .lcard:hover .lcard-t::after{color:var(--primary-dark)}
+.rp .lcard p{margin:0; font-size:var(--fs-14); line-height:var(--lh-body); color:var(--text-2)}
+@container (max-width:900px){ .rp .lcards{grid-template-columns:minmax(0,1fr)} }
 /* ---- 下の帯 ---- */
 .rp .app-ft{border-top:1px solid var(--border); background:var(--surface)}
 .rp .app-ft-in{max-width:1280px; margin:0 auto; padding:16px 24px; display:flex; flex-wrap:wrap; gap:4px 22px; font-size:var(--fs-12); color:var(--text-3)}
@@ -492,11 +551,17 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 <li><a href="#s22"><span class="num">2.2</span>左レール</a></li>
 <li><a href="#s23"><span class="num">2.3</span>移動チップ</a></li>
 <li><a href="#s24"><span class="num">2.4</span>章末バー</a></li>
+<li><a href="#s26"><span class="num">2.6</span>読み進め方のカード</a></li>
 <li><a href="#s3"><span class="num">3</span>HERO</a></li>
 <li><a href="#s4"><span class="num">4</span>セクション</a></li>
+<li><a href="#s41"><span class="num">4.1</span>面のボックス</a></li>
+<li><a href="#s42"><span class="num">4.2</span>KPI カード</a></li>
 <li><a href="#s51"><span class="num">5.1</span>見出しの4段</a></li>
 <li><a href="#s52"><span class="num">5.2</span>文字サイズの段</a></li>
+<li><a href="#s54"><span class="num">5.4</span>強調段落と要点</a></li>
+<li><a href="#s55"><span class="num">5.5</span>引用</a></li>
 <li><a href="#s6"><span class="num">6</span>ボタン・押せるもの</a></li>
+<li><a href="#s6b"><span class="num">6</span>バッジ・リンクのカード</a></li>
 <li><a href="#s7"><span class="num">7</span>テーマ差し替え</a></li>
 <li><a href="#s81"><span class="num">8.1</span>図の枠と操作</a></li>
 <li><a href="#s83"><span class="num">8.3</span>表の枠と道具</a></li>
@@ -688,6 +753,32 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
   </div>
 </div></div>
 </div>
+<div class="card" id="s26">
+<h3>2.6 読み進め方のカード</h3>
+<p class="sub">概要の画面の末尾に、画面と同じ数のカードを横に並べ、読む順番を示す。
+タブの並びと同じ順。
+</p>
+<div class="rp"><div class="pad">
+  <div class="map-path">
+    <a class="map-step now" href="#s26"><span class="map-step-n">1</span><div><div class="map-step-t">分析の概要</div><p>何を決めるかと、その材料。
+いまここ。
+</p></div></a>
+    <a class="map-step" href="#s26"><span class="map-step-n">2</span><div><div class="map-step-t">解説レポート</div><p>何が起きているかの根拠を、結論から順に読む。
+</p></div></a>
+    <a class="map-step" href="#s26"><span class="map-step-n">3</span><div><div class="map-step-t">ダッシュボード</div><p>主要な指標のいまの値。
+</p></div></a>
+    <a class="map-step" href="#s26"><span class="map-step-n">4</span><div><div class="map-step-t">論点別データ</div><p>根拠のもとになった集計。
+会議中に行き来する。
+</p></div></a>
+  </div>
+</div></div>
+<div class="rule-note">1行に画面の数だけ (4つまで)、間 8px。
+Surface・Border 1px・角丸 6px、左に塗りの丸の番号 (22px)。
+現在地は基調の地の面・Primary Light の枠。
+押せるカードなので、hover で枠と面が変わり 1px 浮く。
+1100px 以下では縦に積む。
+</div>
+</div>
 </section>
 
 <!-- ================= 3 HERO ================= -->
@@ -785,6 +876,50 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
 分類ラベル (FINDINGS・DECISION) は見出しの上に小さく置き、背景も枠も持たせない。
 </div>
 </div>
+<div class="card" id="s41">
+<h3>4.1 面のボックス</h3>
+<p class="sub">要点や示唆を面で区切る。
+左の色線は使わない。
+</p>
+<div class="rp"><div class="pad">
+  <div class="box blue" style="margin-top:0"><div class="box-l">INSIGHT</div><p>平日の朝に「その日の分だけ」買う行動が増えている。
+まとめ買いの値引きより、朝の品ぞろえのほうが効く。
+</p></div>
+  <div class="box gold"><div class="box-l">BENEFIT</div><p>朝 7〜9 時に欲しいパンがある、という安心が、来店の回数そのものを支えている。
+</p></div>
+  <div class="box line" style="margin-bottom:0"><div class="box-l">前提</div><p>購買パネルは首都圏 4,800 人。
+地方の店舗は含まない。
+</p></div>
+</div></div>
+<div class="rule-note">角丸 8px・内側 18px 22px。
+ラベルは 12px・太字・字間 0.1em、本文は 14px。
+青の面は基調の地、ゴールドの面は Accent Light を白で薄めたもの (要確認 : DESIGN.md に無い値)、線の面は Surface・Border。
+</div>
+</div>
+<div class="card" id="s42">
+<h3>4.2 KPI カード</h3>
+<p class="sub">ダッシュボードの画面で、主要な指標を4枚並べる。
+</p>
+<div class="rp"><div class="pad">
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-l">週2回以上の購買者</div><div class="kpi-v">46<small>%</small></div><div class="kpi-c">2024年の 38% から 8 ポイント増。
+</div><div class="kpi-s">購買パネル・2026年</div></div>
+    <div class="kpi"><div class="kpi-l">1回あたりの点数</div><div class="kpi-v">1.6<small>点</small></div><div class="kpi-c">2.1 点から減少。
+その日の分だけ買う。
+</div><div class="kpi-s">購買パネル・2026年</div></div>
+    <div class="kpi"><div class="kpi-l">朝 7〜9 時の構成比</div><div class="kpi-v">41<small>%</small></div><div class="kpi-c">平日の購買のうち朝の割合。
+</div><div class="kpi-s">購買パネル・2026年</div></div>
+    <div class="kpi"><div class="kpi-l">休日の変化</div><div class="kpi-v none">—</div><div class="kpi-c">差が 1 ポイント未満のため値を出さない。
+</div><div class="kpi-s">購買パネル・2026年</div></div>
+  </div>
+</div></div>
+<div class="rule-note">Surface・Border 1px・角丸 8px・影 Level 1、内側 20px 22px。
+ラベル 14px・太字、値 34px・Primary Dark・桁をそろえる、単位は 16px。
+値が無いときは「—」を弱い群グレーで置き、理由を補足に書く。
+4列・間 16px。
+1180px 以下は 250px で折り返す。
+</div>
+</div>
 </section>
 
 <!-- ================= 5 文字 ================= -->
@@ -837,6 +972,51 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
 元の実物は本文 1.85・字間 0.06em だったが、2026/10/21 に見比べて DESIGN.md の値にそろえた (REPORT.md §5.3)。
 </div>
 </div>
+<div class="card" id="s54">
+<h3>5.4 強調段落と要点</h3>
+<p class="sub">章の結論を1段落で示す強調段落と、数字と一言の組を並べる要点。
+</p>
+<div class="rp"><div class="pad">
+  <div class="prose" style="margin:0"><p class="key" style="margin-top:0">平日の朝に、その日の分だけ買う人が増えている。
+週2回以上の購買者は <strong>46%</strong> に達した。
+</p></div>
+  <div class="kp" style="margin-bottom:0"><div class="kp-t">KEY POINTS</div><div class="kp-g">
+    <div class="kp-i"><div class="kp-n">+8<small style="font-size:14px">pt</small></div><div class="kp-x">週2回以上の購買者の増加分。
+ほぼ平日の朝。
+</div></div>
+    <div class="kp-i"><div class="kp-n">1.6点</div><div class="kp-x">1回あたりの点数。
+まとめ買いが減った。
+</div></div>
+    <div class="kp-i"><div class="kp-n">±0</div><div class="kp-x">休日は変化なし。
+新しい施策は打たない。
+</div></div>
+  </div></div>
+</div></div>
+<div class="rule-note">強調段落は基調の地の面・角丸 8px・内側 12px 18px、太字の数値だけ 20px。
+要点は基調の地の面に白いカードを並べ、数字 24px・Primary Dark、一言 14px・太字。
+数値の強調は本文と同じ大きさで、色と太さだけで示す。
+</div>
+</div>
+<div class="card" id="s55">
+<h3>5.5 引用</h3>
+<p class="sub">生活者の声など、原文のまま載せるもの。
+いちばん大事な1件は基調の地にして先頭に置く。
+</p>
+<div class="rp"><div class="pad">
+  <div class="voice first"><span class="voice-q">“</span><p>朝は会社の近くで1個だけ買う。
+家で買いだめすると結局食べない。
+<span class="voice-s">30代・会社員・週3回購入</span></p></div>
+  <div class="voice"><span class="voice-q">“</span><p>曜日で決まった棚に行く。
+無いと別の店に行くより、その日はあきらめる。
+<span class="voice-s">40代・会社員・週2回購入</span></p></div>
+  <div class="voice" style="margin-bottom:0"><span class="voice-q">“</span><p>休日は家族の分をまとめて買うので、朝とは別の店。
+<span class="voice-s">30代・主婦・週1回購入</span></p></div>
+</div></div>
+<div class="rule-note">ゴールドの淡い面・角丸 8px・内側 14px 16px、左に大きな引用符 (34px・Accent)。
+本文は 16px・weight 500・行間 1.85 (引用だけ本文より広くてよい)。
+出所は引用の下に 12px・Text Secondary。
+</div>
+</div>
 </section>
 
 <!-- ================= 6 ボタン ================= -->
@@ -864,6 +1044,32 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
 <div class="rule-note">押せるものとラベルの見分けは DESIGN.md §4「押せるものとラベル」が正。
 道具のアイコンの説明は hover で小さな吹き出し (Primary Dark の面・白文字・12px)。
 印刷では出さない。
+</div>
+</div>
+<div class="card" id="s6b">
+<h3>バッジとリンクのカード</h3>
+<p class="sub">バッジは押せない (枠を持つが、矢印を付けず hover で変えない)。
+リンクのカードは押せる (末尾の矢印と hover)。
+</p>
+<div class="rp"><div class="pad">
+  <div class="lab">バッジ (出所・段階)</div>
+  <div class="row"><span class="badge src">購買パネル</span><span class="badge src">意識調査 n=1,200</span><span class="badge c1">確度 高</span><span class="badge c2">確度 中</span><span class="badge c3">確度 低</span></div>
+  <div class="lab">リンクのカード (概要から各画面への入口)</div>
+  <div class="lcards">
+    <a class="lcard" href="#s6b"><p class="lcard-t">結論1 買う回数が増えている</p><p>平日の朝に集中。
+根拠は 2-1・2-2。
+</p></a>
+    <a class="lcard" href="#s6b"><p class="lcard-t">結論2 点数は減っている</p><p>2.1 点 → 1.6 点。
+まとめ買いの減少。
+</p></a>
+    <a class="lcard" href="#s6b"><p class="lcard-t">当面の推奨</p><p>朝の棚を切らさない、1個売りの価格を見直す。
+</p></a>
+  </div>
+</div></div>
+<div class="rule-note">バッジは 12px・内側 2px 10px・角丸 6px。
+出所は Background の面・Border 1px・Text Secondary、段階は Primary Dark (白文字) / Primary Light / 基調のマーカー。
+リンクのカードは Surface・Border 1px・角丸 6px・内側 16px 18px、題 16px・Primary Dark で末尾に →、hover で枠と面が変わり 1px 浮く。
+2〜3列。
 </div>
 </div>
 </section>
