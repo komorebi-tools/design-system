@@ -17,10 +17,11 @@
   --primary-dark:#5A74A3;
   --primary-light:#9BB0D0;
   --sub:#A18E6C;
-  --navy:#3E5A86;        /* 要確認 : DESIGN.md に無い色、ヘッダの帯の終点に仮置き (REPORT.md §7) */
+  --navy:#3E5A86;        /* DESIGN.md §2 Primary Navy (ヘッダの帯の終点) */
   --accent:#C4A55A;
   --accent-light:#E0D5A8;
-  --gold-pale:color-mix(in srgb, var(--accent-light) 40%, white); /* 要確認 : ゴールドの淡い面 (実物 #F5F0E6 相当)、DESIGN.md に無いので Accent Light から作る (REPORT.md §4.1) */
+  --sub-dark:#8B7959;    /* DESIGN.md §2 Accent Deep Dark (ゴールドの淡い面の上のラベル) */
+  --gold-pale:#F9F6EE;   /* FIGURE.md §1.2 ゴールドの淡い面 (Accent を白 90% で薄めた値) */
   --border:#E0E0E0;
   --background:#F7F7F7;
   --surface:#FFFFFF;
@@ -31,7 +32,8 @@
   --cat3-fill:#98BBDE; --cat3-text:#659AC7;
   --cat4-fill:#EDB369; --cat4-text:#DE7C31;
   --cat5-fill:#CB6378;
-  --g-text:#434343;
+  --text-primary:#333333; /* DESIGN.md §2 Text Primary (本文) */
+  --g-text:#434343;       /* FIGURE.md §1.3 本文グレー (図の中の文字だけに使う) */
   --g-note:#595959;
   --g-cmp:#666666;
   --g-weak:#999999;
@@ -84,6 +86,7 @@ h1,h2,h3{font-weight:700; font-feature-settings:"palt" 1,"kern" 1; letter-spacin
 .toc ol{margin:0; padding-left:0; list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:6px 24px}
 .toc a{color:var(--primary-dark); text-decoration:none; font-size:14px}
 .toc a:hover{text-decoration:underline}
+.card a,.rule-note a,.page-foot a,.sub a{color:var(--primary-dark)}
 .toc .num{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; color:var(--g-weak); margin-right:8px; font-size:12px}
 .chapter{margin:56px 0 0}
 .chapter > h2{font-size:24px; font-weight:700; margin:0 0 6px}
@@ -126,7 +129,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
    ============================================================ */
 .rp{
   /* ---- 替えないもの : DESIGN.md / FIGURE.md の値を参照 ---- */
-  --text:var(--g-text);
+  --text:var(--text-primary);
   --text-2:var(--g-cmp);
   --text-3:var(--g-weak);
   --bg:var(--background);
@@ -178,7 +181,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
   white-space:nowrap; font-feature-settings:"palt" 1;
 }
 .rp .nav button b{font-size:var(--fs-14); font-weight:700}
-.rp .nav button i{font-style:normal; font-size:var(--fs-12); font-weight:400; color:rgba(255,255,255,0.5)}
+.rp .nav button i{font-style:normal; font-size:var(--fs-12); font-weight:400; color:rgba(255,255,255,0.72)}
 .rp .nav button:hover{color:var(--surface)}
 .rp .nav button:hover i{color:rgba(255,255,255,0.72)}
 .rp .nav button[aria-selected="true"]{color:var(--surface); border-bottom-color:var(--surface)}
@@ -186,7 +189,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 /* §6 道具のアイコン */
 .rp .app-tools{display:flex; align-items:center; gap:6px; margin-left:auto}
 .rp .tool{
-  appearance:none; cursor:pointer; width:38px; height:38px; border-radius:var(--radius);
+  appearance:none; cursor:pointer; width:44px; height:44px; border-radius:var(--radius);
   border:1px solid rgba(255,255,255,0.26); background:none; color:var(--surface); display:grid; place-items:center;
 }
 .rp .tool:hover{background:rgba(255,255,255,0.14); border-color:rgba(255,255,255,0.5)}
@@ -222,9 +225,8 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
   content:''; position:absolute; left:0; right:0; bottom:-1px; height:120px; pointer-events:none;
   background:linear-gradient(180deg, rgba(247,247,247,0) 0%, var(--bg) calc(100% - 5px), var(--bg) 100%);
 }
-.rp .hero-in{position:relative; max-width:1280px; margin:0 auto; padding:30px 24px 64px}
+.rp .hero-in{position:relative; max-width:1280px; margin:0 auto; padding:30px 24px 136px} /* 下 136px = 溶かし 120px ＋ 本文の重なり 32px の内側に説明文を置かない */
 .rp .page-hero .page-t{color:var(--surface); margin:0 0 4px}
-.rp .page-hero .page-t2{color:var(--surface); margin:0 0 8px}
 .rp .page-hero .page-d{color:rgba(255,255,255,0.92); max-width:1000px; margin:0}
 .rp .page-hero + .page{position:relative; margin-top:-32px; padding-top:0}
 /* ---- §4 セクション ---- */
@@ -319,7 +321,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 }
 /* ---- §2.3 移動チップ ---- */
 .rp .reflist{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:22px; padding-top:16px; border-top:1px solid var(--border)}
-.rp .reflist > span{font-size:var(--fs-12); color:var(--text-3); margin-right:6px}
+.rp .reflist > span{font-size:var(--fs-12); color:var(--text-2); margin-right:6px}
 .rp .jump{
   display:inline-flex; align-items:center; gap:8px; text-decoration:none; cursor:pointer;
   background-color:var(--primary-dark); background-image:var(--grad-deco); background-size:160% 100%; background-position:0% 50%;
@@ -352,7 +354,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .chap-prev:hover{color:var(--primary-dark); text-decoration:underline}
 /* ---- §6 ボタン ---- */
 .rp .btn{
-  appearance:none; height:30px; display:inline-flex; align-items:center; gap:6px; padding:0 14px; cursor:pointer;
+  appearance:none; height:44px; display:inline-flex; align-items:center; gap:6px; padding:0 14px; cursor:pointer; /* 44px = DESIGN.md §8 タッチターゲット */
   border:1px solid var(--border); background:var(--surface); color:var(--text-2); border-radius:var(--radius);
   font-size:var(--fs-12); font-weight:700; line-height:var(--lh-tight);
   transition:background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
@@ -386,9 +388,9 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .tbar{display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:6px}
 .rp .tcap{font-size:var(--fs-12); color:var(--text-2)}
 .rp .ttools{display:flex; align-items:center; gap:8px}
-.rp .tsearch{appearance:none; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:4px 10px; font:inherit; font-size:var(--fs-12); width:150px; color:var(--text)}
+.rp .tsearch{appearance:none; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); height:44px; padding:0 10px; font:inherit; font-size:var(--fs-12); width:150px; color:var(--text)}
 .rp .tsearch:focus{outline:none; border-color:var(--primary)}
-.rp .btn.sm{height:28px; font-weight:400}
+.rp .btn.sm{font-weight:400} /* 高さは .btn と同じ 44px */
 .rp .tw{overflow-x:auto; border:1px solid var(--rule); border-radius:var(--radius); background:var(--surface)}
 .rp table.dt{border-collapse:collapse; width:100%; font-size:var(--fs-14); line-height:var(--lh-tight)}
 .rp table.dt th,.rp table.dt td{border:1px solid var(--rule); padding:12px 14px; text-align:left; vertical-align:top}
@@ -452,7 +454,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .box.line{background:var(--surface); border:1px solid var(--border)}
 .rp .box-l{font-size:var(--fs-12); font-weight:700; letter-spacing:0.1em; margin-bottom:8px}
 .rp .box.blue .box-l{color:var(--primary-dark)}
-.rp .box.gold .box-l{color:var(--sub)}
+.rp .box.gold .box-l{color:var(--sub-dark)}
 .rp .box.line .box-l{color:var(--text-3)}
 .rp .box p{margin:0 0 8px; font-size:var(--fs-14); line-height:var(--lh-body)}
 .rp .box p:last-child{margin-bottom:0}
@@ -463,7 +465,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .kpi-v small{font-size:var(--fs-16); font-weight:700; margin-left:2px}
 .rp .kpi-v.none{color:var(--text-3); font-weight:400}
 .rp .kpi-c{font-size:var(--fs-12); color:var(--text); line-height:var(--lh-body)}
-.rp .kpi-s{font-size:var(--fs-12); color:var(--text-3); margin-top:8px}
+.rp .kpi-s{font-size:var(--fs-12); color:var(--text-2); margin-top:8px}
 @container (max-width:1180px){ .rp .kpis{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))} }
 /* ---- §5.4 強調段落と要点 / §5.5 引用 ---- */
 .rp .prose p.key{background:var(--tint); border-radius:var(--radius-l); padding:20px 24px; margin:14px 0 16px}
@@ -473,11 +475,16 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .kp-i{display:flex; gap:14px; align-items:center; padding:12px 16px; background:var(--surface); border-radius:var(--radius-l); border:1px solid var(--border)}
 .rp .kp-n{flex:none; min-width:84px; font-size:var(--fs-24); font-weight:700; color:var(--primary-dark); line-height:1.2; font-variant-numeric:tabular-nums}
 .rp .kp-x{font-size:var(--fs-14); font-weight:700; line-height:var(--lh-body); color:var(--text)}
-.rp .voice{position:relative; padding:20px 24px 20px 56px; background:var(--gold-pale); border-radius:var(--radius-l); margin-bottom:10px}
-.rp .voice.first{background:var(--tint)}
-.rp .voice-q{position:absolute; left:18px; top:12px; font-family:Georgia,serif; font-size:var(--fs-34); line-height:1; color:var(--accent)}
-.rp .voice p{margin:0; font-size:var(--fs-16); line-height:1.85; font-weight:500}
-.rp .voice-s{display:block; margin-top:6px; font-size:var(--fs-12); color:var(--text-2); font-weight:400}
+.rp .voice{position:relative; padding:16px 20px 16px 52px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); margin-bottom:10px}
+.rp .voice-q{position:absolute; left:16px; top:10px; font-size:var(--fs-34); line-height:1; font-weight:700; color:var(--accent)}
+.rp .voice p{margin:0; font-size:var(--fs-16); line-height:1.85; font-weight:400}
+.rp .voice-s{display:block; margin-top:10px; padding-top:6px; border-top:1px solid var(--border); font-size:var(--fs-12); color:var(--text-2); font-weight:400}
+/* 1件だけのときは吹き出し : 引用符の代わりにピル、下に小さい尾 */
+.rp .voice.solo{padding:14px 20px 16px; margin-bottom:14px}
+.rp .voice.solo::after{content:''; position:absolute; left:22px; bottom:-7px; width:12px; height:12px; background:var(--surface); border-right:1px solid var(--border); border-bottom:1px solid var(--border); transform:rotate(45deg)}
+.rp .voice.solo .voice-s{border-top:0; padding-top:0; margin-top:8px}
+.rp .vpill{display:inline-block; font-size:var(--fs-12); font-weight:700; letter-spacing:0.08em; line-height:1.6; border-radius:999px; padding:2px 10px; margin:0 0 8px; color:var(--sub-dark); background:var(--gold-pale)}
+.rp .vpill.cat{color:var(--primary-dark); background:var(--cat-ground, var(--tint))} /* カテゴリ指定色があるときは --cat-ground にその「地」を入れる */
 /* ---- §6 バッジ・リンクのカード ---- */
 .rp .badge{display:inline-block; font-size:var(--fs-12); line-height:1.5; padding:2px 10px; border-radius:var(--radius); white-space:nowrap}
 .rp .badge.src{background:var(--bg); color:var(--text-2); border:1px solid var(--border)}
@@ -496,16 +503,18 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .h5{font-size:var(--fs-16); font-weight:700; color:var(--text); margin:24px 0 8px; line-height:var(--lh-head)}
 .rp .h6{font-size:var(--fs-14); font-weight:700; color:var(--text-2); letter-spacing:0.08em; margin:16px 0 4px; line-height:var(--lh-head)}
 /* ---- §5.5 短い声の束・回答者カード ---- */
-.rp .vqs{background:var(--tint); border-radius:var(--radius-l); padding:16px 20px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:14px 0 16px}
-.rp .vqs.gold{background:var(--gold-pale)}
+.rp .vqs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:14px 0 16px}
+.rp .vqs-h{grid-column:1 / -1; font-size:var(--fs-12); font-weight:700; letter-spacing:0.14em; color:var(--sub-dark); margin:0 0 2px}
 .rp .vq{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:12px 16px 12px 36px; position:relative; font-size:var(--fs-14); line-height:var(--lh-body); min-width:0}
-.rp .vq::before{content:'\201C'; position:absolute; left:14px; top:10px; font-family:Georgia,serif; font-size:var(--fs-16); line-height:1; color:var(--accent)}
-.rp .person{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); padding:20px 24px; margin:14px 0 16px}
-.rp .person-meta{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:var(--fs-12); color:var(--text-2); margin-bottom:8px}
+.rp .vq::before{content:'\201C'; position:absolute; left:12px; top:8px; font-size:var(--fs-20); line-height:1; font-weight:700; color:var(--accent)}
+.rp .person{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); padding:0; overflow:hidden; margin:14px 0 16px}
+.rp .person-hd{padding:14px 20px; background:var(--gold-pale); border-bottom:1px solid var(--border)} /* カテゴリ指定色があるときは --cat-ground の「地」で塗ってよい */
+.rp .person.cat .person-hd{background:var(--cat-ground, var(--tint))}
+.rp .person-bd{padding:4px 20px 16px}
+.rp .person-meta{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:var(--fs-12); color:var(--text-2); margin:0}
 .rp .person-meta .badge{margin-right:2px}
-.rp .person-q{font-size:var(--fs-16); font-weight:700; color:var(--primary-dark); line-height:1.6; margin:0 0 12px}
-.rp .person-q::before{content:'\201C'; font-family:Georgia,serif; color:var(--accent); margin-right:4px}
-.rp .person-q::after{content:'\201D'; font-family:Georgia,serif; color:var(--accent); margin-left:4px}
+.rp .person-q{font-size:var(--fs-16); font-weight:700; color:var(--text); line-height:1.6; margin:6px 0 0; padding-left:28px; position:relative}
+.rp .person-q::before{content:'\201C'; position:absolute; left:0; top:-4px; font-size:var(--fs-24); font-weight:700; color:var(--accent)}
 .rp .person .h6{margin-top:12px}
 .rp .person p{margin:0; font-size:var(--fs-14); line-height:var(--lh-body)}
 .rp .kv{display:grid; grid-template-columns:120px minmax(0,1fr); gap:0; border-top:1px solid var(--border); margin-top:12px}
@@ -525,6 +534,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .app-ft-in span:first-child{color:var(--text-2); font-weight:700}
 /* ---- 見本の補助 ---- */
 .rp.inner{border:0; border-radius:0; container-type:normal} /* 部品だけの小さい見本では、幅での切り替えを効かせない */
+.rp.inner.show-sub{container-type:inline-size} /* §2.1 のヘッダの見本は幅いっぱいなので、900px 以下でタブを下の行に送る切り替えを効かせる */
 .rp .pad{padding:24px}
 .rp .pad.tight{padding:16px 24px}
 .theme-sw{display:flex; gap:8px; margin-bottom:12px}
@@ -545,7 +555,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
   .rp .page-hero{background:none; color:inherit}
   .rp .page-hero::after{display:none}
   .rp .page-hero .page-t{color:var(--primary-dark)}
-  .rp .page-hero .page-t2,.rp .page-hero .page-d{color:var(--text)}
+  .rp .page-hero .page-d{color:var(--text)}
   .rp .rcard{break-inside:avoid; print-color-adjust:exact; -webkit-print-color-adjust:exact}
 }
 </style>
@@ -639,7 +649,6 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
   <div class="page-hero">
     <div class="hero-in">
       <h2 class="page-t">解説レポート</h2>
-      <p class="page-t2">朝のパンは「量より回数」で選ばれている</p>
       <p class="page-d">2024年から2026年の購買データと、1,200人の意識調査から、朝食のパンがどう選ばれているかを読み解く。
 </p>
     </div>
@@ -819,6 +828,8 @@ Surface・Border 1px・角丸 6px・内側 18px 22px、左に塗りの丸の番�
 
 <!-- ================= 3 HERO ================= -->
 <section class="chapter" id="s3"><h2>3. HERO (画面見出しの帯)</h2><p class="chapter-note">各画面の先頭の見出しを青の帯に載せる。
+載せるのは見出しと説明文の 2 つだけで、見出しを 2 段・3 段に重ねない。
+概要の画面では、説明文の下に KPI カードや要点を白のカードで載せてよい。
 画像なしを基本形にし、画像は任意。
 </p>
 <div class="card">
@@ -829,7 +840,6 @@ Surface・Border 1px・角丸 6px・内側 18px 22px、左に塗りの丸の番�
 <div class="rp">
   <div class="page-hero"><div class="hero-in">
     <h2 class="page-t">分析の概要</h2>
-    <p class="page-t2">朝のパンは「量より回数」で選ばれている</p>
     <p class="page-d">何を決めるためのレポートか、その材料がどこにあるかを先にまとめる。
 </p>
   </div></div>
@@ -847,7 +857,6 @@ Surface・Border 1px・角丸 6px・内側 18px 22px、左に塗りの丸の番�
 <div class="rp">
   <div class="page-hero has-img demo-img"><div class="hero-in">
     <h2 class="page-t">解説レポート</h2>
-    <p class="page-t2">朝のパンは「量より回数」で選ばれている</p>
     <p class="page-d">2024年から2026年の購買データと、1,200人の意識調査から読み解く。
 </p>
   </div></div>
@@ -929,7 +938,7 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
 </div></div>
 <div class="rule-note">角丸 8px・内側 18px 22px。
 ラベルは 12px・太字・字間 0.1em、本文は 14px。
-青の面は基調の地、ゴールドの面は Accent Light を白で 40% に薄めた計算値 #F3EEDC (要確認 : DESIGN.md に無い値)、線の面は Surface・Border。
+青の面は基調の地、ゴールドの面は FIGURE.md §1.2 のゴールドの淡い面 #F9F6EE (ラベルは Accent Deep Dark)、線の面は Surface・Border。
 </div>
 </div>
 <div class="card" id="s42">
@@ -1045,20 +1054,30 @@ h5・h6 でも左の色線は使わない。
 長い声 / 短い声の束 / 回答者カード の3型。
 SLIDE.md §5.3 のパターン C (引用は白のボックスで抜く) を HTML に写したもの。
 </p>
-<div class="lab">長い声 (1件をじっくり読ませる、いちばん大事な1件は基調の地にして先頭)</div>
+<div class="lab">長い声が 2 件以上並ぶとき (白地と Border、引用符はゴールドの太字)</div>
 <div class="rp"><div class="pad">
-  <div class="voice first"><span class="voice-q">“</span><p>朝は会社の近くで1個だけ買う。
+  <div class="voice"><span class="voice-q">“</span><p>朝は会社の近くで1個だけ買う。
 家で買いだめすると結局食べない。
-<span class="voice-s">30代・会社員・週3回購入</span></p></div>
+</p><span class="voice-s">30代・会社員・週3回購入</span></div>
   <div class="voice"><span class="voice-q">“</span><p>曜日で決まった棚に行く。
 無いと別の店に行くより、その日はあきらめる。
-<span class="voice-s">40代・会社員・週2回購入</span></p></div>
+</p><span class="voice-s">40代・会社員・週2回購入</span></div>
   <div class="voice" style="margin-bottom:0"><span class="voice-q">“</span><p>休日は家族の分をまとめて買うので、朝とは別の店。
-<span class="voice-s">30代・主婦・週1回購入</span></p></div>
+</p><span class="voice-s">30代・主婦・週1回購入</span></div>
+</div></div>
+<div class="lab" style="margin-top:20px">長い声が 1 件だけのとき (吹き出し、上に「生活者の声」のピル)</div>
+<div class="rp"><div class="pad">
+  <div class="voice solo"><span class="vpill">生活者の声</span><p>朝は会社の近くで1個だけ買う。
+家で買いだめすると結局食べない。
+</p><span class="voice-s">30代・会社員・週3回購入</span></div>
+  <div class="voice solo" style="margin-bottom:0; --cat-ground:#F3F8F7"><span class="vpill cat">平日の朝・生活者の声</span><p>曜日で決まった棚に行く。
+無いと別の店に行くより、その日はあきらめる。
+</p><span class="voice-s">40代・会社員・週2回購入 (カテゴリ指定色があるときのピル)</span></div>
 </div></div>
 <div class="lab" style="margin-top:20px">短い声の束 (同じ趣旨の短い声を 3〜6 件)</div>
 <div class="rp"><div class="pad">
   <div class="vqs" style="margin:0">
+    <div class="vqs-h">買い方 (5件)</div>
     <div class="vq">朝は会社の近くで1個だけ買う</div>
     <div class="vq">家で買いだめすると結局食べない</div>
     <div class="vq">曜日で決まった棚に行く</div>
@@ -1069,9 +1088,12 @@ SLIDE.md §5.3 のパターン C (引用は白のボックスで抜く) を HTML
 <div class="lab" style="margin-top:20px">回答者カード (1人を深掘りする)</div>
 <div class="rp"><div class="pad">
   <div class="person" style="margin:0">
+    <div class="person-hd">
     <div class="person-meta"><span class="badge c3">平日の朝</span>30代・会社員・未婚・週3回購入</div>
     <p class="person-q">朝は会社の近くで1個だけ買う。
 家で買いだめすると結局食べない</p>
+    </div>
+    <div class="person-bd">
     <h6 class="h6">場面</h6>
     <p>出社前、駅から会社までの道にあるコンビニ。
 7時台。
@@ -1084,14 +1106,18 @@ SLIDE.md §5.3 のパターン C (引用は白のボックスで抜く) を HTML
     <p>その日の分だけ買うことで、食べ残しの罪悪感がない。
 買う行為そのものが朝の区切りになっている。
 </p>
+    </div>
   </div>
 </div></div>
-<div class="rule-note">長い声 : ゴールドの淡い面・角丸 8px・内側 20px 24px (左は引用符の分を足して 56px)、引用符は 34px・Accent。
-短い声の束 : 基調の地の面に白の箱 (Border 1px・角丸 6px・内側 12px 16px・14px) を2列、各箱の頭に引用符 (Accent・16px)。
-回答者カード : Surface・Border 1px・角丸 8px・内側 20px 24px、属性メタ (12px・場面はピル)、見出しの声 (16px・太字・Primary Dark)、h6 のラベルと本文の組。
+<div class="rule-note">声は面を塗らず、白地 ＋ Border で強調段落 (基調の地の面) と見分ける。
+長い声 : Surface・Border 1px・角丸 8px・内側 16px 20px (左は引用符の分を足して 52px)、引用符は 34px・太字・Accent、出所は罫線の下に 12px・Text Secondary。
+1件だけのときは吹き出し (引用符の代わりに「生活者の声」のピル、下に小さい尾)。
+ピルはゴールドの淡い面 ＋ Accent Deep Dark、案件にカテゴリ指定色があるときはその「地」＋ Primary Dark。
+短い声の束 : 白の箱 (Border 1px・角丸 6px・内側 10px 14px・14px) を2列、束の上に小さい見出し (12px・Accent Deep Dark・字間 0.14em)、各箱の頭に引用符 (Accent・20px・太字)。
+回答者カード : Surface・Border 1px・角丸 8px、上の帯 (ゴールドの淡い面、カテゴリ指定色があるときはその「地」) に属性メタ (12px・場面はピル) と見出しの声 (16px・太字・Text Primary・引用符は Accent)、下に h6 のラベルと本文の組。
 1つの節に束は1つまで、声の総数は 10 件を目安にする。
-本文は 16px・weight 500・行間 1.85 (引用だけ本文より広くてよい)。
-出所は引用の下に 12px・Text Secondary。
+本文は 16px・weight 400・行間 1.85 (引用だけ本文より広くてよい)。
+引用符は本文のフォント (明朝体は使わない)。
 </div>
 </div>
 </section>
@@ -1396,10 +1422,11 @@ hover で白面の吹き出し (最大 340px)。
 <tr><td>画像 (グラフ・図解)</td><td>Chart.js・SVG・DIAGRAM の構図で描き直す (既定)</td><td><a href="#s81">§8.1</a></td></tr>
 <tr><td>用語の定義</td><td>モーダルとツールチップ</td><td><a href="#s91">§9</a></td></tr>
 </table></div>
-<div class="rule-note"><strong>文字量の上限 :</strong> 1カードの本文は段落 3 つ・12 行まで。
-段落を続けてよいのは 2 つまで、3 つ目からは要点・箇条書き・図解に。
+<div class="rule-note"><strong>文字量の上限 :</strong> 縛るのは文字の連続で、カードの長さではない。
+節とカードは 1 対 1、見出しの無い続きのカードは作らない。
+段落を続けてよいのは 2 つまでを目安に (言い換えになるときは 3 つまで)、4 つ目の前には図・要点・箇条書き・図解を挟む。
 文字だけのカードが 3 つ続いたら挿絵か図を挟む。
-1画面の高さは窓の 6 画面分まで、超えたら画面を分ける。
+1画面の高さは窓の 6 画面分 (約 5,000px、本文幅 1280px で測る) まで、超えたら画面を分ける。
 </div>
 </div>
 </section>
