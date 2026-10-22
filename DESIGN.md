@@ -64,6 +64,8 @@
   CTAボタン、リンク、アクセントに使用
 - **Primary Light** (`#9BB0D0`): 背景のアクセント、ホバー状態の背景
 - **Primary Dark** (`#5A74A3`): ホバー・プレス時のボタン色
+- **Primary Navy** (`#3E5A86`): 白文字を乗せる帯の終点 (HTML レポートのヘッダの帯、Primary Dark → Primary Navy の縦のグラデーション)。
+  文字には使わない (白文字との比 6.97、Primary Dark 上の 4.71 より読みやすい)
 
 ### Secondary / Accent (セカンダリカラー)
 
@@ -396,6 +398,7 @@ Spacing Scale に無い値を使うときも偶数にそろえる (16px の文�
 Primary Color: #6E87B6
 Primary Dark:  #5A74A3
 Primary Light: #9BB0D0
+Primary Navy:  #3E5A86
 Accent:        #C4A55A
 Accent Dark:   #B0923E
 Accent Light:  #E0D5A8
