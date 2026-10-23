@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REPORT.md プレビュー - HTML レポートの部品の規約</title>
+<link rel="icon" type="image/png" href="assets/logo/logo-clear-symbol.png">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   トークン
+   値の一次情報源は DESIGN.md / FIGURE.md。
+   このページは値を複製せず、ここにまとめて参照する
+   ============================================================ */
+:root{
+  --primary:#6E87B6; /* design-check: allow NO_HARDCODED_PRIMARY */
+  --primary-dark:#5A74A3;
+  --primary-light:#9BB0D0;
+  --sub:#A18E6C;
+  --navy:#3E5A86;        /* DESIGN.md §2 Primary Navy (ヘッダの帯の終点) */
+  --accent:#C4A55A;
+  --accent-light:#E0D5A8;
+  --sub-dark:#8B7959;    /* DESIGN.md §2 Accent Deep Dark (ゴールドの淡い面の上のラベル) */
+  --gold-pale:#F9F6EE;   /* FIGURE.md §1.2 ゴールドの淡い面 (Accent を白 90% で薄めた値) */
+  --border:#E0E0E0;
+  --background:#F7F7F7;
+  --surface:#FFFFFF;
+  --base-bg:#F3F7FC;      /* FIGURE.md §1.2 基調の地 */
+  --base-marker:#D6DDEB;  /* FIGURE.md §1.2 基調のマーカー */
+  --cat1-fill:#A4A5D1; --cat1-text:#8D90CA;
+  --cat2-fill:#84B5B2; --cat2-text:#5CA09D;
+  --cat3-fill:#98BBDE; --cat3-text:#659AC7;
+  --cat4-fill:#EDB369; --cat4-text:#DE7C31;
+  --cat5-fill:#CB6378;
+  --text-primary:#333333; /* DESIGN.md §2 Text Primary (本文) */
+  --g-text:#434343;       /* FIGURE.md §1.3 本文グレー (図の中の文字だけに使う) */
+  --g-note:#595959;
+  --g-cmp:#666666;
+  --g-weak:#999999;
+  --hairline:#E0E0E0;
+  --shadow-1:0 1px 3px rgba(0,0,0,0.08);
+  --shadow-2:0 4px 12px rgba(0,0,0,0.1);
+  --shadow-3:0 8px 24px rgba(0,0,0,0.12);
+  --rule:#D9D9D9;          /* FIGURE.md §1.3 表の罫線 */
+  --page:#FFFFFF;
+  --shell:#F5F6F8;
+  --maxw:1280px;
+  --radius:6px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--shell); color:var(--g-text);
+  font-family:"Plus Jakarta Sans","Noto Sans JP",sans-serif;
+  font-size:16px; line-height:1.6; letter-spacing:0.05em;
+}
+h1,h2,h3{font-weight:700; font-feature-settings:"palt" 1,"kern" 1; letter-spacing:0.05em}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px 96px}
+/* ---- サイト共通ヘッダ (index.html・figure.html・diagram.html と同じ形) ---- */
+.hero{
+  background:linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--primary-light) 100%);
+  color:#FFFFFF; padding:80px 40px; text-align:center;
+}
+.hero h1{font-size:48px; font-weight:700; line-height:1.3; margin:0 0 12px}
+.hero p{font-size:18px; opacity:0.9; margin:0}
+.nav-bar{
+  position:sticky; top:0; z-index:100;
+  background:var(--page); border-bottom:1px solid var(--border);
+  box-shadow:0 1px 3px rgba(0,0,0,0.06);
+  overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch;
+}
+.nav-inner{max-width:var(--maxw); margin:0 auto; padding:0 24px; display:flex; gap:0}
+.nav-link{
+  display:inline-block; padding:12px 16px;
+  font-size:13px; font-weight:600; color:var(--g-cmp);
+  text-decoration:none; border-bottom:2px solid transparent;
+  transition:color 0.2s, border-color 0.2s; flex-shrink:0;
+}
+.nav-link:hover{color:var(--primary); border-bottom-color:var(--primary)}
+.nav-link.current{color:var(--primary-dark); border-bottom-color:var(--primary-dark)}
+.masthead{padding:56px 0 32px}
+.masthead h1{font-size:30px; line-height:1.35; margin:0 0 8px; font-weight:700}
+.masthead .lede{color:var(--g-cmp); font-size:15px; margin:0}
+.masthead .meta{margin-top:18px; font-size:13px; color:var(--g-weak)}
+.toc{background:var(--page); border:1px solid var(--hairline); border-radius:6px; padding:20px 24px; margin-bottom:40px}
+.toc h2{font-size:13px; letter-spacing:.08em; color:var(--g-weak); margin:0 0 12px; font-weight:700}
+.toc ol{margin:0; padding-left:0; list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:6px 24px}
+.toc a{color:var(--primary-dark); text-decoration:none; font-size:14px}
+.toc a:hover{text-decoration:underline}
+.card a,.rule-note a,.page-foot a,.sub a{color:var(--primary-dark)}
+.toc .num{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; color:var(--g-weak); margin-right:8px; font-size:12px}
+.chapter{margin:56px 0 0}
+.chapter > h2{font-size:24px; font-weight:700; margin:0 0 6px}
+.chapter > .chapter-note{color:var(--g-cmp); font-size:14px; margin:0 0 24px}
+.card{background:var(--page); border:1px solid var(--hairline); border-radius:6px; padding:28px 28px 24px; margin-bottom:20px}
+.card > h3{font-size:18px; font-weight:700; color:var(--primary-dark); margin:0 0 4px}
+.card > .sub{color:var(--g-cmp); font-size:14px; margin:0 0 20px}
+.rule-note{
+  margin:20px 0 0; padding:18px 20px; background:var(--background);
+  border-radius:var(--radius); font-size:13px; line-height:1.7; color:var(--g-note);
+}
+.rule-note strong{color:var(--g-text)}
+table.t{width:100%; border-collapse:collapse; font-size:13.5px}
+table.t th{background:var(--primary); color:#fff; font-weight:700; text-align:left; padding:10px 12px; border:1px solid #D9D9D9}
+table.t td{padding:10px 12px; border:1px solid #D9D9D9; background:#fff; vertical-align:top}
+.scroll-x{overflow-x:auto}
+footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--hairline); font-size:12.5px; color:var(--g-weak)}
+code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:0.92em; background:var(--background); padding:1px 5px; border-radius:4px}
+.lab{font-size:12px; font-weight:700; color:var(--g-weak); letter-spacing:0.08em; margin:22px 0 8px}
+.lab:first-child{margin-top:0}
+.pair2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+@media (max-width:768px){
+  .wrap{padding:0 16px 64px}
+  .hero{padding:48px 24px}
+  .hero h1{font-size:28px}
+  .hero p{font-size:15px}
+  .nav-inner{padding:0 16px}
+  .masthead{padding:40px 0 24px}
+  .masthead h1{font-size:26px}
+  .chapter > h2{font-size:21px}
+  .card{padding:22px 20px 20px}
+  .pair2{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   レポートの部品 (REPORT.md §1 〜 §8)
+   見本は .rp の中に組む。
+   レポート本体に持っていくときは
+   .rp のトークンを :root に、部品の CSS をそのまま移す
+   ============================================================ */
+.rp{
+  /* ---- 替えないもの : DESIGN.md / FIGURE.md の値を参照 ---- */
+  --text:var(--text-primary);
+  --text-2:var(--g-cmp);
+  --text-3:var(--g-weak);
+  --bg:var(--background);
+  --tint:var(--base-bg);
+  --marker:var(--base-marker);
+  --radius-l:8px;
+  --font:"Plus Jakarta Sans","Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Meiryo","Yu Gothic UI",sans-serif;
+  --fs-12:12px; --fs-14:14px; --fs-16:16px; --fs-20:20px; --fs-24:24px; --fs-34:34px;
+  --lh-body:1.7; --lh-tight:1.6; --lh-head:1.4;
+  --ls:0.05em;
+  --sp-paragraph:20px; --sp-subsection:32px; --sp-section:40px;
+  --hd-h:80px;
+  /* ---- 替えるもの : 案件ごとに :root で上書きする (REPORT.md §7) ---- */
+  --hero-img:none;
+  --grad-end:var(--cat2-fill);
+  --grad-deco:linear-gradient(90deg, var(--primary-dark) 0%, var(--grad-end) 100%);
+  --cat-1:var(--cat1-fill); --cat-2:var(--cat2-fill); --cat-3:var(--cat3-fill); --cat-4:var(--cat4-fill); --cat-5:var(--cat5-fill);
+  --cat-c:var(--cat2-text);
+  container-type:inline-size;
+
+  background:var(--bg); color:var(--text);
+  font-family:var(--font); font-size:var(--fs-16); line-height:var(--lh-body); letter-spacing:var(--ls);
+  border:1px solid var(--hairline); border-radius:var(--radius); overflow:hidden;
+  overflow-wrap:break-word; line-break:strict;
+}
+.rp h1,.rp h2,.rp h3,.rp h4{margin:0; font-size:inherit; font-weight:inherit; line-height:inherit; letter-spacing:inherit}
+.rp a{color:var(--primary-dark)}
+.rp strong{font-weight:700; color:var(--primary-dark)}
+.rp button{font-family:inherit}
+.rp .paren{font-size:max(11px, 0.78em); color:var(--text-2); letter-spacing:0}
+.rp h2 .paren,.rp h3 .paren,.rp h4 .paren{color:inherit; opacity:0.66}
+.rp .num{font-variant-numeric:tabular-nums}
+
+/* ---- §1 ヘッダの帯 ---- */
+.rp .app-hd{background:var(--primary-dark); background-image:linear-gradient(180deg, var(--primary-dark) 0%, var(--navy) 100%); color:var(--surface); min-height:var(--hd-h)}
+.rp .app-hd-in{max-width:1280px; margin:0 auto; padding:0 24px; min-height:var(--hd-h); display:flex; align-items:center; gap:32px}
+.rp .app-ttl{display:flex; align-items:center; gap:12px; min-width:0; text-decoration:none; color:inherit; padding:4px 8px; margin-left:-8px; border-radius:var(--radius)}
+.rp .app-ttl:hover{background:rgba(255,255,255,0.1)}
+.rp .app-mark{width:36px; height:36px; border-radius:var(--radius-l); background:rgba(255,255,255,0.16); display:grid; place-items:center; flex:none}
+.rp .app-mark svg{display:block}
+.rp .app-name{font-size:var(--fs-20); font-weight:700; line-height:1.3; font-feature-settings:"palt" 1; white-space:nowrap}
+.rp .app-scope{display:block; font-size:var(--fs-12); color:rgba(255,255,255,0.66); white-space:nowrap}
+/* §2.1 画面切替タブ */
+.rp .nav{flex:1 1 auto; display:flex; gap:2px; align-items:stretch; min-width:0; margin-left:14px}
+.rp .nav button{
+  appearance:none; background:none; border:0; border-bottom:3px solid transparent; cursor:pointer;
+  display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:2px;
+  height:var(--hd-h); padding:0 14px; line-height:var(--lh-head); color:rgba(255,255,255,0.72);
+  white-space:nowrap; font-feature-settings:"palt" 1;
+}
+.rp .nav button b{font-size:var(--fs-14); font-weight:700}
+.rp .nav button i{font-style:normal; font-size:var(--fs-12); font-weight:400; color:rgba(255,255,255,0.72)}
+.rp .nav button:hover{color:var(--surface)}
+.rp .nav button:hover i{color:rgba(255,255,255,0.72)}
+.rp .nav button[aria-selected="true"]{color:var(--surface); border-bottom-color:var(--surface)}
+.rp .nav button[aria-selected="true"] i{color:rgba(255,255,255,0.86)}
+/* §6 道具のアイコン */
+.rp .app-tools{display:flex; align-items:center; gap:6px; margin-left:auto}
+.rp .tool{
+  appearance:none; cursor:pointer; width:44px; height:44px; border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,0.26); background:none; color:var(--surface); display:grid; place-items:center;
+}
+.rp .tool:hover{background:rgba(255,255,255,0.14); border-color:rgba(255,255,255,0.5)}
+.rp .tool.on{background:var(--surface); border-color:var(--surface); color:var(--primary-dark)}
+.rp .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.rp .tiptool{
+  display:inline-block; background:var(--primary-dark); color:var(--surface); font-size:var(--fs-12); line-height:1.5;
+  padding:6px 10px; border-radius:var(--radius); box-shadow:var(--shadow-2); white-space:nowrap;
+}
+/* 切り替えは画面幅ではなく見本 (.rp) の幅で行う、レポート本体では :root に同じ値の @media を置く。
+   タブの2行目は規約では窓の幅 1280px 未満で消す、見本の枠は最大 1176px なので、§2.1 の見本だけ .show-sub で2行目を出す */
+@container (max-width:1280px){
+  .rp:not(.show-sub) .nav button i{display:none}
+  .rp .nav button{justify-content:center}
+}
+@container (max-width:900px){
+  .rp .app-hd-in{flex-wrap:wrap; gap:8px 16px; padding-top:8px; padding-bottom:8px}
+  .rp .nav{order:3; flex-basis:100%; overflow:auto; margin-left:0}
+  .rp .nav button{height:40px; padding:0 12px}
+}
+/* ---- §3 HERO (画面見出しの帯) ---- */
+.rp .page-hero{
+  position:relative; color:var(--surface); background-color:var(--bg);
+  background-image:linear-gradient(90deg, rgba(90,116,163,0.96) 0%, var(--grad-end) 100%);
+}
+.rp .page-hero.has-img{
+  background-image:
+    linear-gradient(90deg, rgba(38,60,104,0.60) 0%, rgba(38,60,104,0.45) 45%, rgba(38,60,104,0.35) 100%),
+    var(--hero-img);
+  background-position:center, center; background-size:cover, cover; background-repeat:no-repeat, no-repeat;
+}
+.rp .page-hero::after{
+  content:''; position:absolute; left:0; right:0; bottom:-1px; height:120px; pointer-events:none;
+  background:linear-gradient(180deg, rgba(247,247,247,0) 0%, var(--bg) calc(100% - 5px), var(--bg) 100%);
+}
+.rp .hero-in{position:relative; max-width:1280px; margin:0 auto; padding:30px 24px 136px} /* 下 136px = 溶かし 120px ＋ 本文の重なり 32px の内側に説明文を置かない */
+.rp .page-hero .page-t{color:var(--surface); margin:0 0 4px}
+.rp .page-hero .page-d{color:rgba(255,255,255,0.92); max-width:1000px; margin:0}
+.rp .page-hero + .page{position:relative; margin-top:-32px; padding-top:0}
+/* ---- §4 セクション ---- */
+.rp .page{max-width:1280px; margin:0 auto; padding:24px 24px 64px}
+.rp .page-t{font-size:var(--fs-34); font-weight:700; color:var(--primary-dark); line-height:var(--lh-head); margin:6px 0 4px; font-feature-settings:"palt" 1}
+.rp .page-t2{font-size:var(--fs-24); font-weight:700; color:var(--text); line-height:var(--lh-head); margin:2px 0 10px; font-feature-settings:"palt" 1}
+.rp .page-d{font-size:var(--fs-14); color:var(--text-2); line-height:var(--lh-tight); margin:0 0 16px}
+.rp .page > .page-t{margin-top:46px; padding-top:26px; border-top:1px solid var(--border)}
+.rp .page > .page-t:first-child{margin-top:6px; padding-top:0; border-top:0}
+.rp .lead{margin:0 0 24px}
+.rp .lead p{font-size:var(--fs-16); margin:0 0 6px}
+.rp .lead.boxed{background:var(--tint); border:1px solid var(--primary-light); border-radius:var(--radius); padding:14px 18px}
+.rp .rcard{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); box-shadow:var(--shadow-1); padding:28px 32px; margin:0 0 var(--sp-section)}
+.rp .rcard:last-child{margin-bottom:0}
+.rp .card-h{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:20px}
+.rp .card-t{font-size:var(--fs-24); font-weight:700; line-height:var(--lh-head); font-feature-settings:"palt" 1; display:flex; flex-wrap:wrap; align-items:baseline; column-gap:12px; row-gap:0; min-width:0}
+.rp .tag{flex:0 0 100%; order:-1; margin:0 0 1px; padding:0; font-size:var(--fs-12); font-weight:700; color:var(--text-3); letter-spacing:0.16em; background:none; border:0}
+.rp .card-t .no{width:auto; min-width:30px; height:28px; padding:0 10px; font-size:var(--fs-12); white-space:nowrap; letter-spacing:0.02em; align-self:center}
+.rp .card-m{font-size:var(--fs-12); color:var(--text-3); white-space:nowrap; margin-top:2px}
+.rp .card-d{font-size:var(--fs-14); color:var(--text-2); margin:-6px 0 16px; line-height:var(--lh-tight)}
+.rp .prose p{margin:0 0 18px; line-height:var(--lh-body)}
+.rp .prose{margin-bottom:var(--sp-paragraph)}
+.rp .prose:last-child{margin-bottom:0}
+.rp .prose p:last-child{margin-bottom:0}
+.rp .prose p.note{font-size:var(--fs-12); color:var(--text-2); line-height:var(--lh-tight); margin:-4px 0 14px}
+.rp .prose p.key strong{font-size:var(--fs-20)}
+.rp ol.list,.rp ul.list{margin:0 0 12px; padding-left:1.5em}
+.rp ol.list li,.rp ul.list li{margin-bottom:6px}
+/* ---- §5 文字 ---- */
+.rp .h4n{display:flex; align-items:baseline; gap:8px; margin:var(--sp-subsection) 0 14px}
+.rp .h4n:first-child{margin-top:0}
+.rp .h4n .num{color:var(--primary-dark); font-size:var(--fs-20); font-weight:700; letter-spacing:0.02em}
+.rp .h4n .num::after{content:'.'}
+.rp .h4n .ttl{
+  font-size:var(--fs-20); font-weight:700; color:var(--primary-dark); line-height:1.5;
+  --mk:var(--marker);
+  background-image:linear-gradient(transparent 58%, var(--mk) 58%, var(--mk) 92%, transparent 92%);
+  -webkit-box-decoration-break:clone; box-decoration-break:clone; padding:0 2px; margin:0 -2px;
+}
+@supports (background: color-mix(in srgb, red 20%, transparent)){
+  .rp .h4n .ttl{--mk:color-mix(in srgb, currentColor 20%, transparent)}
+}
+.rp .h4n.cat .ttl,.rp .h4n.cat .num{color:var(--cat-c)}
+.rp .idbox{display:inline-grid; place-items:center; border:1.5px solid var(--primary-light); color:var(--primary-dark); border-radius:7px; font-weight:700; font-variant-numeric:tabular-nums}
+.rp .h3n{display:flex; align-items:baseline; gap:12px; margin:var(--sp-subsection) 0 10px}
+.rp .h3n .idbox{min-width:26px; height:26px; padding:0 7px; font-size:var(--fs-12); white-space:nowrap; align-self:center}
+.rp .h3n .ttl{font-size:var(--fs-24); font-weight:700; color:var(--text); line-height:var(--lh-head)}
+.rp .numlist{list-style:none; margin:0; padding:0}
+.rp .numlist li{display:flex; gap:14px; padding:18px 0; border-top:1px solid var(--border)}
+.rp .numlist li:first-child{border-top:0; padding-top:0}
+.rp .numlist li:last-child{padding-bottom:0}
+.rp .numlist .dot{flex:none; width:28px; height:28px; border-radius:14px; background:var(--primary-dark); color:var(--surface); font-size:var(--fs-14); font-weight:700; display:grid; place-items:center; margin-top:2px}
+.rp .numlist .body{flex:1}
+.rp .numlist .body b{display:block; font-size:var(--fs-16); color:var(--primary-dark); margin-bottom:2px}
+.rp .numlist .body span{font-size:var(--fs-14); color:var(--text-2); line-height:var(--lh-tight)}
+.rp .scale{display:grid; gap:10px}
+.rp .scale div{display:flex; align-items:baseline; gap:18px; border-bottom:1px solid var(--border); padding-bottom:8px}
+.rp .scale small{flex:none; width:120px; font-size:var(--fs-12); color:var(--text-3); font-variant-numeric:tabular-nums}
+.rp .s12{font-size:var(--fs-12)} .rp .s14{font-size:var(--fs-14)} .rp .s16{font-size:var(--fs-16)}
+.rp .s20{font-size:var(--fs-20); font-weight:700} .rp .s24{font-size:var(--fs-24); font-weight:700} .rp .s34{font-size:var(--fs-34); font-weight:700}
+/* ---- §2.2 左レール ---- */
+.rp .rail-layout{display:grid; grid-template-columns:240px minmax(0,1fr); gap:24px; align-items:start}
+.rp .rail-body{min-width:0}
+.rp .rail{
+  position:sticky; top:calc(var(--hd-h) + 16px); max-height:calc(100vh - var(--hd-h) - 32px); overflow:auto;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); padding:14px 10px 12px;
+}
+.rp .rail.static{position:static; max-height:none}
+.rp .rail-h{font-size:var(--fs-12); font-weight:700; color:var(--text-3); letter-spacing:0.14em; padding:0 8px 8px}
+.rp .rail-list{display:grid; gap:1px}
+.rp .rail-i{display:block; text-decoration:none; padding:8px 10px; border-radius:var(--radius); font-size:var(--fs-12); line-height:var(--lh-tight); color:var(--text-2)}
+.rp .rail-i:hover{background:var(--bg); color:var(--text)}
+.rp .rail-i.sub{padding-left:22px; color:var(--text-3)}
+.rp .rail-i.on{background:var(--tint); color:var(--primary-dark); font-weight:700}
+.rp .rail-i.g{font-weight:700; color:var(--text); margin-top:8px}
+.rp .rail-i.g:first-child{margin-top:0}
+.rp .rail-no{display:inline-block; min-width:3.2em; color:var(--text-3); font-variant-numeric:tabular-nums}
+.rp .rail-i.on .rail-no{color:var(--primary-dark)}
+.rp .rail-pos{display:flex; align-items:center; gap:10px; margin-top:10px; padding:12px 10px 2px; border-top:1px solid var(--border)}
+.rp .rail-bar{flex:1; height:3px; border-radius:2px; background:var(--border); overflow:hidden}
+.rp .rail-bar i{display:block; height:100%; background:var(--primary-dark)}
+/* 規約は窓の幅 960px (REPORT.md §2.2)、見本の枠の幅で判定する */
+@container (max-width:960px){
+  .rp .rail-layout{grid-template-columns:minmax(0,1fr)}
+  .rp .rail{position:static; max-height:none; margin-bottom:16px}
+  .rp .rail-list{grid-auto-flow:column; grid-auto-columns:max-content; overflow:auto; gap:6px}
+  .rp .rail-i{border-radius:0; border-bottom:2px solid transparent; white-space:nowrap}
+  .rp .rail-i.sub{padding-left:10px}
+  .rp .rail-i.g{margin-top:0}
+  .rp .rail-i.on{border-bottom-color:var(--primary-dark)}
+  .rp .rail-pos{display:none}
+}
+/* ---- §2.3 移動チップ ---- */
+.rp .reflist{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:22px; padding-top:16px; border-top:1px solid var(--border)}
+.rp .reflist > span{font-size:var(--fs-12); color:var(--text-2); margin-right:6px}
+.rp .jump{
+  display:inline-flex; align-items:center; gap:8px; text-decoration:none; cursor:pointer;
+  background-color:var(--primary-dark); background-image:var(--grad-deco); background-size:160% 100%; background-position:0% 50%;
+  color:var(--surface); border:0; border-radius:var(--radius); font-size:var(--fs-14); font-weight:700; padding:10px 20px; line-height:1.5;
+  box-shadow:0 1px 3px rgba(62,90,134,0.18);
+  transition:background-position 0.28s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+.rp .jump.sm{font-size:var(--fs-12); padding:6px 12px; gap:6px}
+.rp .jump .ar{display:inline-block; transition:transform 0.22s ease}
+.rp .jump:hover{background-position:100% 50%; box-shadow:0 3px 8px rgba(62,90,134,0.28)}
+.rp .jump:hover .ar{transform:translateX(4px)}
+.rp .jump:active{transform:translateY(1px)}
+/* ---- §2.4 章末バー ---- */
+.rp .chap-next{margin:40px 0 0; display:grid; gap:10px}
+.rp .chap-next-b{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:72px; padding:14px 24px;
+  background:var(--primary-dark); background-image:var(--grad-deco); border:0; border-radius:var(--radius-l);
+  color:var(--surface); text-decoration:none; box-shadow:0 2px 8px rgba(62,90,134,0.18);
+  transition:filter 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+.rp .chap-next-b:hover{filter:brightness(1.06); box-shadow:0 4px 14px rgba(62,90,134,0.26)}
+.rp .chap-next-b:active{transform:translateY(1px)}
+.rp .chap-next-l{display:flex; flex-direction:column; gap:2px; min-width:0}
+.rp .chap-next-l small{font-size:var(--fs-12); letter-spacing:0.08em; color:rgba(255,255,255,0.78); font-weight:700}
+.rp .chap-next-l b{font-size:var(--fs-20); font-weight:700; line-height:var(--lh-head); font-feature-settings:"palt" 1}
+.rp .chap-next-go{flex:none; font-size:var(--fs-14); font-weight:700; white-space:nowrap; padding:8px 18px; border-radius:999px; background:var(--surface); color:var(--primary-dark)}
+.rp .chap-next-b.back{background-image:linear-gradient(90deg, var(--grad-end) 0%, var(--primary-dark) 100%)}
+.rp .chap-next-b.back .chap-next-go{background:none; color:var(--surface); border:1.5px solid rgba(255,255,255,0.7)}
+.rp .chap-prev{justify-self:start; font-size:var(--fs-12); color:var(--text-2); text-decoration:none; padding:4px 2px}
+.rp .chap-prev:hover{color:var(--primary-dark); text-decoration:underline}
+/* ---- §6 ボタン ---- */
+.rp .btn{
+  appearance:none; height:44px; display:inline-flex; align-items:center; gap:6px; padding:0 14px; cursor:pointer; /* 44px = DESIGN.md §8 タッチターゲット */
+  border:1px solid var(--border); background:var(--surface); color:var(--text-2); border-radius:var(--radius);
+  font-size:var(--fs-12); font-weight:700; line-height:var(--lh-tight);
+  transition:background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+.rp .btn:hover{background:var(--tint); border-color:var(--primary-light); color:var(--primary-dark)}
+.rp .btn:active{background:var(--base-marker)}
+.rp .btn.fill{background:var(--primary-dark); border-color:var(--primary-dark); color:var(--surface)}
+.rp .btn.fill:hover{background:var(--primary); border-color:var(--primary)}
+.rp :focus-visible{outline:2px solid var(--primary); outline-offset:2px}
+.rp .row{display:flex; flex-wrap:wrap; align-items:center; gap:12px}
+.rp .hdbar{background:var(--primary-dark); background-image:linear-gradient(180deg, var(--primary-dark) 0%, var(--navy) 100%); color:var(--surface); border-radius:var(--radius); padding:12px 16px; display:flex; gap:6px; align-items:center}
+/* ---- §8 図と表の枠 ---- */
+.rp .figs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px}
+.rp .fig{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); box-shadow:var(--shadow-1); padding:22px 24px 18px; min-width:0}
+.rp .fig.w2{grid-column:span 2}
+.rp .fig-h{display:flex; align-items:flex-start; justify-content:space-between; gap:16px}
+.rp .fig-t{font-size:var(--fs-16); font-weight:700; color:var(--text); margin:0 0 2px; line-height:var(--lh-head)}
+.rp .fig-s{font-size:var(--fs-12); color:var(--text-2); margin:0 0 12px; line-height:var(--lh-tight)}
+.rp .fig-c{position:relative; height:400px; background:repeating-linear-gradient(0deg, transparent 0 39px, var(--border) 39px 40px); border-bottom:1px solid var(--text-3); display:flex; align-items:center; justify-content:center; color:var(--text-3); font-size:var(--fs-12)}
+.rp .fig.w2 .fig-c{height:460px}
+.rp .fig .fig-c.short{height:200px} /* 見本だけ低くする */
+.rp .fig-n{font-size:var(--fs-12); color:var(--text-2); margin:10px 0 0; line-height:var(--lh-tight)}
+.rp .rcard .fig{box-shadow:none} /* カードの中の図の枠は影を重ねない */
+.rp .fig-opts{display:flex; flex-wrap:wrap; gap:6px; align-items:center; flex:none}
+.rp .fopt{appearance:none; cursor:pointer; border:1px solid var(--border); background:var(--surface); color:var(--text-2); border-radius:999px; padding:4px 12px; font-size:var(--fs-12); line-height:1.6; font-family:inherit}
+.rp .fopt:hover{border-color:var(--primary); color:var(--primary-dark)}
+.rp .fopt[aria-pressed="true"]{background:var(--primary-dark); border-color:var(--primary-dark); color:var(--surface); font-weight:700}
+.rp .fopt.fchip[aria-pressed="true"]{background:var(--tint); border-color:var(--primary-light); color:var(--primary-dark)}
+.rp .fopt.fchip[aria-pressed="false"]{opacity:0.55; text-decoration:line-through}
+.rp .tbl{margin:6px 0 18px}
+.rp .tbar{display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:6px}
+.rp .tcap{font-size:var(--fs-12); color:var(--text-2)}
+.rp .ttools{display:flex; align-items:center; gap:8px}
+.rp .tsearch{appearance:none; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); height:44px; padding:0 10px; font:inherit; font-size:var(--fs-12); width:150px; color:var(--text)}
+.rp .tsearch:focus{outline:none; border-color:var(--primary)}
+.rp .btn.sm{font-weight:400} /* 高さは .btn と同じ 44px */
+.rp .tw{overflow-x:auto; border:1px solid var(--rule); border-radius:var(--radius); background:var(--surface)}
+.rp table.dt{border-collapse:collapse; width:100%; font-size:var(--fs-14); line-height:var(--lh-tight)}
+.rp table.dt th,.rp table.dt td{border:1px solid var(--rule); padding:12px 14px; text-align:left; vertical-align:top}
+.rp table.dt tr > :first-child{border-left:0}
+.rp table.dt tr > :last-child{border-right:0}
+.rp table.dt thead th{border-top:0}
+.rp table.dt tbody tr:last-child td{border-bottom:0}
+.rp table.dt tbody tr.hl td{font-weight:700}
+.rp table.dt th{background:var(--primary); color:var(--surface); font-weight:700; white-space:nowrap}
+.rp table.dt tbody tr.hl{background:var(--tint)}
+.rp table.dt tbody tr:hover{background:var(--base-marker)}
+.rp table.dt th.num,.rp table.dt td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+.rp table.dt th i.sort{display:inline-block; position:relative; width:8px; height:12px; margin-left:6px; vertical-align:middle; opacity:0.5}
+.rp table.dt th i.sort::before,.rp table.dt th i.sort::after{content:''; position:absolute; left:0; border-left:4px solid transparent; border-right:4px solid transparent}
+.rp table.dt th i.sort::before{top:0; border-bottom:4px solid currentColor}
+.rp table.dt th i.sort::after{bottom:0; border-top:4px solid currentColor}
+.rp table.dt th[data-sort] i.sort{opacity:1}
+.rp table.dt td.bar{position:relative; padding-bottom:16px; z-index:0}
+.rp table.dt td.bar > span{position:relative; z-index:1}
+.rp table.dt td.bar i.b{position:absolute; left:8px; bottom:6px; height:4px; max-width:calc(100% - 16px); background:var(--primary-light); opacity:0.42; border-radius:0 2px 2px 0; pointer-events:none}
+.rp table.dt td.bar i.b.neg{background:var(--text-3); opacity:0.3}
+.rp table.dt tr.hl td.bar i.b{background:var(--primary-dark); opacity:0.5}
+@container (max-width:800px){ .rp .figs{grid-template-columns:minmax(0,1fr)} .rp .fig.w2{grid-column:auto} }
+/* ---- §9 重ねて出すもの ---- */
+.rp .modal-back{position:relative; background:rgba(67,67,67,0.4); display:grid; place-items:center; padding:24px; min-height:380px} /* 見本では画面に固定しない */
+.rp .modal{position:relative; background:var(--surface); border-radius:var(--radius-l); box-shadow:var(--shadow-3); padding:34px 32px 24px; width:min(680px,100%); max-height:84vh; overflow:auto}
+.rp .modal.wide{width:min(880px,100%)}
+.rp .modal-t{font-size:var(--fs-20); font-weight:700; color:var(--primary-dark); margin:0 0 6px; line-height:var(--lh-head)}
+.rp .modal-d{font-size:var(--fs-14); color:var(--text-2); margin:0 0 14px; line-height:var(--lh-tight)}
+.rp .modal-x{position:absolute; right:14px; top:10px; appearance:none; border:0; background:none; font-size:var(--fs-24); line-height:1; color:var(--text-3); cursor:pointer; padding:4px 8px; font-family:inherit}
+.rp .modal-x:hover{color:var(--text)}
+.rp .gl-search{appearance:none; width:100%; border:1px solid var(--border); border-radius:var(--radius); padding:10px 14px; font:inherit; font-size:var(--fs-14); color:var(--text); margin-bottom:6px}
+.rp .gl-search:focus{outline:none; border-color:var(--primary)}
+.rp .gl-sec-t{font-size:var(--fs-12); font-weight:700; letter-spacing:0.12em; color:var(--primary-dark); padding:14px 0 6px; border-bottom:1px solid var(--border)}
+.rp .gl-i{display:grid; grid-template-columns:200px minmax(0,1fr); gap:16px; padding:12px 10px; border-bottom:1px solid var(--border)}
+.rp .gl-i:last-child{border-bottom:0}
+.rp .gl-i.on{background:var(--tint); border-radius:var(--radius)}
+.rp .gl-k{margin:0; font-size:var(--fs-14); font-weight:700; color:var(--text)}
+.rp .gl-v{margin:0; font-size:var(--fs-14); line-height:var(--lh-body); color:var(--text-2)}
+.rp .dl-row{display:flex; align-items:center; justify-content:space-between; gap:24px; padding:18px 0; border-top:1px solid var(--border)}
+.rp .dl-row:first-of-type{border-top:0}
+.rp .dl-i b{display:block; font-size:var(--fs-16); margin-bottom:2px}
+.rp .dl-i span{font-size:var(--fs-14); color:var(--text-2); line-height:var(--lh-tight)}
+.rp .term{border-bottom:1px dotted var(--primary); cursor:help}
+.rp .tip{display:inline-block; max-width:340px; background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-2); padding:12px 16px; font-size:var(--fs-12); line-height:1.7}
+.rp .tip b{display:block; margin-bottom:4px; color:var(--primary-dark)}
+@container (max-width:700px){ .rp .gl-i{grid-template-columns:minmax(0,1fr); gap:4px} }
+/* ---- §2.6 読み進め方のカード ---- */
+.rp .map-path{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px}
+.rp .map-step{display:flex; gap:12px; align-items:flex-start; text-decoration:none; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:18px 22px; transition:border-color 0.12s ease, background 0.12s ease, transform 0.12s ease; min-width:0}
+.rp .map-step:hover{border-color:var(--primary-light); background:var(--tint); transform:translateY(-1px)}
+.rp .map-step.now{background:var(--tint); border-color:var(--primary-light)}
+.rp .map-step-n{flex:none; width:22px; height:22px; border-radius:11px; margin-top:1px; background:var(--primary-dark); color:var(--surface); font-size:var(--fs-12); font-weight:700; display:grid; place-items:center}
+.rp .map-step-t{font-size:var(--fs-14); font-weight:700; color:var(--primary-dark); line-height:var(--lh-head)}
+.rp .map-step p{margin:4px 0 0; font-size:var(--fs-12); line-height:var(--lh-body); color:var(--text-2)}
+@container (max-width:1100px){ .rp .map-path{grid-template-columns:minmax(0,1fr); gap:10px} }
+/* ---- §4.1 面のボックス / §4.2 KPI ---- */
+.rp .box{border-radius:var(--radius-l); padding:18px 22px; margin:14px 0 16px}
+.rp .box.blue{background:var(--tint)}
+.rp .box.gold{background:var(--gold-pale)}
+.rp .box.line{background:var(--surface); border:1px solid var(--border)}
+.rp .box-l{font-size:var(--fs-12); font-weight:700; letter-spacing:0.1em; margin-bottom:8px}
+.rp .box.blue .box-l{color:var(--primary-dark)}
+.rp .box.gold .box-l{color:var(--sub-dark)}
+.rp .box.line .box-l{color:var(--text-3)}
+.rp .box p{margin:0 0 8px; font-size:var(--fs-14); line-height:var(--lh-body)}
+.rp .box p:last-child{margin-bottom:0}
+.rp .kpis{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px}
+.rp .kpi{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); padding:20px 22px; box-shadow:var(--shadow-1); min-width:0}
+.rp .kpi-l{font-size:var(--fs-14); color:var(--text); font-weight:700; line-height:var(--lh-tight)}
+.rp .kpi-v{font-size:var(--fs-34); font-weight:700; line-height:1.25; margin:6px 0 4px; font-variant-numeric:tabular-nums; color:var(--primary-dark)}
+.rp .kpi-v small{font-size:var(--fs-16); font-weight:700; margin-left:2px}
+.rp .kpi-v.none{color:var(--text-3); font-weight:400}
+.rp .kpi-c{font-size:var(--fs-12); color:var(--text); line-height:var(--lh-body)}
+.rp .kpi-s{font-size:var(--fs-12); color:var(--text-2); margin-top:8px}
+@container (max-width:1180px){ .rp .kpis{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))} }
+/* ---- §5.4 強調段落と要点 / §5.5 引用 ---- */
+.rp .prose p.key{background:var(--tint); border-radius:var(--radius-l); padding:20px 24px; margin:14px 0 16px}
+.rp .kp{background:var(--tint); border-radius:var(--radius-l); padding:16px 20px 6px; margin:4px 0 20px}
+.rp .kp-t{font-size:var(--fs-12); font-weight:700; color:var(--primary-dark); letter-spacing:0.14em; margin-bottom:8px}
+.rp .kp-g{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:10px; margin-bottom:10px}
+.rp .kp-i{display:flex; gap:14px; align-items:center; padding:12px 16px; background:var(--surface); border-radius:var(--radius-l); border:1px solid var(--border)}
+.rp .kp-n{flex:none; min-width:84px; font-size:var(--fs-24); font-weight:700; color:var(--primary-dark); line-height:1.2; font-variant-numeric:tabular-nums}
+.rp .kp-x{font-size:var(--fs-14); font-weight:700; line-height:var(--lh-body); color:var(--text)}
+.rp .voice{position:relative; padding:16px 20px 16px 52px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); margin-bottom:10px}
+.rp .voice-q{position:absolute; left:16px; top:10px; font-size:var(--fs-34); line-height:1; font-weight:700; color:var(--accent)}
+.rp .voice p{margin:0; font-size:var(--fs-16); line-height:1.85; font-weight:400}
+.rp .voice-s{display:block; margin-top:10px; padding-top:6px; border-top:1px solid var(--border); font-size:var(--fs-12); color:var(--text-2); font-weight:400}
+/* 1件だけのときは吹き出し : 引用符の代わりにピル、下に小さい尾 */
+.rp .voice.solo{padding:14px 20px 16px; margin-bottom:14px}
+.rp .voice.solo::after{content:''; position:absolute; left:22px; bottom:-7px; width:12px; height:12px; background:var(--surface); border-right:1px solid var(--border); border-bottom:1px solid var(--border); transform:rotate(45deg)}
+.rp .voice.solo .voice-s{border-top:0; padding-top:0; margin-top:8px}
+.rp .vpill{display:inline-block; font-size:var(--fs-12); font-weight:700; letter-spacing:0.08em; line-height:1.6; border-radius:999px; padding:2px 10px; margin:0 0 8px; color:var(--sub-dark); background:var(--gold-pale)}
+.rp .vpill.cat{color:var(--primary-dark); background:var(--cat-ground, var(--tint))} /* カテゴリ指定色があるときは --cat-ground にその「地」を入れる */
+/* ---- §6 バッジ・リンクのカード ---- */
+.rp .badge{display:inline-block; font-size:var(--fs-12); line-height:1.5; padding:2px 10px; border-radius:var(--radius); white-space:nowrap}
+.rp .badge.src{background:var(--bg); color:var(--text-2); border:1px solid var(--border)}
+.rp .badge.c1{background:var(--primary-dark); color:var(--surface)}
+.rp .badge.c2{background:var(--primary-light); color:var(--text)}
+.rp .badge.c3{background:var(--base-marker); color:var(--text-2)}
+.rp .lcards{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px}
+.rp .lcard{display:block; text-decoration:none; border:1px solid var(--border); border-radius:var(--radius); padding:18px 22px; background:var(--surface); cursor:pointer; transition:border-color 0.12s ease, background 0.12s ease, transform 0.12s ease; min-width:0}
+.rp .lcard:hover{border-color:var(--primary-light); background:var(--tint); transform:translateY(-1px)}
+.rp .lcard-t{font-size:var(--fs-16); font-weight:700; color:var(--primary-dark); margin:0 0 4px; line-height:1.5}
+.rp .lcard-t::after{content:' →'; color:var(--primary-light)}
+.rp .lcard:hover .lcard-t::after{color:var(--primary-dark)}
+.rp .lcard p{margin:0; font-size:var(--fs-14); line-height:var(--lh-body); color:var(--text-2)}
+@container (max-width:900px){ .rp .lcards{grid-template-columns:minmax(0,1fr)} }
+/* ---- §5.1 h5・h6 ---- */
+.rp .h5{font-size:var(--fs-16); font-weight:700; color:var(--text); margin:24px 0 8px; line-height:var(--lh-head)}
+.rp .h6{font-size:var(--fs-14); font-weight:700; color:var(--text-2); letter-spacing:0.08em; margin:16px 0 4px; line-height:var(--lh-head)}
+/* ---- §5.5 短い声の束・回答者カード ---- */
+.rp .vqs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:14px 0 16px}
+.rp .vqs-h{grid-column:1 / -1; font-size:var(--fs-12); font-weight:700; letter-spacing:0.14em; color:var(--sub-dark); margin:0 0 2px}
+.rp .vq{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:12px 16px 12px 36px; position:relative; font-size:var(--fs-14); line-height:var(--lh-body); min-width:0}
+.rp .vq::before{content:'\201C'; position:absolute; left:12px; top:8px; font-size:var(--fs-20); line-height:1; font-weight:700; color:var(--accent)}
+.rp .person{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); padding:0; overflow:hidden; margin:14px 0 16px}
+.rp .person-hd{padding:14px 20px; background:var(--gold-pale); border-bottom:1px solid var(--border)} /* カテゴリ指定色があるときは --cat-ground の「地」で塗ってよい */
+.rp .person.cat .person-hd{background:var(--cat-ground, var(--tint))}
+.rp .person-bd{padding:4px 20px 16px}
+.rp .person-meta{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:var(--fs-12); color:var(--text-2); margin:0}
+.rp .person-meta .badge{margin-right:2px}
+.rp .person-q{font-size:var(--fs-16); font-weight:700; color:var(--text); line-height:1.6; margin:6px 0 0; padding-left:28px; position:relative}
+.rp .person-q::before{content:'\201C'; position:absolute; left:0; top:-4px; font-size:var(--fs-24); font-weight:700; color:var(--accent)}
+.rp .person .h6{margin-top:12px}
+.rp .person p{margin:0; font-size:var(--fs-14); line-height:var(--lh-body)}
+.rp .kv{display:grid; grid-template-columns:120px minmax(0,1fr); gap:0; border-top:1px solid var(--border); margin-top:12px}
+.rp .kv > div{padding:10px 12px; border-bottom:1px solid var(--border); font-size:var(--fs-14); line-height:var(--lh-tight)}
+.rp .kv > div:nth-child(odd){font-weight:700; color:var(--text-2); font-size:var(--fs-12); letter-spacing:0.08em}
+/* ---- §8.1 図番号 ---- */
+.rp .fig-k{font-size:var(--fs-12); font-weight:700; color:var(--primary-dark); letter-spacing:0.08em; margin:0 0 2px; font-variant-numeric:tabular-nums}
+/* ---- §10 挿絵 ---- */
+.rp .illust{float:right; width:200px; max-width:25%; margin:0 0 12px 24px}
+.rp .illust img, .rp .illust svg{display:block; width:100%; height:auto}
+.rp .illust-ph{aspect-ratio:1; border:1px dashed var(--primary-light); border-radius:var(--radius); display:grid; place-items:center; color:var(--text-3); font-size:var(--fs-12); text-align:center; line-height:1.6}
+.rp .rcard::after{content:''; display:block; clear:both}
+@container (max-width:700px){ .rp .vqs{grid-template-columns:minmax(0,1fr)} .rp .kv{grid-template-columns:minmax(0,1fr)} .rp .kv > div:nth-child(odd){border-bottom:0; padding-bottom:0} .rp .illust{float:none; width:160px; max-width:none; margin:0 0 12px} }
+/* ---- 下の帯 ---- */
+.rp .app-ft{border-top:1px solid var(--border); background:var(--surface)}
+.rp .app-ft-in{max-width:1280px; margin:0 auto; padding:16px 24px; display:flex; flex-wrap:wrap; gap:4px 22px; font-size:var(--fs-12); color:var(--text-3)}
+.rp .app-ft-in span:first-child{color:var(--text-2); font-weight:700}
+/* ---- 見本の補助 ---- */
+.rp.inner{border:0; border-radius:0; container-type:normal} /* 部品だけの小さい見本では、幅での切り替えを効かせない */
+.rp.inner.show-sub{container-type:inline-size} /* §2.1 のヘッダの見本は幅いっぱいなので、900px 以下でタブを下の行に送る切り替えを効かせる */
+.rp .pad{padding:24px}
+.rp .pad.tight{padding:16px 24px}
+.theme-sw{display:flex; gap:8px; margin-bottom:12px}
+.theme-sw button{appearance:none; border:1px solid var(--hairline); background:#fff; color:var(--g-cmp); border-radius:6px; padding:6px 14px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit}
+.theme-sw button.on{background:var(--base-bg); border-color:var(--primary-light); color:var(--primary-dark)}
+/* テーマの例 : 替える変数だけを上書きする */
+.rp[data-theme="rose"]{--grad-end:var(--cat5-fill); --cat-c:var(--cat5-fill)}
+.rp[data-theme="violet"]{--grad-end:var(--cat1-fill); --cat-c:var(--cat1-text)}
+.rp[data-theme="sky"]{--grad-end:var(--cat3-fill); --cat-c:var(--cat3-text)}
+/* 画像ありの見本 : 外部参照を足さないので、写真の代わりに CSS で作った模様を画像の位置に置く */
+.rp .page-hero.demo-img{--hero-img:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.35) 0 12%, transparent 13%), radial-gradient(circle at 70% 70%, rgba(255,255,255,0.25) 0 18%, transparent 19%), linear-gradient(135deg, #7A94C2 0%, #4E6690 60%, #3C4F70 100%)}
+@media print{
+  @page{size:A4 portrait; margin:14mm}
+  .rp .rail,.rp .jump,.rp .chap-next,.rp .app-tools,.rp .tiptool,.rp .nav,.rp .app-scope,.rp .fig-opts,.rp .ttools,.rp .modal-back,.rp .tip{display:none !important}
+  .rp .app-hd{background:none; color:var(--text); min-height:0}
+  .rp .app-mark{display:none}
+  .rp .rail-layout{display:block}
+  .rp .page-hero{background:none; color:inherit}
+  .rp .page-hero::after{display:none}
+  .rp .page-hero .page-t{color:var(--primary-dark)}
+  .rp .page-hero .page-d{color:var(--text)}
+  .rp .rcard{break-inside:avoid; print-color-adjust:exact; -webkit-print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>Komorebi Design System</h1>
+  <p>コモレビ 全ツール共通のデザインガイドライン</p>
+</div>
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-link" href="index.html">General</a>
+    <a class="nav-link" href="figure.html">Figure</a>
+    <a class="nav-link" href="diagram.html">Diagram</a>
+    <a class="nav-link current" href="report.html" aria-current="page">Report</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header class="masthead">
+  <h1>REPORT.md プレビュー</h1>
+  <p class="lede">HTML レポートの部品の規約のうち、§1 画面の骨格 / §2 ナビゲーション / §3 HERO / §4 セクション / §5 文字 / §6 ボタン / §7 テーマ差し替え / §8 図と表の枠 / §9 重ねて出すもの / §10 挿絵 / §11 骨子からの組み立て を実物で確認するページ。
+</p>
+  <p class="meta">
+    規約の本文は <code>REPORT.md</code>、色・文字の値の一次情報源は <code>DESIGN.md</code> と <code>FIGURE.md</code>。
+<br>
+    見本の題材 (コンビニのパンの調査) と数値は、すべてこのページのために作った架空のもの。
+<br>
+    2026/10/21 時点の検討版 v1。
+  </p>
+</header>
+
+<nav class="toc"><h2>目次</h2><ol>
+<li><a href="#s1"><span class="num">1</span>画面の骨格</a></li>
+<li><a href="#s21"><span class="num">2.1</span>画面切替タブ</a></li>
+<li><a href="#s22"><span class="num">2.2</span>左レール</a></li>
+<li><a href="#s23"><span class="num">2.3</span>移動チップ</a></li>
+<li><a href="#s24"><span class="num">2.4</span>章末バー</a></li>
+<li><a href="#s26"><span class="num">2.6</span>読み進め方のカード</a></li>
+<li><a href="#s3"><span class="num">3</span>HERO</a></li>
+<li><a href="#s4"><span class="num">4</span>セクション</a></li>
+<li><a href="#s41"><span class="num">4.1</span>面のボックス</a></li>
+<li><a href="#s42"><span class="num">4.2</span>KPI カード</a></li>
+<li><a href="#s51"><span class="num">5.1</span>見出しの4段</a></li>
+<li><a href="#s52"><span class="num">5.2</span>文字サイズの段</a></li>
+<li><a href="#s54"><span class="num">5.4</span>強調段落と要点</a></li>
+<li><a href="#s55"><span class="num">5.5</span>引用</a></li>
+<li><a href="#s6"><span class="num">6</span>ボタン・押せるもの</a></li>
+<li><a href="#s6b"><span class="num">6</span>バッジ・リンクのカード</a></li>
+<li><a href="#s7"><span class="num">7</span>テーマ差し替え</a></li>
+<li><a href="#s81"><span class="num">8.1</span>図の枠と操作</a></li>
+<li><a href="#s83"><span class="num">8.3</span>表の枠と道具</a></li>
+<li><a href="#s91"><span class="num">9.1</span>モーダル</a></li>
+<li><a href="#s92"><span class="num">9.2</span>用語ツールチップ</a></li>
+<li><a href="#s10"><span class="num">10</span>挿絵</a></li>
+<li><a href="#s11"><span class="num">11</span>骨子からの組み立て</a></li>
+<li><a href="#s12"><span class="num">12</span>印刷</a></li>
+</ol></nav>
+
+<!-- ================= 1 画面の骨格 ================= -->
+<section class="chapter" id="s1"><h2>1. 画面の骨格</h2><p class="chapter-note">ヘッダの帯 → HERO → 本文 → 下の帯。
+ヘッダの帯は画面の上に固定する (この見本では固定していない)。
+</p>
+<div class="card">
+<h3>1画面ぶんの通し見本</h3>
+<p class="sub">左レールつきの「解説レポート」の画面。
+窓の幅 960px 以下ではレールが上の横並びに戻る。
+タブの2行目は 1280px 未満で消える (この見本の枠は最大 1176px なので、2行目は §2.1 で見る)。
+</p>
+<div class="rp" data-theme="">
+  <header class="app-hd">
+    <div class="app-hd-in">
+      <a class="app-ttl" href="#s1" aria-label="概要へ戻る">
+        <div class="app-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V12"/><path d="M10 19V5"/><path d="M16 19V9"/><path d="M4 19h16"/></svg></div>
+        <div><h1 class="app-name">コンビニパン 購買分析レポート</h1><span class="app-scope">分析期間 : 2024-2026年</span></div>
+      </a>
+      <nav class="nav" role="tablist" aria-label="画面の切り替え">
+        <button role="tab" aria-selected="false"><b>分析の概要</b><i>何を決めるかと、その材料</i></button>
+        <button role="tab" aria-selected="true"><b>解説レポート</b><i>何が起きているかの根拠</i></button>
+        <button role="tab" aria-selected="false"><b>ダッシュボード</b><i>主要な指標のいまの値</i></button>
+        <button role="tab" aria-selected="false"><b>論点別データ</b><i>根拠のもとになった集計</i></button>
+      </nav>
+      <div class="app-tools">
+        <button type="button" class="tool" title="分析条件と、使ったデータ"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg><span class="sr">分析条件と、使ったデータ</span></button>
+        <button type="button" class="tool" title="用語と指標の定義"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v18H5.5A1.5 1.5 0 0 1 4 19.5z"/><path d="M8 3v18"/><path d="M11.5 8h4"/><path d="M11.5 12h4"/></svg><span class="sr">用語と指標の定義</span></button>
+        <button type="button" class="tool" title="ダウンロードと印刷"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5 12 14.5 16 10.5"/><path d="M4 18v2h16v-2"/></svg><span class="sr">ダウンロードと印刷</span></button>
+      </div>
+    </div>
+  </header>
+  <div class="page-hero">
+    <div class="hero-in">
+      <h2 class="page-t">解説レポート</h2>
+      <p class="page-d">2024年から2026年の購買データと、1,200人の意識調査から、朝食のパンがどう選ばれているかを読み解く。
+</p>
+    </div>
+  </div>
+  <div class="page">
+    <div class="rail-layout">
+      <nav class="rail static" aria-label="この画面の目次">
+        <div class="rail-h">この画面の目次</div>
+        <div class="rail-list">
+          <a class="rail-i g" href="#s1"><span class="rail-no">1</span>結論</a>
+          <a class="rail-i sub on" href="#s1"><span class="rail-no">1-1</span>買う回数が増えている</a>
+          <a class="rail-i sub" href="#s1"><span class="rail-no">1-2</span>1回の点数は減っている</a>
+          <a class="rail-i g" href="#s1"><span class="rail-no">2</span>根拠</a>
+          <a class="rail-i sub" href="#s1"><span class="rail-no">2-1</span>購買の頻度</a>
+          <a class="rail-i sub" href="#s1"><span class="rail-no">2-2</span>時間帯の分布</a>
+          <a class="rail-i g" href="#s1"><span class="rail-no">3</span>推奨</a>
+        </div>
+        <div class="rail-pos"><div class="rail-bar"><i style="width:28%"></i></div></div>
+      </nav>
+      <div class="rail-body">
+        <div class="rcard">
+          <div class="card-h">
+            <h3 class="card-t"><span class="tag">FINDINGS</span><span class="idbox no">1-1</span>買う回数が増えている</h3>
+            <span class="card-m">更新 2026/10</span>
+          </div>
+          <div class="prose">
+            <p>週に2回以上パンを買う人は、2024年の <strong>38%</strong> から2026年の <strong>46%</strong> に増えた。
+増えたのは平日の朝で、休日はほぼ変わらない。
+</p>
+            <p class="note">出典 : 購買パネル (n=4,800)・意識調査 (n=1,200)。
+</p>
+          </div>
+          <div class="reflist"><span>根拠を見る</span><a class="jump" href="#s23">2-1 購買の頻度 <i class="ar">→</i></a><a class="jump" href="#s23">2-2 時間帯の分布 <i class="ar">→</i></a></div>
+        </div>
+        <div class="rcard">
+          <div class="card-h">
+            <h3 class="card-t"><span class="tag">FINDINGS</span><span class="idbox no">1-2</span>1回の点数は減っている</h3>
+          </div>
+          <div class="prose">
+            <p>1回に買う点数は 2.1 点から 1.6 点に減った。
+まとめ買いから、その日の分だけ買う行動に移っている。
+</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="app-ft"><div class="app-ft-in"><span>コンビニパン 購買分析レポート</span><span>生成 2026/10/21</span><span>ガイドライン REPORT v1</span></div></footer>
+</div>
+<div class="rule-note"><strong>本文の幅は最大 1280px、左右の余白 24px (DESIGN.md §5 Container と同じ)。
+</strong>
+左レール (240px ＋ 間 24px) を置くと本文は 968px になる。
+下の帯の文字は Text Secondary 以下の濃さにする。
+</div>
+</div>
+</section>
+
+<!-- ================= 2 ナビゲーション ================= -->
+<section class="chapter" id="s2"><h2>2. ナビゲーション</h2><p class="chapter-note">画面を切り替える (タブ) / 同じ画面の中を移動する (左レール) / 画面をまたいで根拠へ飛ぶ (移動チップ・章末バー) の3層。
+</p>
+
+<div class="card" id="s21">
+<h3>2.1 画面切替タブ</h3>
+<p class="sub">1行目が画面の名前、2行目がその画面で何をするか。
+現在地は白の下線 3px と文字の濃さで示す。
+</p>
+<div class="rp inner show-sub" style="border:1px solid var(--hairline); border-radius:6px">
+  <header class="app-hd"><div class="app-hd-in">
+    <a class="app-ttl" href="#s21"><div class="app-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V12"/><path d="M10 19V5"/><path d="M16 19V9"/><path d="M4 19h16"/></svg></div><div><h1 class="app-name">レポート名</h1><span class="app-scope">分析期間 : 2024-2026年</span></div></a>
+    <nav class="nav" role="tablist"><button role="tab" aria-selected="true"><b>分析の概要</b><i>何を決めるかと、その材料</i></button><button role="tab" aria-selected="false"><b>解説レポート</b><i>何が起きているかの根拠</i></button><button role="tab" aria-selected="false"><b>ダッシュボード</b><i>主要な指標のいまの値</i></button></nav>
+  </div></header>
+</div>
+<div class="rule-note">画面は4つまでを目安にする。
+それ以上は左レールに降ろす。
+窓の幅 1280px 未満では2行目を消し、900px 以下ではタブを帯の下の行に送る。
+</div>
+</div>
+
+<div class="card" id="s22">
+<h3>2.2 左レール (画面内の目次)</h3>
+<p class="sub">1画面に1本 / 他の画面へは飛ばさない / 畳まない / 現在地はつねに1つ / 2段は左のインデントで表す。
+</p>
+<div class="pair2">
+  <div>
+    <div class="lab">章 &gt; 節 の2段</div>
+    <div class="rp inner" style="border:1px solid var(--hairline); border-radius:6px"><div class="pad tight" style="max-width:300px">
+      <nav class="rail static"><div class="rail-h">この画面の目次</div><div class="rail-list">
+        <a class="rail-i g" href="#s22"><span class="rail-no">1</span>結論</a>
+        <a class="rail-i sub" href="#s22"><span class="rail-no">1-1</span>買う回数が増えている</a>
+        <a class="rail-i sub on" href="#s22"><span class="rail-no">1-2</span>1回の点数は減っている</a>
+        <a class="rail-i g" href="#s22"><span class="rail-no">2</span>根拠</a>
+        <a class="rail-i sub" href="#s22"><span class="rail-no">2-1</span>購買の頻度</a>
+        <a class="rail-i sub" href="#s22"><span class="rail-no">2-2</span>時間帯の分布</a>
+      </div><div class="rail-pos"><div class="rail-bar"><i style="width:40%"></i></div></div></nav>
+    </div></div>
+  </div>
+  <div>
+    <div class="lab">1段だけ (番号なし)</div>
+    <div class="rp inner" style="border:1px solid var(--hairline); border-radius:6px"><div class="pad tight" style="max-width:300px">
+      <nav class="rail static"><div class="rail-h">この画面の目次</div><div class="rail-list">
+        <a class="rail-i on" href="#s22">全体総括</a>
+        <a class="rail-i" href="#s22">主要な論点</a>
+        <a class="rail-i" href="#s22">当面の推奨</a>
+        <a class="rail-i" href="#s22">このレポートの読み進め方</a>
+      </div><div class="rail-pos"><div class="rail-bar"><i style="width:12%"></i></div></div></nav>
+    </div></div>
+  </div>
+</div>
+<div class="rule-note">幅 240px、本文との間 24px。
+固定位置はヘッダの帯の下 16px で、画面の高さに収まらない分は中でスクロール。
+左の色線は使わず、現在地は基調の地の塗りと Primary Dark の太字で示す。
+読み進めの印は下の細い帯 (3px) だけで、数字は出さない。
+窓の幅 960px 以下ではレールをやめ、上の横並び (下線式) に戻す。
+横並びでは現在地の角丸をなくし、下線だけにする。
+印刷では出さない。
+</div>
+</div>
+
+<div class="card" id="s23">
+<h3>2.3 移動チップ</h3>
+<p class="sub">本文から別の画面の根拠へ飛ぶリンク。
+塗りのボタンの見た目にして、押せると分かるようにする。
+</p>
+<div class="rp inner" style="border:1px solid var(--hairline); border-radius:6px"><div class="pad">
+  <div class="row"><a class="jump" href="#s23">2-1 購買の頻度 <i class="ar">→</i></a><a class="jump" href="#s23">2-2 時間帯の分布 <i class="ar">→</i></a><a class="jump sm" href="#s23">小さい版 <i class="ar">→</i></a></div>
+  <div class="reflist"><span>根拠を見る</span><a class="jump" href="#s23">2-1 購買の頻度 <i class="ar">→</i></a><a class="jump" href="#s23">3-1 時間帯別の客層 <i class="ar">→</i></a></div>
+</div></div>
+<div class="rule-note">塗りは装飾のグラデーション (Primary Dark → 青緑、角度 90°)。
+白文字・矢印つきで、hover でグラデーションが右へ流れ、矢印が少し進む。
+本文のリンク (青文字・下線) とは役目が違うので、見た目も分ける。
+印刷では出さない。
+</div>
+</div>
+
+<div class="card" id="s24">
+<h3>2.4 章末バー</h3>
+<p class="sub">章ごとに切り替えて見せる画面で、読み終わりに次へ進めるバー。
+最後の章は「先頭へ戻る」にし、グラデーションの向きを逆にする。
+</p>
+<div class="rp inner" style="border:1px solid var(--hairline); border-radius:6px"><div class="pad">
+  <div class="chap-next" style="margin-top:0">
+    <a class="chap-next-b" href="#s24"><span class="chap-next-l"><small>次の章</small><b>2. 根拠 : 購買の頻度と時間帯</b></span><span class="chap-next-go">読む →</span></a>
+    <a class="chap-prev" href="#s24">← 前の章 : 1. 結論</a>
+  </div>
+  <div class="chap-next" style="margin-top:24px">
+    <a class="chap-next-b back" href="#s24"><span class="chap-next-l"><small>最後の章です</small><b>先頭の「1. 結論」へ戻る</b></span><span class="chap-next-go">戻る ↑</span></a>
+  </div>
+</div></div>
+</div>
+<div class="card" id="s26">
+<h3>2.6 読み進め方のカード</h3>
+<p class="sub">概要の画面の末尾に、画面と同じ数のカードを横に並べ、読む順番を示す。
+タブの並びと同じ順。
+</p>
+<div class="rp"><div class="pad">
+  <div class="map-path">
+    <a class="map-step now" href="#s26"><span class="map-step-n">1</span><div><div class="map-step-t">分析の概要</div><p>何を決めるかと、その材料。
+いまここ。
+</p></div></a>
+    <a class="map-step" href="#s26"><span class="map-step-n">2</span><div><div class="map-step-t">解説レポート</div><p>何が起きているかの根拠を、結論から順に読む。
+</p></div></a>
+    <a class="map-step" href="#s26"><span class="map-step-n">3</span><div><div class="map-step-t">ダッシュボード</div><p>主要な指標のいまの値。
+</p></div></a>
+    <a class="map-step" href="#s26"><span class="map-step-n">4</span><div><div class="map-step-t">論点別データ</div><p>根拠のもとになった集計。
+会議中に行き来する。
+</p></div></a>
+  </div>
+</div></div>
+<div class="rule-note">1行に画面の数だけ (4つまで)、間 8px。
+Surface・Border 1px・角丸 6px・内側 18px 22px、左に塗りの丸の番号 (22px)。
+現在地は基調の地の面・Primary Light の枠。
+押せるカードなので、hover で枠と面が変わり 1px 浮く。
+1100px 以下では縦に積む。
+</div>
+</div>
+</section>
+
+<!-- ================= 3 HERO ================= -->
+<section class="chapter" id="s3"><h2>3. HERO (画面見出しの帯)</h2><p class="chapter-note">各画面の先頭の見出しを青の帯に載せる。
+載せるのは見出しと説明文の 2 つだけで、見出しを 2 段・3 段に重ねない。
+概要の画面では、説明文の下に KPI カードや要点を白のカードで載せてよい。
+画像なしを基本形にし、画像は任意。
+</p>
+<div class="card">
+<h3>基本形 (画像なし)</h3>
+<p class="sub">Primary Dark → 青緑のグラデーション (角度 90°)。
+下側は本文の背景色へ溶かし、本文の先頭を 32px だけ帯に重ねる。
+</p>
+<div class="rp">
+  <div class="page-hero"><div class="hero-in">
+    <h2 class="page-t">分析の概要</h2>
+    <p class="page-d">何を決めるためのレポートか、その材料がどこにあるかを先にまとめる。
+</p>
+  </div></div>
+  <div class="page"><div class="rcard"><div class="card-h"><h3 class="card-t"><span class="tag">SUMMARY</span>全体総括</h3></div><div class="prose"><p>平日の朝に、その日の分だけ買う行動が増えている。
+品ぞろえは「種類を増やす」より「朝に切らさない」に寄せたい。
+</p></div></div></div>
+</div>
+</div>
+<div class="card">
+<h3>画像あり (任意)</h3>
+<p class="sub">画像の上に同じ系統のグラデーションを 35〜60% の濃さで重ねる。
+文字が左寄せなので左を少し暗くする。
+この見本では写真の代わりに CSS の模様を置いている。
+</p>
+<div class="rp">
+  <div class="page-hero has-img demo-img"><div class="hero-in">
+    <h2 class="page-t">解説レポート</h2>
+    <p class="page-d">2024年から2026年の購買データと、1,200人の意識調査から読み解く。
+</p>
+  </div></div>
+  <div class="page" style="padding-bottom:24px"><div class="rcard"><div class="prose" style="margin:0"><p style="margin:0">本文の先頭は帯に 32px 重なる。
+</p></div></div></div>
+</div>
+<div class="rule-note">画像は <code>--hero-img</code> に data URI で入れる (外部参照は足さない)。
+印刷では背景画像が既定でオフになるので、帯をやめて見出しを Primary Dark の文字に戻す。
+HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッダの帯にある。
+</div>
+</div>
+</section>
+
+<!-- ================= 4 セクション ================= -->
+<section class="chapter" id="s4"><h2>4. セクション</h2><p class="chapter-note">画面見出し / 章題 / 導入文 / カード / 節の切れ目。
+余白の段は 20・32・40 の3つ。
+</p>
+<div class="card">
+<h3>画面の中の並び</h3>
+<p class="sub">2つ目以降の画面見出しは、上に Border の罫と余白を置いて区切る。
+</p>
+<div class="rp"><div class="page" style="padding-top:8px; padding-bottom:24px">
+  <h2 class="page-t">主要な論点</h2>
+  <p class="page-t2">何が増えて、何が減ったか</p>
+  <div class="lead"><p>この章では、購買パネルの3年分から「回数」と「点数」の動きを分けて見る。
+</p></div>
+  <div class="rcard">
+    <div class="card-h"><h3 class="card-t"><span class="tag">FINDINGS</span><span class="idbox no">1-1</span>買う回数が増えている <span class="paren">(平日の朝)</span></h3><span class="card-m">更新 2026/10</span></div>
+    <p class="card-d">週2回以上の購買者の割合。
+2024年と2026年の比較。
+</p>
+    <div class="prose">
+      <p>週に2回以上パンを買う人は <strong>38% → 46%</strong> に増えた。
+</p>
+      <div class="h4n"><span class="num">1</span><h4 class="ttl">平日の朝に集中している</h4></div>
+      <p>増加分の 8 ポイントのうち 7 ポイントが平日の 7〜9 時に入る。
+休日の購買はほぼ変わらない。
+</p>
+      <div class="h4n"><span class="num">2</span><h4 class="ttl">点数は減っている</h4></div>
+      <p>1回に買う点数は 2.1 点から 1.6 点に減った。
+</p>
+    </div>
+  </div>
+  <div class="rcard">
+    <div class="card-h"><h3 class="card-t"><span class="tag">DECISION</span><span class="idbox no">3</span>当面の推奨</h3></div>
+    <ol class="numlist">
+      <li><span class="dot">1</span><div class="body"><b>朝 7〜9 時の棚を切らさない</b><span>回数が増えた時間帯に在庫を寄せる。
+</span></div></li>
+      <li><span class="dot">2</span><div class="body"><b>1個売りの価格を見直す</b><span>まとめ買いの値引きより、1個の値ごろ感を優先する。
+</span></div></li>
+      <li><span class="dot">3</span><div class="body"><b>休日の施策は据え置く</b><span>変化が小さい休日に新しい施策を打たない。
+</span></div></li>
+    </ol>
+  </div>
+  <h2 class="page-t">このレポートの読み進め方</h2>
+  <div class="lead boxed"><p>概要 → 解説レポート → 論点別データ の順に読む。
+会議中は、結論のカードの移動チップから根拠へ飛ぶ。
+</p></div>
+</div></div>
+<div class="rule-note"><strong>余白の段 :</strong> 段落の下 20px / 小見出しの上 32px / カードとカードの間 40px。
+カードは Surface の面・Border 1px・角丸 8px・影 Level 1、内側の余白 28px 32px。
+分類ラベル (FINDINGS・DECISION) は見出しの上に小さく置き、背景も枠も持たせない。
+</div>
+</div>
+<div class="card" id="s41">
+<h3>4.1 面のボックス</h3>
+<p class="sub">要点や示唆を面で区切る。
+左の色線は使わない。
+</p>
+<div class="rp"><div class="pad">
+  <div class="box blue" style="margin-top:0"><div class="box-l">INSIGHT</div><p>平日の朝に「その日の分だけ」買う行動が増えている。
+まとめ買いの値引きより、朝の品ぞろえのほうが効く。
+</p></div>
+  <div class="box gold"><div class="box-l">BENEFIT</div><p>朝 7〜9 時に欲しいパンがある、という安心が、来店の回数そのものを支えている。
+</p></div>
+  <div class="box line" style="margin-bottom:0"><div class="box-l">前提</div><p>購買パネルは首都圏 4,800 人。
+地方の店舗は含まない。
+</p></div>
+</div></div>
+<div class="rule-note">角丸 8px・内側 18px 22px。
+ラベルは 12px・太字・字間 0.1em、本文は 14px。
+青の面は基調の地、ゴールドの面は FIGURE.md §1.2 のゴールドの淡い面 #F9F6EE (ラベルは Accent Deep Dark)、線の面は Surface・Border。
+</div>
+</div>
+<div class="card" id="s42">
+<h3>4.2 KPI カード</h3>
+<p class="sub">ダッシュボードの画面で、主要な指標を4枚並べる。
+</p>
+<div class="rp"><div class="pad">
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-l">週2回以上の購買者</div><div class="kpi-v">46<small>%</small></div><div class="kpi-c">2024年の 38% から 8 ポイント増。
+</div><div class="kpi-s">購買パネル・2026年</div></div>
+    <div class="kpi"><div class="kpi-l">1回あたりの点数</div><div class="kpi-v">1.6<small>点</small></div><div class="kpi-c">2.1 点から減少。
+その日の分だけ買う。
+</div><div class="kpi-s">購買パネル・2026年</div></div>
+    <div class="kpi"><div class="kpi-l">朝 7〜9 時の構成比</div><div class="kpi-v">41<small>%</small></div><div class="kpi-c">平日の購買のうち朝の割合。
+</div><div class="kpi-s">購買パネル・2026年</div></div>
+    <div class="kpi"><div class="kpi-l">休日の変化</div><div class="kpi-v none">—</div><div class="kpi-c">差が 1 ポイント未満のため値を出さない。
+</div><div class="kpi-s">購買パネル・2026年</div></div>
+  </div>
+</div></div>
+<div class="rule-note">Surface・Border 1px・角丸 8px・影 Level 1、内側 20px 22px。
+ラベル 14px・太字、値 34px・Primary Dark・桁をそろえる、単位は 16px。
+値が無いときは「—」を弱い群グレーで置き、理由を補足に書く。
+4列・間 16px。
+1180px 以下は 250px で折り返す。
+</div>
+</div>
+</section>
+
+<!-- ================= 5 文字 ================= -->
+<section class="chapter" id="s5"><h2>5. 文字</h2><p class="chapter-note">見出しは意味のために h タグを使い、見た目はクラス側で決める。
+</p>
+<div class="card" id="s51">
+<h3>5.1 見出しの4段</h3>
+<p class="sub">h1 レポート名 / h2 画面見出し / h3 カード・論点 / h4 小見出し。
+番号の印は「塗りの丸 = 順番」「枠の角丸四角 = 識別子」の2種類。
+</p>
+<div class="rp"><div class="pad">
+  <div class="lab">h1 レポート名 (ヘッダの帯の中・20px・白)</div>
+  <div class="hdbar"><h1 class="app-name">コンビニパン 購買分析レポート</h1></div>
+  <div class="lab">h2 画面見出し (34px・Primary Dark)</div>
+  <h2 class="page-t" style="margin:0">解説レポート</h2>
+  <div class="lab">h3 カードの見出し (24px・Text Primary・左に枠線の番号)</div>
+  <div class="h3n" style="margin:0"><span class="idbox">1-1</span><h3 class="ttl">買う回数が増えている</h3></div>
+  <div class="lab">h4 小見出し (20px・Primary Dark・文字の下半分にマーカー)</div>
+  <div class="h4n" style="margin:0"><span class="num">1</span><h4 class="ttl">平日の朝に集中している</h4></div>
+  <div class="lab">h4 カテゴリ色の見出し (文字色だけ替え、マーカーの濃さは同じ)</div>
+  <div class="h4n cat cat-c" style="margin:0"><span class="num">2</span><h4 class="ttl">青緑のカテゴリの小見出し</h4></div>
+  <div class="lab">h5 小見出しの中の項目 (16px・太字・Text Primary、飾りなし)</div>
+  <h5 class="h5" style="margin:0">共働き世帯では平日の朝に集中する</h5>
+  <div class="lab">h6 行の見出し (14px・太字・Text Secondary・字間 0.08em)</div>
+  <h6 class="h6" style="margin:0">得られたもの</h6>
+  <div class="lab">本文 (16px・行間 1.7)</div>
+  <div class="prose" style="margin:0"><p style="margin:0">週に2回以上パンを買う人は <strong>38% → 46%</strong> に増えた。
+数値の強調は本文と同じ大きさにして、色と太さだけで示す <span class="paren">(かっこの中は補足なので小さく薄く)</span>。
+</p></div>
+</div></div>
+<div class="rule-note">5段目 (h5)・6段目 (h6) は、4段で足りない長いレポートだけで使う。
+h5・h6 でも左の色線は使わない。
+マーカーは見出しの文字色を 20% に薄めたもので共通にする。
+<code>color-mix()</code> が使えるブラウザでは <code>currentColor</code> から作り、使えないブラウザでは基調のマーカー (FIGURE.md §1.2) に落とす。
+見出しを足すときは div ではなく見出しタグを使う。
+</div>
+</div>
+<div class="card" id="s52">
+<h3>5.2 文字サイズの段</h3>
+<p class="sub">DESIGN.md §3.4 の5段に 14 と 20 を足した6段。
+48 は使わない。
+</p>
+<div class="rp"><div class="pad"><div class="scale">
+  <div><small>34px / h2</small><span class="s34">画面見出し</span></div>
+  <div><small>24px / h3</small><span class="s24">カード・論点・章題</span></div>
+  <div><small>20px / h4・h1</small><span class="s20">小見出し・レポート名</span></div>
+  <div><small>16px / 本文</small><span class="s16">週に2回以上パンを買う人は増えた。
+</span></div>
+  <div><small>14px / 小さめの本文</small><span class="s14">表・概要の項目・章末バーの補足。
+</span></div>
+  <div><small>12px / ラベル</small><span class="s12">ラベル・タグ・注記・レールの項目。
+</span></div>
+</div></div></div>
+<div class="rule-note"><strong>行間 :</strong> 本文 1.7 / 表・注記 1.6 / 見出し 1.4。
+<strong>字間 :</strong> 0.05em。
+元の実物は本文 1.85・字間 0.06em だったが、2026/10/21 に見比べて DESIGN.md の値にそろえた (REPORT.md §5.3)。
+</div>
+</div>
+<div class="card" id="s54">
+<h3>5.4 強調段落と要点</h3>
+<p class="sub">章の結論を1段落で示す強調段落と、数字と一言の組を並べる要点。
+</p>
+<div class="rp"><div class="pad">
+  <div class="prose" style="margin:0"><p class="key" style="margin-top:0">平日の朝に、その日の分だけ買う人が増えている。
+週2回以上の購買者は <strong>46%</strong> に達した。
+</p></div>
+  <div class="kp" style="margin-bottom:0"><div class="kp-t">KEY POINTS</div><div class="kp-g">
+    <div class="kp-i"><div class="kp-n">+8<small style="font-size:14px">pt</small></div><div class="kp-x">週2回以上の購買者の増加分。
+ほぼ平日の朝。
+</div></div>
+    <div class="kp-i"><div class="kp-n">1.6点</div><div class="kp-x">1回あたりの点数。
+まとめ買いが減った。
+</div></div>
+    <div class="kp-i"><div class="kp-n">±0</div><div class="kp-x">休日は変化なし。
+新しい施策は打たない。
+</div></div>
+  </div></div>
+</div></div>
+<div class="rule-note">強調段落は基調の地の面・角丸 8px・内側 20px 24px、太字の数値だけ 20px。
+要点は基調の地の面に白いカードを並べ、数字 24px・Primary Dark、一言 14px・太字。
+数値の強調は本文と同じ大きさで、色と太さだけで示す。
+</div>
+</div>
+<div class="card" id="s55">
+<h3>5.5 引用</h3>
+<p class="sub">生活者の声など、原文のまま載せるもの。
+長い声 / 短い声の束 / 回答者カード の3型。
+SLIDE.md §5.3 のパターン C (引用は白のボックスで抜く) を HTML に写したもの。
+</p>
+<div class="lab">長い声が 2 件以上並ぶとき (白地と Border、引用符はゴールドの太字)</div>
+<div class="rp"><div class="pad">
+  <div class="voice"><span class="voice-q">“</span><p>朝は会社の近くで1個だけ買う。
+家で買いだめすると結局食べない。
+</p><span class="voice-s">30代・会社員・週3回購入</span></div>
+  <div class="voice"><span class="voice-q">“</span><p>曜日で決まった棚に行く。
+無いと別の店に行くより、その日はあきらめる。
+</p><span class="voice-s">40代・会社員・週2回購入</span></div>
+  <div class="voice" style="margin-bottom:0"><span class="voice-q">“</span><p>休日は家族の分をまとめて買うので、朝とは別の店。
+</p><span class="voice-s">30代・主婦・週1回購入</span></div>
+</div></div>
+<div class="lab" style="margin-top:20px">長い声が 1 件だけのとき (吹き出し、上に「生活者の声」のピル)</div>
+<div class="rp"><div class="pad">
+  <div class="voice solo"><span class="vpill">生活者の声</span><p>朝は会社の近くで1個だけ買う。
+家で買いだめすると結局食べない。
+</p><span class="voice-s">30代・会社員・週3回購入</span></div>
+  <div class="voice solo" style="margin-bottom:0; --cat-ground:#F3F8F7"><span class="vpill cat">平日の朝・生活者の声</span><p>曜日で決まった棚に行く。
+無いと別の店に行くより、その日はあきらめる。
+</p><span class="voice-s">40代・会社員・週2回購入 (カテゴリ指定色があるときのピル)</span></div>
+</div></div>
+<div class="lab" style="margin-top:20px">短い声の束 (同じ趣旨の短い声を 3〜6 件)</div>
+<div class="rp"><div class="pad">
+  <div class="vqs" style="margin:0">
+    <div class="vqs-h">買い方 (5件)</div>
+    <div class="vq">朝は会社の近くで1個だけ買う</div>
+    <div class="vq">家で買いだめすると結局食べない</div>
+    <div class="vq">曜日で決まった棚に行く</div>
+    <div class="vq">無いと別の店に行くより、その日はあきらめる</div>
+    <div class="vq">休日は家族の分をまとめて買うので別の店</div>
+  </div>
+</div></div>
+<div class="lab" style="margin-top:20px">回答者カード (1人を深掘りする)</div>
+<div class="rp"><div class="pad">
+  <div class="person" style="margin:0">
+    <div class="person-hd">
+    <div class="person-meta"><span class="badge c3">平日の朝</span>30代・会社員・未婚・週3回購入</div>
+    <p class="person-q">朝は会社の近くで1個だけ買う。
+家で買いだめすると結局食べない</p>
+    </div>
+    <div class="person-bd">
+    <h6 class="h6">場面</h6>
+    <p>出社前、駅から会社までの道にあるコンビニ。
+7時台。
+</p>
+    <h6 class="h6">行動</h6>
+    <p>棚にある中から1個だけ選ぶ。
+無い日は買わずに出社する。
+</p>
+    <h6 class="h6">得られたもの</h6>
+    <p>その日の分だけ買うことで、食べ残しの罪悪感がない。
+買う行為そのものが朝の区切りになっている。
+</p>
+    </div>
+  </div>
+</div></div>
+<div class="rule-note">声は面を塗らず、白地 ＋ Border で強調段落 (基調の地の面) と見分ける。
+長い声 : Surface・Border 1px・角丸 8px・内側 16px 20px (左は引用符の分を足して 52px)、引用符は 34px・太字・Accent、出所は罫線の下に 12px・Text Secondary。
+1件だけのときは吹き出し (引用符の代わりに「生活者の声」のピル、下に小さい尾)。
+ピルはゴールドの淡い面 ＋ Accent Deep Dark、案件にカテゴリ指定色があるときはその「地」＋ Primary Dark。
+短い声の束 : 白の箱 (Border 1px・角丸 6px・内側 10px 14px・14px) を2列、束の上に小さい見出し (12px・Accent Deep Dark・字間 0.14em)、各箱の頭に引用符 (Accent・20px・太字)。
+回答者カード : Surface・Border 1px・角丸 8px、上の帯 (ゴールドの淡い面、カテゴリ指定色があるときはその「地」) に属性メタ (12px・場面はピル) と見出しの声 (16px・太字・Text Primary・引用符は Accent)、下に h6 のラベルと本文の組。
+1つの節に束は1つまで、声の総数は 10 件を目安にする。
+本文は 16px・weight 400・行間 1.85 (引用だけ本文より広くてよい)。
+引用符は本文のフォント (明朝体は使わない)。
+</div>
+</div>
+</section>
+
+<!-- ================= 6 ボタン ================= -->
+<section class="chapter" id="s6"><h2>6. ボタン・押せるもの</h2><p class="chapter-note">押せるもの = 枠か塗り＋矢印、押せないもの = 背景も枠もない文字だけ。
+</p>
+<div class="card">
+<h3>部品の一覧</h3>
+<p class="sub">hover は面の色を1段変える。
+フォーカスは Primary の 2px の輪郭。
+</p>
+<div class="rp"><div class="pad">
+  <div class="lab">枠ボタン / 塗りボタン (1画面に1つの主操作)</div>
+  <div class="row"><button class="btn" type="button">CSV で保存</button><button class="btn" type="button">絞り込み</button><button class="btn fill" type="button">印刷する</button></div>
+  <div class="lab">移動チップ (本文から根拠へ)</div>
+  <div class="row"><a class="jump" href="#s6">2-1 購買の頻度 <i class="ar">→</i></a><a class="jump sm" href="#s6">小さい版 <i class="ar">→</i></a></div>
+  <div class="lab">道具のアイコン (ヘッダの帯の右) と hover の吹き出し</div>
+  <div class="row"><div class="hdbar">
+    <button type="button" class="tool"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg><span class="sr">分析条件と、使ったデータ</span></button>
+    <button type="button" class="tool on"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v18H5.5A1.5 1.5 0 0 1 4 19.5z"/><path d="M8 3v18"/><path d="M11.5 8h4"/><path d="M11.5 12h4"/></svg><span class="sr">用語と指標の定義 (開いている状態)</span></button>
+    <button type="button" class="tool"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5 12 14.5 16 10.5"/><path d="M4 18v2h16v-2"/></svg><span class="sr">ダウンロードと印刷</span></button>
+  </div><span class="tiptool">用語と指標の定義</span></div>
+  <div class="lab">ラベル (押せない、背景も枠もない)</div>
+  <div class="row"><span class="tag" style="flex:none">SUMMARY</span><span class="tag" style="flex:none">FINDINGS</span><span class="tag" style="flex:none">DECISION</span></div>
+</div></div>
+<div class="rule-note">押せるものとラベルの見分けは DESIGN.md §4「押せるものとラベル」が正。
+道具のアイコンの説明は hover で小さな吹き出し (Primary Dark の面・白文字・12px)。
+印刷では出さない。
+</div>
+</div>
+<div class="card" id="s6b">
+<h3>バッジとリンクのカード</h3>
+<p class="sub">バッジは押せない (枠を持つが、矢印を付けず hover で変えない)。
+リンクのカードは押せる (末尾の矢印と hover)。
+</p>
+<div class="rp"><div class="pad">
+  <div class="lab">バッジ (出所・段階)</div>
+  <div class="row"><span class="badge src">購買パネル</span><span class="badge src">意識調査 n=1,200</span><span class="badge c1">確度 高</span><span class="badge c2">確度 中</span><span class="badge c3">確度 低</span></div>
+  <div class="lab">リンクのカード (概要から各画面への入口)</div>
+  <div class="lcards">
+    <a class="lcard" href="#s6b"><p class="lcard-t">結論1 買う回数が増えている</p><p>平日の朝に集中。
+根拠は 2-1・2-2。
+</p></a>
+    <a class="lcard" href="#s6b"><p class="lcard-t">結論2 点数は減っている</p><p>2.1 点 → 1.6 点。
+まとめ買いの減少。
+</p></a>
+    <a class="lcard" href="#s6b"><p class="lcard-t">当面の推奨</p><p>朝の棚を切らさない、1個売りの価格を見直す。
+</p></a>
+  </div>
+</div></div>
+<div class="rule-note">バッジは 12px・内側 2px 10px・角丸 6px。
+出所は Background の面・Border 1px・Text Secondary、段階は Primary Dark (白文字) / Primary Light / 基調のマーカー。
+リンクのカードは Surface・Border 1px・角丸 6px・内側 18px 22px、題 16px・Primary Dark で末尾に →、hover で枠と面が変わり 1px 浮く。
+2〜3列。
+</div>
+</div>
+</section>
+
+<!-- ================= 7 テーマ差し替え ================= -->
+<section class="chapter" id="s7"><h2>7. テーマ差し替え</h2><p class="chapter-note">案件ごとに替えるものだけを変数で持つ。
+基調色・グレー・フォント・文字サイズ・余白・角丸・影は替えない。
+</p>
+<div class="card">
+<h3>替える変数の例 : 装飾のグラデーションの終点とカテゴリ色</h3>
+<p class="sub">FIGURE.md §1.2 の定番セットから選ぶ。
+切り替えて、HERO・移動チップ・章末バー・カテゴリ見出しが追随することを確かめる。
+</p>
+<div class="theme-sw" role="group" aria-label="テーマの切り替え">
+  <button type="button" class="on" data-theme="">青緑 (既定)</button>
+  <button type="button" data-theme="violet">紫</button>
+  <button type="button" data-theme="sky">水色</button>
+  <button type="button" data-theme="rose">ローズ</button>
+</div>
+<div class="rp" id="theme-demo" data-theme="">
+  <div class="page-hero"><div class="hero-in">
+    <h2 class="page-t">解説レポート</h2>
+    <p class="page-d">グラデーションの終点が <code style="background:rgba(255,255,255,0.2); color:inherit">--grad-end</code> で替わる。
+</p>
+  </div></div>
+  <div class="page">
+    <div class="rcard">
+      <div class="card-h"><h3 class="card-t"><span class="tag">FINDINGS</span><span class="idbox no">2-1</span>購買の頻度</h3></div>
+      <div class="h4n cat" style="margin-top:0"><span class="num">1</span><h4 class="ttl">カテゴリ色の小見出し</h4></div>
+      <div class="prose"><p>本文の色・グレー・余白は替わらない。
+</p></div>
+      <div class="reflist"><span>根拠を見る</span><a class="jump" href="#s7">2-2 時間帯の分布 <i class="ar">→</i></a></div>
+      <div class="chap-next"><a class="chap-next-b" href="#s7"><span class="chap-next-l"><small>次の章</small><b>3. 推奨</b></span><span class="chap-next-go">読む →</span></a></div>
+    </div>
+  </div>
+</div>
+<div class="scroll-x" style="margin-top:20px"><table class="t">
+<tr><th>替えるもの</th><th>変数</th><th>例</th></tr>
+<tr><td>レポート名・分析期間</td><td>HTML の h1 と <code>.app-scope</code></td><td>コンビニパン 購買分析レポート / 2024-2026年</td></tr>
+<tr><td>HERO の画像</td><td><code>--hero-img</code></td><td>未指定なら画像なし (§3)</td></tr>
+<tr><td>装飾のグラデーションの終点</td><td><code>--grad-end</code></td><td>既定は青緑 (CAT-2)</td></tr>
+<tr><td>章・カテゴリの色</td><td><code>--cat-1</code> 〜 <code>--cat-5</code></td><td>FIGURE.md §1.2 の定番セットの順</td></tr>
+<tr><td>下の帯の文言</td><td>HTML の <code>.app-ft</code></td><td>生成日・ガイドラインの版</td></tr>
+</table></div>
+<div class="rule-note">案件の都合でフォントの並び順を変えるとき (Windows の BIZ UDPGothic など) は、案件側の CSS で <code>--font</code> を上書きする。
+REPORT.md には足さない。
+</div>
+</div>
+</section>
+
+<!-- ================= 8 図と表の枠 ================= -->
+<section class="chapter" id="s8"><h2>8. 図と表の枠</h2><p class="chapter-note">グラフ・表そのものは FIGURE.md が正。
+ここでは、それを載せる枠と、枠に付く道具だけを決める。
+</p>
+<div class="card" id="s81">
+<h3>8.1 図の枠 / 8.2 図の操作</h3>
+<p class="sub">図番号 (章番号つき)・題・補足・描画領域・注記の5段。
+2列のグリッドに並べ、1枚だけ横に広げるときは2列ぶち抜き。
+系列の切り替えチップは枠の右上に置く。
+この見本では描画領域にグラフを入れず、高さだけを示す。
+</p>
+<div class="rp"><div class="pad">
+  <div class="figs">
+    <div class="fig">
+      <div class="fig-h"><div><div class="fig-k">図 2-1</div><h4 class="fig-t">週2回以上の購買者の割合</h4><p class="fig-s">2024年 → 2026年、平日と休日</p></div>
+        <div class="fig-opts"><button class="fopt" type="button" aria-pressed="true">割合</button><button class="fopt" type="button" aria-pressed="false">人数</button></div></div>
+      <div class="fig-c short">描画領域 (高さ 400px)</div>
+      <p class="fig-n">出典 : 購買パネル (n=4,800)。
+</p>
+    </div>
+    <div class="fig">
+      <div class="fig-h"><div><div class="fig-k">図 2-2</div><h4 class="fig-t">時間帯別の購買の分布</h4><p class="fig-s">1時間ごと、平日</p></div>
+        <div class="fig-opts"><button class="fopt fchip" type="button" aria-pressed="true">2024年</button><button class="fopt fchip" type="button" aria-pressed="false">2025年</button><button class="fopt fchip" type="button" aria-pressed="true">2026年</button></div></div>
+      <div class="fig-c short">描画領域 (高さ 400px)</div>
+      <p class="fig-n">出典 : 購買パネル (n=4,800)。
+</p>
+    </div>
+    <div class="fig w2">
+      <div class="fig-h"><div><div class="fig-k">図 2-3</div><h4 class="fig-t">2列ぶち抜きの枠</h4><p class="fig-s">横に長い時系列など</p></div></div>
+      <div class="fig-c short">描画領域 (高さ 460px)</div>
+    </div>
+  </div>
+</div></div>
+<div class="rule-note"><strong>枠 :</strong> Surface・Border 1px・角丸 8px・影 Level 1、内側の余白 22px 24px。
+図番号は「図 2-1」のように章番号つきで 12px・太字・Primary Dark、題は h4 タグで 16px・太字、補足は 12px・Text Secondary、注記は 12px・Text Secondary。
+画像で渡された図版は、既定では FIGURE.md に従って Chart.js か SVG で描き直す (数値は骨子の表か値ラベルから、推定しない)。
+描き直せないものだけ画像のまま載せ、枠の題を付けず注記に出典だけを置き、高さは画像の比率に従い、2列にしない。
+カードの中に入れ子で置くときは影を付けない。
+<strong>操作 :</strong> ピル形のチップ。
+押した状態は Primary Dark の塗り、系列チップは押すと基調の地、外すと 55% の薄さと取り消し線。
+印刷では出さない。
+</div>
+</div>
+<div class="card" id="s83">
+<h3>8.3 表の枠と道具 / 8.4 表の見た目</h3>
+<p class="sub">上のバーに注記と道具 (CSV・絞り込み)。
+見出し行は Primary の面、罫線は FIGURE.md §2.6 の基本形 (縦罫と外枠あり)、数値は右寄せ、強調行は基調の地、数値の下にデータバー。
+</p>
+<div class="rp"><div class="pad">
+  <div class="tbl">
+    <div class="tbar"><span class="tcap">週2回以上の購買者の割合 (%)。
+並べ替えは見出しを押す。
+</span>
+      <div class="ttools"><input class="tsearch" type="search" id="tsearch-demo" placeholder="絞り込み" aria-label="表を絞り込む"><button class="btn sm" type="button">CSV で保存</button></div></div>
+    <div class="tw"><table class="dt">
+      <thead><tr><th>時間帯</th><th class="num" data-sort="desc">2026年<i class="sort"></i></th><th class="num">2024年<i class="sort"></i></th><th class="num">差 (pt)<i class="sort"></i></th><th>読み</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>平日 7〜9時</td><td class="num bar"><span>46.2</span><i class="b" style="width:92%"></i></td><td class="num bar"><span>38.1</span><i class="b" style="width:76%"></i></td><td class="num">+8.1</td><td>増加のほとんどがここ</td></tr>
+        <tr><td>平日 12〜14時</td><td class="num bar"><span>21.4</span><i class="b" style="width:43%"></i></td><td class="num bar"><span>20.9</span><i class="b" style="width:42%"></i></td><td class="num">+0.5</td><td>横ばい</td></tr>
+        <tr><td>平日 17〜20時</td><td class="num bar"><span>17.8</span><i class="b" style="width:36%"></i></td><td class="num bar"><span>19.0</span><i class="b" style="width:38%"></i></td><td class="num bar"><span>-1.2</span><i class="b neg" style="width:12%"></i></td><td>わずかに減</td></tr>
+        <tr><td>休日</td><td class="num bar"><span>30.5</span><i class="b" style="width:61%"></i></td><td class="num bar"><span>30.2</span><i class="b" style="width:60%"></i></td><td class="num">+0.3</td><td>変化なし</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div></div>
+<div class="rule-note"><strong>枠 :</strong> 横スクロール・表の罫線 1px・角丸 6px (外周の線はこの枠だけ)。
+<strong>表 :</strong> 見出し行は Primary の面・白文字・14px、縦罫・横罫・外枠とも表の罫線 (FIGURE.md §1.3) 1px、文字 14px・行間 1.6・余白 12px 14px。
+数値の列は右寄せで桁をそろえ、強調行は基調の地と太字、見出し列は塗らない、hover は基調のマーカー。
+データバーは数値の下に左から 4px、Primary Light の 42% (強調行は Primary Dark、負の値は弱い群グレー)。
+表の色の役割は FIGURE.md §2.6 に合わせてあり、列幅も FIGURE.md §2 を参照する。
+</div>
+</div>
+</section>
+
+<!-- ================= 9 重ねて出すもの ================= -->
+<section class="chapter" id="s9"><h2>9. 重ねて出すもの</h2><p class="chapter-note">モーダル (白面・暗幕つき) / 用語ツールチップ (白面・Border) / 道具の説明 (濃い面、§6) の3種類。
+同じ画面に同時に2つ以上は出さない。
+</p>
+<div class="card" id="s91">
+<h3>9.1 モーダル</h3>
+<p class="sub">暗幕は Text Primary の 40%。
+白面・角丸 8px・影 Level 3、右上に閉じる。
+この見本では画面に固定せず、枠の中に置いている。
+</p>
+<div class="lab">用語の一覧 (広い版・検索つき)</div>
+<div class="rp"><div class="modal-back">
+  <div class="modal wide" role="dialog" aria-label="用語と指標の定義">
+    <button class="modal-x" type="button" aria-label="閉じる">×</button>
+    <h3 class="modal-t">用語と指標の定義</h3>
+    <p class="modal-d">このレポートで使う指標の計算方法。
+</p>
+    <input class="gl-search" type="search" id="gl-search-demo" placeholder="用語を探す" aria-label="用語を探す">
+    <div class="gl-sec-t">購買</div>
+    <div class="gl-i on"><p class="gl-k">購買頻度</p><p class="gl-v">対象期間に、同じ人がパンを買った回数。
+週あたりに直して示す。
+</p></div>
+    <div class="gl-i"><p class="gl-k">1回あたり点数</p><p class="gl-v">1回の会計で買ったパンの個数の平均。
+</p></div>
+    <div class="gl-sec-t">調査</div>
+    <div class="gl-i"><p class="gl-k">意識調査</p><p class="gl-v">2026年9月、20〜60代の 1,200人にウェブで実施。
+</p></div>
+  </div>
+</div></div>
+<div class="lab">保存と印刷 (標準の幅)</div>
+<div class="rp"><div class="modal-back">
+  <div class="modal" role="dialog" aria-label="ダウンロードと印刷">
+    <button class="modal-x" type="button" aria-label="閉じる">×</button>
+    <h3 class="modal-t">ダウンロードと印刷</h3>
+    <div class="dl-row"><div class="dl-i"><b>集計データ (xlsx)</b><span>すべての表を1冊にまとめたもの。
+</span></div><button class="btn" type="button">保存</button></div>
+    <div class="dl-row"><div class="dl-i"><b>このレポートを印刷</b><span>A4 縦。
+レールと移動のボタンは出ない。
+</span></div><button class="btn fill" type="button">印刷する</button></div>
+  </div>
+</div></div>
+<div class="rule-note">白面・角丸 8px・影 Level 3 (DESIGN.md §6 のモーダル)。
+幅は min(680px, 100%)、一覧を出す広い版は 880px。
+高さは最大 84vh で、超える分は中でスクロール。
+題は 20px・Primary Dark、閉じるは右上の × (24px・弱い群グレー)。
+暗幕を押しても Esc でも閉じる。
+印刷では出さない。
+</div>
+</div>
+<div class="card" id="s92">
+<h3>9.2 用語ツールチップ</h3>
+<p class="sub">本文の用語に Primary の点線の下線。
+hover で白面の吹き出し (最大 340px)。
+</p>
+<div class="rp"><div class="pad">
+  <div class="prose" style="margin:0 0 14px"><p style="margin:0">週に2回以上パンを買う人の <span class="term">購買頻度</span> は、2024年から2026年で 8 ポイント上がった。
+</p></div>
+  <span class="tip"><b>購買頻度</b>対象期間に、同じ人がパンを買った回数。
+週あたりに直して示す。
+</span>
+</div></div>
+<div class="rule-note">吹き出しは Surface・Border 1px・角丸 6px・影 Level 2、内側 12px 16px。
+文字は 12px・行間 1.7、用語名は太字・Primary Dark で1行目。
+説明が長いときは吹き出しに収めず、§9.1 の一覧へ誘導する。
+</div>
+</div>
+</section>
+
+<!-- ================= 10 挿絵 ================= -->
+<section class="chapter" id="s10"><h2>10. 挿絵</h2><p class="chapter-note">文字だけのカードや節が続くところに、題材に合う挿絵を置く。
+作り方は SLIDE.md §5.3 (社内の挿絵ツールで案件ごとに用意)、ここでは置き方だけ。
+検討版。
+</p>
+<div class="card">
+<h3>カードの右上に置く</h3>
+<p class="sub">幅 160〜240px、カードの幅の 1/4 まで。
+本文を回り込ませ、流れを切らない。
+この見本では挿絵の代わりに枠だけを置いている。
+</p>
+<div class="rp"><div class="pad">
+  <div class="rcard" style="margin:0">
+    <div class="card-h"><h3 class="card-t"><span class="tag">FINDINGS</span><span class="idbox no">1-1</span>買う回数が増えている</h3></div>
+    <div class="illust"><div class="illust-ph">挿絵<br>(朝のパン売場)</div></div>
+    <div class="prose">
+      <p>週に2回以上パンを買う人は、2024年の <strong>38%</strong> から2026年の <strong>46%</strong> に増えた。
+増えたのは平日の朝で、休日はほぼ変わらない。
+</p>
+      <p>増加分の 8 ポイントのうち 7 ポイントが平日の 7〜9 時に入る。
+まとめ買いから、その日の分だけ買う行動に移っている。
+</p>
+      <p>品ぞろえは「種類を増やす」より「朝に切らさない」に寄せたい。
+</p>
+    </div>
+  </div>
+</div></div>
+<div class="rule-note">1画面に 1〜2 点、同じ絵を同じレポートで2回使わない。
+骨子のキーワードに合う絵を案件の挿絵フォルダから選び、合うものが無ければ置かない。
+透過 PNG か WebP を img で置く (印刷でも残る)。
+挿絵の色味が基調とぶつかるときは置かない。
+</div>
+</div>
+</section>
+
+<!-- ================= 11 骨子からの組み立て ================= -->
+<section class="chapter" id="s11"><h2>11. 骨子からの組み立て</h2><p class="chapter-note">骨子の段落をどの部品に割り当てるか。
+文章は足さない・言い換えない、見せ方だけを変える。
+本文は REPORT.md §11、ここは早見。
+</p>
+<div class="card">
+<h3>段落の割り当て</h3>
+<div class="scroll-x"><table class="t">
+<tr><th>骨子の形</th><th>部品</th><th>見本</th></tr>
+<tr><td>太字だけの段落 (節の結論)</td><td>強調段落</td><td><a href="#s54">§5.4</a></td></tr>
+<tr><td>数値を含む短い文が 2〜3 つ</td><td>要点</td><td><a href="#s54">§5.4</a></td></tr>
+<tr><td>指標名と数値の組が 3〜4 つ</td><td>KPI カード</td><td><a href="#s42">§4.2</a></td></tr>
+<tr><td>箇条書き 3〜6 項目、順番がある</td><td>番号つきの一覧</td><td><a href="#s4">§4</a></td></tr>
+<tr><td>箇条書き 3〜6 項目、順番がない</td><td>タイル・分類表</td><td>DIAGRAM.md §2.2</td></tr>
+<tr><td>各項目が「見出し : 説明」</td><td>リンクのカード・導入定義表</td><td><a href="#s6b">§6</a></td></tr>
+<tr><td>2つの対比</td><td>ビフォーアフター・バタフライ</td><td>DIAGRAM.md §2.6・§2.8</td></tr>
+<tr><td>手順・時系列</td><td>ステップ・ロードマップ</td><td>DIAGRAM.md §2.3〜§2.5</td></tr>
+<tr><td>表</td><td>表</td><td><a href="#s83">§8.3</a></td></tr>
+<tr><td>引用 1〜2 件で長い / 3 件以上で短い / 1人の深掘り</td><td>長い声 / 短い声の束 / 回答者カード</td><td><a href="#s55">§5.5</a></td></tr>
+<tr><td>画像 (グラフ・図解)</td><td>Chart.js・SVG・DIAGRAM の構図で描き直す (既定)</td><td><a href="#s81">§8.1</a></td></tr>
+<tr><td>用語の定義</td><td>モーダルとツールチップ</td><td><a href="#s91">§9</a></td></tr>
+</table></div>
+<div class="rule-note"><strong>文字量の上限 :</strong> 縛るのは文字の連続で、カードの長さではない。
+節とカードは 1 対 1、見出しの無い続きのカードは作らない。
+段落を続けてよいのは 2 つまでを目安に (言い換えになるときは 3 つまで)、4 つ目の前には図・要点・箇条書き・図解を挟む。
+文字だけのカードが 3 つ続いたら挿絵か図を挟む。
+1画面の高さは窓の 6 画面分 (約 5,000px、本文幅 1280px で測る) まで、超えたら画面を分ける。
+</div>
+</div>
+</section>
+
+<!-- ================= 12 印刷 ================= -->
+<section class="chapter" id="s12"><h2>12. 印刷</h2><p class="chapter-note">このページを印刷プレビューにすると、レール・移動チップ・章末バー・道具が消え、HERO が通常の色に戻る。
+</p>
+<div class="card">
+<h3>印刷での扱い</h3>
+<div class="scroll-x"><table class="t">
+<tr><th>部品</th><th>印刷での扱い</th></tr>
+<tr><td>ヘッダの帯</td><td>背景を消し、レポート名だけ残す</td></tr>
+<tr><td>左レール・移動チップ・章末バー・道具のアイコン・図の操作・表の道具・モーダル・ツールチップ</td><td>出さない</td></tr>
+<tr><td>HERO</td><td>帯をやめ、見出しを Primary Dark の文字に戻す</td></tr>
+<tr><td>カード</td><td>面の色と Border は残す (<code>print-color-adjust: exact</code>)</td></tr>
+<tr><td>用紙</td><td>A4・余白 14mm、カードの途中で改ページしない</td></tr>
+</table></div>
+</div>
+</section>
+
+<footer class="page-foot">
+  2026/10/21 時点の検討版 v1。
+  規約の本文は <code>design-system</code> の <code>REPORT.md</code> を一次情報源とする。
+  グラフ・表は <code>FIGURE.md</code> と <a href="figure.html">figure.html</a>、図解は <code>DIAGRAM.md</code> と <a href="diagram.html">diagram.html</a> を参照。
+</footer>
+
+</div>
+<script>
+(function(){
+  var demo=document.getElementById('theme-demo');
+  var sw=document.querySelectorAll('.theme-sw button');
+  sw.forEach(function(b){
+    b.addEventListener('click',function(){
+      demo.setAttribute('data-theme',b.getAttribute('data-theme'));
+      sw.forEach(function(x){x.classList.toggle('on',x===b)});
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -37,6 +37,7 @@ description: |
 `FIGURE.md` が一次情報源。
 スライドを作る・直すときは `SLIDE.md` も読む。
 図解を作る・直すときは `DIAGRAM.md` も読む。
+HTML レポート (ブラウザで読む納品物) の画面を組む・直すときは `REPORT.md` も読む。
 
 https://github.com/komorebi-tools/design-system/blob/main/FIGURE.md
 

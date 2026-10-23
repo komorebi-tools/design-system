@@ -64,6 +64,8 @@
   CTAボタン、リンク、アクセントに使用
 - **Primary Light** (`#9BB0D0`): 背景のアクセント、ホバー状態の背景
 - **Primary Dark** (`#5A74A3`): ホバー・プレス時のボタン色
+- **Primary Navy** (`#3E5A86`): 白文字を乗せる帯の終点 (HTML レポートのヘッダの帯、Primary Dark → Primary Navy の縦のグラデーション)。
+  文字には使わない (白文字との比 6.97、Primary Dark 上の 4.71 より読みやすい)
 
 ### Secondary / Accent (セカンダリカラー)
 
@@ -97,6 +99,7 @@
 図表 (グラフ・図解・表) とスライドの配色は [FIGURE.md](FIGURE.md)、スライド固有の規約 (フォント・配置・テーマ配色) は [SLIDE.md](SLIDE.md) を参照する。
 色の値の一次情報源はこのファイルのままで、`FIGURE.md`・`SLIDE.md` は使い方とそれぞれ固有の規約だけを持つ。
 図表のプレビューは [figure.html](figure.html)、整理の図 (図解) の構図は [DIAGRAM.md](DIAGRAM.md) とそのプレビュー [diagram.html](diagram.html)。
+HTML レポートの画面の骨格・ナビ・部品は [REPORT.md](REPORT.md) とそのプレビュー [report.html](report.html)。
 
 ---
 
@@ -395,6 +398,7 @@ Spacing Scale に無い値を使うときも偶数にそろえる (16px の文�
 Primary Color: #6E87B6
 Primary Dark:  #5A74A3
 Primary Light: #9BB0D0
+Primary Navy:  #3E5A86
 Accent:        #C4A55A
 Accent Dark:   #B0923E
 Accent Light:  #E0D5A8
