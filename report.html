@@ -145,7 +145,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
   /* ---- 替えるもの : 案件ごとに :root で上書きする (REPORT.md §7) ---- */
   --hero-img:none;
   --grad-end:var(--cat2-fill);
-  --grad-deco:linear-gradient(90deg, var(--primary-dark) 0%, var(--grad-end) 100%);
+  --grad-deco:linear-gradient(90deg, var(--primary-dark) 0%, var(--primary-dark) 40%, var(--grad-end) 100%); /* 白文字を読ませるので青の側を 40% まで取る (DIAGRAM.md 1.5) */
   --cat-1:var(--cat1-fill); --cat-2:var(--cat2-fill); --cat-3:var(--cat3-fill); --cat-4:var(--cat4-fill); --cat-5:var(--cat5-fill);
   --cat-c:var(--cat2-text);
   container-type:inline-size;
@@ -161,7 +161,8 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp button{font-family:inherit}
 .rp .paren{font-size:max(11px, 0.78em); color:var(--text-2); letter-spacing:0}
 .rp h2 .paren,.rp h3 .paren,.rp h4 .paren{color:inherit; opacity:0.66}
-.rp .num{font-variant-numeric:tabular-nums}
+.rp .num{font-variant-numeric:tabular-nums; white-space:nowrap} /* 数値は途中で折り返さない (5.6) */
+.rp .nw{white-space:nowrap}
 
 /* ---- §1 ヘッダの帯 ---- */
 .rp .app-hd{background:var(--primary-dark); background-image:linear-gradient(180deg, var(--primary-dark) 0%, var(--navy) 100%); color:var(--surface); min-height:var(--hd-h)}
@@ -170,7 +171,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .app-ttl:hover{background:rgba(255,255,255,0.1)}
 .rp .app-mark{width:36px; height:36px; border-radius:var(--radius-l); background:rgba(255,255,255,0.16); display:grid; place-items:center; flex:none}
 .rp .app-mark svg{display:block}
-.rp .app-name{font-size:var(--fs-20); font-weight:700; line-height:1.3; font-feature-settings:"palt" 1; white-space:nowrap}
+.rp .app-name{font-size:var(--fs-20); font-weight:700; line-height:1.3; font-feature-settings:"palt" 1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden} /* 長いレポート名は 2 行まで折り返す、「…」で切らない */
 .rp .app-scope{display:block; font-size:var(--fs-12); color:rgba(255,255,255,0.66); white-space:nowrap}
 /* §2.1 画面切替タブ */
 .rp .nav{flex:1 1 auto; display:flex; gap:2px; align-items:stretch; min-width:0; margin-left:14px}
@@ -213,7 +214,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 /* ---- §3 HERO (画面見出しの帯) ---- */
 .rp .page-hero{
   position:relative; color:var(--surface); background-color:var(--bg);
-  background-image:linear-gradient(90deg, rgba(90,116,163,0.96) 0%, var(--grad-end) 100%);
+  background-image:linear-gradient(90deg, rgba(90,116,163,0.96) 0%, rgba(90,116,163,0.96) 40%, var(--grad-end) 100%); /* 青の側を 40% まで、説明文は 720px までに収めて青緑の上に置かない */
 }
 .rp .page-hero.has-img{
   background-image:
@@ -227,7 +228,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 }
 .rp .hero-in{position:relative; max-width:1280px; margin:0 auto; padding:30px 24px 136px} /* 下 136px = 溶かし 120px ＋ 本文の重なり 32px の内側に説明文を置かない */
 .rp .page-hero .page-t{color:var(--surface); margin:0 0 4px}
-.rp .page-hero .page-d{color:rgba(255,255,255,0.92); max-width:1000px; margin:0}
+.rp .page-hero .page-d{color:rgba(255,255,255,0.92); max-width:720px; margin:0}
 .rp .page-hero + .page{position:relative; margin-top:-32px; padding-top:0}
 /* ---- §4 セクション ---- */
 .rp .page{max-width:1280px; margin:0 auto; padding:24px 24px 64px}
@@ -458,15 +459,17 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .box.line .box-l{color:var(--text-3)}
 .rp .box p{margin:0 0 8px; font-size:var(--fs-14); line-height:var(--lh-body)}
 .rp .box p:last-child{margin-bottom:0}
-.rp .kpis{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px}
-.rp .kpi{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); padding:20px 22px; box-shadow:var(--shadow-1); min-width:0}
-.rp .kpi-l{font-size:var(--fs-14); color:var(--text); font-weight:700; line-height:var(--lh-tight)}
-.rp .kpi-v{font-size:var(--fs-34); font-weight:700; line-height:1.25; margin:6px 0 4px; font-variant-numeric:tabular-nums; color:var(--primary-dark)}
+.rp .kpis{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); grid-template-rows:auto auto auto auto; gap:0 16px}
+.rp .kpi{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l); padding:20px 22px; box-shadow:var(--shadow-1); min-width:0; display:grid; grid-row:span 4; grid-template-rows:subgrid; margin-bottom:16px} /* ラベル・値・補足・出典の 4 行を 4 枚で揃える */
+.rp .kpi.strong{border:1.5px solid var(--primary-light)} /* 1 画面に 1 枚まで */
+.rp .kpi-l{font-size:var(--fs-14); color:var(--text); font-weight:700; line-height:var(--lh-tight); align-self:start}
+.rp .kpi-v{font-size:var(--fs-34); font-weight:700; line-height:1.25; margin:6px 0 4px; font-variant-numeric:tabular-nums; color:var(--primary-dark); white-space:nowrap}
 .rp .kpi-v small{font-size:var(--fs-16); font-weight:700; margin-left:2px}
 .rp .kpi-v.none{color:var(--text-3); font-weight:400}
 .rp .kpi-c{font-size:var(--fs-12); color:var(--text); line-height:var(--lh-body)}
 .rp .kpi-s{font-size:var(--fs-12); color:var(--text-2); margin-top:8px}
 @container (max-width:1180px){ .rp .kpis{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))} }
+@supports not (grid-template-rows:subgrid){ .rp .kpi{display:block} .rp .kpi-l{min-height:calc(var(--fs-14) * var(--lh-tight) * 2)} } /* subgrid が無いブラウザではラベルを 2 行分で固定 */
 /* ---- §5.4 強調段落と要点 / §5.5 引用 ---- */
 .rp .prose p.key{background:var(--tint); border-radius:var(--radius-l); padding:20px 24px; margin:14px 0 16px}
 .rp .kp{background:var(--tint); border-radius:var(--radius-l); padding:16px 20px 6px; margin:4px 0 20px}
@@ -944,10 +947,13 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
 <div class="card" id="s42">
 <h3>4.2 KPI カード</h3>
 <p class="sub">ダッシュボードの画面で、主要な指標を4枚並べる。
+ラベルの行数が違っても値の行を 4 枚で揃え、値は途中で折り返さない。
+補足 (読み方) と出典・条件は別の行。
+強調は 1 画面に 1 枚まで (Primary Light の枠)。
 </p>
 <div class="rp"><div class="pad">
   <div class="kpis">
-    <div class="kpi"><div class="kpi-l">週2回以上の購買者</div><div class="kpi-v">46<small>%</small></div><div class="kpi-c">2024年の 38% から 8 ポイント増。
+    <div class="kpi strong"><div class="kpi-l">週2回以上パンを買う人 (コンビニを月 2 回以上使う人のうち)</div><div class="kpi-v">46<small>%</small></div><div class="kpi-c">2024年の 38% から 8 ポイント増。
 </div><div class="kpi-s">購買パネル・2026年</div></div>
     <div class="kpi"><div class="kpi-l">1回あたりの点数</div><div class="kpi-v">1.6<small>点</small></div><div class="kpi-c">2.1 点から減少。
 その日の分だけ買う。
