@@ -628,7 +628,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 <br>
     見本の題材 (コンビニのパンの調査) と数値は、すべてこのページのために作った架空のもの。
 <br>
-    2026/10/21 時点の検討版 v1。
+    2026/11/2 時点の検討版 v2。
   </p>
 </header>
 
@@ -739,7 +739,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
       </div>
     </div>
   </div>
-  <footer class="app-ft"><div class="app-ft-in"><span>コンビニパン 購買分析レポート</span><span>生成 2026/10/21</span><span>ガイドライン REPORT v1</span></div></footer>
+  <footer class="app-ft"><div class="app-ft-in"><span>コンビニパン 購買分析レポート</span><span>生成 2026/11/2</span><span>ガイドライン REPORT.md v2 (2026/11/2)</span></div></footer>
 </div>
 <div class="rule-note"><strong>本文の幅は最大 1280px、左右の余白 24px (DESIGN.md §5 Container と同じ)。
 </strong>
@@ -850,7 +850,7 @@ HERO は消さずに上に残す。
 本文の始まりの要素に <code>scroll-margin-top</code> (固定のヘッダの高さ ＋ 16px) を付け、<code>scrollIntoView</code> で移動する。
 章末バーで次へ進んだときも同じ。
 <strong>項目が1つの画面 :</strong> 節の無い概要など、レールの項目が1つしか無い画面ではレールを出さない。
-本文の幅と左の位置はレールのある画面と同じにして、タブを切り替えても本文が横に動かないようにする。
+本文は全幅 (最大 1280px) に広げ、左端を HERO の見出しとヘッダのレポート名にそろえる。
 </div>
 </div>
 
@@ -1596,7 +1596,7 @@ hover で白面の吹き出し (最大 340px)。
 <h3>段落の割り当て</h3>
 <div class="scroll-x"><table class="t">
 <tr><th>骨子の形</th><th>部品</th><th>見本</th></tr>
-<tr><td>太字だけの段落 (節の結論)</td><td>強調段落</td><td><a href="#s54">§5.4</a></td></tr>
+<tr><td>太字だけの段落 (節の結論)</td><td>「。」で終わるか 40 字を超えれば強調段落、それ以外は h4</td><td><a href="#s54">§5.4</a></td></tr>
 <tr><td>数値を含む短い文が 2〜3 つ</td><td>要点</td><td><a href="#s54">§5.4</a></td></tr>
 <tr><td>指標名と数値の組が 3〜4 つ</td><td>KPI カード</td><td><a href="#s42">§4.2</a></td></tr>
 <tr><td>箇条書き 3〜6 項目、順番がある</td><td>番号つきの一覧</td><td><a href="#s4">§4</a></td></tr>
@@ -1605,6 +1605,7 @@ hover で白面の吹き出し (最大 340px)。
 <tr><td>2つの対比</td><td>ビフォーアフター・バタフライ</td><td>DIAGRAM.md §2.6・§2.8</td></tr>
 <tr><td>手順・時系列</td><td>ステップ・ロードマップ</td><td>DIAGRAM.md §2.3〜§2.5</td></tr>
 <tr><td>表</td><td>表</td><td><a href="#s83">§8.3</a></td></tr>
+<tr><td>トグル (Notion の折りたたみ)</td><td>開いて載せる (見出しは h4、中身は上の表どおり)</td><td>REPORT.md §11.2</td></tr>
 <tr><td>引用 1〜2 件で長い / 3 件以上で短い / 1人の深掘り</td><td>長い声 / 短い声の束 / 回答者カード</td><td><a href="#s55">§5.5</a></td></tr>
 <tr><td>画像 (グラフ・図解)</td><td>Chart.js・SVG・DIAGRAM の構図で描き直す (既定)</td><td><a href="#s81">§8.1</a></td></tr>
 <tr><td>用語の定義</td><td>モーダルとツールチップ</td><td><a href="#s91">§9</a></td></tr>
@@ -1613,7 +1614,9 @@ hover で白面の吹き出し (最大 340px)。
 カードの境目は骨子の見出しの境目だけ (既定は節ごとに 1 枚、短い章は 1 枚にまとめてよい) 、見出しの無い続きのカードは作らない。
 段落を続けてよいのは 2 つまでを目安に (言い換えになるときは 3 つまで)、4 つ目の前には図・要点・箇条書き・図解を挟む。
 文字だけのカードが 3 つ続いたら挿絵か図を挟む。
-1画面の高さは約 8,000px (窓の高さ 800px で 10 画面分、本文幅 1280px で測る) まで、超えたら画面を分ける。
+段落 (地の文) から図解は起こさない (データがあればグラフ、依頼に指示があれば図を足す)。
+1表示 (タブか、タブの中で切り替える 1 つ) の高さは約 8,000px (窓の高さ 800px で 10 画面分、本文幅 1280px で測る) まで、章を単位にし、超えるときだけ節の境目で分ける。
+約 2,000px に届かない章は、隣の章と同じ表示にまとめる (概要と付録は除く)。
 </div>
 </div>
 </section>
@@ -1635,7 +1638,7 @@ hover で白面の吹き出し (最大 340px)。
 </section>
 
 <footer class="page-foot">
-  2026/10/21 時点の検討版 v1。
+  2026/11/2 時点の検討版 v2。
   規約の本文は <code>design-system</code> の <code>REPORT.md</code> を一次情報源とする。
   グラフ・表は <code>FIGURE.md</code> と <a href="figure.html">figure.html</a>、図解は <code>DIAGRAM.md</code> と <a href="diagram.html">diagram.html</a> を参照。
 </footer>
