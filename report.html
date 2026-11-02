@@ -142,6 +142,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
   --ls:0.05em;
   --sp-paragraph:20px; --sp-subsection:32px; --sp-section:40px;
   --hd-h:80px;
+  --ease:cubic-bezier(.4,.4,0,1); --ease-out:cubic-bezier(.16,1,.3,1); /* 短い変化 / 現れる・伸びる動き (REPORT.md 8.2) */
   /* ---- 替えるもの : 案件ごとに :root で上書きする (REPORT.md §7) ---- */
   --hero-img:none;
   --grad-end:var(--cat2-fill);
@@ -549,6 +550,45 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp[data-theme="sky"]{--grad-end:var(--cat3-fill); --cat-c:var(--cat3-text)}
 /* 画像ありの見本 : 外部参照を足さないので、写真の代わりに CSS で作った模様を画像の位置に置く */
 .rp .page-hero.demo-img{--hero-img:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.35) 0 12%, transparent 13%), radial-gradient(circle at 70% 70%, rgba(255,255,255,0.25) 0 18%, transparent 19%), linear-gradient(135deg, #7A94C2 0%, #4E6690 60%, #3C4F70 100%)}
+/* 2026/11/2 に足した見本 : 章の切り替え (2.2)・短い章を1枚に (4)・長い声の2列 (5.5)・値カラムの見出しと要点の箱 (8.1) */
+.rp.sw{border:0; border-radius:0; overflow:visible; background:transparent}
+.rp .sw-scroll{height:560px; overflow:auto; position:relative; border:1px solid var(--hairline); border-radius:var(--radius); background:var(--bg)}
+.rp .sw-scroll .app-hd{position:sticky; top:0; z-index:3}
+.rp .sw-scroll .content-start{scroll-margin-top:calc(var(--hd-h) + 16px)}
+.rp .sw-scroll [data-sw-ch]{min-height:520px} /* 見本は中身が短いので、章題をヘッダの下まで動かせるように高さを取る */
+.rp .sw-rail button{display:block; width:100%; text-align:left; font:inherit; font-size:var(--fs-12); line-height:1.5; border:0; background:transparent; color:var(--text); padding:6px 10px; border-radius:6px; cursor:pointer}
+.rp .sw-rail button.on{font-weight:700; color:var(--primary-dark); background:var(--tint)}
+.rp .sw-rail button:focus-visible{outline:2px solid var(--primary-dark); outline-offset:-2px}
+.rp .rcard .sec-in + .sec-in{border-top:1px solid var(--border); margin-top:var(--sp-subsection); padding-top:var(--sp-subsection)}
+.rp .rcard .sec-in > h3{font-size:var(--fs-24); font-weight:700; color:var(--text); line-height:var(--lh-head); margin:0 0 12px}
+.rp .part-lab{display:flex; align-items:center; gap:12px; font-size:var(--fs-14); font-weight:700; color:var(--primary-dark); letter-spacing:0.1em; margin:0 0 6px}
+.rp .part-lab::after{content:""; flex:1; height:1px; background:var(--primary-light)}
+.rp .rail-part{font-size:var(--fs-12); font-weight:700; color:var(--text-2); padding:10px 10px 4px}
+.rp .rail-part:first-child{padding-top:4px}
+.rp .voice-2col{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px}
+.rp .voice-2col .voice{margin:0}
+@container (max-width:1100px){ .rp .voice-2col{grid-template-columns:minmax(0,1fr)} }
+.rp .vbars{display:grid; grid-template-columns:9em minmax(0,1fr) 4.5em 4.5em; gap:6px 14px; align-items:center; font-size:var(--fs-12); line-height:1.5}
+.rp .vbars .vh{font-weight:700}
+.rp .vbars .vh.g1{color:var(--primary-dark)}
+.rp .vbars .vh.g2{color:var(--cat2-text)}
+.rp .vbars .tr{display:grid; gap:3px}
+.rp .vbars .tr i{display:block; height:9px; border-radius:0 2px 2px 0}
+.rp .vbars .tr i.g1{background:var(--primary-dark)}
+.rp .vbars .tr i.g2{background:var(--cat2-fill)}
+.rp .vbars .tr i{transform-origin:left center; transition:background .2s var(--ease); cursor:default}
+.rp .vbars.play .tr i{animation:vgrow .8s var(--ease-out) both}
+@keyframes vgrow{from{transform:scaleX(0)}to{transform:none}}
+.rp .vbars .tr i.g1:hover{background:var(--navy)}
+.rp .vbars .tr i.g2:hover{background:var(--cat2-text)}
+.rp .ftip{position:fixed; z-index:50; pointer-events:none; background:var(--primary-dark); color:var(--surface); font-size:var(--fs-12); line-height:1.5; padding:10px; border-radius:6px; box-shadow:var(--shadow-1); white-space:nowrap}
+.rp .ftip b{display:block; font-weight:700}
+@media (prefers-reduced-motion:reduce){ .rp .vbars.play .tr i{animation:none} .rp .vbars .tr i{transition:none} }
+@media print{ .rp .ftip{display:none} }
+.rp .vbars .v{font-variant-numeric:tabular-nums; white-space:nowrap}
+.rp .vbars .v.b{font-weight:700}
+.rp .fig-key{margin-top:16px; background:var(--tint); border-radius:var(--radius-l); padding:16px 20px; font-size:var(--fs-16); font-weight:700; line-height:var(--lh-body); color:var(--text)}
+.rp .fig-key .fig-key-l{display:block; font-size:var(--fs-14); letter-spacing:0.1em; color:var(--primary-dark); margin-bottom:4px}
 @media print{
   @page{size:A4 portrait; margin:14mm}
   .rp .rail,.rp .jump,.rp .chap-next,.rp .app-tools,.rp .tiptool,.rp .nav,.rp .app-scope,.rp .fig-opts,.rp .ttools,.rp .modal-back,.rp .tip{display:none !important}
@@ -768,6 +808,50 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 横並びでは現在地の角丸をなくし、下線だけにする。
 印刷では出さない。
 </div>
+<div class="lab" style="margin-top:22px">章を切り替えたとき : HERO を残して、本文の始まりへ移動する</div>
+<p class="sub">左の目次の章を押すと、ページの先頭へ戻らずに、固定のヘッダのすぐ下に章題が来る位置まで移動する。
+上へ戻ると HERO が見える。
+この見本は枠の中でスクロールする。
+</p>
+<div class="rp sw"><div class="sw-scroll" id="sw-scroll">
+  <header class="app-hd"><div class="app-hd-in"><div class="app-ttl"><div><span class="app-name">コンビニパン 購買分析レポート</span></div></div></div></header>
+  <div class="page-hero"><div class="hero-in"><h2 class="page-t">解説レポート</h2><p class="page-d">2024年から2026年の購買データから、朝食のパンがどう選ばれているかを読み解く。
+</p></div></div>
+  <div class="page"><div class="rail-layout">
+    <nav class="rail static" aria-label="見本の目次"><div class="rail-h">この画面の目次</div><div class="rail-list sw-rail">
+      <button type="button" class="on" data-sw="0">1 買う回数</button>
+      <button type="button" data-sw="1">2 時間帯</button>
+      <button type="button" data-sw="2">3 当面の推奨</button>
+    </div></nav>
+    <div>
+      <div data-sw-ch="0"><p class="page-t2 content-start">1 買う回数</p>
+        <div class="rcard"><h3 class="card-t">買う回数が増えている</h3><div class="prose"><p>週に2回以上パンを買う人は <strong>38% → 46%</strong> に増えた。
+増加分の多くは平日の朝に入る。
+</p><p>1回に買う点数は 2.1 点から 1.6 点に減り、その日の分だけを買う人が増えている。
+</p></div></div>
+        <div class="rcard"><h3 class="card-t">買う店が決まっている</h3><div class="prose"><p>朝に買う店は、通勤の道すじにある1〜2店に決まっている人が多い。
+棚に無いときは、別の店へ行くより、その日はあきらめる人が多い。
+</p></div></div></div>
+      <div data-sw-ch="1" hidden><p class="page-t2 content-start">2 時間帯</p>
+        <div class="rcard"><h3 class="card-t">平日の 7〜9 時に集中している</h3><div class="prose"><p>増加分の 8 ポイントのうち 7 ポイントが平日の 7〜9 時に入る。
+休日の購買はほぼ変わらない。
+</p></div></div>
+        <div class="rcard"><h3 class="card-t">夕方の購買は減っている</h3><div class="prose"><p>夕方の購買は、まとめ買いの減少とともに少しずつ減っている。
+</p></div></div></div>
+      <div data-sw-ch="2" hidden><p class="page-t2 content-start">3 当面の推奨</p>
+        <div class="rcard"><h3 class="card-t">朝 7〜9 時の棚を切らさない</h3><div class="prose"><p>回数が増えた時間帯に在庫を寄せる。
+1個売りの値ごろ感を優先する。
+</p></div></div></div>
+    </div>
+  </div></div>
+</div></div>
+<div class="rule-note"><strong>切り替えたときの位置 :</strong> 章や表示を切り替えたときは、ページの先頭 (HERO) まで戻さず、本文の始まり (章題の位置) へスクロールする。
+HERO は消さずに上に残す。
+本文の始まりの要素に <code>scroll-margin-top</code> (固定のヘッダの高さ ＋ 16px) を付け、<code>scrollIntoView</code> で移動する。
+章末バーで次へ進んだときも同じ。
+<strong>項目が1つの画面 :</strong> 節の無い概要など、レールの項目が1つしか無い画面ではレールを出さない。
+本文の幅と左の位置はレールのある画面と同じにして、タブを切り替えても本文が横に動かないようにする。
+</div>
 </div>
 
 <div class="card" id="s23">
@@ -923,6 +1007,59 @@ HERO の見出しは h2 (画面見出し) で、レポート名 (h1) はヘッ�
 カードは Surface の面・Border 1px・角丸 8px・影 Level 1、内側の余白 28px 32px。
 分類ラベル (FINDINGS・DECISION) は見出しの上に小さく置き、背景も枠も持たせない。
 </div>
+<div class="lab" style="margin-top:22px">骨子に部 (#) があるとき : 本文では部のラベル、レールでは押せない見出し (どちらも1回だけ)</div>
+<div class="rp"><div class="page" style="padding-top:16px; padding-bottom:24px">
+  <div class="rail-layout">
+    <nav class="rail static" aria-label="部の見本の目次"><div class="rail-list">
+      <div class="rail-part">調査の設計と、選択式設問から見えたこと</div>
+      <a class="rail-i on" href="#s4">1. 調査の設計</a>
+      <a class="rail-i" href="#s4">2. 朝に選ばれる理由</a>
+      <div class="rail-part">自由記述から見えたこと</div>
+      <a class="rail-i" href="#s4">3. よく出た言葉</a>
+    </div></nav>
+    <div>
+      <div class="part-lab">調査の設計と、選択式設問から見えたこと</div>
+      <p class="page-t2">1. 調査の設計</p>
+      <div class="rcard"><div class="prose"><p>購買パネルの3年分と、1,200人へのウェブ調査を組み合わせた。
+</p></div></div>
+      <p class="page-t2">2. 朝に選ばれる理由</p>
+      <div class="rcard"><h3 class="card-t">平日と休日</h3><div class="prose"><p>平日は時間、休日は手間のかけ方で理由が分かれる。
+</p></div></div>
+      <div class="part-lab">自由記述から見えたこと</div>
+      <p class="page-t2">3. よく出た言葉</p>
+    </div>
+  </div>
+</div></div>
+<div class="rule-note"><strong>部の題 :</strong> 本文では部のラベル (14px・太字・Primary Dark・字間 0.1em、右に Primary Light 1px の線) として部の最初に置き、左レールでは章のまとまりの上に押せない見出し (12px・太字・Text Secondary) として置く。
+どちらも1回だけで、章題・HERO の見出し・レールの押せる項目にはしない。
+タブと部が同じ範囲でも、HERO の見出しはタブの名前のまま。
+</div>
+<div class="lab" style="margin-top:22px">章が短いとき : 章を1枚のカードにまとめる (節は h3 のまま、罫で分ける)</div>
+<div class="rp"><div class="page" style="padding-top:8px; padding-bottom:24px">
+  <p class="page-t2">付録 調査の設計</p>
+  <div class="rcard" style="margin-bottom:0">
+    <div class="sec-in"><h3>調査の方法</h3><div class="prose"><p>購買パネルの3年分と、1,200人へのウェブ調査を組み合わせた。
+</p></div></div>
+    <div class="sec-in"><h3>対象者</h3><div class="prose"><p>週に1回以上コンビニでパンを買う、20〜60代の男女。
+</p></div></div>
+    <div class="sec-in"><h3>集計の条件</h3><div class="prose"><p>割合は小数第1位を四捨五入した。
+</p></div></div>
+  </div>
+</div></div>
+<div class="lab" style="margin-top:22px">節の無い章 : 本文を見出しの無いカード1枚に入れる</div>
+<div class="rp"><div class="page" style="padding-top:8px; padding-bottom:24px">
+  <p class="page-t2">まとめ</p>
+  <div class="rcard" style="margin-bottom:0"><div class="prose"><p>朝のパンは、回数が増えて1回の点数が減る方向に動いている。
+買う店と時間帯が決まっている人ほど、この傾向が強い。
+</p><p>次の調査では、休日の購買がなぜ動かないのかを確かめる。
+</p></div></div>
+</div></div>
+<div class="rule-note"><strong>カードの境目 :</strong> カードの境目は、骨子の見出しの境目にだけ置く。
+既定は節ごとに1枚で、章が短いとき (節が3つ以下で、まとめても窓の幅 1400px で約 1,500px まで) は章を1枚にまとめてよい。
+節の間は Border の罫と余白 (罫の上下 32px) で分ける。
+節の無い章の本文と、3段落以上ある章の導入文は、見出しの無いカード1枚に入れる (章題がすぐ上にあるので見出しを重ねない)。
+見出しの無いカードはこの2つだけで、節の途中で切った続きのカードは作らない。
+</div>
 </div>
 <div class="card" id="s41">
 <h3>4.1 面のボックス</h3>
@@ -1071,6 +1208,22 @@ SLIDE.md §5.3 のパターン C (引用は白のボックスで抜く) を HTML
   <div class="voice" style="margin-bottom:0"><span class="voice-q">“</span><p>休日は家族の分をまとめて買うので、朝とは別の店。
 </p><span class="voice-s">30代・主婦・週1回購入</span></div>
 </div></div>
+<div class="lab" style="margin-top:20px">長い声が 4 件以上続くとき (2列、骨子の順は左上から右へ)</div>
+<div class="rp"><div class="pad">
+  <div class="voice-2col">
+    <div class="voice"><span class="voice-q">“</span><p>朝は会社の近くで1個だけ買う。
+家で買いだめすると結局食べない。
+</p><span class="voice-s">30代・会社員・週3回購入</span></div>
+    <div class="voice"><span class="voice-q">“</span><p>曜日で決まった棚に行く。
+無いと別の店に行くより、その日はあきらめる。
+</p><span class="voice-s">40代・会社員・週2回購入</span></div>
+    <div class="voice"><span class="voice-q">“</span><p>甘いパンは週末だけにしている。
+平日はおかず系を1つと決めている。
+</p><span class="voice-s">20代・会社員・週4回購入</span></div>
+    <div class="voice"><span class="voice-q">“</span><p>子どもを送ったあとに寄るので、7時台に並んでいてほしい。
+</p><span class="voice-s">30代・会社員・週2回購入</span></div>
+  </div>
+</div></div>
 <div class="lab" style="margin-top:20px">長い声が 1 件だけのとき (吹き出し、上に「生活者の声」のピル)</div>
 <div class="rp"><div class="pad">
   <div class="voice solo"><span class="vpill">生活者の声</span><p>朝は会社の近くで1個だけ買う。
@@ -1122,6 +1275,8 @@ SLIDE.md §5.3 のパターン C (引用は白のボックスで抜く) を HTML
 短い声の束 : 白の箱 (Border 1px・角丸 6px・内側 10px 14px・14px) を2列、束の上に小さい見出し (12px・Accent Deep Dark・字間 0.14em)、各箱の頭に引用符 (Accent・20px・太字)。
 回答者カード : Surface・Border 1px・角丸 8px、上の帯 (ゴールドの淡い面、カテゴリ指定色があるときはその「地」) に属性メタ (12px・場面はピル) と見出しの声 (16px・太字・Text Primary・引用符は Accent)、下に h6 のラベルと本文の組。
 1つの節に束は1つまで、声の総数は 10 件を目安にする。
+長い声が 4 件以上続くときは2列 (間 16px、1100px 以下では1列)。
+「 / 」でつながれた声は1件のまま載せ、出所が別々に書いてあるときだけ分けてよい。
 本文は 16px・weight 400・行間 1.85 (引用だけ本文より広くてよい)。
 引用符は本文のフォント (明朝体は使わない)。
 </div>
@@ -1243,33 +1398,59 @@ REPORT.md には足さない。
 <div class="rp"><div class="pad">
   <div class="figs">
     <div class="fig">
-      <div class="fig-h"><div><div class="fig-k">図 2-1</div><h4 class="fig-t">週2回以上の購買者の割合</h4><p class="fig-s">2024年 → 2026年、平日と休日</p></div>
+      <div class="fig-h"><div><div class="fig-k">図2-1</div><h4 class="fig-t">週2回以上の購買者の割合</h4><p class="fig-s">2024年 → 2026年、平日と休日</p></div>
         <div class="fig-opts"><button class="fopt" type="button" aria-pressed="true">割合</button><button class="fopt" type="button" aria-pressed="false">人数</button></div></div>
       <div class="fig-c short">描画領域 (高さ 400px)</div>
       <p class="fig-n">出典 : 購買パネル (n=4,800)。
 </p>
     </div>
     <div class="fig">
-      <div class="fig-h"><div><div class="fig-k">図 2-2</div><h4 class="fig-t">時間帯別の購買の分布</h4><p class="fig-s">1時間ごと、平日</p></div>
+      <div class="fig-h"><div><div class="fig-k">図2-2</div><h4 class="fig-t">時間帯別の購買の分布</h4><p class="fig-s">1時間ごと、平日</p></div>
         <div class="fig-opts"><button class="fopt fchip" type="button" aria-pressed="true">2024年</button><button class="fopt fchip" type="button" aria-pressed="false">2025年</button><button class="fopt fchip" type="button" aria-pressed="true">2026年</button></div></div>
       <div class="fig-c short">描画領域 (高さ 400px)</div>
       <p class="fig-n">出典 : 購買パネル (n=4,800)。
 </p>
     </div>
     <div class="fig w2">
-      <div class="fig-h"><div><div class="fig-k">図 2-3</div><h4 class="fig-t">2列ぶち抜きの枠</h4><p class="fig-s">横に長い時系列など</p></div></div>
+      <div class="fig-h"><div><div class="fig-k">図2-3</div><h4 class="fig-t">2列ぶち抜きの枠</h4><p class="fig-s">横に長い時系列など</p></div></div>
       <div class="fig-c short">描画領域 (高さ 460px)</div>
     </div>
   </div>
 </div></div>
 <div class="rule-note"><strong>枠 :</strong> Surface・Border 1px・角丸 8px・影 Level 1、内側の余白 22px 24px。
-図番号は「図 2-1」のように章番号つきで 12px・太字・Primary Dark、題は h4 タグで 16px・太字、補足は 12px・Text Secondary、注記は 12px・Text Secondary。
+図番号は「図2-1」のように章番号つきで 12px・太字・Primary Dark、題は h4 タグで 16px・太字、補足は 12px・Text Secondary、注記は 12px・Text Secondary。
 画像で渡された図版は、既定では FIGURE.md に従って Chart.js か SVG で描き直す (数値は骨子の表か値ラベルから、推定しない)。
 描き直せないものだけ画像のまま載せ、枠の題を付けず注記に出典だけを置き、高さは画像の比率に従い、2列にしない。
 カードの中に入れ子で置くときは影を付けない。
 <strong>操作 :</strong> ピル形のチップ。
 押した状態は Primary Dark の塗り、系列チップは押すと基調の地、外すと 55% の薄さと取り消し線。
 印刷では出さない。
+</div>
+<div class="lab" style="margin-top:22px">値カラムが2列以上のとき (列の上に群の名前) と、画像の中にあった要点の箱</div>
+<div class="rp"><div class="pad">
+  <div class="fig">
+    <div class="fig-h"><div><div class="fig-k">図2-4</div><h4 class="fig-t">朝にパンを選ぶ理由 (平日と休日)</h4><p class="fig-s">複数回答、上位4項目</p></div></div>
+    <div class="vbars" id="vbars-demo">
+      <span></span><span></span><span class="vh g1">平日</span><span class="vh g2">休日</span>
+      <span>すぐ食べられる</span><span class="tr"><i class="g1" style="width:62%" data-tip-t="すぐ食べられる" data-tip-v="平日 62%"></i><i class="g2" style="width:31%" data-tip-t="すぐ食べられる" data-tip-v="休日 31%"></i></span><span class="v b">62%</span><span class="v">31%</span>
+      <span>1個から買える</span><span class="tr"><i class="g1" style="width:48%" data-tip-t="1個から買える" data-tip-v="平日 48%"></i><i class="g2" style="width:22%" data-tip-t="1個から買える" data-tip-v="休日 22%"></i></span><span class="v b">48%</span><span class="v">22%</span>
+      <span>店が通り道にある</span><span class="tr"><i class="g1" style="width:41%" data-tip-t="店が通り道にある" data-tip-v="平日 41%"></i><i class="g2" style="width:18%" data-tip-t="店が通り道にある" data-tip-v="休日 18%"></i></span><span class="v b">41%</span><span class="v">18%</span>
+      <span>種類を選べる</span><span class="tr"><i class="g1" style="width:23%" data-tip-t="種類を選べる" data-tip-v="平日 23%"></i><i class="g2" style="width:35%" data-tip-t="種類を選べる" data-tip-v="休日 35%"></i></span><span class="v b">23%</span><span class="v">35%</span>
+    </div>
+    <div class="fig-key"><span class="fig-key-l">要点</span>平日は「すぐ食べられる」「1個から買える」が上位。
+<br>休日だけ「種類を選べる」が上がる。
+</div>
+    <p class="fig-n">出典 : 意識調査 (n=1,200)。
+</p>
+  </div>
+</div></div>
+<div class="rule-note"><strong>値カラムの見出し :</strong> 右の値カラムが2列以上のときは、各列の上に群の名前を置く (12px・太字・その群の文字色、基調の群は Primary Dark)。
+1列のときは付けない。
+<strong>動きと吹き出し (8.2) :</strong> 図が初めて見えたときに棒を左から 0.8 秒で伸ばし、棒に乗せると Primary Dark の面の吹き出しで項目名と値を出す (乗せた棒は1段濃く)。
+動きを減らす設定のときと印刷では動かさない。
+<strong>要点の箱 :</strong> 描き直す画像の中に要点の箱があるときは、図の枠の中、描画領域の下に基調の地の箱で置く (角丸 8px・内側 16px 20px・文字 16px 太字)。
+文言は画像のまま変えず、ラベル (14px・太字・Primary Dark) は画像に「要点」などの語があるときだけ付ける。
+注記は箱の下に置く。
 </div>
 </div>
 <div class="card" id="s83">
@@ -1429,10 +1610,10 @@ hover で白面の吹き出し (最大 340px)。
 <tr><td>用語の定義</td><td>モーダルとツールチップ</td><td><a href="#s91">§9</a></td></tr>
 </table></div>
 <div class="rule-note"><strong>文字量の上限 :</strong> 縛るのは文字の連続で、カードの長さではない。
-節とカードは 1 対 1、見出しの無い続きのカードは作らない。
+カードの境目は骨子の見出しの境目だけ (既定は節ごとに 1 枚、短い章は 1 枚にまとめてよい) 、見出しの無い続きのカードは作らない。
 段落を続けてよいのは 2 つまでを目安に (言い換えになるときは 3 つまで)、4 つ目の前には図・要点・箇条書き・図解を挟む。
 文字だけのカードが 3 つ続いたら挿絵か図を挟む。
-1画面の高さは窓の 6 画面分 (約 5,000px、本文幅 1280px で測る) まで、超えたら画面を分ける。
+1画面の高さは約 8,000px (窓の高さ 800px で 10 画面分、本文幅 1280px で測る) まで、超えたら画面を分ける。
 </div>
 </div>
 </section>
@@ -1470,6 +1651,39 @@ hover で白面の吹き出し (最大 340px)。
       sw.forEach(function(x){x.classList.toggle('on',x===b)});
     });
   });
+})();
+
+(function(){
+  var box=document.getElementById('sw-scroll'); if(!box) return;
+  var btns=box.querySelectorAll('[data-sw]'), chs=box.querySelectorAll('[data-sw-ch]');
+  btns.forEach(function(b){ b.addEventListener('click',function(){
+    var k=b.getAttribute('data-sw');
+    btns.forEach(function(x){ x.classList.toggle('on', x===b); });
+    chs.forEach(function(c){ c.hidden = c.getAttribute('data-sw-ch')!==k; });
+    var start=box.querySelector('[data-sw-ch="'+k+'"] .content-start');
+    /* レポート本体では start.scrollIntoView() でよい (scroll-margin-top で固定のヘッダの下に止まる)。見本は枠の中だけを動かす */
+    var hd=box.querySelector('.app-hd').getBoundingClientRect().height;
+    box.scrollTop += start.getBoundingClientRect().top - box.getBoundingClientRect().top - hd - 16;
+  }); });
+})();
+
+(function(){
+  var vb=document.getElementById('vbars-demo'); if(!vb) return;
+  /* 初めて見えたときに伸ばす */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ vb.classList.add('play'); io.disconnect(); } }); },{threshold:0.3});
+    io.observe(vb);
+  } else { vb.classList.add('play'); }
+  /* 吹き出し */
+  var tip=document.createElement('div'); tip.className='ftip'; tip.hidden=true;
+  vb.closest('.rp').appendChild(tip);
+  function show(e){ var t=e.target; if(!t.dataset || !t.dataset.tipT) return;
+    tip.innerHTML='<b></b><span></span>'; tip.firstChild.textContent=t.dataset.tipT; tip.lastChild.textContent=t.dataset.tipV;
+    tip.hidden=false; var r=t.getBoundingClientRect(); tip.style.left=Math.min(r.right+8, window.innerWidth-tip.offsetWidth-8)+'px'; tip.style.top=(r.top+r.height/2-tip.offsetHeight/2)+'px'; }
+  function hide(){ tip.hidden=true; }
+  vb.addEventListener('mouseover',show); vb.addEventListener('mouseout',hide);
+  vb.addEventListener('click',function(e){ if(tip.hidden) show(e); else hide(); });
+  window.addEventListener('scroll',hide,{passive:true});
 })();
 </script>
 </body>
