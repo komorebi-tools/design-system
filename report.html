@@ -142,6 +142,7 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
   --ls:0.05em;
   --sp-paragraph:20px; --sp-subsection:32px; --sp-section:40px;
   --hd-h:80px;
+  --ease:cubic-bezier(.4,.4,0,1); --ease-out:cubic-bezier(.16,1,.3,1); /* 短い変化 / 現れる・伸びる動き (REPORT.md 8.2) */
   /* ---- 替えるもの : 案件ごとに :root で上書きする (REPORT.md §7) ---- */
   --hero-img:none;
   --grad-end:var(--cat2-fill);
@@ -571,6 +572,15 @@ code{font-family:ui-monospace,"Roboto Mono",Menlo,Consolas,monospace; font-size:
 .rp .vbars .tr i{display:block; height:9px; border-radius:0 2px 2px 0}
 .rp .vbars .tr i.g1{background:var(--primary-dark)}
 .rp .vbars .tr i.g2{background:var(--cat2-fill)}
+.rp .vbars .tr i{transform-origin:left center; transition:background .2s var(--ease); cursor:default}
+.rp .vbars.play .tr i{animation:vgrow .8s var(--ease-out) both}
+@keyframes vgrow{from{transform:scaleX(0)}to{transform:none}}
+.rp .vbars .tr i.g1:hover{background:var(--navy)}
+.rp .vbars .tr i.g2:hover{background:var(--cat2-text)}
+.rp .ftip{position:fixed; z-index:50; pointer-events:none; background:var(--primary-dark); color:var(--surface); font-size:var(--fs-12); line-height:1.5; padding:10px; border-radius:6px; box-shadow:var(--shadow-1); white-space:nowrap}
+.rp .ftip b{display:block; font-weight:700}
+@media (prefers-reduced-motion:reduce){ .rp .vbars.play .tr i{animation:none} .rp .vbars .tr i{transition:none} }
+@media print{ .rp .ftip{display:none} }
 .rp .vbars .v{font-variant-numeric:tabular-nums; white-space:nowrap}
 .rp .vbars .v.b{font-weight:700}
 .rp .fig-key{margin-top:16px; background:var(--tint); border-radius:var(--radius-l); padding:16px 20px; font-size:var(--fs-16); font-weight:700; line-height:var(--lh-body); color:var(--text)}
@@ -1389,12 +1399,12 @@ REPORT.md には足さない。
 <div class="rp"><div class="pad">
   <div class="fig">
     <div class="fig-h"><div><div class="fig-k">図2-4</div><h4 class="fig-t">朝にパンを選ぶ理由 (平日と休日)</h4><p class="fig-s">複数回答、上位4項目</p></div></div>
-    <div class="vbars">
+    <div class="vbars" id="vbars-demo">
       <span></span><span></span><span class="vh g1">平日</span><span class="vh g2">休日</span>
-      <span>すぐ食べられる</span><span class="tr"><i class="g1" style="width:62%"></i><i class="g2" style="width:31%"></i></span><span class="v b">62%</span><span class="v">31%</span>
-      <span>1個から買える</span><span class="tr"><i class="g1" style="width:48%"></i><i class="g2" style="width:22%"></i></span><span class="v b">48%</span><span class="v">22%</span>
-      <span>店が通り道にある</span><span class="tr"><i class="g1" style="width:41%"></i><i class="g2" style="width:18%"></i></span><span class="v b">41%</span><span class="v">18%</span>
-      <span>種類を選べる</span><span class="tr"><i class="g1" style="width:23%"></i><i class="g2" style="width:35%"></i></span><span class="v b">23%</span><span class="v">35%</span>
+      <span>すぐ食べられる</span><span class="tr"><i class="g1" style="width:62%" data-tip-t="すぐ食べられる" data-tip-v="平日 62%"></i><i class="g2" style="width:31%" data-tip-t="すぐ食べられる" data-tip-v="休日 31%"></i></span><span class="v b">62%</span><span class="v">31%</span>
+      <span>1個から買える</span><span class="tr"><i class="g1" style="width:48%" data-tip-t="1個から買える" data-tip-v="平日 48%"></i><i class="g2" style="width:22%" data-tip-t="1個から買える" data-tip-v="休日 22%"></i></span><span class="v b">48%</span><span class="v">22%</span>
+      <span>店が通り道にある</span><span class="tr"><i class="g1" style="width:41%" data-tip-t="店が通り道にある" data-tip-v="平日 41%"></i><i class="g2" style="width:18%" data-tip-t="店が通り道にある" data-tip-v="休日 18%"></i></span><span class="v b">41%</span><span class="v">18%</span>
+      <span>種類を選べる</span><span class="tr"><i class="g1" style="width:23%" data-tip-t="種類を選べる" data-tip-v="平日 23%"></i><i class="g2" style="width:35%" data-tip-t="種類を選べる" data-tip-v="休日 35%"></i></span><span class="v b">23%</span><span class="v">35%</span>
     </div>
     <div class="fig-key"><span class="fig-key-l">要点</span>平日は「すぐ食べられる」「1個から買える」が上位。
 <br>休日だけ「種類を選べる」が上がる。
@@ -1405,6 +1415,8 @@ REPORT.md には足さない。
 </div></div>
 <div class="rule-note"><strong>値カラムの見出し :</strong> 右の値カラムが2列以上のときは、各列の上に群の名前を置く (12px・太字・その群の文字色、基調の群は Primary Dark)。
 1列のときは付けない。
+<strong>動きと吹き出し (8.2) :</strong> 図が初めて見えたときに棒を左から 0.8 秒で伸ばし、棒に乗せると Primary Dark の面の吹き出しで項目名と値を出す (乗せた棒は1段濃く)。
+動きを減らす設定のときと印刷では動かさない。
 <strong>要点の箱 :</strong> 描き直す画像の中に要点の箱があるときは、図の枠の中、描画領域の下に基調の地の箱で置く (角丸 8px・内側 16px 20px・文字 16px 太字)。
 文言は画像のまま変えず、ラベル (14px・太字・Primary Dark) は画像に「要点」などの語があるときだけ付ける。
 注記は箱の下に置く。
@@ -1622,6 +1634,25 @@ hover で白面の吹き出し (最大 340px)。
     var hd=box.querySelector('.app-hd').getBoundingClientRect().height;
     box.scrollTop += start.getBoundingClientRect().top - box.getBoundingClientRect().top - hd - 16;
   }); });
+})();
+
+(function(){
+  var vb=document.getElementById('vbars-demo'); if(!vb) return;
+  /* 初めて見えたときに伸ばす */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ vb.classList.add('play'); io.disconnect(); } }); },{threshold:0.3});
+    io.observe(vb);
+  } else { vb.classList.add('play'); }
+  /* 吹き出し */
+  var tip=document.createElement('div'); tip.className='ftip'; tip.hidden=true;
+  vb.closest('.rp').appendChild(tip);
+  function show(e){ var t=e.target; if(!t.dataset || !t.dataset.tipT) return;
+    tip.innerHTML='<b></b><span></span>'; tip.firstChild.textContent=t.dataset.tipT; tip.lastChild.textContent=t.dataset.tipV;
+    tip.hidden=false; var r=t.getBoundingClientRect(); tip.style.left=Math.min(r.right+8, window.innerWidth-tip.offsetWidth-8)+'px'; tip.style.top=(r.top+r.height/2-tip.offsetHeight/2)+'px'; }
+  function hide(){ tip.hidden=true; }
+  vb.addEventListener('mouseover',show); vb.addEventListener('mouseout',hide);
+  vb.addEventListener('click',function(e){ if(tip.hidden) show(e); else hide(); });
+  window.addEventListener('scroll',hide,{passive:true});
 })();
 </script>
 </body>
