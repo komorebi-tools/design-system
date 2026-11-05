@@ -323,6 +323,75 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-fl .back{position:absolute; left:135px; top:206px; width:810px; text-align:center}
 .dg-fl .back span{background:#fff; padding:0 16px; font-size:14px; font-weight:700; color:var(--g-cmp)}
 
+/* 18 対応リスト (ラベル → 内容) : ラベルは塗りの四角 ＋ 白文字が基本。矢印はラベルの右端から伸ばし、色は非強調グレー (§1.8) */
+.dg-map{display:grid; grid-template-columns:220px 48px 1fr; align-items:center; row-gap:12px; --lbf:var(--primary); --lbt:#fff}
+.dg-map.soft{--lbf:#D6DDEB; --lbt:var(--primary-dark)}
+.dg-map .hd{font-size:14px; font-weight:700; color:var(--primary-dark); padding-bottom:4px}
+.dg-map .lb{height:52px; display:flex; align-items:center; justify-content:center; background:var(--lbf); color:var(--lbt); font-size:18px; font-weight:700; letter-spacing:.02em}
+.dg-map .ar{display:flex; align-items:center}
+.dg-map .ar svg{display:block}
+.dg-map .ar path{fill:var(--g-mute)}
+.dg-map .tx{font-size:16px; line-height:1.6; padding-left:10px}
+.dg-map.two{row-gap:18px}
+.dg-mapbox{background:var(--base-bg); padding:16px 20px} /* 列の見出しも含めて淡い地に入れる */
+/* 狭い幅 (HTML で 640px 以下) : ラベルを内容の上に置く。ラベルは語の長さに合わせ、上下の余白を詰める。矢印と列の見出しは出さない。
+   レポートでは @media (max-width:640px) で .dg-map に当てる。ここでは見本のため .stack で見せる */
+.dg-map.stack{grid-template-columns:1fr; row-gap:0}
+.dg-map.stack .hd, .dg-map.stack .hd-sp, .dg-map.stack .ar{display:none}
+.dg-map.stack .lb{height:auto; justify-self:start; min-width:7em; padding:3px 12px; line-height:1.5; font-size:15px; margin-top:16px}
+.dg-map.stack .lb:first-of-type{margin-top:0}
+.dg-map.stack .tx{padding:6px 0 0; font-size:15px}
+.dg-narrow{width:358px}
+.dg-narrow .dg-mapbox{padding:14px 16px}
+.dg-set{display:grid; grid-template-columns:64px 1fr; gap:0 16px; background:var(--base-bg); padding:16px 20px; margin-top:12px}
+.dg-set:first-of-type{margin-top:0}
+.dg-set .gn{display:flex; flex-direction:column; align-items:center; gap:8px}
+.dg-set .gn b{width:36px; height:36px; border-radius:999px; background:var(--primary-dark); color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center}
+.dg-set .gn span{font-size:12.5px; font-weight:700; color:var(--primary-dark); text-align:center; line-height:1.4}
+
+/* 19 ベン (2つの重なり) : 円は正円が基本 (入らないときは横 1.25 倍まで)。重なりはグラデーションで、図の中でいちばん大きい文字。
+   三日月の文言は中心の高さで左右の余白を均等にし、左右の上端をそろえる */
+.dg-vn{position:relative; width:1080px; height:480px}
+.dg-vn svg{position:absolute; left:0; top:0}
+.dg-vn .zone{position:absolute; top:188px; display:flex; justify-content:center}
+.dg-vn .nm{display:inline-block; color:#fff; font-size:21px; font-weight:700; padding:3px 16px}
+.dg-vn .ds{font-size:15px; line-height:1.7; margin-top:12px}
+.dg-vn .ctr{position:absolute; left:420px; width:240px; text-align:center; color:#fff; font-size:24px; font-weight:700; line-height:1.5}
+.dg-vn .ctr small{display:block; font-size:13px; letter-spacing:.08em; margin-bottom:4px}
+
+/* 20 ガント : 月のルーラー ＋ 作業ごとの行。基本は行の淡い縞、帯の横に名前を置く型も可 */
+.dg-gtw{display:grid; grid-template-columns:1fr 1fr; gap:40px}
+.dg-gtw .sub2{font-size:13px; font-weight:700; color:var(--g-cmp); margin-bottom:8px}
+.dg-gt{position:relative}
+.dg-gt .hdr{position:relative; height:34px; border-bottom:1px solid var(--hairline)}
+.dg-gt .mo{position:absolute; bottom:6px; padding-left:6px; font-size:18px; font-weight:700; color:var(--primary-dark)}
+.dg-gt .mo span{font-size:11px; color:var(--g-weak); font-weight:500; margin-left:2px}
+.dg-gt .bd{position:relative; margin-top:4px}
+.dg-gt .gl{position:absolute; top:0; bottom:0; width:1px; background:var(--hairline); z-index:1}
+.dg-gt .br, .dg-gt .ms{z-index:2}
+.dg-gt .ph{height:30px; line-height:34px; font-size:12px; font-weight:700; color:var(--g-cmp); letter-spacing:.06em; position:relative}
+.dg-gt .r{position:relative; height:34px}
+.dg-gt .r.z{background:var(--base-bg)}
+.dg-gt .tn{position:absolute; left:8px; line-height:34px; font-size:14px}
+.dg-gt .br{position:absolute; top:9px; height:16px; border-radius:2px}
+.dg-gt .bn{position:absolute; line-height:34px; font-size:14px; white-space:nowrap}
+.dg-gt .ms{position:absolute; top:8px; width:18px; height:18px; border-radius:999px; background:var(--primary-dark); transform:translateX(-9px); box-shadow:0 0 0 3px #fff}
+.dg-gt .ml{position:absolute; line-height:34px; font-size:12.5px; font-weight:700; color:var(--primary-dark); white-space:nowrap}
+
+/* 21 ファネル : 幅は全体に対する割合で、段の間をなめらかな曲線でつなぐ。いちばん離れた先の段を主役にする (濃・中・淡の3段) */
+.dg-fn{position:relative; width:1080px; height:354px}
+.dg-fn svg{position:absolute; left:0; top:0}
+.dg-fn .nm{position:absolute; font-size:16px; font-weight:700; color:var(--g-cmp); line-height:1.3; text-align:right}
+.dg-fn .nm.on{font-size:19px; color:var(--primary-dark)}
+.dg-fn .nm small{display:block; font-size:12px; font-weight:500; color:var(--g-cmp)}
+.dg-fn .v{position:absolute; width:120px; text-align:center; font-size:20px; font-weight:700}
+.dg-fn .v.f{font-size:30px}
+.dg-fn .rt{position:absolute; font-size:13px; color:var(--g-weak); white-space:nowrap}
+.dg-fn .co{position:absolute; white-space:nowrap}
+.dg-fn .co .k{font-size:13px; font-weight:700; color:var(--g-cmp)}
+.dg-fn .co .n{font-size:20px; font-weight:700; color:var(--primary-dark); line-height:1.2}
+.dg-fn .co .s{font-size:12.5px; color:var(--g-cmp); margin-top:2px}
+
 /* §1 の小さな見本 */
 .dg-demo{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px}
 .dg-demo .cell{border:1px solid var(--hairline); border-radius:6px; padding:18px 16px; text-align:center}
@@ -372,7 +441,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <br>
     見本の題材 (コンビニのスイーツの調査) と数値は、すべてこのページのために作った架空のもの。
 <br>
-    2026/10/6 時点の検討版 v2。
+    2026/11/5 時点の検討版 v3。
   </p>
 </header>
 <nav class="toc"><h2>目次</h2><ol><li><a href="#s12"><span class="num">1.2</span>ジャンプ率</a></li>
@@ -396,6 +465,10 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <li><a href="#c15"><span class="num">2.15</span>ツリー</a></li>
 <li><a href="#c16"><span class="num">2.16</span>サイクル</a></li>
 <li><a href="#c17"><span class="num">2.17</span>フロー図</a></li>
+<li><a href="#c18"><span class="num">2.18</span>対応リスト</a></li>
+<li><a href="#c19"><span class="num">2.19</span>ベン (2つの重なり)</a></li>
+<li><a href="#c20"><span class="num">2.20</span>ガント</a></li>
+<li><a href="#c21"><span class="num">2.21</span>ファネル</a></li>
 <li><a href="#s3"><span class="num">3</span>構図の選び方</a></li>
 </ol></nav>
 <section class="chapter"><h2>1. 共通の視覚言語</h2><p class="chapter-note">どの構図でも共通の決まり。
@@ -1088,6 +1161,126 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 順番に進むだけの手順は、ステップ (3・4・5) を使う。
 </div>
 </div>
+<div class="card" id="c18"><h3>18. 対応リスト (ラベル → 内容)</h3><p class="sub">決まった観点・項目ごとに、内容を1対1で示すとき。
+問いの観点・回答の読み解き・打ち手の方針・用語の対応に使える。
+</p>
+<p class="sub" style="margin:0 0 12px"><strong>塗りの面 ＋ 白文字 (基本)</strong> … 濃い面と白文字が行ごとにくり返し、目が行を追いやすい。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図18</span><span class="dg-h">パンを買う場面を、6つの観点で聞く</span></div>
+<div class="dg-mapbox"><div class="dg-map"><div class="hd">観点</div><div class="hd-sp"></div><div class="hd">問い</div>
+<div class="lb">Why</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">なぜ買うのか、どんな目的のためか</div>
+<div class="lb">When</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">いつ (平日・休日、朝・夜、季節)</div>
+<div class="lb">Where</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">どこで食べるか</div>
+<div class="lb">with What</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">何と一緒に、何の代わりに</div>
+<div class="lb">with Whom</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">誰と (ひとり・家族・職場)</div>
+<div class="lb">How feeling</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">食べる前後で、気分がどう変わるか</div>
+</div></div>
+<div class="dg-cap">出典 : 架空の例 (コンビニのパン・見本用)</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>組ごとに繰り返す</strong> … 同じ型の組が続くとき (回答者ごとの4要素など) 。
+</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図18</span><span class="dg-h">買う前の状態を、4つの要素で読み解く</span></div>
+<div class="dg-set"><div class="gn"><b>1</b><span>お弁当の<br>回答者</span></div><div class="dg-map two">
+<div class="lb">場面</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">残業の帰りに、コンビニでお弁当を買った</div>
+<div class="lb">背景</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">平日は自炊できず、食事を整えられていないと感じていた</div>
+<div class="lb">情緒</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">手を抜いた食事が続き、自分を後回しにしているように感じる</div>
+<div class="lb">キッカケ</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">野菜の多いお弁当を見て、これなら<br>自分をいたわる一食になると受け取った</div>
+</div></div>
+<div class="dg-set"><div class="gn"><b>2</b><span>スイーツの<br>回答者</span></div><div class="dg-map two">
+<div class="lb">場面</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">休日の午後、新しいスイーツを1つ選んだ</div>
+<div class="lb">背景</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">平日は時間に追われ、自分のための時間が取れていなかった</div>
+<div class="lb">情緒</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">好きなものを選ぶ余裕がなく、毎日が同じに感じる</div>
+<div class="lb">キッカケ</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">季節限定の表示を見て、今日だけの<br>小さなごほうびにしてよいと受け取った</div>
+</div></div>
+<div class="dg-cap">出典 : 架空の例 (お弁当・コンビニのスイーツ・見本用)</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>狭い幅 (HTML で 640px 以下)</strong> … ラベルを内容の上に置く。
+ラベルは語の長さに合わせ、上下の余白を詰める。
+矢印と列の見出しは出さない。
+</p>
+<div class="dg-narrow" style="margin-top:12px"><div class="dg-mapbox"><div class="dg-map stack">
+<div class="lb">Why</div><div class="tx">なぜ買うのか、どんな目的のためか</div>
+<div class="lb">When</div><div class="tx">いつ (平日・休日、朝・夜、季節)</div>
+<div class="lb">Where</div><div class="tx">どこで食べるか</div>
+<div class="lb">with What</div><div class="tx">何と一緒に、何の代わりに</div>
+<div class="lb">with Whom</div><div class="tx">誰と (ひとり・家族・職場)</div>
+<div class="lb">How feeling</div><div class="tx">食べる前後で、気分がどう変わるか</div>
+</div></div></div>
+<div class="rule-note">ラベルは四角の面で、全行を同じ幅にする。
+列の見出しも含めて、組全体を淡い地に入れる。
+HTML で幅が 640px 以下のときは、ラベルを内容の上に置く (矢印と列の見出しは出さない) 。
+基本は塗りの面 ＋ 白文字。
+矢印はラベルの右端からすき間なく伸ばし、色は非強調グレーにする。
+淡い面 ＋ Primary Dark の文字は、ラベルを控えめにしたいときのバリエーション。
+内容は1 〜 3行で、改行は句読点で入れる。
+Primary Light や水色の面に白文字は乗せない。
+内容が4行以上になるとき、同じ観点で複数の組を横に比べたいときは、この型を使わない。
+</div>
+</div>
+<div class="card" id="c19"><h3>19. ベン (2つの重なり)</h3><p class="sub">2つの集まりと、その両方に当たるところを見せるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図19</span><span class="dg-h">朝にコンビニで買う人と、栄養を気にする人が重なるか</span></div>
+<div class="dg-vn"><svg width="1080" height="480" viewBox="0 0 1080 480" aria-hidden="true">
+<defs><clipPath id="vn-cl"><ellipse cx="385" cy="240" rx="290" ry="232"/></clipPath>
+<linearGradient id="vn-gr" x1="0" y1="0" x2="1" y2="1"><stop offset="22%" stop-color="#5A74A3"/><stop offset="88%" stop-color="#84B5B2"/></linearGradient></defs>
+<ellipse cx="385" cy="240" rx="290" ry="232" fill="#D6DDEB"/>
+<ellipse cx="695" cy="240" rx="290" ry="232" fill="#DDEBE9"/>
+<ellipse cx="695" cy="240" rx="290" ry="232" fill="url(#vn-gr)" clip-path="url(#vn-cl)"/>
+</svg>
+<div class="zone" style="left:95px;width:310px"><div><span class="nm" style="background:var(--primary-dark)">朝のコンビニ</span>
+<div class="ds">通勤の途中に、<br>朝食をコンビニで買う人</div></div></div>
+<div class="zone" style="left:675px;width:310px"><div><span class="nm" style="background:var(--cat2-text)">栄養を気にする人</span>
+<div class="ds">たんぱく質や野菜を、<br>意識して取りたい人</div></div></div>
+<div class="ctr" style="top:174px"><small>重なり</small>朝の手軽さと、<br>栄養の両方を<br>求める人</div>
+</div>
+<div class="dg-cap">出典 : 架空の例 (コンビニの朝食・見本用)・左の円 = 基調・右の円 = 青緑・重なり = 両方に当たる人</div>
+</div>
+</div>
+<div class="rule-note">正円2つを同じ大きさで重ねる。
+文言が入らないときは、横は縦の 1.25 倍まで横長にしてよい。
+重なりは2色を結ぶグラデーションで、図の中でいちばん大きい文字を置く。
+グラデーションは2色がはっきり見えるところまで寄せてよい (見本は青 22% → 青緑 88%) 。
+白文字の比は文字の真下で測る。
+円の名前は塗りのラベル ＋ 白文字。
+三日月の文言は、中心の高さで左右の余白を均等にし、左右の上端をそろえる。
+3つ以上の重なりは使わず、表かマトリクスにする。
+</div>
+</div>
+<div class="card" id="c20"><h3>20. ガント</h3><p class="sub">作業ごとの期間と、その重なりを見せるとき (調査や案件のスケジュール) 。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図20</span><span class="dg-h">調査から報告まで、4か月で進める</span></div>
+<div class="dg-gtw"><div><div class="sub2">淡い縞 (基本)</div><div class="dg-gt"><div class="hdr"><div class="mo" style="left:130px">11<span>月</span></div><div class="mo" style="left:228px">12<span>月</span></div><div class="mo" style="left:325px">1<span>月</span></div><div class="mo" style="left:422px">2<span>月</span></div></div><div class="bd"><div class="gl" style="left:130px"></div><div class="gl" style="left:228px"></div><div class="gl" style="left:325px"></div><div class="gl" style="left:422px"></div><div class="gl" style="left:520px"></div><div class="ph">設計</div><div class="r z"><div class="tn">調査の設計</div><div class="br" style="left:130px;width:86px;background:#5A74A3"></div></div><div class="r"><div class="tn">調査票の確定</div><div class="br" style="left:188px;width:51px;background:#5A74A3"></div><div class="ms" style="left:239px"></div><div class="ml" style="left:253px">確定</div></div><div class="ph">実査</div><div class="r z"><div class="tn">定量調査</div><div class="br" style="left:247px;width:70px;background:#8496BE"></div></div><div class="r"><div class="tn">インタビュー</div><div class="br" style="left:278px;width:109px;background:#8496BE"></div></div><div class="ph">分析と報告</div><div class="r z"><div class="tn">報告書の作成</div><div class="br" style="left:333px;width:78px;background:#AEBBD6"></div><div class="ms" style="left:411px"></div><div class="ml" style="left:425px">報告会</div></div></div></div></div><div><div class="sub2">帯の横に名前 (8行くらいまで)</div><div class="dg-gt"><div class="hdr"><div class="mo" style="left:110px">11<span>月</span></div><div class="mo" style="left:212px">12<span>月</span></div><div class="mo" style="left:315px">1<span>月</span></div><div class="mo" style="left:418px">2<span>月</span></div></div><div class="bd"><div class="gl" style="left:110px"></div><div class="gl" style="left:212px"></div><div class="gl" style="left:315px"></div><div class="gl" style="left:418px"></div><div class="gl" style="left:520px"></div><div class="ph">設計</div><div class="r"><div class="br" style="left:110px;width:90px;background:#5A74A3"></div><div class="bn" style="left:208px">調査の設計</div></div><div class="r"><div class="br" style="left:172px;width:53px;background:#5A74A3"></div><div class="ms" style="left:225px"></div><div class="bn" style="left:245px">調査票の確定<span style="font-size:12.5px;font-weight:700;color:var(--primary-dark);margin-left:8px">確定</span></div></div><div class="ph">実査</div><div class="r"><div class="br" style="left:233px;width:74px;background:#8496BE"></div><div class="bn" style="left:315px">定量調査</div></div><div class="r"><div class="br" style="left:266px;width:115px;background:#8496BE"></div><div class="bn" style="left:389px">インタビュー</div></div><div class="ph">分析と報告</div><div class="r"><div class="br" style="left:274px;width:66px;background:#AEBBD6"></div><div class="ms" style="left:340px"></div><div class="bn" style="left:360px">報告書の作成<span style="font-size:12.5px;font-weight:700;color:var(--primary-dark);margin-left:8px">報告会</span></div></div></div></div></div></div>
+<div class="dg-cap">出典 : 架空の例 (見本用)・帯 = 作業の期間・帯の濃さ = 進む順 (設計 → 実査 → 分析と報告)・丸 = 節目</div>
+</div>
+</div>
+<div class="rule-note">上に月を大きく置き、月の境目の縦線を作業の行の下まで通す。
+作業名と帯の対応は、1行おきの淡い縞で見せる。
+帯の横に名前を置く型も使ってよい (行が8行くらいまで) 。
+右端に近い帯は、名前の分の余白を残す。
+帯の色は段ごとの濃淡 (進む順) で、節目は帯の終わりの丸と名前。
+</div>
+</div>
+<div class="card" id="c21"><h3>21. ファネル</h3><p class="sub">段階を追うごとに人が絞られる様子と、いちばん離れる所 (ボトルネック) を見せるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図21</span><span class="dg-h">興味を持った人の6割が、購入の手前で離れる</span></div>
+<div class="dg-fn"><svg width="1080" height="354" viewBox="0 0 1080 354">
+<defs><linearGradient id="fn-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3E5A86"/><stop offset="100%" stop-color="#5A74A3"/></linearGradient>
+<clipPath id="fn-fc"><path d="M174.2 0 L785.8 0 C777.2 14.0 771.5 28.0 760.0 42.0 C735.4 72.0 702.5 102.0 667.8 132.0 C633.1 162.0 577.9 192.0 551.7 222.0 C525.5 252.0 519.8 282.0 510.7 312.0 C506.5 326.0 506.6 340.0 504.6 354.0 L455.4 354 C453.4 340.0 453.5 326.0 449.3 312.0 C440.2 282.0 434.5 252.0 408.3 222.0 C382.1 192.0 326.9 162.0 292.2 132.0 C257.5 102.0 224.6 72.0 200.0 42.0 C188.5 28.0 182.8 14.0 174.2 0.0 Z"/></clipPath></defs>
+<rect x="0" y="90" width="1080" height="174" fill="#F3F7FC"/><rect x="0" y="0" width="1080" height="84" fill="#D8DEEA" clip-path="url(#fn-fc)"/><rect x="0" y="90" width="1080" height="84" fill="#AEBBD6" clip-path="url(#fn-fc)"/><rect x="0" y="180" width="1080" height="84" fill="url(#fn-g)" clip-path="url(#fn-fc)"/><rect x="0" y="270" width="1080" height="84" fill="#D8DEEA" clip-path="url(#fn-fc)"/><rect x="0" y="84" width="1080" height="6" fill="#fff"/><rect x="0" y="174" width="1080" height="6" fill="#fff"/><rect x="0" y="264" width="1080" height="6" fill="#fff"/><path d="M875 112.0 h10 V242.0 h-10" fill="none" stroke="#5A74A3" stroke-width="2"/>
+</svg><div class="v" style="top:28.0px;left:420.0px;color:#434343">82%</div><div class="nm r" style="top:18.0px;right:920px">認知<small>知っている</small></div><div class="v" style="top:118.0px;left:420.0px;color:#434343">55%</div><div class="nm r on" style="top:108.0px;right:849px">興味<small>試したい</small></div><div class="rt" style="top:122.0px;left:729px">前の段から 67%</div><div class="v f" style="top:204.0px;left:420.0px;color:#fff">21%</div><div class="nm r on" style="top:198.0px;right:736px">購入<small>1回以上買った</small></div><div class="v" style="top:298.0px;left:420.0px;color:#434343">9%</div><div class="nm r" style="top:288.0px;right:658px">リピート<small>月1回以上買う</small></div><div class="rt" style="top:302.0px;left:538px">前の段から 43%</div><div class="co" style="top:131.0px;left:895px"><div class="k">興味 → 購入</div><div class="n"><b style="font-size:40px">62</b><b style="font-size:22px">%</b> が離れる</div><div class="s">前の段から進むのは 38%</div></div></div>
+
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ・見本用)・各段の幅 = 全体に対する割合・濃い段 = いちばん大きく離れた先の段・前の段から = 前の段の人のうち、この段に進んだ割合</div>
+</div>
+</div>
+<div class="rule-note">主役は各段の割合ではなく、いちばん低い移行率 (いちばん離れる所) 。
+その先の段を濃いグラデーション ＋ 白文字、直前の段を中くらいの青、ほかを淡い青にする。
+主役の2段の行に淡い地を敷き、右にかっこで「何 % が離れるか」を大きく出す。
+ほかの移行率は小さく灰色に下げ、数字は帯の中央より少し下に置く。
+上下の段を均等に見せたいときは、直線の台形を重ねる型 (砂時計型) にする。
+</div>
+</div>
 </section>
 <section class="chapter" id="s3"><h2>3. 構図の選び方</h2><p class="chapter-note">見せたい関係性から選ぶ。
 </p>
@@ -1105,6 +1298,10 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <tr><td>土台と、群に分けた要素</td><td>15</td></tr>
 <tr><td>回りつづける循環</td><td>16</td></tr>
 <tr><td>関係でつながる流れ・構造</td><td>17</td></tr>
+<tr><td>観点・項目ごとの内容の対応</td><td>18</td></tr>
+<tr><td>2つの集まりの重なり</td><td>19</td></tr>
+<tr><td>作業ごとの期間・スケジュール</td><td>20</td></tr>
+<tr><td>段階ごとに人が絞られる流れ</td><td>21</td></tr>
 <tr><td>1年・長期の時間</td><td>10・11・12</td></tr>
 </table><div class="rule-note">図解にするのは、本文の関係性が構図に合う部分だけ。
 数値・語は本文にあるものだけを使い、仮説は「仮説」と明記する。
@@ -1113,7 +1310,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 </section>
 
 <footer class="page-foot">
-  2026/10/6 時点の検討版 v2。
+  2026/11/5 時点の検討版 v3。
   規約の本文は <code>design-system</code> の <code>DIAGRAM.md</code> を一次情報源とする。
   軸と目盛りで読ませるグラフは <code>FIGURE.md</code> と <a href="figure.html">figure.html</a> を参照。
 </footer>
