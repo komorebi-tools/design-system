@@ -378,6 +378,20 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-gt .ms{position:absolute; top:8px; width:18px; height:18px; border-radius:999px; background:var(--primary-dark); transform:translateX(-9px); box-shadow:0 0 0 3px #fff}
 .dg-gt .ml{position:absolute; line-height:34px; font-size:12.5px; font-weight:700; color:var(--primary-dark); white-space:nowrap}
 
+/* 21 ファネル : 幅は全体に対する割合で、段の間をなめらかな曲線でつなぐ。いちばん離れた先の段を主役にする (濃・中・淡の3段) */
+.dg-fn{position:relative; width:1080px; height:354px}
+.dg-fn svg{position:absolute; left:0; top:0}
+.dg-fn .nm{position:absolute; font-size:16px; font-weight:700; color:var(--g-cmp); line-height:1.3; text-align:right}
+.dg-fn .nm.on{font-size:19px; color:var(--primary-dark)}
+.dg-fn .nm small{display:block; font-size:12px; font-weight:500; color:var(--g-cmp)}
+.dg-fn .v{position:absolute; width:120px; text-align:center; font-size:20px; font-weight:700}
+.dg-fn .v.f{font-size:30px}
+.dg-fn .rt{position:absolute; font-size:13px; color:var(--g-weak); white-space:nowrap}
+.dg-fn .co{position:absolute; white-space:nowrap}
+.dg-fn .co .k{font-size:13px; font-weight:700; color:var(--g-cmp)}
+.dg-fn .co .n{font-size:20px; font-weight:700; color:var(--primary-dark); line-height:1.2}
+.dg-fn .co .s{font-size:12.5px; color:var(--g-cmp); margin-top:2px}
+
 /* §1 の小さな見本 */
 .dg-demo{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px}
 .dg-demo .cell{border:1px solid var(--hairline); border-radius:6px; padding:18px 16px; text-align:center}
@@ -454,6 +468,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <li><a href="#c18"><span class="num">2.18</span>対応リスト</a></li>
 <li><a href="#c19"><span class="num">2.19</span>ベン (2つの重なり)</a></li>
 <li><a href="#c20"><span class="num">2.20</span>ガント</a></li>
+<li><a href="#c21"><span class="num">2.21</span>ファネル</a></li>
 <li><a href="#s3"><span class="num">3</span>構図の選び方</a></li>
 </ol></nav>
 <section class="chapter"><h2>1. 共通の視覚言語</h2><p class="chapter-note">どの構図でも共通の決まり。
@@ -1247,6 +1262,25 @@ Primary Light や水色の面に白文字は乗せない。
 帯の色は段ごとの濃淡 (進む順) で、節目は帯の終わりの丸と名前。
 </div>
 </div>
+<div class="card" id="c21"><h3>21. ファネル</h3><p class="sub">段階を追うごとに人が絞られる様子と、いちばん離れる所 (ボトルネック) を見せるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図21</span><span class="dg-h">興味を持った人の6割が、購入の手前で離れる</span></div>
+<div class="dg-fn"><svg width="1080" height="354" viewBox="0 0 1080 354">
+<defs><linearGradient id="fn-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3E5A86"/><stop offset="100%" stop-color="#5A74A3"/></linearGradient>
+<clipPath id="fn-fc"><path d="M174.2 0 L785.8 0 C777.2 14.0 771.5 28.0 760.0 42.0 C735.4 72.0 702.5 102.0 667.8 132.0 C633.1 162.0 577.9 192.0 551.7 222.0 C525.5 252.0 519.8 282.0 510.7 312.0 C506.5 326.0 506.6 340.0 504.6 354.0 L455.4 354 C453.4 340.0 453.5 326.0 449.3 312.0 C440.2 282.0 434.5 252.0 408.3 222.0 C382.1 192.0 326.9 162.0 292.2 132.0 C257.5 102.0 224.6 72.0 200.0 42.0 C188.5 28.0 182.8 14.0 174.2 0.0 Z"/></clipPath></defs>
+<rect x="0" y="90" width="1080" height="174" fill="#F3F7FC"/><rect x="0" y="0" width="1080" height="84" fill="#D8DEEA" clip-path="url(#fn-fc)"/><rect x="0" y="90" width="1080" height="84" fill="#AEBBD6" clip-path="url(#fn-fc)"/><rect x="0" y="180" width="1080" height="84" fill="url(#fn-g)" clip-path="url(#fn-fc)"/><rect x="0" y="270" width="1080" height="84" fill="#D8DEEA" clip-path="url(#fn-fc)"/><rect x="0" y="84" width="1080" height="6" fill="#fff"/><rect x="0" y="174" width="1080" height="6" fill="#fff"/><rect x="0" y="264" width="1080" height="6" fill="#fff"/><path d="M875 112.0 h10 V242.0 h-10" fill="none" stroke="#5A74A3" stroke-width="2"/>
+</svg><div class="v" style="top:28.0px;left:420.0px;color:#434343">82%</div><div class="nm r" style="top:18.0px;right:920px">認知<small>知っている</small></div><div class="v" style="top:118.0px;left:420.0px;color:#434343">55%</div><div class="nm r on" style="top:108.0px;right:849px">興味<small>試したい</small></div><div class="rt" style="top:122.0px;left:729px">前の段から 67%</div><div class="v f" style="top:204.0px;left:420.0px;color:#fff">21%</div><div class="nm r on" style="top:198.0px;right:736px">購入<small>1回以上買った</small></div><div class="v" style="top:298.0px;left:420.0px;color:#434343">9%</div><div class="nm r" style="top:288.0px;right:658px">リピート<small>月1回以上買う</small></div><div class="rt" style="top:302.0px;left:538px">前の段から 43%</div><div class="co" style="top:131.0px;left:895px"><div class="k">興味 → 購入</div><div class="n"><b style="font-size:40px">62</b><b style="font-size:22px">%</b> が離れる</div><div class="s">前の段から進むのは 38%</div></div></div>
+
+<div class="dg-cap">出典 : 架空の調査 (コンビニのスイーツ・見本用)・各段の幅 = 全体に対する割合・濃い段 = いちばん大きく離れた先の段・前の段から = 前の段の人のうち、この段に進んだ割合</div>
+</div>
+</div>
+<div class="rule-note">主役は各段の割合ではなく、いちばん低い移行率 (いちばん離れる所) 。
+その先の段を濃いグラデーション ＋ 白文字、直前の段を中くらいの青、ほかを淡い青にする。
+主役の2段の行に淡い地を敷き、右にかっこで「何 % が離れるか」を大きく出す。
+ほかの移行率は小さく灰色に下げ、数字は帯の中央より少し下に置く。
+上下の段を均等に見せたいときは、直線の台形を重ねる型 (砂時計型) にする。
+</div>
+</div>
 </section>
 <section class="chapter" id="s3"><h2>3. 構図の選び方</h2><p class="chapter-note">見せたい関係性から選ぶ。
 </p>
@@ -1267,6 +1301,7 @@ Primary Light や水色の面に白文字は乗せない。
 <tr><td>観点・項目ごとの内容の対応</td><td>18</td></tr>
 <tr><td>2つの集まりの重なり</td><td>19</td></tr>
 <tr><td>作業ごとの期間・スケジュール</td><td>20</td></tr>
+<tr><td>段階ごとに人が絞られる流れ</td><td>21</td></tr>
 <tr><td>1年・長期の時間</td><td>10・11・12</td></tr>
 </table><div class="rule-note">図解にするのは、本文の関係性が構図に合う部分だけ。
 数値・語は本文にあるものだけを使い、仮説は「仮説」と明記する。
