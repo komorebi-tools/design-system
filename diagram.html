@@ -359,6 +359,25 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-vn .ctr{position:absolute; left:420px; width:240px; text-align:center; color:#fff; font-size:24px; font-weight:700; line-height:1.5}
 .dg-vn .ctr small{display:block; font-size:13px; letter-spacing:.08em; margin-bottom:4px}
 
+/* 20 ガント : 月のルーラー ＋ 作業ごとの行。基本は行の淡い縞、帯の横に名前を置く型も可 */
+.dg-gtw{display:grid; grid-template-columns:1fr 1fr; gap:40px}
+.dg-gtw .sub2{font-size:13px; font-weight:700; color:var(--g-cmp); margin-bottom:8px}
+.dg-gt{position:relative}
+.dg-gt .hdr{position:relative; height:34px; border-bottom:1px solid var(--hairline)}
+.dg-gt .mo{position:absolute; bottom:6px; padding-left:6px; font-size:18px; font-weight:700; color:var(--primary-dark)}
+.dg-gt .mo span{font-size:11px; color:var(--g-weak); font-weight:500; margin-left:2px}
+.dg-gt .bd{position:relative; margin-top:4px}
+.dg-gt .gl{position:absolute; top:0; bottom:0; width:1px; background:var(--hairline); z-index:1}
+.dg-gt .br, .dg-gt .ms{z-index:2}
+.dg-gt .ph{height:30px; line-height:34px; font-size:12px; font-weight:700; color:var(--g-cmp); letter-spacing:.06em; position:relative}
+.dg-gt .r{position:relative; height:34px}
+.dg-gt .r.z{background:var(--base-bg)}
+.dg-gt .tn{position:absolute; left:8px; line-height:34px; font-size:14px}
+.dg-gt .br{position:absolute; top:9px; height:16px; border-radius:2px}
+.dg-gt .bn{position:absolute; line-height:34px; font-size:14px; white-space:nowrap}
+.dg-gt .ms{position:absolute; top:8px; width:18px; height:18px; border-radius:999px; background:var(--primary-dark); transform:translateX(-9px); box-shadow:0 0 0 3px #fff}
+.dg-gt .ml{position:absolute; line-height:34px; font-size:12.5px; font-weight:700; color:var(--primary-dark); white-space:nowrap}
+
 /* §1 の小さな見本 */
 .dg-demo{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px}
 .dg-demo .cell{border:1px solid var(--hairline); border-radius:6px; padding:18px 16px; text-align:center}
@@ -434,6 +453,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <li><a href="#c17"><span class="num">2.17</span>フロー図</a></li>
 <li><a href="#c18"><span class="num">2.18</span>対応リスト</a></li>
 <li><a href="#c19"><span class="num">2.19</span>ベン (2つの重なり)</a></li>
+<li><a href="#c20"><span class="num">2.20</span>ガント</a></li>
 <li><a href="#s3"><span class="num">3</span>構図の選び方</a></li>
 </ol></nav>
 <section class="chapter"><h2>1. 共通の視覚言語</h2><p class="chapter-note">どの構図でも共通の決まり。
@@ -1213,6 +1233,20 @@ Primary Light や水色の面に白文字は乗せない。
 3つ以上の重なりは使わず、表かマトリクスにする。
 </div>
 </div>
+<div class="card" id="c20"><h3>20. ガント</h3><p class="sub">作業ごとの期間と、その重なりを見せるとき (調査や案件のスケジュール) 。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図20</span><span class="dg-h">調査から報告まで、4か月で進める</span></div>
+<div class="dg-gtw"><div><div class="sub2">淡い縞 (基本)</div><div class="dg-gt"><div class="hdr"><div class="mo" style="left:130px">11<span>月</span></div><div class="mo" style="left:228px">12<span>月</span></div><div class="mo" style="left:325px">1<span>月</span></div><div class="mo" style="left:422px">2<span>月</span></div></div><div class="bd"><div class="gl" style="left:130px"></div><div class="gl" style="left:228px"></div><div class="gl" style="left:325px"></div><div class="gl" style="left:422px"></div><div class="gl" style="left:520px"></div><div class="ph">設計</div><div class="r z"><div class="tn">調査の設計</div><div class="br" style="left:130px;width:86px;background:#5A74A3"></div></div><div class="r"><div class="tn">調査票の確定</div><div class="br" style="left:188px;width:51px;background:#5A74A3"></div><div class="ms" style="left:239px"></div><div class="ml" style="left:253px">確定</div></div><div class="ph">実査</div><div class="r z"><div class="tn">定量調査</div><div class="br" style="left:247px;width:70px;background:#8496BE"></div></div><div class="r"><div class="tn">インタビュー</div><div class="br" style="left:278px;width:109px;background:#8496BE"></div></div><div class="ph">分析と報告</div><div class="r z"><div class="tn">報告書の作成</div><div class="br" style="left:333px;width:78px;background:#AEBBD6"></div><div class="ms" style="left:411px"></div><div class="ml" style="left:425px">報告会</div></div></div></div></div><div><div class="sub2">帯の横に名前 (8行くらいまで)</div><div class="dg-gt"><div class="hdr"><div class="mo" style="left:110px">11<span>月</span></div><div class="mo" style="left:212px">12<span>月</span></div><div class="mo" style="left:315px">1<span>月</span></div><div class="mo" style="left:418px">2<span>月</span></div></div><div class="bd"><div class="gl" style="left:110px"></div><div class="gl" style="left:212px"></div><div class="gl" style="left:315px"></div><div class="gl" style="left:418px"></div><div class="gl" style="left:520px"></div><div class="ph">設計</div><div class="r"><div class="br" style="left:110px;width:90px;background:#5A74A3"></div><div class="bn" style="left:208px">調査の設計</div></div><div class="r"><div class="br" style="left:172px;width:53px;background:#5A74A3"></div><div class="ms" style="left:225px"></div><div class="bn" style="left:245px">調査票の確定<span style="font-size:12.5px;font-weight:700;color:var(--primary-dark);margin-left:8px">確定</span></div></div><div class="ph">実査</div><div class="r"><div class="br" style="left:233px;width:74px;background:#8496BE"></div><div class="bn" style="left:315px">定量調査</div></div><div class="r"><div class="br" style="left:266px;width:115px;background:#8496BE"></div><div class="bn" style="left:389px">インタビュー</div></div><div class="ph">分析と報告</div><div class="r"><div class="br" style="left:274px;width:66px;background:#AEBBD6"></div><div class="ms" style="left:340px"></div><div class="bn" style="left:360px">報告書の作成<span style="font-size:12.5px;font-weight:700;color:var(--primary-dark);margin-left:8px">報告会</span></div></div></div></div></div></div>
+<div class="dg-cap">出典 : 架空の例 (見本用)・帯 = 作業の期間・帯の濃さ = 進む順 (設計 → 実査 → 分析と報告)・丸 = 節目</div>
+</div>
+</div>
+<div class="rule-note">上に月を大きく置き、月の境目の縦線を作業の行の下まで通す。
+作業名と帯の対応は、1行おきの淡い縞で見せる。
+帯の横に名前を置く型も使ってよい (行が8行くらいまで) 。
+右端に近い帯は、名前の分の余白を残す。
+帯の色は段ごとの濃淡 (進む順) で、節目は帯の終わりの丸と名前。
+</div>
+</div>
 </section>
 <section class="chapter" id="s3"><h2>3. 構図の選び方</h2><p class="chapter-note">見せたい関係性から選ぶ。
 </p>
@@ -1232,6 +1266,7 @@ Primary Light や水色の面に白文字は乗せない。
 <tr><td>関係でつながる流れ・構造</td><td>17</td></tr>
 <tr><td>観点・項目ごとの内容の対応</td><td>18</td></tr>
 <tr><td>2つの集まりの重なり</td><td>19</td></tr>
+<tr><td>作業ごとの期間・スケジュール</td><td>20</td></tr>
 <tr><td>1年・長期の時間</td><td>10・11・12</td></tr>
 </table><div class="rule-note">図解にするのは、本文の関係性が構図に合う部分だけ。
 数値・語は本文にあるものだけを使い、仮説は「仮説」と明記する。
