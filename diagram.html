@@ -323,6 +323,32 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-fl .back{position:absolute; left:135px; top:206px; width:810px; text-align:center}
 .dg-fl .back span{background:#fff; padding:0 16px; font-size:14px; font-weight:700; color:var(--g-cmp)}
 
+/* 18 対応リスト (ラベル → 内容) : ラベルは塗りの四角 ＋ 白文字が基本。矢印はラベルの右端から伸ばし、色は非強調グレー (§1.8) */
+.dg-map{display:grid; grid-template-columns:220px 48px 1fr; align-items:center; row-gap:12px; --lbf:var(--primary); --lbt:#fff}
+.dg-map.soft{--lbf:#D6DDEB; --lbt:var(--primary-dark)}
+.dg-map .hd{font-size:14px; font-weight:700; color:var(--primary-dark); padding-bottom:4px}
+.dg-map .lb{height:52px; display:flex; align-items:center; justify-content:center; background:var(--lbf); color:var(--lbt); font-size:18px; font-weight:700; letter-spacing:.02em}
+.dg-map .ar{display:flex; align-items:center}
+.dg-map .ar svg{display:block}
+.dg-map .ar path{fill:var(--g-mute)}
+.dg-map .tx{font-size:16px; line-height:1.6; padding-left:10px}
+.dg-map.two{row-gap:18px}
+.dg-mapbox{background:var(--base-bg); padding:16px 20px} /* 列の見出しも含めて淡い地に入れる */
+/* 狭い幅 (HTML で 640px 以下) : ラベルを内容の上に置く。ラベルは語の長さに合わせ、上下の余白を詰める。矢印と列の見出しは出さない。
+   レポートでは @media (max-width:640px) で .dg-map に当てる。ここでは見本のため .stack で見せる */
+.dg-map.stack{grid-template-columns:1fr; row-gap:0}
+.dg-map.stack .hd, .dg-map.stack .hd-sp, .dg-map.stack .ar{display:none}
+.dg-map.stack .lb{height:auto; justify-self:start; min-width:7em; padding:3px 12px; line-height:1.5; font-size:15px; margin-top:16px}
+.dg-map.stack .lb:first-of-type{margin-top:0}
+.dg-map.stack .tx{padding:6px 0 0; font-size:15px}
+.dg-narrow{width:358px}
+.dg-narrow .dg-mapbox{padding:14px 16px}
+.dg-set{display:grid; grid-template-columns:64px 1fr; gap:0 16px; background:var(--base-bg); padding:16px 20px; margin-top:12px}
+.dg-set:first-of-type{margin-top:0}
+.dg-set .gn{display:flex; flex-direction:column; align-items:center; gap:8px}
+.dg-set .gn b{width:36px; height:36px; border-radius:999px; background:var(--primary-dark); color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center}
+.dg-set .gn span{font-size:12.5px; font-weight:700; color:var(--primary-dark); text-align:center; line-height:1.4}
+
 /* §1 の小さな見本 */
 .dg-demo{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px}
 .dg-demo .cell{border:1px solid var(--hairline); border-radius:6px; padding:18px 16px; text-align:center}
@@ -396,6 +422,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <li><a href="#c15"><span class="num">2.15</span>ツリー</a></li>
 <li><a href="#c16"><span class="num">2.16</span>サイクル</a></li>
 <li><a href="#c17"><span class="num">2.17</span>フロー図</a></li>
+<li><a href="#c18"><span class="num">2.18</span>対応リスト</a></li>
 <li><a href="#s3"><span class="num">3</span>構図の選び方</a></li>
 </ol></nav>
 <section class="chapter"><h2>1. 共通の視覚言語</h2><p class="chapter-note">どの構図でも共通の決まり。
@@ -1088,6 +1115,64 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 順番に進むだけの手順は、ステップ (3・4・5) を使う。
 </div>
 </div>
+<div class="card" id="c18"><h3>18. 対応リスト (ラベル → 内容)</h3><p class="sub">決まった観点・項目ごとに、内容を1対1で示すとき。
+問いの観点・回答の読み解き・打ち手の方針・用語の対応に使える。
+</p>
+<p class="sub" style="margin:0 0 12px"><strong>塗りの面 ＋ 白文字 (基本)</strong> … 濃い面と白文字が行ごとにくり返し、目が行を追いやすい。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図18</span><span class="dg-h">パンを買う場面を、6つの観点で聞く</span></div>
+<div class="dg-mapbox"><div class="dg-map"><div class="hd">観点</div><div class="hd-sp"></div><div class="hd">問い</div>
+<div class="lb">Why</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">なぜ買うのか、どんな目的のためか</div>
+<div class="lb">When</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">いつ (平日・休日、朝・夜、季節)</div>
+<div class="lb">Where</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">どこで食べるか</div>
+<div class="lb">with What</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">何と一緒に、何の代わりに</div>
+<div class="lb">with Whom</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">誰と (ひとり・家族・職場)</div>
+<div class="lb">How feeling</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">食べる前後で、気分がどう変わるか</div>
+</div></div>
+<div class="dg-cap">出典 : 架空の例 (コンビニのパン・見本用)</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>組ごとに繰り返す</strong> … 同じ型の組が続くとき (回答者ごとの4要素など) 。
+</p>
+<div class="scroll-x" style="margin-top:12px"><div class="dg"><div class="dg-title"><span class="dg-badge">図18</span><span class="dg-h">買う前の状態を、4つの要素で読み解く</span></div>
+<div class="dg-set"><div class="gn"><b>1</b><span>お弁当の<br>回答者</span></div><div class="dg-map two">
+<div class="lb">場面</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">残業の帰りに、コンビニでお弁当を買った</div>
+<div class="lb">背景</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">平日は自炊できず、食事を整えられていないと感じていた</div>
+<div class="lb">情緒</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">手を抜いた食事が続き、自分を後回しにしているように感じる</div>
+<div class="lb">キッカケ</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">野菜の多いお弁当を見て、これなら<br>自分をいたわる一食になると受け取った</div>
+</div></div>
+<div class="dg-set"><div class="gn"><b>2</b><span>スイーツの<br>回答者</span></div><div class="dg-map two">
+<div class="lb">場面</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">休日の午後、新しいスイーツを1つ選んだ</div>
+<div class="lb">背景</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">平日は時間に追われ、自分のための時間が取れていなかった</div>
+<div class="lb">情緒</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">好きなものを選ぶ余裕がなく、毎日が同じに感じる</div>
+<div class="lb">キッカケ</div><div class="ar"><svg width="44" height="24" viewBox="0 0 44 24" aria-hidden="true"><path d="M0 9 H28 V1 L44 12 L28 23 V15 H0 Z"/></svg></div><div class="tx">季節限定の表示を見て、今日だけの<br>小さなごほうびにしてよいと受け取った</div>
+</div></div>
+<div class="dg-cap">出典 : 架空の例 (お弁当・コンビニのスイーツ・見本用)</div>
+</div>
+</div>
+<p class="sub" style="margin:28px 0 0"><strong>狭い幅 (HTML で 640px 以下)</strong> … ラベルを内容の上に置く。
+ラベルは語の長さに合わせ、上下の余白を詰める。
+矢印と列の見出しは出さない。
+</p>
+<div class="dg-narrow" style="margin-top:12px"><div class="dg-mapbox"><div class="dg-map stack">
+<div class="lb">Why</div><div class="tx">なぜ買うのか、どんな目的のためか</div>
+<div class="lb">When</div><div class="tx">いつ (平日・休日、朝・夜、季節)</div>
+<div class="lb">Where</div><div class="tx">どこで食べるか</div>
+<div class="lb">with What</div><div class="tx">何と一緒に、何の代わりに</div>
+<div class="lb">with Whom</div><div class="tx">誰と (ひとり・家族・職場)</div>
+<div class="lb">How feeling</div><div class="tx">食べる前後で、気分がどう変わるか</div>
+</div></div></div>
+<div class="rule-note">ラベルは四角の面で、全行を同じ幅にする。
+列の見出しも含めて、組全体を淡い地に入れる。
+HTML で幅が 640px 以下のときは、ラベルを内容の上に置く (矢印と列の見出しは出さない) 。
+基本は塗りの面 ＋ 白文字。
+矢印はラベルの右端からすき間なく伸ばし、色は非強調グレーにする。
+淡い面 ＋ Primary Dark の文字は、ラベルを控えめにしたいときのバリエーション。
+内容は1 〜 3行で、改行は句読点で入れる。
+Primary Light や水色の面に白文字は乗せない。
+内容が4行以上になるとき、同じ観点で複数の組を横に比べたいときは、この型を使わない。
+</div>
+</div>
 </section>
 <section class="chapter" id="s3"><h2>3. 構図の選び方</h2><p class="chapter-note">見せたい関係性から選ぶ。
 </p>
@@ -1105,6 +1190,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <tr><td>土台と、群に分けた要素</td><td>15</td></tr>
 <tr><td>回りつづける循環</td><td>16</td></tr>
 <tr><td>関係でつながる流れ・構造</td><td>17</td></tr>
+<tr><td>観点・項目ごとの内容の対応</td><td>18</td></tr>
 <tr><td>1年・長期の時間</td><td>10・11・12</td></tr>
 </table><div class="rule-note">図解にするのは、本文の関係性が構図に合う部分だけ。
 数値・語は本文にあるものだけを使い、仮説は「仮説」と明記する。
