@@ -349,6 +349,16 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 .dg-set .gn b{width:36px; height:36px; border-radius:999px; background:var(--primary-dark); color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center}
 .dg-set .gn span{font-size:12.5px; font-weight:700; color:var(--primary-dark); text-align:center; line-height:1.4}
 
+/* 19 ベン (2つの重なり) : 円は正円が基本 (入らないときは横 1.25 倍まで)。重なりはグラデーションで、図の中でいちばん大きい文字。
+   三日月の文言は中心の高さで左右の余白を均等にし、左右の上端をそろえる */
+.dg-vn{position:relative; width:1080px; height:480px}
+.dg-vn svg{position:absolute; left:0; top:0}
+.dg-vn .zone{position:absolute; top:188px; display:flex; justify-content:center}
+.dg-vn .nm{display:inline-block; color:#fff; font-size:21px; font-weight:700; padding:3px 16px}
+.dg-vn .ds{font-size:15px; line-height:1.7; margin-top:12px}
+.dg-vn .ctr{position:absolute; left:420px; width:240px; text-align:center; color:#fff; font-size:24px; font-weight:700; line-height:1.5}
+.dg-vn .ctr small{display:block; font-size:13px; letter-spacing:.08em; margin-bottom:4px}
+
 /* §1 の小さな見本 */
 .dg-demo{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px}
 .dg-demo .cell{border:1px solid var(--hairline); border-radius:6px; padding:18px 16px; text-align:center}
@@ -423,6 +433,7 @@ footer.page-foot{margin-top:56px; padding-top:20px; border-top:1px solid var(--h
 <li><a href="#c16"><span class="num">2.16</span>サイクル</a></li>
 <li><a href="#c17"><span class="num">2.17</span>フロー図</a></li>
 <li><a href="#c18"><span class="num">2.18</span>対応リスト</a></li>
+<li><a href="#c19"><span class="num">2.19</span>ベン (2つの重なり)</a></li>
 <li><a href="#s3"><span class="num">3</span>構図の選び方</a></li>
 </ol></nav>
 <section class="chapter"><h2>1. 共通の視覚言語</h2><p class="chapter-note">どの構図でも共通の決まり。
@@ -1173,6 +1184,35 @@ Primary Light や水色の面に白文字は乗せない。
 内容が4行以上になるとき、同じ観点で複数の組を横に比べたいときは、この型を使わない。
 </div>
 </div>
+<div class="card" id="c19"><h3>19. ベン (2つの重なり)</h3><p class="sub">2つの集まりと、その両方に当たるところを見せるとき。
+</p>
+<div class="scroll-x"><div class="dg"><div class="dg-title"><span class="dg-badge">図19</span><span class="dg-h">朝にコンビニで買う人と、栄養を気にする人が重なるか</span></div>
+<div class="dg-vn"><svg width="1080" height="480" viewBox="0 0 1080 480" aria-hidden="true">
+<defs><clipPath id="vn-cl"><ellipse cx="385" cy="240" rx="290" ry="232"/></clipPath>
+<linearGradient id="vn-gr" x1="0" y1="0" x2="1" y2="1"><stop offset="22%" stop-color="#5A74A3"/><stop offset="88%" stop-color="#84B5B2"/></linearGradient></defs>
+<ellipse cx="385" cy="240" rx="290" ry="232" fill="#D6DDEB"/>
+<ellipse cx="695" cy="240" rx="290" ry="232" fill="#DDEBE9"/>
+<ellipse cx="695" cy="240" rx="290" ry="232" fill="url(#vn-gr)" clip-path="url(#vn-cl)"/>
+</svg>
+<div class="zone" style="left:95px;width:310px"><div><span class="nm" style="background:var(--primary-dark)">朝のコンビニ</span>
+<div class="ds">通勤の途中に、<br>朝食をコンビニで買う人</div></div></div>
+<div class="zone" style="left:675px;width:310px"><div><span class="nm" style="background:var(--cat2-text)">栄養を気にする人</span>
+<div class="ds">たんぱく質や野菜を、<br>意識して取りたい人</div></div></div>
+<div class="ctr" style="top:174px"><small>重なり</small>朝の手軽さと、<br>栄養の両方を<br>求める人</div>
+</div>
+<div class="dg-cap">出典 : 架空の例 (コンビニの朝食・見本用)・左の円 = 基調・右の円 = 青緑・重なり = 両方に当たる人</div>
+</div>
+</div>
+<div class="rule-note">正円2つを同じ大きさで重ねる。
+文言が入らないときは、横は縦の 1.25 倍まで横長にしてよい。
+重なりは2色を結ぶグラデーションで、図の中でいちばん大きい文字を置く。
+グラデーションは2色がはっきり見えるところまで寄せてよい (見本は青 22% → 青緑 88%) 。
+白文字の比は文字の真下で測る。
+円の名前は塗りのラベル ＋ 白文字。
+三日月の文言は、中心の高さで左右の余白を均等にし、左右の上端をそろえる。
+3つ以上の重なりは使わず、表かマトリクスにする。
+</div>
+</div>
 </section>
 <section class="chapter" id="s3"><h2>3. 構図の選び方</h2><p class="chapter-note">見せたい関係性から選ぶ。
 </p>
@@ -1191,6 +1231,7 @@ Primary Light や水色の面に白文字は乗せない。
 <tr><td>回りつづける循環</td><td>16</td></tr>
 <tr><td>関係でつながる流れ・構造</td><td>17</td></tr>
 <tr><td>観点・項目ごとの内容の対応</td><td>18</td></tr>
+<tr><td>2つの集まりの重なり</td><td>19</td></tr>
 <tr><td>1年・長期の時間</td><td>10・11・12</td></tr>
 </table><div class="rule-note">図解にするのは、本文の関係性が構図に合う部分だけ。
 数値・語は本文にあるものだけを使い、仮説は「仮説」と明記する。
