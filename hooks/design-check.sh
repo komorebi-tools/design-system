@@ -284,7 +284,13 @@ if (count > 0) {
 // 以前は grep の PCRE モードを使っていたが、BSD grep はそのオプションを持たず
 // invalid option になるため、macOS ではこの検査は一度も動いていなかった。
 const PERIOD = /。[^<\n"')\]}>）」』】\s]/u;
-const SKIP_LINE = /<script|<style|\/\/|\/\*|\*\//;
+// 飛ばすのは、行頭からのコメント (//) とブロックコメントの印だけ。
+// 以前は行のどこかに // があれば丸ごと飛ばしていたため、URL を含む段落が全部素通りしていた (2026/11/6 直し)。
+// URL は検査の前に取り除く (下の URL_RE)。<script>・<style> は行ではなく範囲で飛ばす (下の inSkipBlock)。
+const SKIP_LINE = /^\s*\/\/|\/\*|\*\//;
+const URL_RE = /https?:\/\/[^\s"'<>)）」]+/g;
+const BLOCK_OPEN = /<(script|style)\b/i;
+const BLOCK_CLOSE = /<\/(script|style)\s*>/i;
 // 「。」の手前の文 (前の「。」か行頭から) が10文字未満なら出さない (2026/10/7 決定)
 // 文字数は codepoint で数える。行の中のどれか1か所でも10文字以上なら、その行を出す
 const PERIOD_MIN_SENTENCE = 10;
@@ -301,9 +307,22 @@ function hasLongSentenceBeforePeriod(line) {
 }
 const periodHits = [];
 let periodTotal = 0;
+let inSkipBlock = false;
 for (let i = 0; i < lines.length; i++) {
-  if (!PERIOD.test(lines[i]) || SKIP_LINE.test(lines[i])) continue;
-  if (!hasLongSentenceBeforePeriod(lines[i])) continue;
+  // <script>〜</script>・<style>〜</style> は開始行から終了行まで検査しない (同じ行で閉じるものも含む)
+  if (inSkipBlock) {
+    if (BLOCK_CLOSE.test(lines[i])) inSkipBlock = false;
+    continue;
+  }
+  if (BLOCK_OPEN.test(lines[i])) {
+    if (!BLOCK_CLOSE.test(lines[i])) inSkipBlock = true;
+    continue;
+  }
+  if (SKIP_LINE.test(lines[i])) continue;
+  // URL の中の「。」は文の区切りではないので、取り除いてから検査する
+  const stripped = lines[i].replace(URL_RE, "");
+  if (!PERIOD.test(stripped)) continue;
+  if (!hasLongSentenceBeforePeriod(stripped)) continue;
   // この検査も allow NO_PERIOD_LINEBREAK で黙らせられる
   if (silence(i, PERIOD_RULE_ID)) continue;
   periodTotal++;

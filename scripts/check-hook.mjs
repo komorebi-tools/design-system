@@ -232,10 +232,35 @@ console.log("\n=== 6. 「。」改行チェック ===");
   check("違反しない入力では検出されない", !rg.out.includes("「。」改行チェック"));
   check("<script> 行は除外される", !rs.out.includes("「。」改行チェック"));
 
-  // URL を含む行は除外される (行内に // があるため)
-  const url = write("period-url.md", "詳しくは https://example.com を見てください。これは二文目です。\n");
+  // URL を含む行は、URL を取り除いてから検査する (2026/11/6 直し)。
+  // 以前は行内に // があれば丸ごと飛ばしていたので、URL を含む段落の句点後改行もれを全部見逃していた
+  const url = write("period-url.md", "詳しくはこちらのページ https://example.com/a.b を見てください。これは二文目です。\n");
   const ru = runHook(url, { KOMOREBI_RULES_FILE: RULES_MAIN });
-  check("URL (// を含む) の行は除外される", !ru.out.includes("「。」改行チェック"));
+  check("URL を含む行でも、URL を除いた残りが違反なら検出される", ru.out.includes("「。」改行チェック"));
+  const urlOnly = write("period-url-only.md", "詳しくはこちらのページ https://example.com/a.b を見てください。\n");
+  const ruo = runHook(urlOnly, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("URL を含む行で、残りが1文だけなら検出されない", !ruo.out.includes("「。」改行チェック"));
+
+  // 行頭からの // コメント (JS) はいまも飛ばす。行の途中の // (URL) だけが対象になった
+  const jsComment = write("period-jscomment.md", "  // これはコメントの一文目です。二文目です。\n");
+  const rjc = runHook(jsComment, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("行頭からの // コメントの行は検出されない", !rjc.out.includes("「。」改行チェック"));
+
+  // <script>・<style> は行ではなく範囲で飛ばす (2026/11/6 直し)。
+  // 以前は <script の行だけを飛ばしていたので、複数行の script の2行目以降にある日本語が誤検出になっていた
+  const scriptBlock = write("period-script-block.html",
+    '<script>\n  const s = "これはテスト用の一文目です。二文目です。";\n</script>\n');
+  const rsb = runHook(scriptBlock, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("複数行の <script> の中の行は検出されない (範囲で飛ばす)", !rsb.out.includes("「。」改行チェック"));
+  const styleBlock = write("period-style-block.html",
+    '<style>\n  /* 色の決まりはこちらです。本文は本文色にする。 */\n  p{color:#434343}\n</style>\n');
+  const rstb = runHook(styleBlock, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("複数行の <style> の中の行は検出されない (範囲で飛ばす)", !rstb.out.includes("「。」改行チェック"));
+  // 範囲が閉じたあとの本文は検査される
+  const afterBlock = write("period-after-block.html",
+    '<script>\n  const a = 1;\n</script>\n<p>これはテスト用の一文目です。これは二文目です。</p>\n');
+  const rab = runHook(afterBlock, { KOMOREBI_RULES_FILE: RULES_MAIN });
+  check("</script> のあとの本文は検出される", rab.out.includes("「。」改行チェック"));
 
   // 「。」の手前の文が10文字未満なら出さない。境目は9文字と10文字
   const nine = write("period-9.md", "あいうえおかきくけ。次の文です。\n");
