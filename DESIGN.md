@@ -160,12 +160,13 @@ AI エージェントがテキストを生成・編集する際は必ず従う�
 本ルールはコモレビ全社共通 (web・slides・Notion・Slack・コミットメッセージ・コードコメント等すべてに適用) 。
 
 > 中黒は前後にスペースを入れません。
-> スライド (Googleスライド・PowerPoint の中に直接打つ文字) は半角 `･` (U+FF65)、それ以外 (文書・HTML のページ・レポート・図の画像・Notion・Slack など) は全角 `・` (U+30FB) です。 <!-- design-check: allow NO_HALFWIDTH_NAKAGURO -->
+> スライド (Googleスライド・PowerPoint の中に直接打つ文字) と、スライド原稿 (スライドに流す骨子を書いた Notion のページ) は半角 `･` (U+FF65)、それ以外 (文書・HTML のページ・レポート・図の画像・スライド原稿でない Notion・Slack など) は全角 `・` (U+30FB) です。 <!-- design-check: allow NO_HALFWIDTH_NAKAGURO -->
+> スライド原稿は、そのままスライドに流すので半角にそろえます (コモレビフォーマッターは Notion に当てるときも半角 `･` にする・2026-11-18)。 <!-- design-check: allow NO_HALFWIDTH_NAKAGURO -->
 > 見た目の似た中点 `·` (U+00B7) は、どちらでも使いません。 <!-- design-check: allow NO_HALFWIDTH_NAKAGURO -->
 
 | # | ルール | OK 例 | NG 例 |
 |---|---|---|---|
-| 1 | 中黒は**前後にスペース無し**。スライドの中の文字は半角 `･` (U+FF65)、それ以外は全角 `・` (U+30FB)。中点 `·` (U+00B7) は使わない | `Notion・Slack・Email` (スライドの中は `Notion･Slack･Email`) | `Notion ･ Slack`、`Notion ・ Slack` (前後スペース)、スライド以外での `Notion･Slack`、`Notion·Slack` (中点) <!-- design-check: allow NO_HALFWIDTH_NAKAGURO,NO_NAKAGURO_SPACE,NO_PERIOD_LINEBREAK --> |
+| 1 | 中黒は**前後にスペース無し**。スライドの中の文字とスライド原稿 (Notion) は半角 `･` (U+FF65)、それ以外は全角 `・` (U+30FB)。中点 `·` (U+00B7) は使わない | `Notion・Slack・Email` (スライドの中とスライド原稿は `Notion･Slack･Email`) | `Notion ･ Slack`、`Notion ・ Slack` (前後スペース)、スライドとスライド原稿以外での `Notion･Slack`、`Notion·Slack` (中点) <!-- design-check: allow NO_HALFWIDTH_NAKAGURO,NO_NAKAGURO_SPACE,NO_PERIOD_LINEBREAK --> |
 | 2 | スラッシュ `/` は半角。**要素並列は前後にスペース有り、日付・パス・単位・二者択一 (compound) は前後スペース無し** | `Notion / Slack / Email`、`7/27`、`2026/04/28`、`src/foo`、`km/h`、`ON/OFF` | `Notion/Slack/Email`、`7 / 27`、`2026 / 04 / 28` <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | 3 | 引用符 `"..."` は前後にスペース有り (文中の場合、文末は閉じ後スペース不要) | `これは "重要" な点` | `これは"重要"な点` |
 | 4 | 半角丸括弧 `()`: **外側に半角スペース、内側にスペース無し** | `この (テキスト) として` | `この(テキスト)として`、`この ( テキスト ) として` <!-- design-check: allow NO_PAREN_INNER_SPACE --> |
@@ -173,7 +174,7 @@ AI エージェントがテキストを生成・編集する際は必ず従う�
 | 6 | 全角括弧 (「」 `『』` ［］ 【】) の前後にスペース無し (前後がどんな文字でも同様) | `この「テキスト」として`、`「タイトル」「サブ」`、`「テキスト」(補足)` | `この 「テキスト」 として` |
 | 7 | 表示用途の角括弧は全角 `［］`、半角 `[]` 禁止。**例外**: Markdown リンク `[text](url)`・配列・正規表現等のコード構文は半角必須 | `［補足］` | `[補足]` (display 用途で半角) <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | 8 | 全角演算記号 (`＋ × ÷ =`) の前後に半角スペース | `A ＋ B`、`kcal ＝ P × 4 ＋ F × 9 ＋ C × 4` | `A＋B`、`収入×0.3` |
-| 9 | コロン `:` は半角、**前後にスペース有り**。例外: 直後に全角開き括弧 (「『［【) が来る場合はスペース無し | `仮説 : 結論`、`仮説:「結論」` | `仮説:結論`、`仮説 : 「結論」` <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
+| 9 | コロン `:` は半角、**前後にスペース有り**。例外: 直後に全角開き括弧 (「『［【) が来る場合はスペース無し。ただし太字の見出しの直後のコロン (箇条書きの「**見出し** : 本文」の形) にはこの例外を当てず、スペース有り (2026-11-18) | `仮説 : 結論`、`仮説:「結論」`、`**伸びた** : 「たっぷり」が効いた` (太字の見出しの後) | `仮説:結論`、`仮説 : 「結論」`、`**伸びた**:「たっぷり」が効いた` (太字の見出しの後) <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | 10 | カンマ `,` は半角、**後ろに半角スペース有り** (前は無し) | `A, B, C`、`Apple, Google, Meta` | `A,B,C`、`A ,B` |
 | 11 | 日本語の中の半角英数字の前後にスペース無し。英単語間 (`Phase 3`) の半角スペースは保持 | `毎月1万円`、`インフルエンサーSNS発信`、`Phase 3` | `毎月 1 万円`、`インフルエンサー SNS 発信` <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
 | 12 | 句点後改行: 句点「。」 の後に続きの文があり、**直前の文が 10 文字 (codepoint) 以上**なら「。」 の後で改行。短い文の後・文末の「。」・後続が閉じ括弧・句読点のときは改行しない | `議事録を確認しました。\n次の打ち合わせは木曜です。`、`了解。次に進みます。` (前の文が短い→改行無し) | `議事録を確認しました。次の打ち合わせは木曜です。` (長い文が続くのに改行無し) <!-- design-check: allow NO_PERIOD_LINEBREAK --> |
